@@ -1,0 +1,11 @@
+
+#galerie img{
+
+    display:none;
+    
+}
+
+#galerie .active{
+    display:block;
+    width: 70%;
+}
