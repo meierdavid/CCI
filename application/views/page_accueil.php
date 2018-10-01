@@ -70,6 +70,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div id="container">
 	<h1>Vous êtes sur la page d'accueil de notre projet Piscine</h1>
+	
+	<br></br>
+	
+	<p>CASSE LA DEMARCHE COMME SAMUEL, SAMUEL UMTITI !</p>
 
 	<div id="body">
 
