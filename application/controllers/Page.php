@@ -24,12 +24,7 @@ class Page extends CI_Controller {
                 
 	}
 
-	public function index()
-	{
-		$this->load->view('page_index');
-                
-	}
-        public function Accueil()
+    public function Accueil()
 	{
 		$this->load->view('page_accueil');
 	}
