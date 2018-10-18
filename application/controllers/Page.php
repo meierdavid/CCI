@@ -27,8 +27,4 @@ class Page extends CI_Controller {
 	{
 		$this->load->view('page_accueil');
 	}
-	public function test()
-	{
-		$this->load->view('test');
-	}
 }
