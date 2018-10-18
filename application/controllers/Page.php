@@ -23,6 +23,12 @@ class Page extends CI_Controller {
 		$this->load->view('page_index');
                 
 	}
+
+	public function index()
+	{
+		$this->load->view('page_index');
+                
+	}
         public function Accueil()
 	{
 		$this->load->view('page_accueil');
