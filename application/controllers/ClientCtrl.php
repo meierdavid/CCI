@@ -18,21 +18,18 @@ class ClientCtrl extends CI_Controller {
             //mettre mail pour la sélection
             $this->load->helper('url');
             $this->load->view('client/profil',$data);
+            
+            // modifie le profil à l'envoi du formulaire
         }
         
-           public function modifierprofil()
-        {
-            // formulaire pour mofdifer les données du client à faire
-            // modification de la bdd avec la fct Update
-        }
+
         
         
         public function inscription(){
+                // faire envoi de mail
                 $this->load->model('client');
 		$this->load->helper('form');
-<<<<<<< HEAD
-		$this->load->view('client/inscription');		
-=======
+
 		$this->load->view('client/inscription');
                 if(isset($_GET['mdpClient']) && $_GET['mdpClient']==$_GET['mdpClient2']){
                 $data=array(
@@ -49,7 +46,7 @@ class ClientCtrl extends CI_Controller {
    		$this->client->insert($data);
            
                 }          
->>>>>>> 9ac67fdc47309d8ed587e0e7c15cc41b09a7942c
+
 	}
    
 }
