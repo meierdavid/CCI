@@ -23,7 +23,9 @@ class PageCtrl extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->view('pages/pageconnexion');
                 $this->load->model('client');
-                $data['client'] = $this->client->selectByMail($_GET['mailClient']);
+                
+                
+                /*$data['client'] = $this->client->selectByMail($_GET['mailClient']);
                 var_dump($data['client']);
                 die;
                 if( $data['client' != NULL]){
@@ -31,7 +33,7 @@ class PageCtrl extends CI_Controller {
                 } 
                 else{
                     $this->load-view('pages/pageaccueil');
-                }
+                }*/
                 
 	}
     

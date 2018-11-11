@@ -11,12 +11,19 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/profil');               
 	}
 
-        public function profil($mail)
+        public function profil()
         {
-            $data['client'] = $this->client->selectById($mail);
             $this->load->model('client');
+            $data['client'] = $this->client->selectById(1);
+            //mettre mail pour la sélection
             $this->load->helper('url');
             $this->load->view('client/profil',$data);
+        }
+        
+           public function modifierprofil()
+        {
+            // formulaire pour mofdifer les données du client à faire
+            // modification de la bdd avec la fct Update
         }
         
         
@@ -24,7 +31,7 @@ class ClientCtrl extends CI_Controller {
                 $this->load->model('client');
 		$this->load->helper('form');
 		$this->load->view('client/inscription');
-                if($_GET['mdpClient']==$_GET['mdpClient2']){
+                if(isset($_GET['mdpClient']) && $_GET['mdpClient']==$_GET['mdpClient2']){
                 $data=array(
                             "prenomClient"=> htmlspecialchars($_GET['prenomClient']),
                             "nomClient"=> htmlspecialchars($_GET['nomClient']),
@@ -40,15 +47,5 @@ class ClientCtrl extends CI_Controller {
            
                 }          
 	}
-           public function connexion(){
-                $this->load->model('client');
-		$this->load->helper('form');
-		$this->load->view('client/inscription');
- 
-                $data['client'] = $this->client->selectByMail($_GET['mailClient']);
-                
-                if( $data['client' != NULL]){
-                    $this->load-view('pages/accueil');
-                }           
-           }
+   
 }
