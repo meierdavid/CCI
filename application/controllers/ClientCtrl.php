@@ -22,7 +22,7 @@ class ClientCtrl extends CI_Controller {
         
         public function inscription(){		
 		$this->load->helper('form');
-		$this->load->view('pages/client/inscription');		
+		$this->load->view('client/inscription');		
 	}
 
 }
