@@ -47,13 +47,13 @@
             <br></br>
 
             <div class="text-center">
-            <a class="btn btn-primary" href="index.php/PageCtrl/ConnexionSellers" role="button">Commercant ? Cliquez ici !</a>
+            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/ConnexionSellers" role="button">Commercant ? Cliquez ici !</a>
             </div>
 
             <br></br>
 
             <div class="text-center">
-            <a class="btn btn-primary" href="index.php/PageCtrl/ConnexionAdmin" role="button">Administrateur ? Cliquez ici !</a>
+            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/ConnexionAdmin" role="button">Administrateur ? Cliquez ici !</a>
             </div>
 
             
