@@ -55,8 +55,12 @@
             <div class="text-center">
             <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/ConnexionAdmin" role="button">Administrateur ? Cliquez ici !</a>
             </div>
-
             
+            <br></br>
+            
+             <div class="text-center">
+            <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/inscription" role="button">Vous êtes pas inscrit ? Cliquez ici !</a>
+            </div>
 
             </div>
         </div>
