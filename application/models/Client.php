@@ -13,12 +13,21 @@
         }
         public function selectById($id) {
     		$this->load->database();
-    		$this->db->select('*')
+    		return $this->db->select('*')
                     ->from('client')
                     ->where('idClient', $id)
                     ->get()
                     ->result();
-            print_r($this);
+            
+  		}
+        public function selectByMail($mail) {
+    		$this->load->database();
+    		return $this->db->select('*')
+                    ->from('client')
+                    ->where('mailClient', $mail)
+                    ->get()
+                    ->result();
+            
   		}
   		public function getLastUserId() {
     		$this->load->database();
