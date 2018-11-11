@@ -21,9 +21,7 @@ class CommercantCtrl extends CI_Controller {
         
     public function inscription(){		
 		$this->load->helper('form');
-		$this->load->view('commercant/inscription');
-        var_dump($_GET);
-        die;    	
+		$this->load->view('commercant/inscription');   	
 	}
 
 }
