@@ -37,7 +37,7 @@
                     
                  
                     
-                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value=" Connexion " /></div>
+                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Connexion" /></div>
                     <div class="text-center">
                         <br>
                         <h1 style="color:darkslategrey; "></h1>

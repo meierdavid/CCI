@@ -26,43 +26,43 @@
 
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
-                        <input type="text" class="form-control" name="prenomClient" value="prenomClient" size="30" required/> 
+                        <input type="text" class="form-control" name="prenomClient" value="" size="30" required/> 
                             <h6 style="color:red;"</h6>
                     </div>
                     
                     <div class="form-group">
                         <label class="control-label">Nom</label>
-                        <input type="text" class="form-control" name="nomClient" value="nomClient" size="30" required/>
+                        <input type="text" class="form-control" name="nomClient" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="" value="" size="30" required/> 
+                        <input type="text" class="form-control" name="mailClient" value="" size="30" required/> 
                             <h6 style="color:red;"</h6>
                     </div>  
                     
                     <div class="form-group">
                         <label class="control-label">Mot de passe</label>
-                        <input type="password" class="form-control" name="" value="" size="30" required/>
+                        <input type="password" class="form-control" name="mdpClient" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Mot de passe2</label>
-                        <input type="password" class="form-control" name="" value="" size="30" required/>
+                        <input type="password" class="form-control" name="mdpClient2" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Adresse</label>
-                        <input type="text" class="form-control" name="" value="" size="30" required/>
+                        <input type="text" class="form-control" name="adresseClient" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Code postale</label>
-                        <input type="text" class="form-control" name="" value="" size="30" required/>
+                        <input type="text" class="form-control" name="codePClient" value="" size="30" required/>
                     </div> 
                     <div class="form-group">
                         <label class="control-label">Ville</label>
-                        <input type="text" class="form-control" name="" value="" size="30" required/>
+                        <input type="text" class="form-control" name="villeClient" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Numéro de téléphone</label>
-                        <input type="text" class="form-control" name="" value="" size="30" required/>
+                        <input type="text" class="form-control" name="telClient" value="" size="30" required/>
                     </div>    
                     
                     
