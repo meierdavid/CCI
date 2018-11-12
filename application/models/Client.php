@@ -1,48 +1,63 @@
 <?php
 	class client extends CI_Model{
+        
         protected $table ='client';
-     	public function __construct() {
+     	
+        public function __construct() {
         	parent::__construct();
     	} 
-	public function selectAll(){
-		$this->load->database();
-    	return $this->db->select('*')
+	   
+        public function selectAll(){
+		
+        $this->load->database();
+    	
+        return $this->db->select('*')
                ->from('client')
                ->get()
                ->result();
         }
+        
         public function selectById($id) {
-    		$this->load->database();
-    		return $this->db->select('*')
+    	
+        	$this->load->database();
+    	
+        	return $this->db->select('*')
                     ->from('client')
                     ->where('idClient', $id)
                     ->get()
                     ->result();
             
   		}
+        
         public function selectByMail($mail) {
-    		$this->load->database();
-    		return $this->db->select('*')
+    	
+        	$this->load->database();
+    	
+        	return $this->db->select('*')
                     ->from('client')
                     ->where('mailClient', $mail)
                     ->get()
                     ->result();
-            
-  		}
-  		public function getLastUserId() {
-    		$this->load->database();
-    		return $this->db->select('idClient')
+        }
+  		
+        public function getLastUserId() {
+    	
+        	$this->load->database();
+    	
+        	return $this->db->select('idClient')
         	        ->from('client')
                     ->order_by('idClient', 'desc')
                     ->limit(1)
                     ->get()
                     ->result();
   		}
-    	public function insert($data) {
+    	
+        public function insert($data) {
+        
             $this->load->database();
             $this->db->set('prenomClient', $data['prenomClient'])
-        	->set('nomClient', $data['nomClient'])
- 		->set('mailClient', $data['mailClient'])
+        	    ->set('nomClient', $data['nomClient'])
+ 		        ->set('mailClient', $data['mailClient'])
                 ->set('adresseClient', $data['adresseClient'])
                 ->set('codePClient', $data['codePClient'])
                 ->set('villeClient', $data['villeClient'])
@@ -53,16 +68,20 @@
         }   
 			
 		public function delete($id){
-      		$this->load->database();
-      		return $this->db->where('idClient',$id)
+      		
+            $this->load->database();
+      		
+            return $this->db->where('idClient',$id)
                     	->delete($this->table);
     	}
         
         public function update($id, $data) {
-        $this->load->database();
-        $this->db->set('prenomClient', $data['prenomClient'])
-        	->set('nomClient', $data['nomClient'])
- 		->set('mailClient', $data['mailClient'])
+            
+            $this->load->database();
+            
+            $this->db->set('prenomClient', $data['prenomClient'])
+        	    ->set('nomClient', $data['nomClient'])
+ 		        ->set('mailClient', $data['mailClient'])
                 ->set('adresseClient', $data['adresseClient'])
                 ->set('codePClient', $data['codePClient'])
                 ->set('villeClient', $data['villeClient'])
