@@ -1,4 +1,4 @@
-<?php
+    <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdministrateurCtrl extends CI_Controller {
@@ -42,12 +42,12 @@ class AdministrateurCtrl extends CI_Controller {
            public function connexion(){
                 $this->load->model('administrateur');
 		$this->load->helper('form');
-		$this->load->view('administrateur/inscription');
- 
-                $data['administrateur'] = $this->administrateur->selectByMail($_GET['mailAdministrateur']);
+		//$this->load->view('administrateur/inscription');
                 
-                if( $data['administrateur' != NULL]){
-                    $this->load-view('pages/accueil');
+                $data['administrateur'] = $this->administrateur->selectByMail($_POST['mail']);
+                
+                if( $data['administrateur'] != NULL){
+                    $this->load->view('pages/page_index');
                 }           
            }
 }

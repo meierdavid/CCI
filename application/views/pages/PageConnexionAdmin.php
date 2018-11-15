@@ -13,9 +13,9 @@
             <div class="form-login" >
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Admin !</h2>
             
-            <?php ?> // formulaire de connexion Admin
+            <?php // formulaire de connexion Admin ?> 
 
-            <form>
+            <form role="form" method="post" action="<?=base_url('administrateurCtrl/connexion')?>">
                 <br></br>
                     <div class="text-center">
                     <h4>Entrez votre Pseudo d'Administrateur et votre mot de passe :</h4>
@@ -24,19 +24,20 @@
                     <br></br>
 
                     <div class="form-group">
-                        <label class="control-label">Pseudo</label>
-                        <input type="text" class="form-control" name="" value="" size="30" required/> 
+                        <label name="mail" class="control-label">Mail</label>
+                        <input type="text" class="form-control" name="mail" value="" size="30" required/> 
                             <h6 style="color:red;"</h6>
                     </div>
                     
                     <div class="form-group">
-                        <label class="control-label">Mot de passe</label>
-                        <input type="password" class="form-control" name="" value="" size="30" required/>
+                        <label name="mdp" class="control-label">Mot de passe</label>
+                        <input type="password" class="form-control" name="mdp" value="" size="30" required/>
                     </div>    
                     
                  
                     
-                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value=" Connexion " /></div>
+                    <div class="text-center">
+                        <input class="btn btn-primary btn-success btn-block" type="submit" value="Connexion" /></div>
                     <div class="text-center">
                         <br>
                         <h1 style="color:darkslategrey; "></h1>

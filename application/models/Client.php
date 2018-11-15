@@ -56,8 +56,8 @@
         
             $this->load->database();
             $this->db->set('prenomClient', $data['prenomClient'])
-        	    ->set('nomClient', $data['nomClient'])
- 		        ->set('mailClient', $data['mailClient'])
+        	->set('nomClient', $data['nomClient'])
+ 		->set('mailClient', $data['mailClient'])
                 ->set('adresseClient', $data['adresseClient'])
                 ->set('codePClient', $data['codePClient'])
                 ->set('villeClient', $data['villeClient'])

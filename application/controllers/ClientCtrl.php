@@ -30,7 +30,7 @@ class ClientCtrl extends CI_Controller {
                 $this->load->model('client');
 		$this->load->helper('form');
 
-		$this->load->view('client/inscription');
+		
                 if(isset($_GET['mdpClient']) && $_GET['mdpClient']==$_GET['mdpClient2']){
                 $data=array(
                             "prenomClient"=> htmlspecialchars($_GET['prenomClient']),
@@ -42,10 +42,25 @@ class ClientCtrl extends CI_Controller {
                             "villeClient" => htmlspecialchars($_GET['villeClient']),
                             "telClient" => htmlspecialchars($_GET['telClient']),
                             "pointClient" => htmlspecialchars(0),
-			);	
+			);
+                /*$this->load->library('email');
+
+                $this->email->from('cci@yopmail.com', 'Piscine');
+                $this->email->to($data['mailClient']);
+                $this->email->subject('CCI Email Validation');
+                $this->email->message('follow this link');
+                
+                
+                
+                $this->email->send();*/
+                $this->load->view('client/validationEmail');
+                if(true){
    		$this->client->insert($data);
-           
-                }          
+                }
+                }
+                else{
+                    $this->load->view('client/inscription');
+                }
 
 	}
    

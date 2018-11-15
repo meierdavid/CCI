@@ -10,8 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="<?php echo base_url()."assets/css/bootstrap.min.css"; ?>" rel="stylesheet">
-    <link href="<?php echo base_url()."assets/css/defilement.css"; ?>" rel="stylesheet">
+    <link href="<?php echo base_url()."../assets/css/bootstrap.min.css"; ?>" rel="stylesheet">
+    <link href="<?php echo base_url()."../assets/css/defilement.css"; ?>" rel="stylesheet">
   </head>
   <body>
       <div class="header">
@@ -56,17 +56,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <div class="container-fluid">
 
-              <p><img src="<?php echo base_url().'assets/image/cci-herault.jpg';?>" alt="lol" >
-               <img src="<?php echo base_url().'assets/image/polylogo.png';?>" alt="lol" style="float:right; margin-left:8px;" >
+              <p><img src="<?php echo base_url().'../assets/image/cci-herault.jpg';?>" alt="lol" >
+               <img src="<?php echo base_url().'../assets/image/polylogo.png';?>" alt="lol" style="float:right; margin-left:8px;" >
               </p>
 
       </div>
       <div class='container'>
           <div id="galerie">
-              <img  class="active" src="<?php echo base_url().'assets/image/comedie.jpg';?>" alt="img1" >
-              <img src="<?php echo base_url().'assets/image/Nimes.jpg';?>" alt="lol">
-              <img src="<?php echo base_url().'assets/image/setes.jpg';?>" alt="lol" >
-              <img src="<?php echo base_url().'assets/image/beziers.jpg';?>" alt="lol">
+              <img  class="active" src="<?php echo base_url().'../assets/image/comedie.jpg';?>" alt="img1" >
+              <img src="<?php echo base_url().'../assets/image/Nimes.jpg';?>" alt="lol">
+              <img src="<?php echo base_url().'../assets/image/setes.jpg';?>" alt="lol" >
+              <img src="<?php echo base_url().'../assets/image/beziers.jpg';?>" alt="lol">
         
           </div>
           

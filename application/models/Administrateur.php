@@ -58,7 +58,7 @@
             $this->load->database();
             $this->db->set('prenomAdministrateur', $data['prenomAdministrateur'])
                 ->set('nomAdministrateur', $data['nomAdministrateur'])
- 		        ->set('mailAdministrateur', $data['mailAdministrateur'])
+ 		->set('mailAdministrateur', $data['mailAdministrateur'])
                 ->set('adresseAdministrateur', $data['adresseAdministrateur'])
                 ->set('codePAdministrateur', $data['codePAdministrateur'])
                 ->set('villeAdministrateur', $data['villeAdministrateur'])
@@ -78,8 +78,8 @@
         $this->load->database();
         
         $this->db->set('prenomAdministrateur', $data['prenomAdministrateur'])
-        	    ->set('nomAdministrateur', $data['nomAdministrateur'])
- 		        ->set('mailAdministrateur', $data['mailAdministrateur'])
+        	->set('nomAdministrateur', $data['nomAdministrateur'])
+ 		->set('mailAdministrateur', $data['mailAdministrateur'])
                 ->set('adresseAdministrateur', $data['adresseAdministrateur'])
                 ->set('codePAdministrateur', $data['codePAdministrateur'])
                 ->set('villeAdministrateur', $data['villeAdministrateur'])
