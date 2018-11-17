@@ -54,7 +54,7 @@
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Code postale</label>
-                        <input type="text" class="form-control" name="codePClient" value="<?php  echo $client[0]->codePClient; ?>" size="30" required/>
+                            <input type="text" class="form-control" name="codePClient" value="<?php  echo $client[0]->codePClient; ?>" size="30" required/>
                     </div> 
                     <div class="form-group">
                         <label class="control-label">Ville</label>

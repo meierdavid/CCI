@@ -30,7 +30,7 @@ class ClientCtrl extends CI_Controller {
                 $this->load->model('client');
 		$this->load->helper('form');
 
-		
+		$this->load->view('client/inscription');
                 if(isset($_GET['mdpClient']) && $_GET['mdpClient']==$_GET['mdpClient2']){
                 $data=array(
                             "prenomClient"=> htmlspecialchars($_GET['prenomClient']),
@@ -50,17 +50,13 @@ class ClientCtrl extends CI_Controller {
                 $this->email->subject('CCI Email Validation');
                 $this->email->message('follow this link');
                 
-                
+                $this->load->view('client/validationEmail');
                 
                 $this->email->send();*/
-                $this->load->view('client/validationEmail');
                 if(true){
    		$this->client->insert($data);
                 }
-                }
-                else{
-                    $this->load->view('client/inscription');
-                }
+                }          
 
 	}
    

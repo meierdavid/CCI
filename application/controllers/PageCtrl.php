@@ -43,7 +43,10 @@ class PageCtrl extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->view('pages/pageconnexionadmin');
 	}
-
+        public function choix_inscription(){
+            $this->load->helper('url');
+            $this->load->view('pages/choix_inscription');
+        }
 	public function ConnexionSellers()
 
 	{

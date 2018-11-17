@@ -16,7 +16,7 @@
             
             <?php ?> // formulaire d'inscription Administrateur
 
-            <form>
+            <form method="post" action="AdministrateurCtrl/inscription">
                 <br></br>
                     <div class="text-center">
                     <h4>Entrez votre Pseudo d'Administrateur et votre mot de passe :</h4>

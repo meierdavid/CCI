@@ -14,9 +14,9 @@
             <div class="form-login" >
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Commercant !</h2>
             
-            <?php ?>
+            <?php echo validation_errors(); ?>
 
-            <form>
+            <form method="post" action="validation_inscription">
                 <br></br>
                     <div class="text-center">
                     <h4>Entrez vos coordonnées :</h4>
@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
-                        <input type="text" class="form-control" name="prenomCommercant" value="" size="30" required/>
+                        <input type="text" class="form-control" name="prenomCommercant" value="<?php echo set_value('prenomCommercant'); ?>" size="30" required/>
                     </div>
                     
                     <div class="form-group">

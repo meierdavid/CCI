@@ -26,8 +26,19 @@
                     ->where('idCommercant', $id)
                     ->get()
                     ->result();
-  		}
-
+        }
+             public function selectByMail($mail) {
+    	
+        	$this->load->database();
+    	
+        	return $this->db->select('*')
+                    ->from('commercant')
+                    ->where('mailCommercant', $mail)
+                    ->get()
+                    ->result();
+        }
+  		
+                
   		public function getLastUserId() {
     		
         $this->load->database();

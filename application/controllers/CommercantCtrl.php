@@ -17,24 +17,60 @@ class CommercantCtrl extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('commercant/profil',$data);
     }
+    
+    public function check_connexion(){
+       
+        if(isset($_POST['mail']) && isset($_POST['mdp']) ){
+            $this->load->model('commercant');
+            $data['commercant'] = $this->commercant->selectByMail($_POST['mail']);
+            
+            if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
+                $this->load->view('commercant/index',$data);
+            }
+            else{
+                //$erreur="erreur mauvais mot de passe ou mauvaise adresse mail";
+                //$data['error']=$erreur;
+                $this->load->view('commercant/connexion');
+                // erreur mauvais mdp ou mauvaise adresse mail
+            }
+        }
+        else{
+            // erreur 
+        }
+    }
+    
+    public function connexion(){
+        $this->load->helper('url');
+        $this->load->view('commercant/connexion');
         
+    }
         
+    public function validation_inscription(){
+        $this->load->model('commercant');		
+        $this->load->helper('form');
+        if(isset($_POST['mdpCommercant']) && $_POST['mdpCommercant']==$_POST['mdpCommercant2']){
+                $data=array(
+                            "prenomCommercant"=> htmlspecialchars($_POST['prenomCommercant']),
+                            "nomCommercant"=> htmlspecialchars($_POST['nomCommercant']),
+                            "mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
+                            "mdpCommercant" => htmlspecialchars($_POST['mdpCommercant']),
+                            "adresseCommercant"=> htmlspecialchars($_POST['adresseCommercant']),
+                            "codePCommercant"=> htmlspecialchars($_POST['codePCommercant']),
+                            "villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
+                            "telCommercant" => htmlspecialchars($_POST['telCommercant']),);  
+                $this->commercant->insert($data); 
+                $this->load->view('commercant/validation_inscription');
+        }
+        else{
+             $this->load->view('commercant/inscription');
+        }
+        
+    }
     public function inscription(){
         $this->load->model('commercant');		
-		$this->load->helper('form');
-		$this->load->view('commercant/inscription');
-        if(isset($_GET['mdpCommercant']) && $_GET['mdpCommercant']==$_GET['mdpCommercant2']){
-                $data=array(
-                            "prenomCommercant"=> htmlspecialchars($_GET['prenomCommercant']),
-                            "nomCommercant"=> htmlspecialchars($_GET['nomCommercant']),
-                            "mailCommercant" => htmlspecialchars($_GET['mailCommercant']),
-                            "mdpCommercant" => htmlspecialchars($_GET['mdpCommercant']),
-                            "adresseCommercant"=> htmlspecialchars($_GET['adresseCommercant']),
-                            "codePCommercant"=> htmlspecialchars($_GET['codePCommercant']),
-                            "villeCommercant" => htmlspecialchars($_GET['villeCommercant']),
-                            "telCommercant" => htmlspecialchars($_GET['telCommercant']),);  
-                $this->commercant->insert($data); 
-        }  	
+        $this->load->helper('form');
+        $this->load->view('commercant/inscription');
+      
 	}
 
 }

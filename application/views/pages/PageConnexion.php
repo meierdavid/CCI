@@ -47,7 +47,7 @@
             <br></br>
 
             <div class="text-center">
-            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/ConnexionSellers" role="button">Commercant ? Cliquez ici !</a>
+            <a class="btn btn-primary" href="<?php echo base_url()?>CommercantCtrl/Connexion" role="button">Commercant ? Cliquez ici !</a>
             </div>
 
             <br></br>
@@ -59,7 +59,7 @@
             <br></br>
             
              <div class="text-center">
-            <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/inscription" role="button">Vous êtes pas inscrit ? Cliquez ici !</a>
+            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/choix_inscription" role="button">Vous êtes pas inscrit ? Cliquez ici !</a>
             </div>
 
             </div>
