@@ -36,7 +36,7 @@
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mailAdministrateur" value="" size="30" required/> 
+                        <input type="mail" class="form-control" name="mailAdministrateur" value="" size="30" required/> 
                             <h6 style="color:red;"</h6>
                     </div>  
                     

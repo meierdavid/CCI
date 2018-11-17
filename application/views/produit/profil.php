@@ -14,7 +14,7 @@
             <div class="form-login" >
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Consommateur !</h2>
             
-            <?php ?> // formulaire d'inscription consommateur
+            <?php ?> // Profil
 
             <form>
                 <br></br>
@@ -26,17 +26,17 @@
 
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
-                        <input type="text" class="form-control" name="prenomClient" value="" size="30" required/> 
+                        <input type="text" class="form-control" name="prenomClient" value="<?php echo  $client[0]->prenomClient; ?>" size="30" required/> 
                             <h6 style="color:red;"</h6>
                     </div>
                     
                     <div class="form-group">
                         <label class="control-label">Nom</label>
-                        <input type="text" class="form-control" name="nomClient" value="" size="30" required/>
+                        <input type="text" class="form-control" name="nomClient" value=" <?php echo $client[0]->nomClient; ?>" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Mail</label>
-                        <input type="mail" class="form-control" name="mailClient" value="" size="30" required/> 
+                        <input type="text" class="form-control" name="mailClient" value="<?php echo $client[0]->mailClient; ?>" size="30" required/> 
                             <h6 style="color:red;"</h6>
                     </div>  
                     
@@ -45,24 +45,24 @@
                         <input type="password" class="form-control" name="mdpClient" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
-                        <label class="control-label">Confirmation du Mot de passe</label>
+                        <label class="control-label">Mot de passe2</label>
                         <input type="password" class="form-control" name="mdpClient2" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Adresse</label>
-                        <input type="text" class="form-control" name="adresseClient" value="" size="30" required/>
+                        <input type="text" class="form-control" name="adresseClient" value="<?php echo $client[0]->adresseClient; ?>" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Code postale</label>
-                        <input type="text" class="form-control" name="codePClient" value="" size="30" required/>
+                        <input type="text" class="form-control" name="codePClient" value="<?php  echo $client[0]->codePClient; ?>" size="30" required/>
                     </div> 
                     <div class="form-group">
                         <label class="control-label">Ville</label>
-                        <input type="text" class="form-control" name="villeClient" value="" size="30" required/>
+                        <input type="text" class="form-control" name="villeClient" value="<?php echo $client[0]->villeClient; ?>" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Numéro de téléphone</label>
-                        <input type="text" class="form-control" name="telClient" value="" size="30" required/>
+                        <input type="text" class="form-control" name="telClient" value="<?php echo $client[0]->telClient; ?>" size="30" required/>
                     </div>    
                     
                     

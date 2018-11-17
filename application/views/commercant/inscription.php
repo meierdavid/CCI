@@ -35,7 +35,7 @@
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mailCommercant" value="" size="30" required/>
+                        <input type="mail" class="form-control" name="mailCommercant" value="" size="30" required/>
                     </div>  
                     
                     <div class="form-group">
@@ -43,7 +43,7 @@
                         <input type="password" class="form-control" name="mdpCommercant" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
-                        <label class="control-label">Mot de passe2</label>
+                        <label class="control-label">Confirmation du Mot de passe</label>
                         <input type="password" class="form-control" name="mdpCommercant2" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
