@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a href="#">Profil</a>
         <a href="#">Historique</a>
         <a href="#">Changer de mot de passe</a>
-        <a href="../../">Se déconnecter</a>
+        <a href="../../">Se déconnecter</a> <?php // changer ce Href lorsque les cookies seront mis en place ?>
 </div>
       
   </body>

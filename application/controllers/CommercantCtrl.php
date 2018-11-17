@@ -10,9 +10,9 @@ class CommercantCtrl extends CI_Controller {
         $this->load->view('commercant/profil');               
 	}
 
-    public function profil($id)
+    public function profil($mail)
     {
-        $data['commercant'] = $this->commercant->selectById($id);
+        $data['commercant'] = $this->commercant->selectByMail($mail);
         $this->load->model('Commercant');
         $this->load->helper('url');
         $this->load->view('commercant/profil',$data);
