@@ -126,6 +126,10 @@ class CommercantCtrl extends CI_Controller {
          
                 $this->entreprise->insert($data,$id); 
                 $this->load->view('commercant/validation_ajout_entreprise');
+                $this->load->model('entreprise');
+                $data['entreprise'] =$this->entreprise->selectById($_POST['numSiret']);
+                $this->load->view('entreprise/profil',$data);
+                        
                 
         }
         else{
@@ -145,7 +149,16 @@ class CommercantCtrl extends CI_Controller {
         $this->load->view('commercant/connexion');
         
     }
-        
+    
+    public function deconnexion(){
+        $this->load->helper('url');
+        $this->load->helper('cookie');
+        delete_cookie("commercantCookie");
+        $this->load->view('pages/deconnection');
+        $this->load->view('pages/pageconnexion');
+    }
+
+
     public function validation_inscription(){
         $this->load->model('commercant');		
         $this->load->helper('form');
