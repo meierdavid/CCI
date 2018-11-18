@@ -31,7 +31,6 @@ class ClientCtrl extends CI_Controller {
 		$this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
 		$this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
 		$this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
-		//$this->form_validation->set_rules('mailClient', 'Email', 'is_unique[client.mailClient]');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -39,7 +38,11 @@ class ClientCtrl extends CI_Controller {
 		}
 		else
 		{
-			if($_POST['mdpClient'] == $_POST['mdpClient2'] ){
+			if (null != $this->client->selectByMail($_POST['mailClient'])){
+				$this->load->view('client/inscription.php');
+				echo "<div class='alert alert-danger text-center'>Cet email n'est pas disponible</div>";
+			}
+			else if($_POST['mdpClient'] == $_POST['mdpClient2'] ){
 				echo "formumaire bien remplie";
 				$data=array(
 					"prenomClient"=> htmlspecialchars($_POST['prenomClient']),
