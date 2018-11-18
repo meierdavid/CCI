@@ -33,7 +33,7 @@
     	
         	return $this->db->select('*')
                     ->from('commercant')
-                    ->where('mailCommercant', $mail)
+                    ->where('mailCommercant',$mail)
                     ->get()
                     ->result();
         }
