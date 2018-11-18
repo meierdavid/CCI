@@ -15,5 +15,17 @@ class EntrepriseCtrl extends CI_Controller {
             $this->load->helper('form');
             $this->load->view('entreprise/ajout_entreprise');
         }
-
+        
+        public function profil($num){
+                $this->load->helper('cookie');
+                $this->load->helper('url');
+                if($this->input->cookie('commercantCookie')!= FALSE){ // il faudra vérifier que c'est le bon commerçant qui est connecté
+                    $this->load->model('entreprise');
+                    $data['entreprise'] =$this->entreprise->selectById($num);
+                    $this->load->view('entreprise/profil',$data);
+                }
+                else{
+                    $this->load->view('pages/pageconnexion');
+                }
+        }
 }

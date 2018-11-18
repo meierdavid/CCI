@@ -21,9 +21,9 @@
     		
         $this->load->database();
     		
-        $this->db->select('*')
+        return $this->db->select('*')
                     ->from('entreprise')
-                    ->where('numSiret', $id)
+                    ->where('numSiret',$id)
                     ->get()
                     ->result();
         }
