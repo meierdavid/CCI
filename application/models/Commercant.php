@@ -42,13 +42,14 @@
         public function selectEntreprise($mail){
                 $this->load->database();
                 $commercant=$this->selectByMail($mail);
-                var_dump($commercant);
                 $commercant[0]->idCommercant;
         	return $this->db->select('*')
-                    ->from('faire_partie')
+                    ->from('Entreprise')
+                    ->join('faire_partie','faire_partie.numSiret = entreprise.numSiret')
                     ->where('idCommercant', $commercant[0]->idCommercant)
                     ->get()
                     ->result();
+
         }
 
 
@@ -101,6 +102,14 @@
               ->set('telCommercant', $data['telCommercant'])
               ->set('mdpCommercant', $data['mdpCommercant'])
 				->update($this->table);
+    	}
+        public function updateMdp($mail,$mdp){
+      		
+          $this->load->database();
+      		
+          return $this->db->where('mailCommercant',$mail)
+              ->set('mdpCommercant',$mdp)
+	     ->update($this->table);
     	}
     }
 ?>

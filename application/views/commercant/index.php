@@ -11,12 +11,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </head>
   <body>
     <center>
-        <h1>Bienvenue <?php  echo $commercant[0]->prenomCommercant; echo ' '; echo $commercant[0]->nomCommercant ;    ?> sur votre espace Commerçant</h1>
+        <h1>Bienvenue <?php if(isset($commercant)){ echo $commercant[0]->prenomCommercant; echo ' '; echo $commercant[0]->nomCommercant ;}    ?> sur votre espace Commerçant</h1>
     </center>
   <div class="vertical-menu" style="position: absolute; margin-top: 70px;">
         <a href="#" class="active">Vos Commerces</a>
         <a href="<?php echo base_url()?>CommercantCtrl/liste_entreprise">Liste des commerces</a>
-        <a href="<?php echo base_url()?>entrepriseCtrl/add_entreprise">Ajouter un commerce</a>
+        <a href="<?php echo base_url()?>CommercantCtrl/add_entreprise">Ajouter un commerce</a>
         <a href="<?php echo base_url()?>commercantCtrl/lie_commercant">Lier un commerçant à un commerce</a>
         <a href="#">Vos commandes en attente</a>
         <a href="#" class="active">Votre Compte</a>

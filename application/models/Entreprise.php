@@ -23,7 +23,7 @@
     		
         $this->db->select('*')
                     ->from('entreprise')
-                    ->where('idEntreprise', $id)
+                    ->where('numSiret', $id)
                     ->get()
                     ->result();
         }
@@ -51,7 +51,7 @@
                     ->result();
   		}
 
-  		public function insert($data,$id) {
+        public function insert($data,$id) {
         
         $this->load->database();
         

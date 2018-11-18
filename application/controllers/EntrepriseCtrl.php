@@ -10,7 +10,7 @@ class EntrepriseCtrl extends CI_Controller {
             $this->load->view('Entreprise/index');               
 	}
 
-        public function add_entreprise(){ //^paremetre mail du commercant ou cookie pour le récupérer
+        public function add_entreprise(){ //paremetre mail du commercant ou cookie pour le récupérer
             $this->load->model('entreprise');		
             $this->load->helper('form');
             $this->load->view('entreprise/ajout_entreprise');

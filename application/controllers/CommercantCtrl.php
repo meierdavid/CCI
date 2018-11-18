@@ -6,39 +6,72 @@ class CommercantCtrl extends CI_Controller {
 	
 	public function index()
 	{       
+        if($this->input->cookie('commercantCookie')!= FALSE){
         $this->load->helper('url');
-        $this->load->view('commercant/profil');               
+        $this->load->view('commercant/profil');     
+        }
 	}
 
     public function profil()
     {
-        $var="davidmeier@hotmail.fr"; // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
-        $this->load->model('commercant');
+        $this->load->helper('cookie');
         $this->load->helper('url');
-        $data['commercant'] = $this->commercant->selectByMail($var);
-        $this->load->view('commercant/index',$data);
-        $this->load->view('commercant/profil',$data);
+        if($this->input->cookie('commercantCookie')!= FALSE){
+            $varMail= $this->input->cookie('commercantCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
+            $this->load->model('commercant');
+           
+            $data['commercant'] = $this->commercant->selectByMail($varMail);
+            $this->load->view('commercant/index',$data);
+            $this->load->view('commercant/profil',$data);
+        }
+        else{
+            $this->load->view('pages/pageconnexion');
+        }
     }
     public function changer_mdp(){ // info commercant avec cookie
-        // Pas FINIT
+        $this->load->helper('cookie');
         $this->load->model('commercant');
         $this->load->helper('url');
-        if(isset($_POST['mdpCommercantAncien'])  ){ // + tester Bon Ancien mot de passe
+        $varMail= $this->input->cookie('commercantCookie');
+        $data['commercant'] = $this->commercant->selectByMail($varMail); 
+        
+        if(isset($_POST['mdpCommercantAncien']) && ($_POST['mdpCommercantAncien'] == $data['commercant'][0]->mdpCommercant) ){ // + tester Bon Ancien mot de passe
             if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
-                //Update Nouveau Mot de passe
+                $newMdp = $_POST['mdpCommercantNouveau'];
+                $this->commercant->updateMdp($varMail,$newMdp);
+                delete_cookie("commercantCookie");
+                $this->load->view('pages/pageconnexion');
             }
         }
-        $data['commercant'] = $this->commercant->selectByMail(); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
-        $this->load->view('commercant/index',$data);
-        $this->load->view('commercant/changer_mdp',$data);
+        else{
+            $this->load->view('commercant/index',$data);
+            $this->load->view('commercant/changer_mdp',$data);
+        }
+        
+        
     }
     public function check_connexion(){
-       
+       $this->load->helper('cookie');
         if(isset($_POST['mail']) && isset($_POST['mdp']) ){
             $this->load->model('commercant');
             $data['commercant'] = $this->commercant->selectByMail($_POST['mail']);
             
             if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
+                $cookie = array(
+
+                                'name'   => 'commercantCookie',
+
+                                'value'  => $data['commercant'][0]->mailCommercant,
+
+                                'expire' => '3600'
+
+                                
+
+                             );	
+                $this->input->set_cookie($cookie);
+                	
+                echo $this->input->cookie('commercantCookie');
+                
                 $this->load->view('commercant/index',$data);
             }
             else{
@@ -52,18 +85,59 @@ class CommercantCtrl extends CI_Controller {
             // erreur 
         }
     }
-    public function liste_entreprise(){ //mettre parametre mail ou utiliser cookie
+    public function liste_entreprise(){
+        $this->load->helper('cookie');
         $this->load->model('commercant');
         $this->load->model('entreprise');
-        $data['entreprises']=$this->commercant->selectEntreprise("davidmeier@hotmail.fr");
-        if( $data['entreprises'] == NULL){
+        $varMail= $this->input->cookie('commercantCookie');
+        $data['entreprises']=$this->commercant->selectEntreprise($varMail);
+        
+        if( $data['entreprises'] != NULL){
+            $this->load->view('commercant/index',$data);
            $this->load->view('commercant/liste_entreprise',$data);
+           
         }
         else{
-            // ce commerçant n'a pas d'entreprise ( lui proposer d'en ajouter une )
+            $this->add_entreprise();
         }
     }
     public function add_entreprise() { //mettre parametre mail ou utiliser cookie
+        // use insert for model entreprise paramètre $data , $idCommercant
+        $this->load->helper('form');
+        $this->load->helper('cookie');
+        $this->load->model('entreprise');
+        $this->load->model('commercant');
+        if($this->input->cookie('commercantCookie') != False){
+        $varMail= $this->input->cookie('commercantCookie');
+        $data['commercant']=$this->commercant->selectByMail($varMail);
+        $id= $data['commercant'][0]->idCommercant;
+        if(isset($_POST['nomEntreprise'])){
+            $data=array(
+                            "numSiret"=> htmlspecialchars($_POST['numSiret']),
+                            "nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
+                            "adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
+                            "codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
+                            "villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
+                            "horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
+                            "livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
+                            "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
+                        ); 
+            
+         
+                $this->entreprise->insert($data,$id); 
+                $this->load->view('commercant/validation_ajout_entreprise');
+                
+        }
+        else{
+            $this->load->view('commercant/index',$data);
+            $this->load->model('entreprise');		
+            $this->load->helper('form');
+            $this->load->view('commercant/ajout_entreprise');
+        }
+        }
+        else{
+            //pas de cookie
+        }
         
     }
     public function connexion(){
