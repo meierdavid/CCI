@@ -2,7 +2,7 @@
           <div class="content mt-3">
                 <div class="animated fadeIn">
                   <div>
-                      <div style="margin-left: 200px" class="row">
+                      <div style="margin-left: 60px" class="row">
                       <div class="col-md-12 col-md-offset-2">
                           <div class="box">
                               <h2>Liste des Entreprises</h2>
