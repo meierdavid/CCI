@@ -38,7 +38,17 @@ class CommercantCtrl extends CI_Controller {
             // erreur 
         }
     }
-    
+    public function liste_entreprise(){ //mettre parametre mail ou utiliser cookie
+        $this->load->model('commercant');
+        $this->load->model('entreprise');
+        $data['entreprises']=$this->commercant->selectEntreprise("davidmeier@hotmail.fr");
+        if( $data['entreprises'] == NULL){
+           $this->load->view('commercant/liste_entreprise',$data);
+        }
+        else{
+            // ce commerçant n'a pas d'entreprise ( lui proposer d'en ajouter une )
+        }
+    }
     public function connexion(){
         $this->load->helper('url');
         $this->load->view('commercant/connexion');

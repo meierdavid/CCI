@@ -37,9 +37,22 @@
                     ->get()
                     ->result();
         }
-  		
-                
-  		public function getLastUserId() {
+        
+        
+        public function selectEntreprise($mail){
+                $this->load->database();
+                $commercant=$this->selectByMail($mail);
+                var_dump($commercant);
+                $commercant[0]->idCommercant;
+        	return $this->db->select('*')
+                    ->from('faire_partie')
+                    ->where('idCommercant', $commercant[0]->idCommercant)
+                    ->get()
+                    ->result();
+        }
+
+
+        public function getLastCommercantId() {
     		
         $this->load->database();
     		
@@ -51,7 +64,7 @@
                     ->result();
   		}
 
-  		public function insert($data) {
+        public function insert($data) {
         
         $this->load->database();
         
@@ -64,13 +77,14 @@
               ->set('telCommercant', $data['telCommercant'])
               ->set('mdpCommercant', $data['mdpCommercant'])
 				->insert($this->table);
-        }   
+        }
+
 
         public function delete($id){
       		
           $this->load->database();
       		
-          return $this->db->where('idClient',$id)
+          return $this->db->where('idCommercant',$id)
                 ->delete($this->table);
     	  }
         
@@ -78,7 +92,7 @@
       		
           $this->load->database();
       		
-          return $this->db->where('idClient',$id)
+          return $this->db->where('idCommercant',$id)
             	->set('nomCommercant', $data['nomCommercant'])
  				      ->set('mailCommercant', $data['mailCommercant'])
               ->set('adresseCommercant', $data['adresseCommercant'])

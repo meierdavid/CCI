@@ -40,7 +40,7 @@
                     ->result();
         }
   		
-        public function getLastUserId() {
+        public function getLastClientId() {
     	
         	$this->load->database();
     	
