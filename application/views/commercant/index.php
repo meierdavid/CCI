@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a href="#" class="active">Votre Compte</a>
         <a href="<?php echo base_url()?>commercantCtrl/profil">Profil</a>
         <a href="#">Historique</a>
-        <a href="#">Changer de mot de passe</a>
+        <a href="<?php echo base_url()?>commercantCtrl/changer_mdp">Changer de mot de passe</a>
         <a href="../../">Se déconnecter</a> <?php // changer ce Href lorsque les cookies seront mis en place ?>
 </div>
       

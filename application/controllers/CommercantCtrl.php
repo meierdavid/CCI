@@ -12,14 +12,26 @@ class CommercantCtrl extends CI_Controller {
 
     public function profil()
     {
-        $var="davidmeier@hotmail.fr";
+        $var="davidmeier@hotmail.fr"; // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
         $this->load->model('commercant');
         $this->load->helper('url');
         $data['commercant'] = $this->commercant->selectByMail($var);
         $this->load->view('commercant/index',$data);
         $this->load->view('commercant/profil',$data);
     }
-    
+    public function changer_mdp(){ // info commercant avec cookie
+        // Pas FINIT
+        $this->load->model('commercant');
+        $this->load->helper('url');
+        if(isset($_POST['mdpCommercantAncien'])  ){ // + tester Bon Ancien mot de passe
+            if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
+                //Update Nouveau Mot de passe
+            }
+        }
+        $data['commercant'] = $this->commercant->selectByMail(); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
+        $this->load->view('commercant/index',$data);
+        $this->load->view('commercant/changer_mdp',$data);
+    }
     public function check_connexion(){
        
         if(isset($_POST['mail']) && isset($_POST['mdp']) ){
