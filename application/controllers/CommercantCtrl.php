@@ -49,6 +49,9 @@ class CommercantCtrl extends CI_Controller {
             // ce commerçant n'a pas d'entreprise ( lui proposer d'en ajouter une )
         }
     }
+    public function add_entreprise() { //mettre parametre mail ou utiliser cookie
+        
+    }
     public function connexion(){
         $this->load->helper('url');
         $this->load->view('commercant/connexion');
@@ -74,6 +77,14 @@ class CommercantCtrl extends CI_Controller {
         else{
              $this->load->view('commercant/inscription');
         }
+        
+    }
+    public function lie_commercant(){
+        //vérifier le num de siret du commercant
+        // ajouter à la table faire_partie
+        $this->load->model('commercant');		
+        $this->load->helper('form');
+        $this->load->view('commercant/lie_commercant');
         
     }
     public function inscription(){
