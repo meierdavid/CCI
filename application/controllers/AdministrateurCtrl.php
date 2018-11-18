@@ -30,7 +30,6 @@ class AdministrateurCtrl extends CI_Controller {
 		$this->form_validation->set_rules('codePAdministrateur', 'Code postale', 'integer');
 		$this->form_validation->set_rules('villeAdministrateur', 'Ville', 'alpha_dash');
 		$this->form_validation->set_rules('telAdministrateur', 'Numéro de téléphone', 'integer');
-		//$this->form_validation->set_rules('mailAdministrateur', 'Email', 'is_unique[Administrateur.mailAdministrateur]');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -38,7 +37,11 @@ class AdministrateurCtrl extends CI_Controller {
 		}
 		else
 		{
-			if($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2'] ){
+      if (null != $this->administrateur->selectByMail($_POST['mailAdministrateur'])){
+				$this->load->view('administrateurt/inscription.php');
+				echo "<div class='alert alert-danger text-center'>Cet email n'est pas disponible</div>";
+			}
+			else if($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2'] ){
 				echo "formumaire bien remplie";
 				$data=array(
 					"prenomAdministrateur"=> htmlspecialchars($_POST['prenomAdministrateur']),
