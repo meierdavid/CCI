@@ -17,7 +17,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a href="#" class="active">Vos Commerces</a>
         <a href="<?php echo base_url()?>CommercantCtrl/liste_entreprise">Liste des commerces</a>
         <a href="<?php echo base_url()?>CommercantCtrl/add_entreprise">Ajouter un commerce</a>
-        <a href="<?php echo base_url()?>commercantCtrl/lie_commercant">Lier un commerçant à un commerce</a>
         <a href="#">Vos commandes en attente</a>
         <a href="#" class="active">Votre Compte</a>
         <a href="<?php echo base_url()?>commercantCtrl/profil">Profil</a>

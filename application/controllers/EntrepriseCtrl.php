@@ -22,6 +22,7 @@ class EntrepriseCtrl extends CI_Controller {
                 if($this->input->cookie('commercantCookie')!= FALSE){ // il faudra vérifier que c'est le bon commerçant qui est connecté
                     $this->load->model('entreprise');
                     $data['entreprise'] =$this->entreprise->selectById($num);
+                    $this->load->view('entreprise/index',$data);
                     $this->load->view('entreprise/profil',$data);
                 }
                 else{

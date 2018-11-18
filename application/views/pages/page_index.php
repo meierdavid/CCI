@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              
                   
               </article>
-              <article class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <article class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                   <h1> Article 2 </h1>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum risus vitae ex tincidunt consequat. Donec ac ipsum tempus mauris aliquam rhoncus. In sollicitudin risus vel facilisis iaculis. Morbi ut felis vel nunc accumsan placerat at id turpis. Integer tincidunt dui eget nisl ultrices, tempor blandit dolor facilisis. Morbi eget diam ex. Praesent sodales vel orci vel bibendum. Ut pharetra leo mauris, dictum pulvinar diam vulputate fringilla. Pellentesque nec tellus quis odio pellentesque tristique eget consectetur quam. Donec pharetra semper massa. Vivamus tincidunt eros mi, sollicitudin iaculis quam bibendum id.</p>
                           
