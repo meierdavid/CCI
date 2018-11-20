@@ -15,8 +15,8 @@
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Commercant !</h2>
             
             <?php ?> // formulaire d'ajout de produit
-
-            <form>
+			<?php echo form_open_multipart('ProduitCtrl/ajout_produit');?>
+            
                 <br></br>
                     <div class="text-center">
                     <h4>Veuillez rentrer les spécifications du produit :</h4>
@@ -42,7 +42,7 @@
                     
                     <div class="form-group">
                         <label class="control-label">Photo du produit :</label>
-                        <input type="file" class="form-control" name="imageProduit" value="" size="30" accept "image/*"/>
+                        <input type="file" class="form-control" name="imageProduit" value="" accept "image/*"/>
                     </div>    
                                       
                     
