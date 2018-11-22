@@ -101,7 +101,7 @@ class CommercantCtrl extends CI_Controller {
             $this->add_entreprise();
         }
     }
-		
+
     public function add_entreprise() { //mettre parametre mail ou utiliser cookie
         // use insert for model entreprise paramètre $data , $idCommercant
         $this->load->helper('form');
@@ -191,11 +191,49 @@ class CommercantCtrl extends CI_Controller {
         $this->load->view('commercant/lie_commercant');
 
     }
+
     public function inscription(){
         $this->load->model('commercant');
-        $this->load->helper('form');
-        $this->load->view('commercant/inscription');
+        $this->load->helper('form','url');
+				$this->load->library('form_validation');
 
-	}
+				$this->form_validation->set_rules('prenomCommercant', 'Prénom', 'alpha_dash');
+				$this->form_validation->set_rules('nomCommercant', 'Nom', 'alpha_numeric_spaces');
+				$this->form_validation->set_rules('mailCommercant', 'Email', 'valid_email');
+				$this->form_validation->set_rules('codePCommercant', 'Code postale', 'integer');
+				$this->form_validation->set_rules('villeCommercant', 'Ville', 'alpha_dash');
+				$this->form_validation->set_rules('telCommercant', 'Numéro de téléphone', 'integer');
+
+				if ($this->form_validation->run() == FALSE)
+				{
+					$this->load->view('commercant/inscription');
+				}
+				else
+				{
+					if (null != $this->commercant->selectByMail($_POST['mailCommercant'])){
+						$this->load->view('commercant/inscription');
+						echo "<div class='alert alert-danger text-center'>Cet email n'est pas disponible</div>";
+					}
+					else if($_POST['mdpCommercant'] == $_POST['mdpCommercant2'] ){
+						echo "formumaire bien remplie";
+						$data=array(
+							"prenomCommercant"=> htmlspecialchars($_POST['prenomCommercant']),
+							"nomCommercant"=> htmlspecialchars($_POST['nomCommercant']),
+							"mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
+							"mdpCommercant" => htmlspecialchars($_POST['mdpCommercant']),
+							"adresseCommercant"=> htmlspecialchars($_POST['adresseCommercant']),
+							"codePCommercant"=> htmlspecialchars($_POST['codePCommercant']),
+							"villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
+							"telCommercant" => htmlspecialchars($_POST['telCommercant']),
+							"pointCommercant" => htmlspecialchars(0),
+						);
+						$this->commercant->insert($data);
+					}
+					else {
+						$this->load->view('commercant/inscription');
+						echo '<div class="alert alert-danger text-center">La confirmation de Mot de passe ne correspond pas au premier</div>';
+					}
+				}
+		}
 
 }
