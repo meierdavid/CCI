@@ -34,12 +34,12 @@ class ClientCtrl extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('client/inscription.php');
+			$this->load->view('client/inscription');
 		}
 		else
 		{
 			if (null != $this->client->selectByMail($_POST['mailClient'])){
-				$this->load->view('client/inscription.php');
+				$this->load->view('client/inscription');
 				echo "<div class='alert alert-danger text-center'>Cet email n'est pas disponible</div>";
 			}
 			else if($_POST['mdpClient'] == $_POST['mdpClient2'] ){
@@ -58,7 +58,7 @@ class ClientCtrl extends CI_Controller {
 				$this->client->insert($data);
 			}
 			else {
-				$this->load->view('client/inscription.php');
+				$this->load->view('client/inscription');
 				echo '<div class="alert alert-danger text-center">La confirmation de Mot de passe ne correspond pas au premier</div>';
 			}
 		}

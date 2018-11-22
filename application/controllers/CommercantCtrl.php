@@ -148,8 +148,31 @@ class CommercantCtrl extends CI_Controller {
     }
 
     public function connexion(){
-        $this->load->helper('url');
-        $this->load->view('commercant/connexion');
+			$this->load->model('commercant');
+			$this->load->helper('form','url');
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('commercant/connexion');
+			}
+			else
+			{
+				//print($this->commercant->selectByMail("e@e.fr"));
+				if ($this->commercant->selectByMail($_POST['mailCommercant']) == null){
+					$this->load->view('commercant/lie_commercant');
+					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+				}//probleme : selectByMail ne retourne rien ! 
+				// else if( $this->commercant->selectByMail($_POST['mailCommercant'])[8] != $_POST['mdp']){
+				// 	$this->load->view('commercant/lie_commercant');
+				// 	echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+				// }
+				else{
+					echo "formumaire bien remplie";
+				}
+			}
 
     }
 
@@ -183,14 +206,44 @@ class CommercantCtrl extends CI_Controller {
         }
 
     }
-    public function lie_commercant(){
-        //vérifier le num de siret du commercant
-        // ajouter à la table faire_partie
-        $this->load->model('commercant');
-        $this->load->helper('form');
-        $this->load->view('commercant/lie_commercant');
 
-    }
+		public function lie_commercant(){
+			$this->load->model('commercant');
+			$this->load->model('faire_partie');
+			$this->load->helper('form','url');
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('commercant/lie_commercant');
+			}
+			else
+			{
+				$comm=$this->commercant->selectByMail($_POST['mailCommercant']);
+				//ligne commercant correspondant à cet email
+				//$faitpartie=$this->faire_partie->selectByIdCommercant() : mettre cookie du commercant connecté
+				//ligne de faire_partie correspondant à cet idCommercant
+
+				if ($comm == null){
+					$this->load->view('commercant/lie_commercant');
+					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+				}
+				// else if( $faitpartie == null){
+				// 	$this->load->view('commercant/lie_commercant');
+				// 	echo '<div class="alert alert-danger text-center">Ce numéro SIRET ne corrspond pas à votre entreprise</div>';
+				// }
+				// else{
+				// 	echo "formumaire bien remplie";
+				// 	$data=array(
+				// 		"numSiret"=> htmlspecialchars($_POST['siret']),
+				// 		"idCommercant"=> htmlspecialchars($comm[0])
+				// 	);
+				// 	$this->faire_partie->insert($data);
+				// }
+			}
+		}
 
     public function inscription(){
         $this->load->model('commercant');
