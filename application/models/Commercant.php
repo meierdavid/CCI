@@ -33,10 +33,10 @@
         	$this->load->database();
 
         	return $this->db->select('*')
-                    ->from('commercant')
-                    ->where('mailCommercant',$mail)
-                    ->get()
-                    ->result();
+          ->from('commercant')
+          ->where('mailCommercant',$mail)
+          ->get()
+          ->result();
         }
 
 

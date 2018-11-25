@@ -148,31 +148,34 @@ class CommercantCtrl extends CI_Controller {
     }
 
     public function connexion(){
-			$this->load->model('commercant');
+
 			$this->load->helper('form','url');
 			$this->load->library('form_validation');
+			$this->load->model('commercant');
 
-			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
-
-			if ($this->form_validation->run() == FALSE)
-			{
-				$this->load->view('commercant/connexion');
-			}
-			else
-			{
-				//print($this->commercant->selectByMail("e@e.fr"));
-				if ($this->commercant->selectByMail($_POST['mailCommercant']) == null){
-					$this->load->view('commercant/lie_commercant');
-					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
-				}//probleme : selectByMail ne retourne rien ! 
-				// else if( $this->commercant->selectByMail($_POST['mailCommercant'])[8] != $_POST['mdp']){
-				// 	$this->load->view('commercant/lie_commercant');
-				// 	echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
-				// }
-				else{
-					echo "formumaire bien remplie";
-				}
-			}
+			echo "con";
+			$data['user']= $this->commercant->selectByMail('c@c.fr')[];
+			$this->load->view('CommercantCtrl/connexion', $data);
+			// $this->form_validation->set_rules('mailCommercant', 'Email', 'required');
+			//
+			// if ($this->form_validation->run() == FALSE)
+			// {
+			// 	$this->load->view('commercant/connexion');
+			// }
+			// else
+			// {
+			// 	if ($this->commercant->selectByMail($_POST['mailCommercant']) == null){
+			// 		$this->load->view('commercant/lie_commercant');
+			// 		echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+			// 	}//probleme : selectByMail ne retourne rien !
+			// 	// else if( $this->commercant->selectByMail($_POST['mailCommercant'])[8] != $_POST['mdp']){
+			// 	// 	$this->load->view('commercant/lie_commercant');
+			// 	// 	echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+			// 	// }
+			// 	else{
+			// 		echo "formumaire bien remplie";
+			// 	}
+			// }
 
     }
 
@@ -214,6 +217,9 @@ class CommercantCtrl extends CI_Controller {
 			$this->load->library('form_validation');
 
 			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
+
+			echo "la";
+			echo $this->input->cookie('commercantCookie');
 
 			if ($this->form_validation->run() == FALSE)
 			{
