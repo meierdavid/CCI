@@ -12,9 +12,11 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-            <?php echo validation_errors(); ?>
 
-            <form method="post" action="add_entreprise">
+              <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
+              <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
+              <?php echo form_open('CommercantCtrl/ajout_entreprise'); ?>
+
                     <div class="text-center">
                     <h4>Ajoutez votre entreprise :</h4>
                     <div class="form-group">
@@ -40,11 +42,19 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Horaires</label>
-                        <input type="datetime" class="form-control" name="horairesEntreprise" value="" size="30" required/>
+                        <textarea class="form-control" name="horairesEntreprise" required>
+                        Lun**h**/**h**-**h**/**h**
+                        Mar**h**/**h**-**h**/**h**
+                        Mer**h**/**h**-**h**/**h**
+                        Jeu**h**/**h**-**h**/**h**
+                        Ven**h**/**h**-**h**/**h**
+                        Sam**h**/**h**-**h**/**h**
+                        Dim**h**/**h**-**h**/**h**</textarea>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Livraison</label>
-                        <input type="checkbox"  name="livraisonEntreprise" value="" size="" required/>
+                        <input type="radio"  name="livraisonEntreprise" value="Oui" required/>Oui
+                        <input type="radio"  name="livraisonEntreprise" value="Non" required/>Non
                     </div>
                     <div class="form-group">
                         <label class="control-label">Temps Maximum de Réservation en heure </label>

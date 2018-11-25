@@ -64,8 +64,6 @@
                         <input type="text" class="form-control" name="telCommercant" value="" size="30" required/>
                     </div>
 
-
-
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Inscription" /></div>
                     <div class="text-center">
                         <br>

@@ -102,50 +102,63 @@ class CommercantCtrl extends CI_Controller {
         }
     }
 
-    public function add_entreprise() { //mettre parametre mail ou utiliser cookie
-        // use insert for model entreprise paramètre $data , $idCommercant
-        $this->load->helper('form');
-        $this->load->helper('cookie');
-        $this->load->model('entreprise');
-        $this->load->model('commercant');
+		public function ajout_entreprise() { //mettre parametre mail ou utiliser cookie
+			// use insert for model entreprise paramètre $data , $idCommercant
+			$this->load->helper('form','url');
+			$this->load->helper('cookie');
 
-        if($this->input->cookie('commercantCookie') != False){
-	        $varMail= $this->input->cookie('commercantCookie');
-	        $data['commercant']=$this->commercant->selectByMail($varMail);
-	        $id= $data['commercant'][0]->idCommercant;
-	        if(isset($_POST['nomEntreprise'])){
-	            $data=array(
-	                            "numSiret"=> htmlspecialchars($_POST['numSiret']),
-	                            "nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
-	                            "adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
-	                            "codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
-	                            "villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
-	                            "horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
-	                            "livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
-	                            "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
-	                        );
+			$this->load->library('form_validation');
 
+			$this->load->model('entreprise');
+			$this->load->model('commercant');
 
-	                $this->entreprise->insert($data,$id);
-	                $this->load->view('commercant/validation_ajout_entreprise');
-	                $this->load->model('entreprise');
-	                $data['entreprise'] =$this->entreprise->selectById($_POST['numSiret']);
-	                $this->load->view('entreprise/profil',$data);
+			$this->form_validation->set_rules('numSiret', 'n° SIRET', 'required');
+			$this->form_validation->set_rules('nomEntreprise', "Nom de l'entreprise", 'alpha_numeric_spaces');
+			$this->form_validation->set_rules('codePEntreprise', 'Code postale', 'integer');
+			$this->form_validation->set_rules('villeEntreprise', 'Ville', 'alpha_dash');
+			//	$this->form_validation->set_rules('horairesEntreprise', 'Horaires', ''); je ne sais pas comment géré ce champ
+			$this->form_validation->set_rules('TempsReservMax', 'Temps maximum de réservation en heure', 'integer');
 
+			if($this->input->cookie('commercantCookie') != null){
+				if ($this->form_validation->run() == FALSE)
+				{
+					$this->load->view('commercant/ajout_entreprise');
+				}
+				else
+				{
+					if($this->entreprise->selectById($_POST['numSiret']) == null){
+						$varid= $this->input->cookie('commercantCookie');
+						$data['commercant']=$this->commercant->selectById($varid);
+						$id= $data['commercant'][0]->idCommercant;
 
-	        }
-	        else{
-	            $this->load->view('commercant/index',$data);
-	            $this->load->model('entreprise');
-	            $this->load->helper('form');
-	            $this->load->view('commercant/ajout_entreprise');
-	        }
-        }
-        else{
-            //pas de cookie
-        }
+						$data=array(
+							"numSiret"=> htmlspecialchars($_POST['numSiret']),
+							"nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
+							"adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
+							"codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
+							"villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
+							"horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
+							"livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
+							"tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
+						);
 
-    }
+						$this->entreprise->insert($data,$id);
+						$this->load->view('commercant/validation_ajout_entreprise');
+						$this->load->model('entreprise');
+						$data['entreprise'] =$this->entreprise->selectById($_POST['numSiret']);
+						$this->load->view('entreprise/profil',$data);
+					}
+					else{
+						$this->load->view('commercant/ajout_entreprise');
+						echo '<div class="alert alert-danger text-center">Ce numéro SIRET corrspond déjà à une entreprise</div>';
+					}
+				}
+			}
+			else{
+				$this->load->view('pages/deconnexion');
+				$this->load->view('commercant/connexion');
+			}
+		}
 
     public function connexion(){
 			$this->load->helper('form','url');
@@ -169,7 +182,7 @@ class CommercantCtrl extends CI_Controller {
 					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
 				}
 				else if( $com[0]->mdpCommercant != $_POST['mdp']){
-					$this->load->view('commercant/lie_commercant');
+					$this->load->view('commercant/connexion');
 					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
 				}
 				else{
@@ -185,31 +198,8 @@ class CommercantCtrl extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('cookie');
         delete_cookie("commercantCookie");
-        $this->load->view('pages/deconnection');
+        $this->load->view('pages/deconnexion');
         $this->load->view('pages/pageconnexion');
-    }
-
-
-    public function validation_inscription(){
-        $this->load->model('commercant');
-        $this->load->helper('form');
-        if(isset($_POST['mdpCommercant']) && $_POST['mdpCommercant']==$_POST['mdpCommercant2']){
-                $data=array(
-                            "prenomCommercant"=> htmlspecialchars($_POST['prenomCommercant']),
-                            "nomCommercant"=> htmlspecialchars($_POST['nomCommercant']),
-                            "mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
-                            "mdpCommercant" => htmlspecialchars($_POST['mdpCommercant']),
-                            "adresseCommercant"=> htmlspecialchars($_POST['adresseCommercant']),
-                            "codePCommercant"=> htmlspecialchars($_POST['codePCommercant']),
-                            "villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
-                            "telCommercant" => htmlspecialchars($_POST['telCommercant']),);
-                $this->commercant->insert($data);
-                $this->load->view('commercant/validation_inscription');
-        }
-        else{
-             $this->load->view('commercant/inscription');
-        }
-
     }
 
 		public function lie_commercant(){
