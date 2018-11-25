@@ -148,34 +148,36 @@ class CommercantCtrl extends CI_Controller {
     }
 
     public function connexion(){
-
 			$this->load->helper('form','url');
+			$this->load->helper('cookie');
 			$this->load->library('form_validation');
 			$this->load->model('commercant');
 
-			echo "con";
-			$data['user']= $this->commercant->selectByMail('c@c.fr')[];
-			$this->load->view('CommercantCtrl/connexion', $data);
-			// $this->form_validation->set_rules('mailCommercant', 'Email', 'required');
-			//
-			// if ($this->form_validation->run() == FALSE)
-			// {
-			// 	$this->load->view('commercant/connexion');
-			// }
-			// else
-			// {
-			// 	if ($this->commercant->selectByMail($_POST['mailCommercant']) == null){
-			// 		$this->load->view('commercant/lie_commercant');
-			// 		echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
-			// 	}//probleme : selectByMail ne retourne rien !
-			// 	// else if( $this->commercant->selectByMail($_POST['mailCommercant'])[8] != $_POST['mdp']){
-			// 	// 	$this->load->view('commercant/lie_commercant');
-			// 	// 	echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
-			// 	// }
-			// 	else{
-			// 		echo "formumaire bien remplie";
-			// 	}
-			// }
+			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('commercant/connexion');
+			}
+			else
+			{
+				$com=$this->commercant->selectByMail($_POST['mailCommercant']);
+				//le commercant qui essaye de se connecter
+
+				if ($com == null){
+					$this->load->view('commercant/lie_commercant');
+					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+				}
+				else if( $com[0]->mdpCommercant != $_POST['mdp']){
+					$this->load->view('commercant/lie_commercant');
+					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+				}
+				else{
+					echo "formumaire bien remplie";
+					//mettre la connexion dans les cookies
+					setcookie('commercantCookie',$com[0]->idCommercant,time()+3600,'/','');
+				}
+			}
 
     }
 
@@ -214,12 +216,16 @@ class CommercantCtrl extends CI_Controller {
 			$this->load->model('commercant');
 			$this->load->model('faire_partie');
 			$this->load->helper('form','url');
+			$this->load->helper('cookie');
 			$this->load->library('form_validation');
 
-			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
+			$cookie=$this->input->cookie('commercantCookie');
+			$faitpartie=$this->faire_partie->selectByIdCommercant((int)$cookie);
+			//ligne de faire_partie correspondant à l'email Commercant
 
-			echo "la";
-			echo $this->input->cookie('commercantCookie');
+			echo $faitpartie[0]->numSiret;
+
+			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
 
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -229,25 +235,23 @@ class CommercantCtrl extends CI_Controller {
 			{
 				$comm=$this->commercant->selectByMail($_POST['mailCommercant']);
 				//ligne commercant correspondant à cet email
-				//$faitpartie=$this->faire_partie->selectByIdCommercant() : mettre cookie du commercant connecté
-				//ligne de faire_partie correspondant à cet idCommercant
 
 				if ($comm == null){
 					$this->load->view('commercant/lie_commercant');
 					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
 				}
-				// else if( $faitpartie == null){
-				// 	$this->load->view('commercant/lie_commercant');
-				// 	echo '<div class="alert alert-danger text-center">Ce numéro SIRET ne corrspond pas à votre entreprise</div>';
-				// }
-				// else{
-				// 	echo "formumaire bien remplie";
-				// 	$data=array(
-				// 		"numSiret"=> htmlspecialchars($_POST['siret']),
-				// 		"idCommercant"=> htmlspecialchars($comm[0])
-				// 	);
-				// 	$this->faire_partie->insert($data);
-				// }
+				else if( $faitpartie[0] == null){
+					$this->load->view('commercant/lie_commercant');
+					echo '<div class="alert alert-danger text-center">Ce numéro SIRET ne corrspond pas à votre entreprise</div>';
+				}
+				else{
+					echo "formumaire bien remplie";
+					$data=array(
+						"numSiret"=> htmlspecialchars($_POST['siret']),
+						"idCommercant"=> htmlspecialchars($comm[0]->idCommercant)
+					);
+					$this->faire_partie->insert($data);
+				}
 			}
 		}
 
