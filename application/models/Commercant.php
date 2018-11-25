@@ -21,7 +21,7 @@
 
         $this->load->database();
 
-        $this->db->select('*')
+        return $this->db->select('*')
                     ->from('commercant')
                     ->where('idCommercant', $id)
                     ->get()

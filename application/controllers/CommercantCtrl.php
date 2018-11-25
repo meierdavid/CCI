@@ -220,10 +220,8 @@ class CommercantCtrl extends CI_Controller {
 			$this->load->library('form_validation');
 
 			$cookie=$this->input->cookie('commercantCookie');
-			$faitpartie=$this->faire_partie->selectByIdCommercant((int)$cookie);
+			$faitpartie=$this->commercant->selectById($cookie);
 			//ligne de faire_partie correspondant à l'email Commercant
-
-			echo $faitpartie[0]->numSiret;
 
 			$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
 

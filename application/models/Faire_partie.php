@@ -17,10 +17,9 @@ class faire_partie extends CI_Model{
   }
 
   public function selectByIdCommercant($id){
-
     $this->load->database();
 
-    $this->db->select('*')
+    return $this->db->select('*')
     ->from('faire_partie')
     ->where('idCommercant', $id)
     ->get()
@@ -31,11 +30,20 @@ class faire_partie extends CI_Model{
 
     $this->load->database();
 
-    $this->db->select('*')
+    return $this->db->select('*')
     ->from('faire_partie')
     ->where('numSiret', $siret)
     ->get()
     ->result();
+  }
+
+  public function insert($data) {
+
+  $this->load->database();
+
+  $this->db->set('numSiret', $data['numSiret'])
+        ->set('idCommercant', $data['idCommercant'])
+  ->insert($this->table);
   }
 
 }
