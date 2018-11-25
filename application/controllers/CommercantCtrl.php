@@ -6,9 +6,9 @@ class CommercantCtrl extends CI_Controller {
 
 	public function index()
 	{
-        if($this->input->cookie('commercantCookie')!= FALSE){
-        $this->load->helper('url');
-        $this->load->view('commercant/profil');
+        if($this->input->cookie('commercantCookie') != null){
+	        $this->load->helper('url');
+	        $this->load->view('commercant/profil');
         }
 	}
 
@@ -16,11 +16,12 @@ class CommercantCtrl extends CI_Controller {
     {
         $this->load->helper('cookie');
         $this->load->helper('url');
-        if($this->input->cookie('commercantCookie')!= FALSE){
-            $varMail= $this->input->cookie('commercantCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
+
+        if($this->input->cookie('commercantCookie') != null){
+            $varid= $this->input->cookie('commercantCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
             $this->load->model('commercant');
 
-            $data['commercant'] = $this->commercant->selectByMail($varMail);
+            $data['commercant'] = $this->commercant->selectById($varid);
             $this->load->view('commercant/index',$data);
             $this->load->view('commercant/profil',$data);
         }
@@ -28,17 +29,18 @@ class CommercantCtrl extends CI_Controller {
             $this->load->view('pages/pageconnexion');
         }
     }
+
     public function changer_mdp(){ // info commercant avec cookie
         $this->load->helper('cookie');
         $this->load->model('commercant');
         $this->load->helper('url');
-        $varMail= $this->input->cookie('commercantCookie');
-        $data['commercant'] = $this->commercant->selectByMail($varMail);
+        $varid= $this->input->cookie('commercantCookie');
+        $data['commercant'] = $this->commercant->selectById($varid);
 
         if(isset($_POST['mdpCommercantAncien']) && ($_POST['mdpCommercantAncien'] == $data['commercant'][0]->mdpCommercant) ){ // + tester Bon Ancien mot de passe
             if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
                 $newMdp = $_POST['mdpCommercantNouveau'];
-                $this->commercant->updateMdp($varMail,$newMdp);
+                $this->commercant->updateMdp($varid,$newMdp);
                 delete_cookie("commercantCookie");
                 $this->load->view('pages/pageconnexion');
             }
@@ -50,23 +52,19 @@ class CommercantCtrl extends CI_Controller {
 
 
     }
+
     public function check_connexion(){
        $this->load->helper('cookie');
+			 
         if(isset($_POST['mail']) && isset($_POST['mdp']) ){
             $this->load->model('commercant');
             $data['commercant'] = $this->commercant->selectByMail($_POST['mail']);
 
             if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
                 $cookie = array(
-
                                 'name'   => 'commercantCookie',
-
                                 'value'  => $data['commercant'][0]->mailCommercant,
-
                                 'expire' => '3600'
-
-
-
                              );
                 $this->input->set_cookie($cookie);
 
@@ -85,12 +83,13 @@ class CommercantCtrl extends CI_Controller {
             // erreur
         }
     }
+
     public function liste_entreprise(){
         $this->load->helper('cookie');
         $this->load->model('commercant');
         $this->load->model('entreprise');
-        $varMail= $this->input->cookie('commercantCookie');
-        $data['entreprises']=$this->commercant->selectEntreprise($varMail);
+        $varid= $this->input->cookie('commercantCookie');
+        $data['entreprises']=$this->commercant->selectEntreprise($varid);
 
         if( $data['entreprises'] != NULL){
             $this->load->view('commercant/index',$data);
