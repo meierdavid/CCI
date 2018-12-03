@@ -55,11 +55,12 @@ class CommercantCtrl extends CI_Controller {
 
     public function check_connexion(){
        $this->load->helper('cookie');
-			 
+
         if(isset($_POST['mail']) && isset($_POST['mdp']) ){
             $this->load->model('commercant');
             $data['commercant'] = $this->commercant->selectByMail($_POST['mail']);
-
+						var_dump($data['commercant']);
+						die;
             if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
                 $cookie = array(
                                 'name'   => 'commercantCookie',
@@ -97,7 +98,7 @@ class CommercantCtrl extends CI_Controller {
 
         }
         else{
-            $this->add_entreprise();
+            $this->ajout_entreprise();
         }
     }
 
@@ -143,7 +144,7 @@ class CommercantCtrl extends CI_Controller {
 
 						$this->entreprise->insert($data,$id);
 						$this->load->view('commercant/validation_ajout_entreprise');
-						$this->load->model('entreprise');
+
 						$data['entreprise'] =$this->entreprise->selectById($_POST['numSiret']);
 						$this->load->view('entreprise/profil',$data);
 					}
@@ -173,6 +174,7 @@ class CommercantCtrl extends CI_Controller {
 			}
 			else
 			{
+
 				$com=$this->commercant->selectByMail($_POST['mailCommercant']);
 				//le commercant qui essaye de se connecter
 
@@ -187,11 +189,27 @@ class CommercantCtrl extends CI_Controller {
 				else{
 					echo "formumaire bien remplie";
 					//mettre la connexion dans les cookies
-					setcookie('commercantCookie',$com[0]->idCommercant,time()+3600,'/','');
+					//setcookie('commercantCookie',$com[0]->idCommercant,time()+3600,'/','');
+				 //	$this->load->view('commercant/index',$data);
+
+				 $data['commercant'] = $this->commercant->selectByMail($_POST['mailCommercant']);
+
+					 if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
+							 $cookie = array(
+															 'name'   => 'commercantCookie',
+															 'value'  => $data['commercant'][0]->mailCommercant,
+															 'expire' => '3600'
+														);
+						 $this->input->set_cookie($cookie);
+
+						 echo $this->input->cookie('commercantCookie');
+
+						 $this->load->view('commercant/index',$data);
 				}
 			}
 
     }
+	}
 
     public function deconnexion(){
         $this->load->helper('url');
