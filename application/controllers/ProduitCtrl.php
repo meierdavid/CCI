@@ -21,42 +21,23 @@ class ProduitCtrl extends CI_Controller {
             
             // modifie le profil à l'envoi du formulaire
         }
-
+                
         
-        public function ajout_produit(){
+        public function inscription(){
                 // faire envoi de mail
-				
-			    $this->load->model('produit');
+                $this->load->model('produit');
 				$this->load->helper('form');
-				$this->load->view('produit/ajout_produit');
-				
-				 $data=array(
+				$this->load->view('produit/inscription');
+                $data=array(
                             "nomProduit"=> htmlspecialchars($_GET['nomProduit']),
                             "descriptionProduit"=> htmlspecialchars($_GET['descriptionProduit']),
                             "prixUnitaireProduit" => htmlspecialchars($_GET['prixUnitaireProduit']),
                             "reducProduit" => htmlspecialchars($_GET['reducProduit']),
 			);	
-				$this->produit->insert($data);
-				/*
-				$config['upload_path'] = './assets/image/Produits';
-				$config['allowed_types'] = 'gif|jpg|png';
-				$config['overwrite'] = TRUE;
-				$this->load->library('upload', $config);
-				
-               
+   		$this->produit->insert($data);
+           
+                     
 
-				if (!($this->upload->do_upload("imageProduit"))){
-					
-					//Vue mise pour tester 
-					//$this->load->view('client/inscription');
-				}
-				else{
-					$file_data = $this->upload->data();
-					
-					//Vue mise pour tester 
-					$this->load->view('administrateur/inscription');
-				}
-              */
-	  }
+	}
    
 }

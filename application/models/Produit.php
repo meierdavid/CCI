@@ -4,40 +4,23 @@
      	public function __construct() {
         	parent::__construct();
     	} 
-	 public function selectAll(){
-		
-        $this->load->database();
-    	
-        return $this->db->select('*')
+	public function selectAll(){
+		$this->load->database();
+    	return $this->db->select('*')
                ->from('produit')
                ->get()
                ->result();
         }
-        
         public function selectById($id) {
-    	
-        	$this->load->database();
-    	
-        	return $this->db->select('*')
+    		$this->load->database();
+    		return $this->db->select('*')
                     ->from('produit')
                     ->where('idProduit', $id)
                     ->get()
                     ->result();
             
   		}
-        
-  		
-        public function getLastClientId() {
-    	
-        	$this->load->database();
-    	
-        	return $this->db->select('produit')
-        	        ->from('produit')
-                    ->order_by('idProduit', 'desc')
-                    ->limit(1)
-                    ->get()
-                    ->result();
-  		}
+            
   		
   		
     	public function insert($data) {
