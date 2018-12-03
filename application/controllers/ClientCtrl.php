@@ -73,6 +73,77 @@ class ClientCtrl extends CI_Controller {
 			$this->load->view('client/validationEmail');
 
 			$this->email->send();*/
+		
+
+		public function connexion(){
+			$this->load->helper('form','url');
+			$this->load->helper('cookie');
+			$this->load->library('form_validation');
+			$this->load->model('client');
+
+			$this->form_validation->set_rules('mailClient', 'Email', 'required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('client/connexion');
+			}
+			else
+			{
+				$com=$this->client->selectByMail($_POST['mailClient']);
+				//le commercant qui essaye de se connecter
+
+				if ($com == null){
+					$this->load->view('client/lie_client');
+					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+				}
+				else if( $com[0]->mdpClient != $_POST['mdp']){
+					$this->load->view('client/connexion');
+					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+				}
+				else{
+					echo "formumaire bien remplie";
+					//mettre la connexion dans les cookies
+					setcookie('clientCookie',$com[0]->idClient,time()+3600,'/','');
+				}
+			}
+
+	   public function check_connexion(){
+       $this->load->helper('cookie');
+			 
+        if(isset($_POST['mail']) && isset($_POST['mdp']) ){
+            $this->load->model('client');
+            $data['client'] = $this->client->selectByMail($_POST['mail']);
+
+            if( $data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient ){
+                $cookie = array(
+                                'name'   => 'clientCookie',
+                                'value'  => $data['client'][0]->mailClient,
+                                'expire' => '3600'
+                             );
+                $this->input->set_cookie($cookie);
+
+                echo $this->input->cookie('clientCookie');
+
+                $this->load->view('template/index.html',$data);
+            }
+            else{
+                //$erreur="erreur mauvais mot de passe ou mauvaise adresse mail";
+                //$data['error']=$erreur;
+                $this->load->view('client/connexion');
+                // erreur mauvais mdp ou mauvaise adresse mail
+            }
+        }
+        else{
+            // erreur
+        }
+    }
+
+    
+
+
+
+
+
 	}
 
 }

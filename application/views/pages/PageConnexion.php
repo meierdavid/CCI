@@ -12,11 +12,9 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-            <h2 class="text-center"> CCI Hérault - Bienvenue cher Consommateur !</h2>
+            <h2 class="text-center"> CCI Hérault - Bienvenue cher Client !</h2>
             
-            <?php ?> // formulaire de connexion consommateur
-
-            <form>
+           
                 <br></br>
                     <div class="text-center">
                     <h4>Entrez votre Pseudo d'Utilisateur et votre mot de passe :</h4>
@@ -35,14 +33,14 @@
                         <input type="password" class="form-control" name="" value="" size="30" required/>
                     </div>    
                     
-                 
-                    
-                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Connexion" /></div>
                     <div class="text-center">
+            <a class="btn btn-primary" href="/template/index.html" role="button">Connexion</a>
+            </div>
+                    
+                    
                         <br>
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
-                </form>
             <br></br>
             <br></br>
 
