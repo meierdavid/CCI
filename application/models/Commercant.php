@@ -41,16 +41,13 @@
 
 
         public function selectEntreprise($id){
-                $this->load->database();
-                $commercant=$this->selectById($id);
-
-        	return $this->db->select('*')
-                    ->from('Entreprise')
-                    ->join('faire_partie','faire_partie.numSiret = entreprise.numSiret')
-                    ->where('idCommercant', $commercant[0]->idCommercant)
-                    ->get()
-                    ->result();
-
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('Entreprise')
+                ->join('faire_partie','faire_partie.numSiret = entreprise.numSiret')
+                ->where('idCommercant', $id)
+                ->get()
+                ->result();
         }
 
 
@@ -108,7 +105,7 @@
 
           $this->load->database();
 
-          return $this->db->where('idCommercant',$id)
+          return $this->db->where('mailCommercant',$id)
               ->set('mdpCommercant',$mdp)
 	     ->update($this->table);
     	}
