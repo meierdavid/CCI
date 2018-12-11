@@ -39,8 +39,9 @@ class ClientCtrl extends CI_Controller {
 		else
 		{
 			if (null != $this->client->selectByMail($_POST['mailClient'])){
+				$data['message']="Cet email n'est pas disponible";
+				$this->load->view('errors/erreur_formulaire',$data['message']);
 				$this->load->view('client/inscription');
-				echo "<div class='alert alert-danger text-center'>Cet email n'est pas disponible</div>";
 			}
 			else if($_POST['mdpClient'] == $_POST['mdpClient2'] ){
 				echo "formumaire bien remplie";
@@ -62,6 +63,7 @@ class ClientCtrl extends CI_Controller {
 				echo '<div class="alert alert-danger text-center">La confirmation de Mot de passe ne correspond pas au premier</div>';
 			}
 		}
+	}
 
 			/*$this->load->library('email');
 
@@ -73,7 +75,7 @@ class ClientCtrl extends CI_Controller {
 			$this->load->view('client/validationEmail');
 
 			$this->email->send();*/
-		
+
 
 		public function connexion(){
 			$this->load->helper('form','url');
@@ -106,10 +108,11 @@ class ClientCtrl extends CI_Controller {
 					setcookie('clientCookie',$com[0]->idClient,time()+3600,'/','');
 				}
 			}
+		}
 
 	   public function check_connexion(){
        $this->load->helper('cookie');
-			 
+
         if(isset($_POST['mail']) && isset($_POST['mdp']) ){
             $this->load->model('client');
             $data['client'] = $this->client->selectByMail($_POST['mail']);
@@ -136,14 +139,6 @@ class ClientCtrl extends CI_Controller {
         else{
             // erreur
         }
-    }
-
-    
-
-
-
-
-
 	}
 
 }
