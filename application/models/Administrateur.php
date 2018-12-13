@@ -58,13 +58,13 @@
             $this->load->database();
             $this->db->set('prenomAdministrateur', $data['prenomAdministrateur'])
                 ->set('nomAdministrateur', $data['nomAdministrateur'])
- 		->set('mailAdministrateur', $data['mailAdministrateur'])
+ 		        ->set('mailAdministrateur', $data['mailAdministrateur'])
                 ->set('adresseAdministrateur', $data['adresseAdministrateur'])
                 ->set('codePAdministrateur', $data['codePAdministrateur'])
                 ->set('villeAdministrateur', $data['villeAdministrateur'])
                 ->set('telAdministrateur', $data['telAdministrateur'])
                 ->set('mdpAdministrateur', $data['mdpAdministrateur'])
-		      ->insert($this->table);
+                ->insert($this->table);
         }   
 			
 		public function delete($id){

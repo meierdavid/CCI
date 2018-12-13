@@ -111,8 +111,11 @@ class CommercantCtrl extends CI_Controller {
         }
     }
 
-    public function ajout_entreprise() { //mettre parametre mail ou utiliser cookie
+    public function ajout_entreprise() {
+
+	        //mettre parametre mail ou utiliser cookie
             // use insert for model entreprise paramètre $data , $idCommercant
+
             $this->load->helper('form','url');
             $this->load->helper('cookie');
 

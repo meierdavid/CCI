@@ -62,15 +62,15 @@ class AdministrateurCtrl extends CI_Controller {
 		}
 	}
 
-  public function connexion(){
-    $this->load->model('administrateur');
-    $this->load->helper('form');
-    //$this->load->view('administrateur/inscription');
+          public function connexion(){
+            $this->load->model('administrateur');
+            $this->load->helper('form');
+            //$this->load->view('administrateur/inscription');
 
-    $data['administrateur'] = $this->administrateur->selectByMail($_POST['mail']);
+            $data['administrateur'] = $this->administrateur->selectByMail($_POST['mail']);
 
-    if( $data['administrateur'] != NULL){
-      $this->load->view('pages/page_index');
-    }
-  }
+            if( $data['administrateur'] != NULL){
+              $this->load->view('pages/page_index');
+            }
+          }
 }
