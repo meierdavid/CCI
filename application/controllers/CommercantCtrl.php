@@ -16,7 +16,7 @@ class CommercantCtrl extends CI_Controller {
     {
         $this->load->helper('cookie');
         $this->load->helper('url');
-        
+
         if($this->input->cookie('commercantCookie') != Null){
             $varid= $this->input->cookie('commercantCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
             $this->load->model('commercant');
@@ -77,9 +77,10 @@ class CommercantCtrl extends CI_Controller {
                 $this->load->view('commercant/index',$data);
             }
             else{
-                //$erreur="erreur mauvais mot de passe ou mauvaise adresse mail";
-                //$data['error']=$erreur;
-                $this->load->view('commercant/connexion');
+                $erreur="erreur mauvais mot de passe ou mauvaise adresse mail";
+                $data['message']=$erreur;
+                $this->load->view('errors/erreur_formulaire', $data);
+								$this->load->view('commercant/connexion');
                 // erreur mauvais mdp ou mauvaise adresse mail
             }
         }
@@ -139,8 +140,8 @@ class CommercantCtrl extends CI_Controller {
                     else
                     {
                             if($this->entreprise->selectById($_POST['numSiret']) == null){
-                                    
-                                    
+
+
                                     $id= $data['commercant'][0]->idCommercant;
 
                                     $data=array(
@@ -197,8 +198,10 @@ class CommercantCtrl extends CI_Controller {
                                 else{
                                     $com = $this->commercant->selectByMail($_POST['mailCommercant']);
                                     if( $com[0]->mdpCommercant != $_POST['mdp']){
-                                            $this->load->view('commercant/connexion');
-                                            echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+																			$erreur="erreur mauvais mot de passe ou mauvaise adresse mail";
+																			$data['message']=$erreur;
+																			$this->load->view('errors/erreur_formulaire',$data);
+																			//$this->load->view('commercant/connexion');
                                     }
                                     else{
                                             echo "formumaire bien remplie";
