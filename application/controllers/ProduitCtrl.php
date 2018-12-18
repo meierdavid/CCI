@@ -32,6 +32,7 @@ class ProduitCtrl extends CI_Controller {
 
         }
 
+
         
         public function ajout_produit(){
                 // faire envoi de mail
