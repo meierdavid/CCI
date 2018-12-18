@@ -19,51 +19,46 @@ class ClientCtrl extends CI_Controller {
 		// modifie le profil à l'envoi du formulaire
 	}
 
-	public function inscription(){
-		// faire envoi de mail
-		$this->load->helper('form','url');
-		$this->load->library('form_validation');
-		$this->load->model('client');
+	public function inscription()
+    {
+        // faire envoi de mail
+        $this->load->helper('form', 'url');
+        $this->load->library('form_validation');
+        $this->load->model('client');
 
-		$this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
-		$this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
-		$this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
-		$this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
-		$this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
-		$this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
+        $this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
+        $this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
+        $this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
+        $this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
+        $this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
+        $this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
 
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->load->view('client/inscription');
-		}
-		else
-		{
-			if (null != $this->client->selectByMail($_POST['mailClient'])){
-				$data['message']="Cet email n'est pas disponible";
-				$this->load->view('errors/erreur_formulaire',$data['message']);
-				$this->load->view('client/inscription');
-			}
-			else if($_POST['mdpClient'] == $_POST['mdpClient2'] ){
-				echo "formumaire bien remplie";
-				$data=array(
-					"prenomClient"=> htmlspecialchars($_POST['prenomClient']),
-					"nomClient"=> htmlspecialchars($_POST['nomClient']),
-					"mailClient" => htmlspecialchars($_POST['mailClient']),
-					"mdpClient" => htmlspecialchars($_POST['mdpClient']),
-					"adresseClient"=> htmlspecialchars($_POST['adresseClient']),
-					"codePClient"=> htmlspecialchars($_POST['codePClient']),
-					"villeClient" => htmlspecialchars($_POST['villeClient']),
-					"telClient" => htmlspecialchars($_POST['telClient']),
-					"pointClient" => htmlspecialchars(0),
-				);
-				$this->client->insert($data);
-			}
-			else {
-				$this->load->view('client/inscription');
-				echo '<div class="alert alert-danger text-center">La confirmation de Mot de passe ne correspond pas au premier</div>';
-			}
-		}
-	}
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('client/inscription');
+        } else {
+            if (null != $this->client->selectByMail($_POST['mailClient'])) {
+                $this->load->view('client/inscription');
+                echo "<div class='alert alert-danger text-center'>Cet email n'est pas disponible</div>";
+            } else if ($_POST['mdpClient'] == $_POST['mdpClient2']) {
+                echo "formumaire bien remplie";
+                $data = array(
+                    "prenomClient" => htmlspecialchars($_POST['prenomClient']),
+                    "nomClient" => htmlspecialchars($_POST['nomClient']),
+                    "mailClient" => htmlspecialchars($_POST['mailClient']),
+                    "mdpClient" => htmlspecialchars($_POST['mdpClient']),
+                    "adresseClient" => htmlspecialchars($_POST['adresseClient']),
+                    "codePClient" => htmlspecialchars($_POST['codePClient']),
+                    "villeClient" => htmlspecialchars($_POST['villeClient']),
+                    "telClient" => htmlspecialchars($_POST['telClient']),
+                    "pointClient" => htmlspecialchars(0),
+                );
+                $this->client->insert($data);
+            } else {
+                $this->load->view('client/inscription');
+                echo '<div class="alert alert-danger text-center">La confirmation de Mot de passe ne correspond pas au premier</div>';
+            }
+        }
+    }
 
 			/*$this->load->library('email');
 
@@ -75,44 +70,40 @@ class ClientCtrl extends CI_Controller {
 			$this->load->view('client/validationEmail');
 
 			$this->email->send();*/
+		
 
+		public function connexion()
+        {
+            $this->load->helper('form', 'url');
+            $this->load->helper('cookie');
+            $this->load->library('form_validation');
+            $this->load->model('client');
 
-		public function connexion(){
-			$this->load->helper('form','url');
-			$this->load->helper('cookie');
-			$this->load->library('form_validation');
-			$this->load->model('client');
+            $this->form_validation->set_rules('mailClient', 'Email', 'required');
 
-			$this->form_validation->set_rules('mailClient', 'Email', 'required');
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('client/connexion');
+            } else {
+                $com = $this->client->selectByMail($_POST['mailClient']);
+                //le commercant qui essaye de se connecter
 
-			if ($this->form_validation->run() == FALSE)
-			{
-				$this->load->view('client/connexion');
-			}
-			else
-			{
-				$com=$this->client->selectByMail($_POST['mailClient']);
-				//le commercant qui essaye de se connecter
-
-				if ($com == null){
-					$this->load->view('client/lie_client');
-					echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
-				}
-				else if( $com[0]->mdpClient != $_POST['mdp']){
-					$this->load->view('client/connexion');
-					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
-				}
-				else{
-					echo "formumaire bien remplie";
-					//mettre la connexion dans les cookies
-					setcookie('clientCookie',$com[0]->idClient,time()+3600,'/','');
-				}
-			}
-		}
+                if ($com == null) {
+                    $this->load->view('client/lie_client');
+                    echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+                } else if ($com[0]->mdpClient != $_POST['mdp']) {
+                    $this->load->view('client/connexion');
+                    echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+                } else {
+                    echo "formumaire bien remplie";
+                    //mettre la connexion dans les cookies
+                    setcookie('clientCookie', $com[0]->idClient, time() + 3600, '/', '');
+                }
+            }
+        }
 
 	   public function check_connexion(){
        $this->load->helper('cookie');
-
+			 
         if(isset($_POST['mail']) && isset($_POST['mdp']) ){
             $this->load->model('client');
             $data['client'] = $this->client->selectByMail($_POST['mail']);
@@ -139,6 +130,14 @@ class ClientCtrl extends CI_Controller {
         else{
             // erreur
         }
+    }
+
+    
+
+
+
+
+
 	}
 
-}
+
