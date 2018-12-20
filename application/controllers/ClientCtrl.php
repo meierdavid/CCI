@@ -53,6 +53,7 @@ class ClientCtrl extends CI_Controller {
                     "pointClient" => htmlspecialchars(0),
                 );
                 $this->client->insert($data);
+                $this->load->view('pages/pageConnexion');
             } else {
                 $this->load->view('client/inscription');
                 echo '<div class="alert alert-danger text-center">La confirmation de Mot de passe ne correspond pas au premier</div>';
@@ -70,40 +71,53 @@ class ClientCtrl extends CI_Controller {
 			$this->load->view('client/validationEmail');
 
 			$this->email->send();*/
-		
+public function view(){
+    $this->load->helper('form', 'url');
+    $this->load->view('template/index');
+}
 
-		public function connexion()
-        {
-            $this->load->helper('form', 'url');
-            $this->load->helper('cookie');
-            $this->load->library('form_validation');
-            $this->load->model('client');
+public function connexion(){
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    $this->load->model('client');
+    $this->form_validation->set_rules('mailClient', 'Email', 'required');
 
-            $this->form_validation->set_rules('mailClient', 'Email', 'required');
+    if ($this->form_validation->run() == FALSE) {
+        $this->load->view('client/connexion');
+    } else {
+        $client = $this->client->selectByMail($_POST['mailClient']);
+        //le client qui essaye de se connecter
 
-            if ($this->form_validation->run() == FALSE) {
-                $this->load->view('client/connexion');
-            } else {
-                $com = $this->client->selectByMail($_POST['mailClient']);
-                //le commercant qui essaye de se connecter
-
-                if ($com == null) {
-                    $this->load->view('client/lie_client');
-                    echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
-                } else if ($com[0]->mdpClient != $_POST['mdp']) {
-                    $this->load->view('client/connexion');
-                    echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
-                } else {
-                    echo "formumaire bien remplie";
-                    //mettre la connexion dans les cookies
-                    setcookie('clientCookie', $com[0]->idClient, time() + 3600, '/', '');
+        if ($client == null) {
+            $this->load->view('client/lie_client');
+            echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+        } 
+        else{
+            if ($client[0]->mdpClient != $_POST['mdp']) {
+            $this->load->view('client/connexion');
+            echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+            }
+            else{
+                echo "formumaire bien remplie";
+                $data['client'] = $client;
+                if( $data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient ){
+                    $cookie = array(
+                       'name'   => 'clientCookie',
+                       'value'  => $data['client'][0]->mailClient,
+                       'expire' => '3600'
+                    );
+                    $this->input->set_cookie($cookie);
+                    echo $this->input->cookie('clientCookie');
+                    $this->load->view('template/index');
                 }
             }
         }
+}   }
 
 	   public function check_connexion(){
-       $this->load->helper('cookie');
-			 
+         $this->load->helper('cookie');
+	  $this->load->helper('form', 'url');		 
         if(isset($_POST['mail']) && isset($_POST['mdp']) ){
             $this->load->model('client');
             $data['client'] = $this->client->selectByMail($_POST['mail']);
@@ -118,7 +132,6 @@ class ClientCtrl extends CI_Controller {
 
                 echo $this->input->cookie('clientCookie');
 
-                $this->load->view('template/index.html',$data);
             }
             else{
                 //$erreur="erreur mauvais mot de passe ou mauvaise adresse mail";

@@ -189,38 +189,37 @@ class CommercantCtrl extends CI_Controller {
                 else
                 {
 
-                    $com=$this->commercant->selectByMail($_POST['mailCommercant']);
+                    $com = $this->commercant->selectByMail($_POST['mailCommercant']);
                     //le commercant qui essaye de se connecter
 
-                    if ($this->commercant->selectByMail($_POST['mailCommercant']) == null){
+                    if ($com == null){
                         $this->load->view('commercant/lie_commercant');
                         echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
                     }
-                                    else{
-                                        $com = $this->commercant->selectByMail($_POST['mailCommercant']);
-                                        if( $com[0]->mdpCommercant != $_POST['mdp']){
-                                                $this->load->view('commercant/connexion');
-                                                echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
-                                        }
-                                        else{
-                                                echo "formumaire bien remplie";
-                                                //mettre la connexion dans les cookies
-                                                //setcookie('commercantCookie',$com[0]->idCommercant,time()+3600,'/','');
-                                         //	$this->load->view('commercant/index',$data);
+                    else{
+                        if($com[0]->mdpCommercant != $_POST['mdp']){
+                                $this->load->view('commercant/connexion');
+                                echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+                        }
+                        else{
+                                echo "formumaire bien remplie";
+                                //mettre la connexion dans les cookies
+                                //setcookie('commercantCookie',$com[0]->idCommercant,time()+3600,'/','');
+                         //	$this->load->view('commercant/index',$data);
 
-                                        $data['commercant'] = $this->commercant->selectByMail($_POST['mailCommercant']);
-                                        if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
-                                                                 $cookie = array(
-                                                                    'name'   => 'commercantCookie',
-                                                                    'value'  => $data['commercant'][0]->mailCommercant,
-                                                                    'expire' => '3600'
-                                                                );
-                                                         $this->input->set_cookie($cookie);
-                                                         echo $this->input->cookie('commercantCookie');
-                                                         $this->load->view('commercant/index',$data);
-                                                }
-                                        }
-                                    }
+                        $data['commercant'] = $com;
+                        if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
+                                                 $cookie = array(
+                                                    'name'   => 'commercantCookie',
+                                                    'value'  => $data['commercant'][0]->mailCommercant,
+                                                    'expire' => '3600'
+                                                );
+                                         $this->input->set_cookie($cookie);
+                                         echo $this->input->cookie('commercantCookie');
+                                         $this->load->view('commercant/index',$data);
+                        }
+                        }
+                    }
 
             }
         }
@@ -310,6 +309,7 @@ class CommercantCtrl extends CI_Controller {
 							"pointCommercant" => htmlspecialchars(0),
 						);
 						$this->commercant->insert($data);
+                                                $this->load->view('commercant/connexion');
 					}
 					else {
 						$this->load->view('commercant/inscription');
