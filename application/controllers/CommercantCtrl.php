@@ -191,10 +191,12 @@ class CommercantCtrl extends CI_Controller {
 
                     $com = $this->commercant->selectByMail($_POST['mailCommercant']);
                     //le commercant qui essaye de se connecter
-
+                    
                     if ($com == null){
-                        $this->load->view('commercant/lie_commercant');
+                        //$this->load->view('commercant/lie_commercant');
                         echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+                        $this->load->view('commercant/connexion');
+                        
                     }
                     else{
                         if($com[0]->mdpCommercant != $_POST['mdp']){
