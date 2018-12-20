@@ -61,16 +61,84 @@ class AdministrateurCtrl extends CI_Controller {
 			}
 		}
 	}
+        
 
-          public function connexion(){
+        public function connexion(){
             $this->load->model('administrateur');
             $this->load->helper('form');
-            //$this->load->view('administrateur/inscription');
-
-            $data['administrateur'] = $this->administrateur->selectByMail($_POST['mail']);
-
-            if( $data['administrateur'] != NULL){
-              $this->load->view('pages/page_index');
+            $this->load->helper('url');
+            $this->load->library('form_validation');
+            $this->load->helper('cookie');
+            
+            $this->form_validation->set_rules('mailAdministrateur', 'Email', 'required');
+            
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->load->view('admistrateur/connexion');
             }
-          }
+            else
+            {
+                
+                $com=$this->administrateur->selectByMail($_POST['mailAdministrateur']);
+                
+                if ($this->admistrateur->selectByMail($_POST['mailAdministrateur']) == null){
+                    echo "div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+                }
+                else{
+                    $com = $this->administrateur->selectByMail($_POST['mailAdministrateur']);
+                    if( $com[0]->mdpAdministrateur != $_POST['mdp']){
+                        $this->load->view('administrateur/connexion');
+                        echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+                    }
+                    else{
+                        echo "formulaire bien remplie";
+                        
+                        $data['administrateur'] = $this->administrateur->selectByMail($_POST['mailAdministrateur']);
+                        if( $data['administrateur'] != NULL && $_POST['mdp'] == $data['administrateur'][0]->mdpAdministrateur ){
+                            $cookie = array(
+                                'name' => 'administrateurCookie',
+                                'value' => $data['administrateur'][0]->mailAdministrateur,
+                                'expire' => '3600'
+                            );
+                            $this->input->set_cookie($cookie);
+                            echo $this->input->cookie('adminstrateurCookie');
+                            $this->load->view('administrateur/index',$data);
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+        public function deconnexion(){
+            $this->load->helper('url');
+            $this->load->helper('cookie');
+            delete_cookie("administrateurCookie");
+            $this->load->view('pages/deconnexion');
+            $this->load->view('pages/pageconnexion');
+        }
+        
+        public function ajout_administrateur(){
+            $this->load->model('administrateur');
+            $this->load->helper('form');
+            $data=array(
+                "prenomAdministrateur"=> htmlspecialchars($_POST['prenomAdministrateur']),
+                "nomAdministrateur"=> htmlspecialchars($_POST['nomAdministrateur']),
+                "adresseAdministrateur"=> htmlspecialchars($_POST['adresseAdministrateur']),
+                "codePAdministrateur"=> htmlspecialchars($_POST['codePAdministrateur']),
+                "villeAdministrateur"=> htmlspecialchars($_POST['villeAdministrateur']),
+                "telAdministrateur"=> htmlspecialchars($_POST['telAdministrateur']),
+                "mdpAdministrateur"=> htmlspecialchars($_POST['mdpAdministrateur']),
+                "mailAdministrateur"=> htmlspecialchars($_POST['maildministrateur']),
+                );
+            $this->administrateur->insert($data);
+            $this->load->view('administrateur/index');
+            $this->load->view('administrateur/ajout_administrateur');                      
+        }
+        
+        
+        
+          
+          
 }
