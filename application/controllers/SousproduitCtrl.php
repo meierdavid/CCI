@@ -14,13 +14,16 @@ class SousproduitCtrl extends CI_Controller {
         $this->load->model('sousproduit');
         $this->load->helper('form');
         $this->load->view('sousproduit/ajout_sousproduit');
+        $this->load->view('commercant/index');
+
         $data=array(
             "nomProduit"=> htmlspecialchars($_GET['nomProduit']),
             "descriptionProduit"=> htmlspecialchars($_GET['descriptionProduit']),
             "prixUnitaireProduit" => htmlspecialchars($_GET['prixUnitaireProduit']),
             "reducProduit" => htmlspecialchars($_GET['reducProduit']),
-            );
-            $this->produit->insert($data);
+        );
+
+        $this->produit->insert($data);
         }
 
         

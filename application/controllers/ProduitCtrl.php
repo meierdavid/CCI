@@ -28,11 +28,16 @@ class ProduitCtrl extends CI_Controller {
             // envoi de mail lors de l'inscription d'un produit ?
             $this->load->model('produit');
             $this->load->helper('form');
+            $this->load->view('commercant/index');
             $this->load->view('produit/ajout_produit');
+	    }
 
+        public function liste_produit(){
+            $this->load->model('Produit');
+            $data['produit'] = $this->Produit->selectAll();
+            $this->load->view('commercant/index');
+            $this->load->view('produit/liste_produit',$data);
         }
-
-
         
         public function ajout_produit(){
                 // faire envoi de mail
@@ -47,6 +52,7 @@ class ProduitCtrl extends CI_Controller {
                             "reducProduit" => htmlspecialchars($_POST['reducProduit']),
 			    );
                 $this->produit->insert($data);
+                $this->load->view('commercant/index');
                 $this->load->view('produit/ajout_produit');
 
         }

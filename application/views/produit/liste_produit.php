@@ -5,7 +5,7 @@
                 <div style="margin-left: 60px" class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="box">
-                            <h2>Liste des Entreprises</h2>
+                            <h2>Liste des Produits</h2>
                             <div class="row">
                                 <article class=" col-md-1 col-lg-1">
 
@@ -16,31 +16,19 @@
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
-                                                <th scope="col">Détail</th>
-                                                <th scope="col">NumSiret</th>
-                                                <th scope="col">nomEntreprise</th>
-                                                <th scope="col">adresseEntreprise</th>
-                                                <th scope="col">codePEntreprise</th>
-                                                <th scope="col">VilleEntreprise</th>
-                                                <th scope="col">horairesEntreprise</th>
-                                                <th scope="col">livraisonEntreprise</th>
-                                                <th scope="col">tempsReservMax</th>
-
-
+                                                <th scope="col">Nom</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Prix</th>
+                                                <th scope="col">Réduction</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <?php foreach ($entreprises as $item) { ?>
-                                                <td> <a class="btn btn-primary" href="<?php echo base_url("ProduitCtrl/profil/".$item->numSiret);?>" role="button">Voir</a></td>
-                                                <td><?php echo $item->numSiret; ?></td>
-                                                <td><?php echo $item->nomEntreprise; ?></td>
-                                                <td><?php echo $item->adresseEntreprise; ?></td>
-                                                <td><?php echo $item->codePEntreprise; ?></td>
-                                                <td><?php echo $item->villeEntreprise; ?></td>
-                                                <td><?php echo $item->horairesEntreprise; ?></td>
-                                                <td><?php echo $item->livraisonEntreprise; ?></td>
-                                                <td><?php echo $item->tempsReservMax; ?></td>
+                                                <?php foreach ($produit as $item) { ?>
+                                                <td><?php echo $item->nomProduit; ?></td>
+                                                <td><?php echo $item->descriptionProduit; ?></td>
+                                                <td><?php echo $item->prixUnitaireProduit; ?></td>
+                                                <td><?php echo $item->reducProduit; ?></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>
