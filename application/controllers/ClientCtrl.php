@@ -109,7 +109,7 @@ public function connexion(){
                     );
                     $this->input->set_cookie($cookie);
                     echo $this->input->cookie('clientCookie');
-                    $this->load->view('template/index');
+                    $this->load->view('template/index');    
                 }
             }
         }
@@ -144,13 +144,18 @@ public function connexion(){
             // erreur
         }
     }
+    public function deconnexion(){
+            $this->load->helper('url');
+            $this->load->helper('form');
+            $this->load->helper('cookie');
+            delete_cookie("clientCookie");
+            $this->load->view('pages/deconnexion');
+            $this->load->view('pages/pageconnexion');
+        }
 
     
 
 
-
-
-
-	}
+}
 
 
