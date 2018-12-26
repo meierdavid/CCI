@@ -138,13 +138,16 @@ class CommercantCtrl extends CI_Controller {
 			{
 				if($this->entreprise->selectById($_POST['numSiret']) == null){
 					$id= $data['commercant'][0]->idCommercant;
+					$horairesEntreprise=$_POST['lundi_matin_ouverture'].$_POST['lundi_matin_fermeture'];
+					var_dump($horairesEntreprise);
+					die;
 					$data=array(
 						"numSiret"=> htmlspecialchars($_POST['numSiret']),
 						"nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
 						"adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
 						"codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
 						"villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
-						"horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
+						"horairesEntreprise" => htmlspecialchars($_POST[$horairesEntreprise]),
 						"livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
 						"tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
 					);
