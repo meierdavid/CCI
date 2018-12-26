@@ -26,7 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header" id="home">
 	<div class="container">
 		<ul>
-		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Connexion </a></li>
+                        <li> <a href="<?php echo base_url() ?>clientCtrl/profil"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Profil </a></li>
 			<li> <a href="<?php echo base_url() ?>clientCtrl/deconnexion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Se déconnecter </a></li>
 			<li><i class="fa fa-phone" aria-hidden="true"></i> Appeler : 0123456789</li>
 			<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">cci_assistance@gmail.com</a></li>
@@ -142,105 +142,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!-- //banner-top -->
-<!-- Modal1 -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body modal-body-sub_agile">
-						<div class="col-md-8 modal_body_left modal_body_left1">
-							<h3 class="agileinfo_sign">Connexion</h3>
-								<form action="#" method="post">
-									<div class="styled-input">
-										<input type="email" name="Email" required="">
-										<label>Email</label>
-										<span></span>
-									</div>
-									<div class="styled-input agile-styled-input-top">
-										<input type="password" name="Mdp" required="">
-										<label>Mot de passe</label>
-										<span></span>
-									</div>
-									<input type="submit" value="Connexion">
-								</form>
-						  <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
-									<li><a href="#" class="facebook">
-									  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-										<div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-							</ul>
-							<div class="clearfix"></div>
-							<p><a href="#" data-toggle="modal" data-target="#myModal2" >Pas encore inscrit ?</a></p>
-						</div>
-						<div class="col-md-4 modal_body_right modal_body_right1">
-							<img src="<?php echo base_url()."../template/images/personne.png"; ?>" alt=" "/>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<!-- //Modal content-->
-			</div>
-		</div>
-<!-- //Modal1 -->
-<!-- Modal2 -->
-		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-			<div class="modal-dialog">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-						<div class="modal-body modal-body-sub_agile">
-						<div class="col-md-8 modal_body_left modal_body_left1">
-						<h3 class="agileinfo_sign">dqzdzq</h3>
-						 <form action="#" method="post">
-							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Prenom" required="">
-								<label>Prénom</label>
-								<span></span>
-							</div>
-							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Nom" required="">
-								<label>Nom</label>
-								<span></span>
-							</div>
-							<div class="styled-input">
-								<input type="email" name="Email" required="">
-								<label>Email</label>
-								<span></span>
-							</div>
-							<div class="styled-input">
-								<input type="password" name="password" required="">
-								<label>Mot de passe</label>
-								<span></span>
-							</div>
-							<div class="styled-input">
-								<input type="password" name="Password2" required="">
-								<label>Confirmation du mot de passe</label>
-								<span></span>
-							</div>
-							<input type="submit" value="S'inscrire">
-						</form>
-						  <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
-								<li><a href="#" class="facebook">
-									<div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-									<div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-							</ul>
-							<div class="clearfix"></div>
-							<p><a href="#">En cliquant sur "S'inscrire", vous acceptez les conditions d'utilisations</a></p>
-						</div>
-						<div class="col-md-4 modal_body_right modal_body_right1">
-							<img src="<?php echo base_url()."../template/images/personne_inscription.jpg"; ?>" alt=" " class="img_inscription"/>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<!-- //Modal content-->
-			</div>
-		</div>
-<!-- //Modal2 -->
 
 <!-- banner -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">

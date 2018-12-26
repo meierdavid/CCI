@@ -18,9 +18,9 @@ class CommercantCtrl extends CI_Controller {
 		$this->load->helper('url');
 
 		if($this->input->cookie('commercantCookie') != Null){
-			$varid= $this->input->cookie('commercantCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
+			$varMail= $this->input->cookie('commercantCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
 			$this->load->model('commercant');
-			$data['commercant'] = $this->commercant->selectByMail($varid);
+			$data['commercant'] = $this->commercant->selectByMail($varMail);
 			$this->load->view('commercant/index',$data);
 			$this->load->view('commercant/profil',$data);
 		}
