@@ -47,7 +47,7 @@
             <br></br>
 
             <div class="text-center">
-            <a class="btn btn-primary" href="index" role="button">Accueil</a>
+            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/index" role="button">Accueil</a>
             </div>
 
 

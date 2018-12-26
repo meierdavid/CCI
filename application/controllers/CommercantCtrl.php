@@ -277,9 +277,10 @@ class CommercantCtrl extends CI_Controller {
 	public function deconnexion(){
 		$this->load->helper('url');
 		$this->load->helper('cookie');
+                $this->load->library('form_validation');
 		delete_cookie("commercantCookie");
 		$this->load->view('pages/deconnexion');
-		$this->load->view('pages/pageconnexion');
+		$this->load->view('commercant/connexion');
 	}
 
 	public function lie_commercant(){
