@@ -10,14 +10,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 
-<link href= "<?php echo base_url()."../assets/css/style_template.css"; ?>" rel="stylesheet" type="text/css" media="all" />
-<link href="<?php echo base_url()."../assets/css/font-awesome.css";?> rel="stylesheet">
-<link href="<?php echo base_url()."../assets/css/easy-responsive-tabs.css";?>" rel='stylesheet' type='text/css'/>
-<link href="<?php echo base_url()."../assets/css/bootstrap.css"; ?>" rel="stylesheet" type="text/css" media="all" />
-<link href="<?php echo base_url()."../assets/css/easy-responsive-tabs.css"; ?>" rel='stylesheet' type='text/css'/>
+<link href="<?php echo base_url('../assets/css/bootstrap.css'); ?>" rel="stylesheet" type="text/css" media="all" />
+<link href="<?php echo base_url('../assets/css/style.css'); ?>" rel="stylesheet" type="text/css" media="all" />
+<link href="<?php echo base_url('../assets/css/font-awesome.css'); ?>" rel="stylesheet">
+<link href="<?php echo base_url('../assets/css/easy-responsive-tabs.css'); ?>" rel='stylesheet' type='text/css'/>
 <!-- //for bootstrap working -->
-<link href="<?php echo base_url()."../assets///fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"; ?>" rel="stylesheet">
-<link href='<?php echo base_url().'../assets///fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic';?>' rel='stylesheet' type='text/css'>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -26,7 +25,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container">
 		<ul>
 		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Connexion </a></li>
-			<li> <a href="<?php echo base_url()?>clientCtrl/deconnexion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Se déconnecter </a></li>
+			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Inscription </a></li>
 			<li><i class="fa fa-phone" aria-hidden="true"></i> Appeler : 0123456789</li>
 			<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">cci_assistance@gmail.com</a></li>
 		</ul>
@@ -37,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header-bot">
 	<div class="header-bot_inner_wthreeinfo_header_mid">
 		<div class="col-md-4 logo_agile">
-			<h1><a href="index.html"><img src="<?php echo base_url()."../assets/image/logo.png";?>"></a></h1>
+			<h1><a href="index.html"><img src="images/logo.png"></a></h1>
 		</div>
 		<div class="col-md-4 header-middle">
 			<form action="#" method="post">
@@ -59,8 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                      
-                                        <span class="sr-only">Toggle navigation</span>
+					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -75,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="dropdown-menu multi-column columns-3">
 								<div class="agile_inner_drop_nav_info">
 									<div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-										<a href="mens.html"><img src="<?php echo base_url()."../assets/image/chariot.png";?>" alt=" "/></a>
+										<a href="mens.html"><img src="images/chariot.png" alt=" "/></a>
 									</div>
 									<div class="col-sm-3 multi-gd-img">
 										<ul class="multi-column-dropdown">
@@ -104,7 +102,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</ul>
 									</div>
 									<div class="col-sm-6 multi-gd-img multi-gd-text ">
-										<a href="womens.html"><img src="<?php echo base_url()."../assets/image/top1.jpg";?>" alt=" "/></a>
+										<a href="womens.html"><img src="images/top1.jpg" alt=" "/></a>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -173,7 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<p><a href="#" data-toggle="modal" data-target="#myModal2" >Pas encore inscrit ?</a></p>
 						</div>
 						<div class="col-md-4 modal_body_right modal_body_right1">
-							<img src="<?php echo base_url()."../assets/image/personne.png";?>" alt=" "/>
+							<img src="images/personne.png" alt=" "/>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -192,7 +190,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 						<div class="modal-body modal-body-sub_agile">
 						<div class="col-md-8 modal_body_left modal_body_left1">
-						<h3 class="agileinfo_sign">dqzdzq</h3>
+						<h3 class="agileinfo_sign">S'inscrire</h3>
 						 <form action="#" method="post">
 							<div class="styled-input agile-styled-input-top">
 								<input type="text" name="Prenom" required="">
@@ -230,7 +228,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<p><a href="#">En cliquant sur "S'inscrire", vous acceptez les conditions d'utilisations</a></p>
 						</div>
 						<div class="col-md-4 modal_body_right modal_body_right1">
-							<img src="<?php echo base_url()."../assets/image/personne_inscription.jpg"; ?>" alt=" " class="img_inscription"/>
+							<img src="images/personne_inscription.jpg" alt=" " class="img_inscription"/>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -284,7 +282,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="banner_bottom_agile_info_inner_w3ls">
     	           <div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
 						<figure class="effect-roxy">
-							<img src="<?php echo base_url()."../assets/image/bottom1.jpg";?>" alt=" " class="img-responsive" />
+							<img src="images/bottom1.jpg" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>P</span>roduits</h3>
 							</figcaption>
@@ -292,7 +290,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					 <div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
 						<figure class="effect-roxy">
-							<img src="<?php echo base_url()."../assets/image/bottom2.jpg";?>" alt=" " class="img-responsive" />
+							<img src="images/bottom2.jpg" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>M</span>agasins</h3>
 							</figcaption>
@@ -380,7 +378,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="login-grids">
 								<div class="login">
 									<div class="login-bottom">
-                                                                            <h1>Se déconnecter</h1>
+										<h3>S'inscrire'</h3>
+										<form>
+											<div class="sign-up">
+												<h4>Email :</h4>
+												<input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+											</div>
+											<div class="sign-up">
+												<h4>Mot de passe :</h4>
+												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+
+											</div>
+											<div class="sign-up">
+												<h4>Confirmation mot de passe :</h4>
+												<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+
+											</div>
+											<div class="sign-up">
+												<input type="submit" value="S'inscrire" >
+											</div>
+
+										</form>
 									</div>
 									<div class="login-right">
 										<h3>Se connecter</h3>
@@ -415,12 +433,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
 <!-- js -->
-<script type="text/javascript" src="<?php echo base_url()."../assets/js/jquery-2.1.4.min.js";?>"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <!-- //js -->
-<script src="<?php echo base_url()."../assets/js/modernizr.custom.js";?>"></script>
+<script src="js/modernizr.custom.js"></script>
 	<!-- Custom-JavaScript-File-Links -->
 	<!-- cart-js -->
-	<script src="<?php echo base_url()."../assets/js/minicart.min.js";?>"></script>
+	<script src="js/minicart.min.js"></script>
 <script>
 	// Mini Cart
 	paypal.minicart.render({
@@ -434,7 +452,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<!-- //cart-js -->
 <!-- script for responsive tabs -->
-<script src="<?php echo base_url()."../assets/js/easy-responsive-tabs.js";?>"></script>
+<script src="js/easy-responsive-tabs.js"></script>
 <script>
 	$(document).ready(function () {
 	$('#horizontalTab').easyResponsiveTabs({
@@ -459,14 +477,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 <!-- //script for responsive tabs -->
 <!-- stats -->
-	<script src="<?php echo base_url()."../assets/js/jquery.waypoints.min.js";?>"></script>
-	<script src="<?php echo base_url()."../assets/js/jquery.countup.js";?>></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.countup.js"></script>
 	<script>
 		$('.counter').countUp();
 	</script>
 <!-- //stats -->
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="<?php echo base_url()."../assets/js/jquery.easing.min.js";?>"></script>
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){
@@ -495,6 +514,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 <!-- for bootstrap working -->
-<script type="text/javascript" src="<?php echo base_url()."../assets/js/bootstrap.js";?>"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>
