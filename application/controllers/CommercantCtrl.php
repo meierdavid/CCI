@@ -166,7 +166,6 @@ class CommercantCtrl extends CI_Controller {
 					);
 
 					$this->entreprise->insert($data,$id);
-					$this->load->view('commercant/validation_ajout_entreprise');
 					$this->load->view('commercant/index',$data);
 					$data['entreprise'] =$this->entreprise->selectById($_POST['numSiret']);
 					$this->load->view('entreprise/profil',$data);

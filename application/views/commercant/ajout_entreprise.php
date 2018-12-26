@@ -45,87 +45,87 @@
 													<tbody>
                           <tr>
 														<th>Lundi Matin</th>
-														<td><input type="string" class="form-control" name="lundi_matin_ouverture" value="08h00" size="5" required/></td>
+														<td><input type="time" class="form-control" name="lundi_matin_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="lundi_matin_fermeture" value="12h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="lundi_matin_fermeture"></td>
                           </tr>
                           <tr>
                             <th>Lundi Soir</th>
-                            <td><input type="string" class="form-control" name="lundi_soir_ouverture" value="13h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="lundi_soir_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="lundi_soir_fermeture" value="20h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="lundi_soir_fermeture"></td>
 													</tr>
                           <tr>
 														<th>Mardi Matin</th>
-														<td><input type="string" class="form-control" name="mardi_matin_ouverture" value="08h00" size="5" required/></td>
+														<td><input type="time" class="form-control" name="mardi_matin_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="mardi_matin_fermeture" value="12h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="mardi_matin_fermeture"></td>
                           </tr>
                           <tr>
                             <th>Mardi Soir</th>
-                            <td><input type="string" class="form-control" name="mardi_soir_ouverture" value="13h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="mardi_soir_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="mardi_soir_fermeture" value="20h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="mardi_soir_fermeture"></td>
 													</tr>
                           <tr>
 														<th>Mercredi Matin</th>
-														<td><input type="string" class="form-control" name="mercredi_matin_ouverture" value="08h00" size="5" required/></td>
+														<td><input type="time" class="form-control" name="mercredi_matin_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="mercredi_matin_fermeture" value="12h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="mercredi_matin_fermeture"></td>
                           </tr>
                           <tr>
                             <th>Mercredi Soir</th>
-                            <td><input type="string" class="form-control" name="mercredi_soir_ouverture" value="13h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="mercredi_soir_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="mercredi_soir_fermeture" value="20h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="mercredi_soir_fermeture"></td>
 													</tr>
                           <tr>
 														<th>Jeudi Matin</th>
-														<td><input type="string" class="form-control" name="jeudi_matin_ouverture" value="08h00" size="5" required/></td>
+														<td><input type="time" class="form-control" name="jeudi_matin_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="jeudi_matin_fermeture" value="12h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="jeudi_matin_fermeture"></td>
                           </tr>
                           <tr>
                             <th>Jeudi Soir</th>
-                            <td><input type="string" class="form-control" name="jeudi_soir_ouverture" value="13h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="jeudi_soir_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="jeudi_soir_fermeture" value="20h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="jeudi_soir_fermeture"></td>
 													</tr>
                           <tr>
 														<th>Vendredi Matin</th>
-														<td><input type="string" class="form-control" name="vendredi_matin_ouverture" value="08h00" size="5" required/></td>
+														<td><input type="time" class="form-control" name="vendredi_matin_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="vendredi_matin_fermeture" value="12h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="vendredi_matin_fermeture"></td>
                           </tr>
                           <tr>
                             <th>Vendredi Soir</th>
-                            <td><input type="string" class="form-control" name="vendredi_soir_ouverture" value="13h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="vendredi_soir_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="vendredi_soir_fermeture" value="20h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="vendredi_soir_fermeture"></td>
 													</tr>
                           <tr>
 														<th>Samedi Matin</th>
-														<td><input type="string" class="form-control" name="samedi_matin_ouverture" value="08h00" size="5" required/></td>
+														<td><input type="time" class="form-control" name="samedi_matin_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="samedi_matin_fermeture" value="12h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="samedi_matin_fermeture"></td>
                           </tr>
                           <tr>
                             <th>Samedi Soir</th>
-                            <td><input type="string" class="form-control" name="samedi_soir_ouverture" value="13h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="samedi_soir_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="samedi_soir_fermeture" value="20h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="samedi_soir_fermeture"></td>
 													</tr>
                           <tr>
 														<th>Dimanche Matin</th>
-														<td><input type="string" class="form-control" name="dimanche_matin_ouverture" value="08h00" size="5" required/></td>
+														<td><input type="time" class="form-control" name="dimanche_matin_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="dimanche_matin_fermeture" value="12h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="dimanche_matin_fermeture"></td>
                           </tr>
                           <tr>
                             <th>Dimanche Soir</th>
-                            <td><input type="string" class="form-control" name="dimanche_soir_ouverture" value="13h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="dimanche_soir_ouverture"></td>
                             <td><p>à</p></td>
-                            <td><input type="string" class="form-control" name="dimanche_soir_fermeture" value="20h00" size="5" required/></td>
+                            <td><input type="time" class="form-control" name="dimanche_soir_fermeture"></td>
 													</tr>
 												</tbody></table>
                     </div>
