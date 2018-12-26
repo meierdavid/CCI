@@ -43,7 +43,8 @@
                     <div class="form-group">
                         <label class="control-label">Horaires d'ouverture</label>
                         <table width="100%" cellspacing="1" cellpadding="0" class="horaire">
-													<tbody><tr>
+													<tbody>
+                          <tr>
 														<th>Lundi Matin</th>
 														<td><input type="float" class="form-control" name="lundi_matin" value="08,00" size="5" required/></td>
                             <td><p>à</p></td>
@@ -51,33 +52,81 @@
                           </tr>
                           <tr>
                             <th>Lundi Soir</th>
-                            <td><input type="float" class="form-control" name="lundi_matin" value="13,00" size="5" required/></td>
+                            <td><input type="float" class="form-control" name="lundi_soir" value="13,00" size="5" required/></td>
                             <td><p>à</p></td>
-                            <td><input type="float" class="form-control" name="lundi_matin" value="20,00" size="5" required/></td>
+                            <td><input type="float" class="form-control" name="lundi_soir" value="20,00" size="5" required/></td>
 													</tr>
-													<tr>
-														<th>Mardi</th>
-														<td>9h30 - 20h30</td>
+                          <tr>
+														<th>Mardi Matin</th>
+														<td><input type="float" class="form-control" name="mardi_matin" value="08,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="mardi_matin" value="12,00" size="5" required/></td>
+                          </tr>
+                          <tr>
+                            <th>Mardi Soir</th>
+                            <td><input type="float" class="form-control" name="mardi_soir" value="13,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="mardi_soir" value="20,00" size="5" required/></td>
 													</tr>
-													<tr>
-														<th>Mercredi</th>
-														<td>9h30 - 20h30</td>
+                          <tr>
+														<th>Mercredi Matin</th>
+														<td><input type="float" class="form-control" name="mercredi_matin" value="08,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="mercredi_matin" value="12,00" size="5" required/></td>
+                          </tr>
+                          <tr>
+                            <th>Mercredi Soir</th>
+                            <td><input type="float" class="form-control" name="mercredi_soir" value="13,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="mercredi_soir" value="20,00" size="5" required/></td>
 													</tr>
-													<tr>
-														<th>Jeudi</th>
-														<td>9h30 - 20h30</td>
+                          <tr>
+														<th>Jeudi Matin</th>
+														<td><input type="float" class="form-control" name="jeudi_matin" value="08,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="jeudi_matin" value="12,00" size="5" required/></td>
+                          </tr>
+                          <tr>
+                            <th>Jeudi Soir</th>
+                            <td><input type="float" class="form-control" name="jeudi_soir" value="13,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="jeudi_soir" value="20,00" size="5" required/></td>
 													</tr>
-													<tr>
-														<th>Vendredi</th>
-														<td>9h30 - 20h30</td>
+                          <tr>
+														<th>Vendredi Matin</th>
+														<td><input type="float" class="form-control" name="vendredi_matin" value="08,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="Vendredi_matin" value="12,00" size="5" required/></td>
+                          </tr>
+                          <tr>
+                            <th>Vendredi Soir</th>
+                            <td><input type="float" class="form-control" name="Vendredi_soir" value="13,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="Vendredi_soir" value="20,00" size="5" required/></td>
 													</tr>
-													<tr>
-														<th>Samedi</th>
-														<td>9h30 - 20h30</td>
+                          <tr>
+														<th>Samedi Matin</th>
+														<td><input type="float" class="form-control" name="samedi_matin" value="08,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="samedi_matin" value="12,00" size="5" required/></td>
+                          </tr>
+                          <tr>
+                            <th>Samedi Soir</th>
+                            <td><input type="float" class="form-control" name="samedi_soir" value="13,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="samedi_soir" value="20,00" size="5" required/></td>
 													</tr>
-													<tr>
-														<th>Dimanche</th>
-														<td></td>
+                          <tr>
+														<th>Dimanche Matin</th>
+														<td><input type="float" class="form-control" name="dimanche_matin" value="08,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="dimanche_matin" value="12,00" size="5" required/></td>
+                          </tr>
+                          <tr>
+                            <th>Dimanche Soir</th>
+                            <td><input type="float" class="form-control" name="dimanche_soir" value="13,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="dimanche_soir" value="20,00" size="5" required/></td>
 													</tr>
 												</tbody></table>
                         <!-- <p>Lundi :</p>
