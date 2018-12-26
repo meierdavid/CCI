@@ -68,26 +68,26 @@ class AdministrateurCtrl extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('administrateur');
 		$this->form_validation->set_rules('mailAdministrateur', 'Email', 'required');
-
+                
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('administrateur/connexion');
 		} else {
 			$administrateur = $this->administrateur->selectByMail($_POST['mailAdministrateur']);
 			//l'administrateur qui essaye de se connecter
-
+                        
 			if ($administrateur == null) {
 				$this->load->view('administrateur/connexion');
 				echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
 			}
 			else{
-				if ($administrateur[0]->mdpAdministrateur != $_POST['mdp']) {
+				if ($administrateur[0]->mdpAdministrateur != $_POST['mdpAdministrateur']) {
 					$this->load->view('administrateur/connexion');
 					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
 				}
 				else{
 					echo "formumaire bien remplie";
 					$data['administrateur'] = $administrateur;
-					if( $data['administrateur'] != NULL && $_POST['mdp'] == $data['administrateur'][0]->mdpAdministrateur ){
+					if( $data['administrateur'] != NULL && $_POST['mdpAdministrateur'] == $data['administrateur'][0]->mdpAdministrateur ){
 						$cookie = array(
 							'name'   => 'administrateurCookie',
 							'value'  => $data['administrateur'][0]->mailAdministrateur,
@@ -111,21 +111,45 @@ class AdministrateurCtrl extends CI_Controller {
         }
         
         public function ajout_administrateur(){
-            $this->load->model('administrateur');
-            $this->load->helper('form');
-            $data=array(
-                "prenomAdministrateur"=> htmlspecialchars($_POST['prenomAdministrateur']),
-                "nomAdministrateur"=> htmlspecialchars($_POST['nomAdministrateur']),
-                "adresseAdministrateur"=> htmlspecialchars($_POST['adresseAdministrateur']),
-                "codePAdministrateur"=> htmlspecialchars($_POST['codePAdministrateur']),
-                "villeAdministrateur"=> htmlspecialchars($_POST['villeAdministrateur']),
-                "telAdministrateur"=> htmlspecialchars($_POST['telAdministrateur']),
-                "mdpAdministrateur"=> htmlspecialchars($_POST['mdpAdministrateur']),
-                "mailAdministrateur"=> htmlspecialchars($_POST['maildministrateur']),
-                );
-            $this->administrateur->insert($data);
-            $this->load->view('administrateur/index');
-            $this->load->view('administrateur/ajout_administrateur');                      
+            // faire envoi de mail
+		$this->load->helper('form', 'url');
+		$this->load->library('form_validation');
+		$this->load->model('administrateur');
+                $this->load->view('administrateur/index');
+
+		$this->form_validation->set_rules('prenomAdministrateur', 'Prénom', 'alpha_dash');
+		$this->form_validation->set_rules('nomAdministrateur', 'Nom', 'alpha_numeric_spaces');
+		$this->form_validation->set_rules('mailAdministrateur', 'Email', 'valid_email');
+		$this->form_validation->set_rules('codePAdministrateur', 'Code postale', 'integer');
+		$this->form_validation->set_rules('villeAdministrateur', 'Ville', 'alpha_dash');
+		$this->form_validation->set_rules('telAdministrateur', 'Numéro de téléphone', 'integer');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('administrateur/ajout_administrateur');
+		} else {
+			if (null != $this->administrateur->selectByMail($_POST['mailAdministrateur'])) {
+				$data['message']="erreur : cet email n'est pas disponible";
+				$this->load->view('errors/erreur_formulaire', $data);
+				$this->load->view('administrateur/ajout_administrateur');
+			} else if ($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']) {
+				$data = array(
+					"prenomAdministrateur" => htmlspecialchars($_POST['prenomAdministrateur']),
+					"nomAdministrateur" => htmlspecialchars($_POST['nomAdministrateur']),
+					"mailAdministrateur" => htmlspecialchars($_POST['mailAdministrateur']),
+					"mdpAdministrateur" => htmlspecialchars($_POST['mdpAdministrateur']),
+					"adresseAdministrateur" => htmlspecialchars($_POST['adresseAdministrateur']),
+					"codePAdministrateur" => htmlspecialchars($_POST['codePAdministrateur']),
+					"villeAdministrateur" => htmlspecialchars($_POST['villeAdministrateur']),
+					"telAdministrateur" => htmlspecialchars($_POST['telAdministrateur']),
+				);
+				$this->administrateur->insert($data);
+				$this->load->view('administrateur/index');
+			} else {
+				$data['message']="erreur : la confirmation de Mot de passe ne correspond pas au premier";
+				$this->load->view('errors/erreur_formulaire', $data);
+				$this->load->view('administrateur/ajout_administrateur');
+			}
+		}
         }
         
         public function ajout_entreprise(){

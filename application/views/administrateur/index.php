@@ -2,8 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html)>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
+    <head><
+        <m                                                                                           eta charset="utf-8">
         
         <!-- Bootstrap -->
         <link href="<?php echo base_url()."../assets/css/bootstrap.min.css"; ?>" rel=" stylesheet">
@@ -16,6 +16,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </center>
     <div class="vertical-menu" style="position: absolute; margin-top: 70px;">
         <a href="<?php echo base_url()?>AdministrateurCtrl/ajout_administrateur">Ajouter un administrateur</a>
+        <a href="#" class="active">Votre Compte</a>
+        <a href="<?php echo base_url()?>AdministrateurCtrl/deconnexion">Se déconnecter</a>
+        
     </div>
         
     

@@ -24,14 +24,14 @@
                     <br></br>
                     
                     <div class="form-group">
-                        <label name="mail" class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mail" value="" size="30" required/> 
+                        <label name="mailAdministrateur" class="control-label">Mail</label>
+                        <input type="text" class="form-control" name="mailAdministrateur" value="" size="30" required/> 
                             <h6 style="color:red;"</h6>
                     </div>
                     
                     <div class="form-group">
-                        <label name="mdp" class="control-label">Mot de passe</label>
-                        <input type="password" class="form-control" name="mdp" value="" size="30" required/>
+                        <label name="mdpAdministrateur" class="control-label">Mot de passe</label>
+                        <input type="password" class="form-control" name="mdpAdministrateur" value="" size="30" required/>
                     </div>    
                     
                  

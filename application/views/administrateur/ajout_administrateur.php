@@ -30,8 +30,18 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mailAdministrateur" value="" size="30" required/>
+                        <input type="mail" class="form-control" name="mailAdministrateur" value="" size="30" required/>
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label">Mot de passe</label>
+                        <input type="password" class="form-control" name="mdpAdministrateur" value="" size="30" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Confirmation du mot de passe</label>
+                        <input type="password" class="form-control" name="mdpAdministrateur2" value="" size="30" required/>
+                    </div>
+                    
                     <div class="form-group">
                         <label class="control-label">Adresse</label>
                         <input type="text" class="form-control" name="adresseAdministrateur" value="" size="30" required/>
@@ -47,10 +57,6 @@
                     <div class="form-group">
                         <label class="control-label">Telephone</label>
                         <input type="number" class="form-control" name="telAdministrateur" value="" size="30" required/>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Mot de passe</label>
-                        <input type="text" class="form-control" name="mdpAmnistrateur" value="" size="30" required/>
                     </div>
 
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Inscription" /></div>
