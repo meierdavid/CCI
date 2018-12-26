@@ -495,6 +495,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 <!-- for bootstrap working -->
-<script type="text/javascript" src="<?php echo base_url()."../assets/js/bootstrap.js";?>"></script>
+<script type="text/javascript" src="<?php echo base_url()."../template/js/bootstrap.js";?>"></script>
 </body>
 </html>
