@@ -41,7 +41,8 @@ class ProduitCtrl extends CI_Controller {
                 // faire envoi de mail
                 // envoi de mail lors de l'inscription d'un produit ?
                 $this->load->model('produit');
-				$this->load->helper('form');
+                $this->load->model('entreprise');
+                $this->load->helper('form');
 
 				$data=array(
                             "nomProduit"=> htmlspecialchars($_POST['nomProduit']),

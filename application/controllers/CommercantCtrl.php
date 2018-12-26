@@ -91,7 +91,18 @@ class CommercantCtrl extends CI_Controller {
 		}
 	}
 
-	public function liste_entreprise(){
+    public function liste_entreprise_dropbox(){
+        $this->load->helper('cookie');
+        $this->load->model('commercant');
+        $this->load->model('entreprise');
+
+        $varid = $this->input->cookie('commercantCookie');
+        $data['commercant'] = $this->commercant->selectByMail($varid);
+        $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+	}
+
+
+    public function liste_entreprise(){
 		$this->load->helper('cookie');
 		$this->load->model('commercant');
 		$this->load->model('entreprise');

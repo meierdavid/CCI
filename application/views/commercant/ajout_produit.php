@@ -57,6 +57,13 @@
                         <input type="number" class="form-control" name="reducProduit" value="" size="30" required/>
                     </div>
 
+                    <label>Entreprise :</label>
+                    <?php echo form_dropdown();?>
+                    <div class="submit">
+                        <input type="submit" name="submit" value="Ajouter" />
+                    </div>
+                    <br></br>
+
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmation" /></div>
                     <div class="text-center">
                         <br>

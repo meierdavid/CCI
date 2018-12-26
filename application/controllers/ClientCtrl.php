@@ -8,7 +8,7 @@ class ClientCtrl extends CI_Controller {
 	public function profil()
 	{
 		$this->load->model('client');
-                $this->load->helper('form', 'url');
+		$this->load->helper('form', 'url');
 		$this->load->helper('cookie');
 		$this->load->library('form_validation');
                 if(isset($_COOKIE['clientCookie'])){
