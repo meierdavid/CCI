@@ -60,7 +60,6 @@ class ClientCtrl extends CI_Controller {
 				$this->load->view('client/inscription');
 			}
 		}
-//<<<<<<< HEAD
 	}
 
 	/*$this->load->library('email');
@@ -155,11 +154,6 @@ class ClientCtrl extends CI_Controller {
 			$this->load->view('pages/pageconnexion');
 		}
 
-
-
-
-//=======
-
         }
 
 			/*$this->load->library('email');
@@ -227,7 +221,4 @@ public function connexion(){
             $this->load->view('pages/deconnexion');
             $this->load->view('pages/pageconnexion');
         }
-
-
-//>>>>>>> fd0d1ea339c59b37055cc36a54675111e925fbd5
 	}
