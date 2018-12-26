@@ -62,55 +62,46 @@ class AdministrateurCtrl extends CI_Controller {
 		}
 	}
         
-
         public function connexion(){
-            $this->load->model('administrateur');
-            $this->load->helper('form');
-            $this->load->helper('url');
-            $this->load->library('form_validation');
-            $this->load->helper('cookie');
-            
-            $this->form_validation->set_rules('mailAdministrateur', 'Email', 'required');
-            
-            if ($this->form_validation->run() == FALSE)
-            {
-                $this->load->view('admistrateur/connexion');
-            }
-            else
-            {
-                
-                $com=$this->administrateur->selectByMail($_POST['mailAdministrateur']);
-                
-                if ($this->admistrateur->selectByMail($_POST['mailAdministrateur']) == null){
-                    echo "div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
-                }
-                else{
-                    $com = $this->administrateur->selectByMail($_POST['mailAdministrateur']);
-                    if( $com[0]->mdpAdministrateur != $_POST['mdp']){
-                        $this->load->view('administrateur/connexion');
-                        echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
-                    }
-                    else{
-                        echo "formulaire bien remplie";
-                        
-                        $data['administrateur'] = $this->administrateur->selectByMail($_POST['mailAdministrateur']);
-                        if( $data['administrateur'] != NULL && $_POST['mdp'] == $data['administrateur'][0]->mdpAdministrateur ){
-                            $cookie = array(
-                                'name' => 'administrateurCookie',
-                                'value' => $data['administrateur'][0]->mailAdministrateur,
-                                'expire' => '3600'
-                            );
-                            $this->input->set_cookie($cookie);
-                            echo $this->input->cookie('adminstrateurCookie');
-                            $this->load->view('administrateur/index',$data);
-                            
-                        }
-                    }
-                    
-                }
-            }
+		$this->load->helper('form', 'url');
+		$this->load->helper('cookie');
+		$this->load->library('form_validation');
+		$this->load->model('administrateur');
+		$this->form_validation->set_rules('mailAdministrateur', 'Email', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('administrateur/connexion');
+		} else {
+			$administrateur = $this->administrateur->selectByMail($_POST['mailAdministrateur']);
+			//l'administrateur qui essaye de se connecter
+
+			if ($administrateur == null) {
+				$this->load->view('administrateur/connexion');
+				echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
+			}
+			else{
+				if ($administrateur[0]->mdpAdministrateur != $_POST['mdp']) {
+					$this->load->view('administrateur/connexion');
+					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+				}
+				else{
+					echo "formumaire bien remplie";
+					$data['administrateur'] = $administrateur;
+					if( $data['administrateur'] != NULL && $_POST['mdp'] == $data['administrateur'][0]->mdpAdministrateur ){
+						$cookie = array(
+							'name'   => 'administrateurCookie',
+							'value'  => $data['administrateur'][0]->mailAdministrateur,
+							'expire' => '3600'
+						);
+						$this->input->set_cookie($cookie);
+						echo $this->input->cookie('administrateurCookie');
+						$this->load->view('administrateur/index');
+					}
+				}
+			}
+		}   
         }
-        
+          
         public function deconnexion(){
             $this->load->helper('url');
             $this->load->helper('cookie');
@@ -137,8 +128,18 @@ class AdministrateurCtrl extends CI_Controller {
             $this->load->view('administrateur/ajout_administrateur');                      
         }
         
+        public function ajout_entreprise(){
+        }
         
+        public function ajout_commercant(){
+        }
         
+        public function supprimer_produit() {
+        }
+        
+        public function supprimer_client(){
+            
+        }
           
           
 }

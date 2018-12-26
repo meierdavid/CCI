@@ -71,7 +71,7 @@ class PageCtrl extends CI_Controller {
         public function ConnexionAdmin()
         {
 		$this->load->helper('url');
-		$this->load->view('pages/pageconnexionadmin');
+		$this->load->view('administrateur/connexion');
 	    }
 
 	    public function choix_inscription()
