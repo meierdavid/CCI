@@ -154,3 +154,4 @@ class ClientCtrl extends CI_Controller {
 			$this->load->view('pages/deconnexion');
 			$this->load->view('pages/pageconnexion');
 		}
+}
