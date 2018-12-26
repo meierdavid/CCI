@@ -111,7 +111,7 @@ public function connexion(){
                     );
                     $this->input->set_cookie($cookie);
                     echo $this->input->cookie('clientCookie');
-                    $this->load->view('template/debug');    
+                    $this->load->view('template/index');    
                 }
             }
         }
