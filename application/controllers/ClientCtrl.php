@@ -20,7 +20,7 @@ class ClientCtrl extends CI_Controller {
 	}
 
 	public function inscription(){
-         
+
 		// faire envoi de mail
 		$this->load->helper('form', 'url');
 		$this->load->library('form_validation');
@@ -60,7 +60,7 @@ class ClientCtrl extends CI_Controller {
 				$this->load->view('client/inscription');
 			}
 		}
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	}
 
 	/*$this->load->library('email');
@@ -158,8 +158,8 @@ class ClientCtrl extends CI_Controller {
 
 
 
-=======
-	
+//=======
+
         }
 
 			/*$this->load->library('email');
@@ -193,7 +193,7 @@ public function connexion(){
         if ($client == null) {
             $this->load->view('client/lie_client');
             echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
-        } 
+        }
         else{
             if ($client[0]->mdpClient != $_POST['mdp']) {
             $this->load->view('client/connexion');
@@ -210,15 +210,15 @@ public function connexion(){
                     );
                     $this->input->set_cookie($cookie);
                     echo $this->input->cookie('clientCookie');
-                    $this->load->view('template/index');    
+                    $this->load->view('template/index');
                 }
             }
         }
-}   
+}
 
 }
 
-	 
+
     public function deconnexion(){
             $this->load->helper('url');
             $this->load->helper('form');
@@ -228,6 +228,6 @@ public function connexion(){
             $this->load->view('pages/pageconnexion');
         }
 
-   
->>>>>>> fd0d1ea339c59b37055cc36a54675111e925fbd5
+
+//>>>>>>> fd0d1ea339c59b37055cc36a54675111e925fbd5
 	}
