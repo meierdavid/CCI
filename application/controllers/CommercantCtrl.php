@@ -28,7 +28,6 @@ class CommercantCtrl extends CI_Controller {
 			$this->load->view('pages/pageconnexion');
 		}
 	}
-
 	public function changer_mdp(){ // info commercant avec cookie
 		$this->load->helper('cookie');
 		$this->load->model('commercant');
@@ -37,7 +36,6 @@ class CommercantCtrl extends CI_Controller {
                 if(isset($_COOKIE['commercantCookie'])){
                     $varid= $this->input->cookie('commercantCookie');
                     $data['commercant'] = $this->commercant->selectByMail($varid);
-
                     if(isset($_POST['mdpCommercantAncien']) && ($_POST['mdpCommercantAncien'] == $data['commercant'][0]->mdpCommercant) ){ // + tester Bon Ancien mot de passe
                             if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
                                     $newMdp = $_POST['mdpCommercantNouveau'];

@@ -8,7 +8,9 @@ class AdministrateurCtrl extends CI_Controller {
 
   {
     $this->load->helper('url');
-    $this->load->view('administrateur/profil');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->view('administrateur/index');
   }
 
   public function profil($mail)
@@ -105,6 +107,7 @@ class AdministrateurCtrl extends CI_Controller {
         public function deconnexion(){
             $this->load->helper('url');
             $this->load->helper('cookie');
+            $this->load->helper('form');
             delete_cookie("administrateurCookie");
             $this->load->view('pages/deconnexion');
             $this->load->view('pages/pageconnexion');
@@ -152,6 +155,34 @@ class AdministrateurCtrl extends CI_Controller {
 		}
         }
         
+        public function changer_mdp(){
+            $this->load->helper('cookie');
+            $this->load->model('administrateur');
+            $this->load->helper('url');
+            $this->load->library('form_validation');
+            if(isset($_COOKIE['administrateurCookie'])){
+                    $varid= $this->input->cookie('administrateurCookie');
+                    $data['administrateur'] = $this->administrateur->selectByMail($varid);
+                    
+		if(isset($_POST['ancienMdp']) && ($_POST['ancienMdp'] == $data['administrateur'][0]->mdpAdministrateur) ){ // + tester Bon Ancien mot de passe
+			if($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']){
+				$newMdp = $_POST['mdpAdministrateur'];
+				$this->administrateur->updateMdp($varid,$newMdp);
+				delete_cookie("administrateurCookie");
+                                print_r("mot de passe mis à jour");
+				$this->load->view('administrateur/index');
+			}
+			else{
+				$this->load->view('administrateur/index',$data);
+				$this->load->view('administrateur/changer_mdp',$data);
+			}
+		}
+		else{
+			$this->load->view('administrateur/index',$data);
+			$this->load->view('administrateur/changer_mdp',$data);
+		}
+            }
+        }
         public function ajout_entreprise(){
         }
         
