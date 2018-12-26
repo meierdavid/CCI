@@ -1,4 +1,3 @@
-_matin_fermeture"
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -96,13 +95,13 @@ _matin_fermeture"
 														<th>Vendredi Matin</th>
 														<td><input type="float" class="form-control" name="vendredi_matin_ouverture" value="08,00" size="5" required/></td>
                             <td><p>à</p></td>
-                            <td><input type="float" class="form-control" name="Vendredi_matin_fermeture" value="12,00" size="5" required/></td>
+                            <td><input type="float" class="form-control" name="vendredi_matin_fermeture" value="12,00" size="5" required/></td>
                           </tr>
                           <tr>
                             <th>Vendredi Soir</th>
-                            <td><input type="float" class="form-control" name="Vendredi_soir_ouverture" value="13,00" size="5" required/></td>
+                            <td><input type="float" class="form-control" name="vendredi_soir_ouverture" value="13,00" size="5" required/></td>
                             <td><p>à</p></td>
-                            <td><input type="float" class="form-control" name="Vendredi_soir_fermeture" value="20,00" size="5" required/></td>
+                            <td><input type="float" class="form-control" name="vendredi_soir_fermeture" value="20,00" size="5" required/></td>
 													</tr>
                           <tr>
 														<th>Samedi Matin</th>

@@ -138,16 +138,29 @@ class CommercantCtrl extends CI_Controller {
 			{
 				if($this->entreprise->selectById($_POST['numSiret']) == null){
 					$id= $data['commercant'][0]->idCommercant;
-					$horairesEntreprise=$_POST['lundi_matin_ouverture'].$_POST['lundi_matin_fermeture'];
-					var_dump($horairesEntreprise);
-					die;
+
+					$horairesEntreprise=$_POST['lundi_matin_ouverture']."-".$_POST['lundi_matin_fermeture']."/".
+					$_POST['lundi_soir_ouverture']."-".$_POST['lundi_soir_fermeture']." ".
+					$_POST['mardi_matin_ouverture']."-".$_POST['mardi_matin_fermeture']."/".
+					$_POST['mardi_soir_ouverture']."-".$_POST['mardi_soir_fermeture']." ".
+					$_POST['mercredi_matin_ouverture']."-".$_POST['mercredi_matin_fermeture']."/".
+					$_POST['mercredi_soir_ouverture']."-".$_POST['mercredi_soir_fermeture']." ".
+					$_POST['jeudi_matin_ouverture']."-".$_POST['jeudi_matin_fermeture']."/".
+					$_POST['jeudi_soir_ouverture']."-".$_POST['jeudi_soir_fermeture']." ".
+					$_POST['vendredi_matin_ouverture']."-".$_POST['vendredi_matin_fermeture']."/".
+					$_POST['vendredi_soir_ouverture']."-".$_POST['vendredi_soir_fermeture']." ".
+					$_POST['samedi_matin_ouverture']."-".$_POST['samedi_matin_fermeture']."/".
+					$_POST['samedi_soir_ouverture']."-".$_POST['samedi_soir_fermeture']." ".
+					$_POST['dimanche_matin_ouverture']."-".$_POST['dimanche_matin_fermeture']."/".
+					$_POST['dimanche_soir_ouverture']."-".$_POST['dimanche_soir_fermeture'];
+
 					$data=array(
 						"numSiret"=> htmlspecialchars($_POST['numSiret']),
 						"nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
 						"adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
 						"codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
 						"villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
-						"horairesEntreprise" => htmlspecialchars($_POST[$horairesEntreprise]),
+						"horairesEntreprise" => htmlspecialchars($horairesEntreprise),
 						"livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
 						"tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
 					);
