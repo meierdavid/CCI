@@ -50,8 +50,8 @@
                     </div>
 
                     <label>Entreprise :</label>
-                    <?php echo form_dropdown(); liste_entreprise_dropbox();
-                    foreach($data as $row)
+                    <?php echo form_dropdown();
+                    foreach($entreprises as $row)
                     {
                         echo '<option value="'.$row->numSiret.'">'.$row->nomEntreprise.'</option>';
                     }
