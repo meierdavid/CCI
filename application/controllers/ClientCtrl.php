@@ -2,14 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ClientCtrl extends CI_Controller {
-
+        // cette view sera utilisé pour afficher l'index du template quand le principe des cookies
+        // fonctionnera. On l'appellera directement dans connection
 	public function index()
 	{   
                 $this->load->helper('form', 'url');
 		$this->load->helper('cookie');
 		$this->load->library('form_validation');
 		$this->load->model('client');
-                var_dump($_COOKIE);
+                ;
               
                 if(isset($_COOKIE['clientCookie'])){
                     $this->load->view('template/index');
@@ -95,7 +96,7 @@ class ClientCtrl extends CI_Controller {
 		} else {
 			$client = $this->client->selectByMail($_POST['mailClient']);
 			//le client qui essaye de se connecter
-
+                        
 			if ($client == null) {
 				$data['message']="erreur : cet email n'existe pas";
 				$this->load->view('errors/erreur_formulaire', $data);
@@ -110,14 +111,9 @@ class ClientCtrl extends CI_Controller {
 				else{
 					$data['client'] = $client;
 					if( $data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient ){
-						$cookie = array(
-							'name'   => 'clientCookie',
-							'value'  => $data['client'][0]->mailClient,
-							'expire' => '3600'
-						);
-						$this->input->set_cookie($cookie);
-						echo $this->input->cookie('clientCookie');
-                                                $this->index();
+						setcookie('clientCookie',$data['client'][0]->mailClient,'3600');
+                                                
+                                                $this->load->view('template/index');
                                             
 					}
 				}
@@ -159,6 +155,6 @@ class ClientCtrl extends CI_Controller {
 			$this->load->helper('cookie');
 			delete_cookie("clientCookie");
 			$this->load->view('pages/deconnexion');
-			$this->load->url('ClientCtrl/connexion');
+			$this->connexion();
 		}
 }

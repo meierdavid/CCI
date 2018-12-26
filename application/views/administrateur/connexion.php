@@ -22,7 +22,7 @@
                     </div>
                     
                     <br></br>
-
+                    
                     <div class="form-group">
                         <label name="mail" class="control-label">Mail</label>
                         <input type="text" class="form-control" name="mail" value="" size="30" required/> 
