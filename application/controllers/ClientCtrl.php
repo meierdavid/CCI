@@ -41,7 +41,6 @@ class ClientCtrl extends CI_Controller {
 				$this->load->view('errors/erreur_formulaire', $data);
 				$this->load->view('client/inscription');
 			} else if ($_POST['mdpClient'] == $_POST['mdpClient2']) {
-				echo "formumaire bien remplie";
 				$data = array(
 					"prenomClient" => htmlspecialchars($_POST['prenomClient']),
 					"nomClient" => htmlspecialchars($_POST['nomClient']),
@@ -56,8 +55,9 @@ class ClientCtrl extends CI_Controller {
 				$this->client->insert($data);
 				$this->load->view('pages/pageConnexion');
 			} else {
+				$data['message']="erreur : la confirmation de Mot de passe ne correspond pas au premier";
+				$this->load->view('errors/erreur_formulaire', $data);
 				$this->load->view('client/inscription');
-				echo '<div class="alert alert-danger text-center">La confirmation de Mot de passe ne correspond pas au premier</div>';
 			}
 		}
 	}
@@ -91,16 +91,17 @@ class ClientCtrl extends CI_Controller {
 			//le client qui essaye de se connecter
 
 			if ($client == null) {
+				$data['message']="erreur : cet email n'existe pas";
+				$this->load->view('errors/erreur_formulaire', $data);
 				$this->load->view('client/lie_client');
-				echo "<div class='alert alert-danger text-center'>Cet email n'existe pas</div>";
 			}
 			else{
 				if ($client[0]->mdpClient != $_POST['mdp']) {
+					$data['message']="erreur : mauvais mot de passe";
+					$this->load->view('errors/erreur_formulaire', $data);
 					$this->load->view('client/connexion');
-					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
 				}
 				else{
-					echo "formumaire bien remplie";
 					$data['client'] = $client;
 					if( $data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient ){
 						$cookie = array(
@@ -135,10 +136,9 @@ class ClientCtrl extends CI_Controller {
 
 				}
 				else{
-					//$erreur="erreur mauvais mot de passe ou mauvaise adresse mail";
-					//$data['error']=$erreur;
+					$data['message']="erreur : mauvais mot de passe ou mauvaise adresse mail";
+					$this->load->view('errors/erreur_formulaire', $data);
 					$this->load->view('client/connexion');
-					// erreur mauvais mdp ou mauvaise adresse mail
 				}
 			}
 			else{
