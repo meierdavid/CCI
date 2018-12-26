@@ -33,26 +33,32 @@ class CommercantCtrl extends CI_Controller {
 		$this->load->helper('cookie');
 		$this->load->model('commercant');
 		$this->load->helper('url');
-		$varid= $this->input->cookie('commercantCookie');
-		$data['commercant'] = $this->commercant->selectByMail($varid);
+                $this->load->library('form_validation');
+                if(isset($_COOKIE['commercantCookie'])){
+                    $varid= $this->input->cookie('commercantCookie');
+                    $data['commercant'] = $this->commercant->selectByMail($varid);
 
-		if(isset($_POST['mdpCommercantAncien']) && ($_POST['mdpCommercantAncien'] == $data['commercant'][0]->mdpCommercant) ){ // + tester Bon Ancien mot de passe
-			if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
-				$newMdp = $_POST['mdpCommercantNouveau'];
-				$this->commercant->updateMdp($varid,$newMdp);
-				delete_cookie("commercantCookie");
-				$this->load->view('pages/pageconnexion');
-			}
-			else{
-				$this->load->view('commercant/index',$data);
-				$this->load->view('commercant/changer_mdp',$data);
-			}
-		}
-		else{
-			$this->load->view('commercant/index',$data);
-			$this->load->view('commercant/changer_mdp',$data);
-		}
-
+                    if(isset($_POST['mdpCommercantAncien']) && ($_POST['mdpCommercantAncien'] == $data['commercant'][0]->mdpCommercant) ){ // + tester Bon Ancien mot de passe
+                            if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
+                                    $newMdp = $_POST['mdpCommercantNouveau'];
+                                    $this->commercant->updateMdp($varid,$newMdp);
+                                    delete_cookie("commercantCookie");
+                                    $this->load->view('commercant/connexion');
+                            }
+                            else{
+                                    $this->load->view('commercant/index',$data);
+                                    $this->load->view('commercant/changer_mdp',$data);
+                            }
+                    }
+                    else{
+                            $this->load->view('commercant/index',$data);
+                            $this->load->view('commercant/changer_mdp',$data);
+                    }
+                }
+                else{
+                    $this->load->view('commercant/connexion');
+                }
+                
 
 	}
 
@@ -127,8 +133,8 @@ class CommercantCtrl extends CI_Controller {
 		$this->form_validation->set_rules('TempsReservMax', 'Temps maximum de réservation en heure', 'integer');
 
 		if($this->input->cookie('commercantCookie') != null){
-			$varid= $this->input->cookie('commercantCookie');
-			$data['commercant']=$this->commercant->selectByMail($varid);
+			$varMail= $this->input->cookie('commercantCookie');
+			$data['commercant']=$this->commercant->selectByMail($varMail);
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->load->view('commercant/index',$data);
@@ -184,7 +190,39 @@ class CommercantCtrl extends CI_Controller {
 			$this->load->view('commercant/connexion');
 		}
 	}
-
+        // Cette fonction est en commentaire car le but était d'ajouter un produit à une entreprise 
+        // OR ce sont les sous produit qui sont lié à une entreprise
+       /* public function ajout_produit() {
+            $this->load->helper('form','url');
+	    $this->load->helper('cookie');
+	    $this->load->library('form_validation');
+	    $this->load->model('commercant');
+            $this->load->model('entreprise');
+            $this->load->model('produit');
+            if($this->input->cookie('commercantCookie') != null){
+			$varMail= $this->input->cookie('commercantCookie');
+			$data['commercant']=$this->commercant->selectByMail($varMail);
+                        $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('commercant/index',$data);
+				$this->load->view('commercant/ajout_produit',$data);
+			}
+            }
+            else
+	    {
+                $data=array("numSiret"=> htmlspecialchars($_POST['numSiret']),
+                            "nomProduit"=> htmlspecialchars($_POST['nomProduit']),
+                            "adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
+                            "codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
+                            "villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
+                            "horairesEntreprise" => htmlspecialchars($horairesEntreprise),
+                            "livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
+                            "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
+                );
+                
+            }
+        }*/
 	public function connexion(){
 		$this->load->helper('form','url');
 		$this->load->helper('cookie');
