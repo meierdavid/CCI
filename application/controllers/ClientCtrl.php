@@ -4,9 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ClientCtrl extends CI_Controller {
 
 	public function index()
-	{
-		$this->load->helper('url');
-		$this->load->view('client/profil');
+	{   
+                $this->load->helper('form', 'url');
+		$this->load->helper('cookie');
+		$this->load->library('form_validation');
+		$this->load->model('client');
+                var_dump($_COOKIE);
+              
+                if(isset($_COOKIE['clientCookie'])){
+                    $this->load->view('template/index');
+                }
+                else{
+                    $this->deconnexion();
+                }
 	}
 
 	public function profil()
@@ -71,10 +81,7 @@ class ClientCtrl extends CI_Controller {
 	$this->load->view('client/validationEmail');
 
 	$this->email->send();*/
-	public function view(){
-		$this->load->helper('form', 'url');
-		$this->load->view('template/index');
-	}
+
 
 	public function connexion(){
 		$this->load->helper('form', 'url');
@@ -110,7 +117,8 @@ class ClientCtrl extends CI_Controller {
 						);
 						$this->input->set_cookie($cookie);
 						echo $this->input->cookie('clientCookie');
-						$this->load->view('template/index');
+                                                $this->index();
+                                            
 					}
 				}
 			}
@@ -147,11 +155,10 @@ class ClientCtrl extends CI_Controller {
 		}
 
 		public function deconnexion(){
-			$this->load->helper('url');
-			$this->load->helper('form');
+                        $this->load->helper('form', 'url');
 			$this->load->helper('cookie');
 			delete_cookie("clientCookie");
 			$this->load->view('pages/deconnexion');
-			$this->load->view('pages/pageconnexion');
+			$this->load->url('ClientCtrl/connexion');
 		}
 }
