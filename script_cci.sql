@@ -95,6 +95,7 @@ CREATE TABLE SOUSPANIER(
 CREATE TABLE PRODUIT(
 	idProduit             INT NOT NULL AUTO_INCREMENT ,
 	nomProduit            VARCHAR (50) NOT NULL ,
+	categorieProduit VARCHAR (50) NOT NULL,
 	numSiret       INT NOT NULL ,
 	descriptionProduit    VARCHAR (2000)  NOT NULL ,
 	prixUnitaireProduit   FLOAT  NOT NULL ,
