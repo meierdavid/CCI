@@ -41,15 +41,56 @@
                         <input type="text" class="form-control" name="villeEntreprise" value="" size="30" required/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Horaires</label>
-                        <textarea class="form-control" name="horairesEntreprise" required>
+                        <label class="control-label">Horaires d'ouverture</label>
+                        <table width="100%" cellspacing="1" cellpadding="0" class="horaire">
+													<tbody><tr>
+														<th>Lundi Matin</th>
+														<td><input type="float" class="form-control" name="lundi_matin" value="08,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="lundi_matin" value="12,00" size="5" required/></td>
+                          </tr>
+                          <tr>
+                            <th>Lundi Soir</th>
+                            <td><input type="float" class="form-control" name="lundi_matin" value="13,00" size="5" required/></td>
+                            <td><p>à</p></td>
+                            <td><input type="float" class="form-control" name="lundi_matin" value="20,00" size="5" required/></td>
+													</tr>
+													<tr>
+														<th>Mardi</th>
+														<td>9h30 - 20h30</td>
+													</tr>
+													<tr>
+														<th>Mercredi</th>
+														<td>9h30 - 20h30</td>
+													</tr>
+													<tr>
+														<th>Jeudi</th>
+														<td>9h30 - 20h30</td>
+													</tr>
+													<tr>
+														<th>Vendredi</th>
+														<td>9h30 - 20h30</td>
+													</tr>
+													<tr>
+														<th>Samedi</th>
+														<td>9h30 - 20h30</td>
+													</tr>
+													<tr>
+														<th>Dimanche</th>
+														<td></td>
+													</tr>
+												</tbody></table>
+                        <!-- <p>Lundi :</p>
+                        <input type="number" class="form-control" name="lundi_matin" value="8" size="10" required/>
+                        <input type="number" class="form-control" name="lundi_soir" value="12" size="30"/> -->
+                        <!-- <textarea class="form-control" name="horairesEntreprise" required>
                         Lun**h**/**h**-**h**/**h**
                         Mar**h**/**h**-**h**/**h**
                         Mer**h**/**h**-**h**/**h**
                         Jeu**h**/**h**-**h**/**h**
                         Ven**h**/**h**-**h**/**h**
                         Sam**h**/**h**-**h**/**h**
-                        Dim**h**/**h**-**h**/**h**</textarea>
+                        Dim**h**/**h**-**h**/**h**</textarea> -->
                     </div>
                     <div class="form-group">
                         <label class="control-label">Livraison</label>
