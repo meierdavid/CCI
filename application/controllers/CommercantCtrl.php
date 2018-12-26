@@ -104,7 +104,7 @@ class CommercantCtrl extends CI_Controller {
             $this->load->view('commercant/index');
             $data = liste_entreprise_dropbox();
             $this->load->view('produit/ajout_produit', $data);
-	    }
+	}
     
 
     public function liste_entreprise(){
