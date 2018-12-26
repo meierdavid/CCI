@@ -4,6 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ClientCtrl extends CI_Controller {
         // cette view sera utilisé pour afficher l'index du client quand le principe des cookies
         // fonctionnera. On l'appellera directement dans connection
+	public function index()
+	{   
+                $this->load->helper('form', 'url');
+		$this->load->helper('cookie');
+		$this->load->library('form_validation');
+		$this->load->model('client');
+                var_dump($_COOKIE['clientCookie']);
+                if(isset($_COOKIE['clientCookie'])){
+                    $this->load->view('client/header');
+                    $this->load->view('client/accueil');
+                    $this->load->view('client/footer');
+                }
+                else{
+                    
+                }
+	}
 
 	public function profil()
 	{

@@ -181,7 +181,7 @@ class AdministrateurCtrl extends CI_Controller {
 			$this->load->view('administrateur/index',$data);
 			$this->load->view('administrateur/changer_mdp',$data);
 		}
-        }
+            }
         }
         public function ajout_entreprise(){
         }
