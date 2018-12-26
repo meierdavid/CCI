@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ClientCtrl extends CI_Controller {
-        // cette view sera utilisé pour afficher l'index du template quand le principe des cookies
+        // cette view sera utilisé pour afficher l'index du client quand le principe des cookies
         // fonctionnera. On l'appellera directement dans connection
 	public function index()
 	{   
@@ -10,10 +10,11 @@ class ClientCtrl extends CI_Controller {
 		$this->load->helper('cookie');
 		$this->load->library('form_validation');
 		$this->load->model('client');
-                ;
-              
+                var_dump($_COOKIE['clientCookie']);
                 if(isset($_COOKIE['clientCookie'])){
-                    $this->load->view('template/index');
+                    $this->load->view('client/header');
+                    $this->load->view('client/accueil');
+                    $this->load->view('client/footer');
                 }
                 else{
                     $this->deconnexion();
@@ -23,10 +24,24 @@ class ClientCtrl extends CI_Controller {
 	public function profil()
 	{
 		$this->load->model('client');
-		$data['client'] = $this->client->selectById(1);
-		//mettre mail pour la sélection
-		$this->load->helper('url');
-		$this->load->view('client/profil',$data);
+                $this->load->helper('form', 'url');
+		$this->load->helper('cookie');
+		$this->load->library('form_validation');
+                if(isset($_COOKIE['clientCookie'])){
+                    $varmail= $this->input->cookie('clientCookie');
+                    
+                    if(isset($varmail)){
+                        $data['client'] = $this->client->selectByMail($varmail);
+                        var_dump($_COOKIE['clientCookie']);
+                        $this->load->view('client/header');
+                        $this->load->view('client/profil',$data);
+                        $this->load->view('client/footer');
+                    }
+                }
+                else{
+                    var_dump($_COOKIE);
+                }
+		;
 		// modifie le profil à l'envoi du formulaire
 	}
 
@@ -111,9 +126,9 @@ class ClientCtrl extends CI_Controller {
 				else{
 					$data['client'] = $client;
 					if( $data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient ){
-						setcookie('clientCookie',$data['client'][0]->mailClient,'3600');
+						setcookie('clientCookie',$data['client'][0]->mailClient,time()+36000);
                                                 
-                                                $this->load->view('template/index');
+                                                $this->index();
                                             
 					}
 				}
@@ -153,7 +168,7 @@ class ClientCtrl extends CI_Controller {
 		public function deconnexion(){
                         $this->load->helper('form', 'url');
 			$this->load->helper('cookie');
-			delete_cookie("clientCookie");
+			setcookie("clientCookie","",time()-36000);
 			$this->load->view('pages/deconnexion');
 			$this->connexion();
 		}
