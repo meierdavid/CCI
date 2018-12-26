@@ -17,7 +17,7 @@ class ClientCtrl extends CI_Controller {
                     $this->load->view('client/footer');
                 }
                 else{
-                    $this->deconnexion();
+                    
                 }
 	}
 
@@ -127,8 +127,9 @@ class ClientCtrl extends CI_Controller {
 					$data['client'] = $client;
 					if( $data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient ){
 						setcookie('clientCookie',$data['client'][0]->mailClient,time()+36000);
-                                                
-                                                $this->index();
+                                                $this->load->view('client/header');
+                                                $this->load->view('client/accueil');
+                                                $this->load->view('client/footer');
                                             
 					}
 				}
