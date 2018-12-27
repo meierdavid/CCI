@@ -300,7 +300,7 @@ class AdministrateurCtrl extends CI_Controller {
     }
 	
 	
-	public function supprimer_entreprise(id){
+	public function supprimer_entreprise($id){
 		$this->load->database();
 		$this->load->model('entreprise');
 		$this->load->model('faire_partie');
