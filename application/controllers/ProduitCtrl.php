@@ -44,12 +44,12 @@ class ProduitCtrl extends CI_Controller {
                 $this->load->model('entreprise');
                 $this->load->helper('form');
 
-				$data=array(
-                            "nomProduit"=> htmlspecialchars($_POST['nomProduit']),
-                            "descriptionProduit"=> htmlspecialchars($_POST['descriptionProduit']),
-                            "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
-                            "reducProduit" => htmlspecialchars($_POST['reducProduit']),
-			    );
+                $data=array(
+                "nomProduit"=> htmlspecialchars($_POST['nomProduit']),
+                "descriptionProduit"=> htmlspecialchars($_POST['descriptionProduit']),
+                "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
+                "reducProduit" => htmlspecialchars($_POST['reducProduit']),
+                );
                 $this->produit->insert($data);
                 $this->load->view('commercant/index');
                 $this->load->view('produit/ajout_produit');
