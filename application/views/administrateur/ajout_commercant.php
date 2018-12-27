@@ -15,9 +15,8 @@
 
             <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
-            <?php echo form_open('CommercantCtrl/inscription'); ?>
+            <?php echo form_open('AdministrateurCtrl/ajout_commercant'); ?>
 
-                <!------ <br></br> ---------->
                     <div class="text-center">
                     <h4>Entrez les coordonnees du commercant à ajouter :</h4>
                     </div>
