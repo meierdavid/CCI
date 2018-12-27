@@ -44,12 +44,19 @@
         public function selectBySoldes(){
             $this->load->database();
             return $this->db->select('*')
-                ->from('Produit')
+                ->from('produit')
                 ->where('reducProduit >',0)
                 ->get()
                 ->result();
         }
-        
+        public function search($str){
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('produit')
+                ->like('nomProduit',$str)
+                ->get()
+                ->result();
+        }
          public function selectProduit($mail){
             $this->load->database();
             return $this->db->select('*')

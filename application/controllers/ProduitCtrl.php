@@ -170,5 +170,25 @@ class ProduitCtrl extends CI_Controller {
             }
         }
 
-
+        public function search(){
+            $this->load->helper('form', 'url');
+            $this->load->library('form_validation');
+            $this->load->model('produit');
+            if(isset($_POST['search'])){
+                $str = $_POST['search'];
+                $str = preg_replace("#[^0-9a-z]#i","",$str);
+                if($this->produit->search($str)!=null){
+                    $data['produit'] = $this->produit->search($str);
+                    $this->load->view('client/header');
+                    $this->load->view('produit/produit_par_recherche',$data);
+                    $this->load->view('client/footer');
+                }
+                else{
+                    
+                }
+            }
+            else{
+                
+            }
+        }
 }
