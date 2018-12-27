@@ -160,27 +160,30 @@ class AdministrateurCtrl extends CI_Controller {
             $this->load->model('administrateur');
             $this->load->helper('url');
             $this->load->library('form_validation');
+            var_dump($_COOKIE);
             if(isset($_COOKIE['administrateurCookie'])){
                     $varid= $this->input->cookie('administrateurCookie');
                     $data['administrateur'] = $this->administrateur->selectByMail($varid);
                     
-				if(isset($_POST['ancienMdp']) && ($_POST['ancienMdp'] == $data['administrateur'][0]->mdpAdministrateur) ){ // + tester Bon Ancien mot de passe
-					if($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']){
-						$newMdp = $_POST['mdpAdministrateur'];
-						$this->administrateur->updateMdp($varid,$newMdp);
-						delete_cookie("administrateurCookie");
-										print_r("mot de passe mis à jour");
-						$this->load->view('administrateur/index');
-					}
-					else{
-						$this->load->view('administrateur/index',$data);
-						$this->load->view('administrateur/changer_mdp',$data);
-					}
-				}
-				else{
-					$this->load->view('administrateur/index',$data);
-					$this->load->view('administrateur/changer_mdp',$data);
-				}
+		if(isset($_POST['ancienMdp']) && ($_POST['ancienMdp'] == $data['administrateur'][0]->mdpAdministrateur) ){ // + tester Bon Ancien mot de passe
+			if($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']){
+				$newMdp = $_POST['mdpAdministrateur'];
+				$this->administrateur->updateMdp($varid,$newMdp);
+				delete_cookie("administrateurCookie");
+				$this->load->view('administrateur/index');
+			}
+			else{
+				$this->load->view('administrateur/index',$data);
+				$this->load->view('administrateur/changer_mdp',$data);
+			}
+		}
+		else{
+			$this->load->view('administrateur/index',$data);
+			$this->load->view('administrateur/changer_mdp',$data);
+		}
+            }
+            else{
+                $this->load->view('administrateur/connexion');
             }
         }
 		

@@ -87,6 +87,15 @@
                 ->set('mdpAdministrateur', $data['mdpAdministrateur'])
                 ->update($this->table);
         }
+        
+        public function updateMdp($id,$mdp){
+
+          $this->load->database();
+
+          return $this->db->where('mailAdministrateur',$id)
+              ->set('mdpAdministrateur',$mdp)
+	     ->update($this->table);
+    	}
 	
     }
 ?>
