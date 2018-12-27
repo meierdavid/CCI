@@ -188,14 +188,9 @@ class AdministrateurCtrl extends CI_Controller {
             }
         }
 		
+		  
 		
-		
-    public function ajout_entreprise(){
-			
-    }
-        
-		
-		
+	
     public function ajout_commercant(){
 			$this->load->model('commercant');
 			$this->load->helper('form','url');

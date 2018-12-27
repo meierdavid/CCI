@@ -58,14 +58,42 @@ class ProduitCtrl extends CI_Controller {
                         "descriptionProduit"=> htmlspecialchars($_POST['descriptionProduit']),
                         "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
                         "reducProduit" => htmlspecialchars($_POST['reducProduit']),
-                   );
-                   
-                   $this->produit->insert($data);
+                    );
+                   var_dump($data);
+                    $this->produit->insert($data);
+					
+					
+					
+					
+					
+					
+					
+				    $config['upload_path'] = './assets/image/Produits';
+					$config['allowed_types'] = 'gif|jpg|png';
+					$config['overwrite'] = TRUE;
+					$this->load->library('upload', $config);
+					if (!($this->upload->do_upload($_POST['imageProduit']))){
+						var_dump("insert ");
+						log_message('error',$this->upload->display_errors());
+						$data['message']="erreur : la photo n'a pas pu s'importer";
+						$this->load->view('errors/erreur_formulaire', $data);
+						$this->load->view('commercant/index',$data);
+						$this->load->view('produit/ajout_produit');
+					}
+					else {
+						$this->produit->load_image();
+						$file_data = $this->upload->data();
+						$this->load->view('commercant/index',$data);
+					}
+					
+						
+						
+						
                    $data['produit'] = $this->produit->selectAll();
                    $this->load->view('commercant/index',$data);
                    $this->load->view('produit/liste_produit',$data);
-                   }
-                   else
+                }
+                else
                    {
                         var_dump("mauvais ");
                         $data['message']="erreur : mauvais numéro de Siret";
