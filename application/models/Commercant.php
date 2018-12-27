@@ -101,7 +101,8 @@
               ->set('mdpCommercant', $data['mdpCommercant'])
 				->update($this->table);
     	}
-        public function updateMdp($id,$mdp){
+
+    	public function updateMdp($id,$mdp){
 
           $this->load->database();
 

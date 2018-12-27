@@ -6,7 +6,7 @@ class ClientCtrl extends CI_Controller {
         // fonctionnera. On l'appellera directement dans connection
 	public function index()
 	{   
-                $this->load->helper('form', 'url');
+	    $this->load->helper('form', 'url');
 		$this->load->helper('cookie');
 		$this->load->library('form_validation');
 		$this->load->model('client');
@@ -20,8 +20,9 @@ class ClientCtrl extends CI_Controller {
                     $this->load->view('pages/deconnexion');
                 }
 	}
-        public function modifier(){
-            $this->load->helper('form', 'url');
+
+	public function modifier(){
+	    $this->load->helper('form', 'url');
 		$this->load->library('form_validation');
 		$this->load->model('client');
 
@@ -36,7 +37,7 @@ class ClientCtrl extends CI_Controller {
                     $data['client'] = $this->client->selectByMail($varmail);
                     $mdp = $data['client'][0]->mdpClient;
                     if ($this->form_validation->run() == FALSE) {
-			$this->load->view('client/profil');
+			            $this->load->view('client/profil');
                     } else {
 			if ($varmail != $_POST['mailClient']) {
 				$data['message']="erreur : Vous ne pouvez pas changer votre adresse mail";
@@ -218,6 +219,70 @@ class ClientCtrl extends CI_Controller {
 				// erreur
 			}
 		}
+
+		/*
+		 *
+		public function changer_mdp(){
+        $this->load->model('client');
+        $this->load->helper('url');
+        $this->load->library('form_validation');
+        if(isset($_COOKIE['clientCookie'])){
+            $varid= $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varid);
+            if(isset($_POST['mdpclientAncien']) && ($_POST['mdpclientAncien'] == $data['client'][0]->mdpClient) ){
+                if($_POST['mdpClientNouveau'] == $_POST['mdpClientConf']){
+                    $newMdp = $_POST['mdpClientNouveau'];
+                    $this->client->updateMdp($varid,$newMdp);
+                    delete_cookie("clientCookie");
+                    $this->load->view('client/connexion');
+                }
+                else{
+                    $this->load->view('client/index',$data);
+                    $this->load->view('client/changer_mdp',$data);
+                }
+            }
+            else{
+                $this->load->view('client/index',$data);
+                $this->load->view('client/changer_mdp',$data);
+            }
+        }
+        else{
+            $this->load->view('client/connexion');
+        }
+    }
+		 */
+
+    public function changer_mdp(){
+        $this->load->model('client');
+        $this->load->helper('url');
+        $this->load->library('form_validation');
+
+        if(isset($_COOKIE['clientCookie'])){
+            $varid= $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varid);
+            if(isset($_POST['mdpClientAncien']) && ($_POST['mdpClientAncien'] == $data['client'][0]->mdpClient) ){
+                if($_POST['mdpClientNouveau'] == $_POST['mdpClientConf']){
+                    $newMdp = $_POST['mdpClientNouveau'];
+                    $this->client->updateMdp($varid,$newMdp);
+                    setcookie("clientCookie","",time()-36000);
+                    $this->load->view('client/connexion');
+                }
+                else{
+                    $this->load->view('client/header');
+                    $this->load->view('client/changer_mdp',$data);
+                    $this->load->view('client/footer');
+                }
+            }
+            else{
+                $this->load->view('client/header');
+                $this->load->view('client/changer_mdp',$data);
+                $this->load->view('client/footer');
+            }
+        }
+        else{
+            $this->load->view('client/accueil');
+        }
+    }
 
 		public function deconnexion(){
                         $this->load->helper('form', 'url');

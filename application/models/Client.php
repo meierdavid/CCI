@@ -96,5 +96,15 @@ class client extends CI_Model{
 		->update($this->table);
 	}
 
+	public function updateMdp($id,$mdp){
+
+		$this->load->database();
+
+		return $this->db->where('mailClient',$id)
+			->set('mdpClient',$mdp)
+			->update($this->table);
+	}
+
+
 }
 ?>

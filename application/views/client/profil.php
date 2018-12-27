@@ -7,7 +7,9 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-            
+                <br></br>
+                <br></br>
+
                 <h2>Votre Profil</h2>
 
                     <br></br>
@@ -66,7 +68,13 @@
             <br></br>
             <br></br>
 
-            
+                <br></br>
+
+                <div class="text-center">
+                    <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/changer_mdp" role="button">Voulez vous changer votre mot de passe ?</a>
+                </div>
+
+                <br></br>
 
             </div>
         </div>
