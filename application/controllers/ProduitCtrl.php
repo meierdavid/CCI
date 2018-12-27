@@ -135,6 +135,23 @@ class ProduitCtrl extends CI_Controller {
                 $this->load->view('pages/deconnexion');
             }
         }
+        
+        public function categorie($categorie){
+            $this->load->helper('form', 'url');
+            $this->load->library('form_validation');
+            $this->load->model('produit');
+            if($this->produit->selectByCategorie($categorie) != null){
+                $data['produit'] = $this->produit->selectByCategorie($categorie);
+                $this->load->view('client/header');
+                $this->load->view('produit/produit_par_categorie',$data);
+                $this->load->view('client/footer');
+            }
+            else{
+                $this->load->view('client/header');
+                $this->load->view('client/accueil');
+                $this->load->view('client/footer');
+            }
+        }
 
 
 

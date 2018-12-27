@@ -82,17 +82,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="col-sm-3 multi-gd-img">
 										<ul class="multi-column-dropdown">
 											<h2>Produits</h2>
-											<li><a href="mens.html">Aliments</a></li>
-											<li><a href="mens.html">Vêtements</a></li>
-											<li><a href="mens.html">chaussures</a></li>
-											<li><a href="mens.html">Accessoires</a></li>
-											<li><a href="mens.html">Beauté</a></li>
-											<li><a href="mens.html">Sport</a></li>
-											<li><a href="mens.html">Informatique</a></li>
-											<li><a href="mens.html">Livres</a></li>
-											<li><a href="mens.html">Musique</a></li>
-											<li><a href="mens.html">Divertissement</a></li>
-											<li><a href="mens.html">Bricolage</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/aliments"); ?>">Aliments</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/vetements"); ?>">Vêtements</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/chaussures"); ?>">chaussures</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/accessoires"); ?>">Accessoires</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/beaute"); ?>">Beauté</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/sport"); ?>">Sport</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/informatique"); ?>">Informatique</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/livres"); ?>">Livres</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/musique"); ?>">Musique</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/divertissement"); ?>">Divertissement</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/categorie/bricolage"); ?>">Bricolage</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-3 multi-gd-img">

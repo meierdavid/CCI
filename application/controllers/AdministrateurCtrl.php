@@ -254,7 +254,6 @@ class AdministrateurCtrl extends CI_Controller {
 			if( $data['commercant'] != NULL){
 				$this->load->view('administrateur/index',$data);
 				$this->load->view('administrateur/liste_commercant',$data);
-
 			}
 			else{
 				$this->ajout_commercant();
