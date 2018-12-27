@@ -65,9 +65,9 @@
         $this->load->database();
         $this->db->set('nomProduit', $data['nomProduit'])
                 ->set('categorieProduit', $data['categorieProduit'])
-		->set('descriptionProduit', $data['descriptionProduit'])
+		        ->set('descriptionProduit', $data['descriptionProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-		->set('reducProduit', $data['reducProduit'])
+		        ->set('reducProduit', $data['reducProduit'])
                 ->where('idProduit', $id)
                 ->update($this->table);
         }

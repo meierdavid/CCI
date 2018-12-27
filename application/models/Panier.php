@@ -26,10 +26,14 @@
 
         public function insert($data) {
             $this->load->database();
-            $this->db->set('nomProduit', $data['nomProduit'])
-                ->set('descriptionProduit', $data['descriptionProduit'])
-                ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-                ->set('reducProduit', $data['reducProduit'])
+            $this->db->set('datePanier', $data['datePanier'])
+                ->set('annulationPanier', $data['annulationPanier'])
+                ->set('codePromo', $data['codePromo'])
+                ->set('datePanier', $data['datePanier'])
+                ->set('finaliserPanier', $data['finaliserPanier'])
+                ->set('idClient', $data['idClient'])
+                ->set('numSiret', $data['numSiret'])
+                ->set('prixTotPanier', $data['prixTotPanier'])
                 ->insert($this->table);
         }
 
@@ -41,12 +45,18 @@
 
         public function update($id, $data) {
             $this->load->database();
-            $this->db->set('nomProduit', $data['nomProduit'])
-                ->set('descriptionProduit', $data['descriptionProduit'])
-                ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-                ->set('reducProduit', $data['reducProduit'])
+            $this->db->set('annulationPanier', $data['annulationPanier'])
+                ->set('codePromo', $data['codePromo'])
+                ->set('datePanier', $data['datePanier'])
+                ->set('finaliserPanier', $data['finaliserPanier'])
+                ->set('numSiret', $data['numSiret'])
+                ->set('paiementPanier', $data['paiementPanier'])
+                ->set('prixTotPanier', $data['prixTotPanier'])
+                ->set('idClient', $data['idClient'])
                 ->update($this->table);
         }
+
+
 
     }
 ?>
