@@ -54,7 +54,6 @@
                     </div>
                     <?php var_dump($entreprises)?>
                      <select name = 'numSiret' id = 'category'> 
-                        
                             <option value="">-- Select Entreprise --</option> 
                                <?php foreach($entreprises as $item){ ?> 
                             <option  value="<?php echo $item->numSiret; ?>"><?php echo $item->nomEntreprise; ?></option> 
