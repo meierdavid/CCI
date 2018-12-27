@@ -23,12 +23,8 @@
 
                     <br></br>
                     <div class="form-group">
-                        <select name = 'entreprise' id = 'category'> 
-                            <option value="">-- Select Category --</option> 
-                               <?php foreach($entreprises as $item){ ?> 
-                            <option value="<?php echo $item->numSiret; ?>"><?php echo $item->nonEntreprise; ?></option> 
-                            <?php } ?> 
-                         </select> 
+                       
+             
                    </div>
                    <br><br> 
                     <div class="form-group">
@@ -57,8 +53,7 @@
                         <input type="number" class="form-control" name="reducProduit" value="" size="30" required/>
                     </div>
 
-                    <label>Entreprise :</label>
-                    <?php echo form_dropdown();?>
+                    
                     <div class="submit">
                         <input type="submit" name="submit" value="Ajouter" />
                     </div>

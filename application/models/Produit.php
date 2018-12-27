@@ -7,7 +7,7 @@
     	} 
 
     	public function selectAll(){
-		    $this->load->database();
+        $this->load->database();
     	return $this->db->select('*')
                ->from('produit')
                ->get()
@@ -23,13 +23,23 @@
                     ->result();
             
   		}
-
+        public function selectByEntreprise($numSiret){
+            $this->load->database();
+            return $this->db->select('*')
+               ->from('produit')
+               ->where('numSiret', $numSiret)
+               ->get()
+               ->result();
+        }
+        
     	public function insert($data) {
             $this->load->database();
             $this->db->set('nomProduit', $data['nomProduit'])
-				->set('descriptionProduit', $data['descriptionProduit'])
+		->set('descriptionProduit', $data['descriptionProduit'])
+                ->set('numSiret', $data['numSiret'])
+                ->set('categorieProduit', $data['categorieProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-				->set('reducProduit', $data['reducProduit'])
+		->set('reducProduit', $data['reducProduit'])
 		        ->insert($this->table);
         }   
 			

@@ -37,17 +37,31 @@ class ProduitCtrl extends CI_Controller {
                 $this->load->model('produit');
                 $this->load->model('entreprise');
                 $this->load->helper('form');
-
-                $data=array(
-                "nomProduit"=> htmlspecialchars($_POST['nomProduit']),
-                "descriptionProduit"=> htmlspecialchars($_POST['descriptionProduit']),
-                "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
-                "reducProduit" => htmlspecialchars($_POST['reducProduit']),
-                );
-                $this->produit->insert($data);
-                $this->load->view('commercant/index');
-                $this->load->view('produit/ajout_produit');
-
+                if($this->entreprise->selectById($_POST['numSiret']) != null){
+                    
+                    
+                   $data=array(
+                        "nomProduit"=> htmlspecialchars($_POST['nomProduit']),
+                        "categorieProduit"=> htmlspecialchars($_POST['categorieProduit']),
+                        "numSiret"=> htmlspecialchars($_POST['numSiret']),
+                        "descriptionProduit"=> htmlspecialchars($_POST['descriptionProduit']),
+                        "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
+                        "reducProduit" => htmlspecialchars($_POST['reducProduit']),
+                   );
+                   
+                   $this->produit->insert($data);
+                   $data['produit'] = $this->produit->selectAll();
+                   $this->load->view('commercant/index',$data);
+                   $this->load->view('produit/liste_produit',$data);
+                   }
+                   else
+                   {
+                        var_dump("mauvais ");
+                        $data['message']="erreur : mauvais numéro de Siret";
+                        $this->load->view('errors/erreur_formulaire', $data);
+                        $this->load->view('commercant/index',$data);
+                        $this->load->view('produit/ajout_produit');
+                   }
         }
    
 

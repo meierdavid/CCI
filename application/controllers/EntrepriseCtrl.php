@@ -29,4 +29,21 @@ class EntrepriseCtrl extends CI_Controller {
                     $this->load->view('pages/pageconnexion');
                 }
         }
+        
+        public function liste_produit($num){
+            $this->load->helper('cookie');
+            $this->load->helper('url');
+            $this->load->model('entreprise');		
+            $this->load->helper('form');
+            if($this->input->cookie('commercantCookie')!= FALSE){ // il faudra vérifier que c'est le bon commerçant qui est connecté
+                    $data['entreprise'] =$this->entreprise->selectById($num);
+                    $data['produits'] = $this->produit->SelectByEntreprise($num);
+                    $this->load->view('entreprise/index',$data);
+                    $this->load->view('entreprise/liste_produit',$data);
+                }
+                else{
+                    $this->load->view('pages/pageconnexion');
+                }
+            
+        }
 }

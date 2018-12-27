@@ -16,8 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="vertical-menu" style="position: absolute; margin-top: 70px;">
       <a href="#" class="active"><?php if (isset($entreprise)){ echo $entreprise[0]->nomEntreprise;}; ?></a>
         <a href="<?php echo base_url("EntrepriseCtrl/profil/".$entreprise[0]->numSiret);?>">Profil</a>
-        <a href="<?php echo base_url()?>EntrepriseCtrl/liste_produit">Liste des produits</a>
-        <a href="<?php echo base_url()?>ProduitCtrl/add_produit">Ajouter un produit</a>
+        <a href="<?php echo base_url("EntrepriseCtrl/liste_produit/".$entreprise[0]->numSiret);?>">Liste des produits</a>
         <a href="<?php echo base_url()?>commercantCtrl/lie_commercant">Lier un commerçant à un commerce</a>
         <a href="#">Vos commandes en attente</a>
         <a href="#" class="active">Votre Compte</a>
