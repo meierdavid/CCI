@@ -32,7 +32,7 @@
                                                 <td><?php echo $item->nomClient; ?></td>
                                                 <td><?php echo $item->prenomClient; ?></td>
                                                 <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_client/".$item->idClient);?>">Supprimer le client</a></p></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/modifier_client/".$item->idClient);?>">Modifier le client</a></p></td>
+                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/profil_client/".$item->idClient);?>">Modifier le client</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>
