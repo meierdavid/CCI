@@ -36,6 +36,7 @@ class ClientCtrl extends CI_Controller {
                     $varmail= $this->input->cookie('clientCookie');
                     $data['client'] = $this->client->selectByMail($varmail);
                     $mdp = $data['client'][0]->mdpClient;
+                    $id = $data['client'][0]->idClient;
                     if ($this->form_validation->run() == FALSE) {
 			            $this->load->view('client/profil');
                     } else {
@@ -44,7 +45,6 @@ class ClientCtrl extends CI_Controller {
 				$this->load->view('errors/erreur_formulaire', $data);
 				$this->load->view('client/inscription');
 			} else if ($_POST['mdpClient'] == $_POST['mdpClient2'] && $mdp == $_POST['mdpClient']) {
-				$this->client->deleteByMail($varmail);
                                 $data = array(
 					"prenomClient" => htmlspecialchars($_POST['prenomClient']),
 					"nomClient" => htmlspecialchars($_POST['nomClient']),
@@ -57,7 +57,7 @@ class ClientCtrl extends CI_Controller {
 					"pointClient" => htmlspecialchars(0),
 				);
                                 
-				$this->client->insert($data);
+				$this->client->update($id,$data);
                                 $data['client']= $this->client->selectByMail($varmail);
 				$this->load->view('client/header');
                                 $this->load->view('client/profil',$data);
