@@ -118,7 +118,7 @@ class AdministrateurCtrl extends CI_Controller {
 		$this->load->helper('form', 'url');
 		$this->load->library('form_validation');
 		$this->load->model('administrateur');
-                $this->load->view('administrateur/index');
+        $this->load->view('administrateur/index');
 
 		$this->form_validation->set_rules('prenomAdministrateur', 'Prénom', 'alpha_dash');
 		$this->form_validation->set_rules('nomAdministrateur', 'Nom', 'alpha_numeric_spaces');
@@ -164,36 +164,95 @@ class AdministrateurCtrl extends CI_Controller {
                     $varid= $this->input->cookie('administrateurCookie');
                     $data['administrateur'] = $this->administrateur->selectByMail($varid);
                     
-		if(isset($_POST['ancienMdp']) && ($_POST['ancienMdp'] == $data['administrateur'][0]->mdpAdministrateur) ){ // + tester Bon Ancien mot de passe
-			if($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']){
-				$newMdp = $_POST['mdpAdministrateur'];
-				$this->administrateur->updateMdp($varid,$newMdp);
-				delete_cookie("administrateurCookie");
-                                print_r("mot de passe mis à jour");
-				$this->load->view('administrateur/index');
-			}
-			else{
-				$this->load->view('administrateur/index',$data);
-				$this->load->view('administrateur/changer_mdp',$data);
-			}
-		}
-		else{
-			$this->load->view('administrateur/index',$data);
-			$this->load->view('administrateur/changer_mdp',$data);
-		}
+				if(isset($_POST['ancienMdp']) && ($_POST['ancienMdp'] == $data['administrateur'][0]->mdpAdministrateur) ){ // + tester Bon Ancien mot de passe
+					if($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']){
+						$newMdp = $_POST['mdpAdministrateur'];
+						$this->administrateur->updateMdp($varid,$newMdp);
+						delete_cookie("administrateurCookie");
+										print_r("mot de passe mis à jour");
+						$this->load->view('administrateur/index');
+					}
+					else{
+						$this->load->view('administrateur/index',$data);
+						$this->load->view('administrateur/changer_mdp',$data);
+					}
+				}
+				else{
+					$this->load->view('administrateur/index',$data);
+					$this->load->view('administrateur/changer_mdp',$data);
+				}
             }
         }
+		
+		
+		
         public function ajout_entreprise(){
+			
         }
         
+		
+		
         public function ajout_commercant(){
+			$this->load->model('commercant');
+			$this->load->helper('form','url');
+			$this->load->library('form_validation');
+			$this->load->view('administrateur/index');
+			$this->form_validation->set_rules('prenomCommercant', 'Prénom', 'alpha_dash');
+			$this->form_validation->set_rules('nomCommercant', 'Nom', 'alpha_numeric_spaces');
+			$this->form_validation->set_rules('mailCommercant', 'Email', 'valid_email');
+			$this->form_validation->set_rules('codePCommercant', 'Code postale', 'integer');
+			$this->form_validation->set_rules('villeCommercant', 'Ville', 'alpha_dash');
+			$this->form_validation->set_rules('telCommercant', 'Numéro de téléphone', 'integer');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('administrateur/ajout_commercant');
+			}
+			else
+			{
+				if (null != $this->commercant->selectByMail($_POST['mailCommercant'])){
+					$data['message']="erreur : cet email n'est pas disponible";
+					$this->load->view('errors/erreur_formulaire', $data);
+					$this->load->view('administrateur/ajout_commercant');
+				}
+				else if($_POST['mdpCommercant'] == $_POST['mdpCommercant2'] ){
+					$data=array(
+						"prenomCommercant"=> htmlspecialchars($_POST['prenomCommercant']),
+						"nomCommercant"=> htmlspecialchars($_POST['nomCommercant']),
+						"mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
+						"mdpCommercant" => htmlspecialchars($_POST['mdpCommercant']),
+						"adresseCommercant"=> htmlspecialchars($_POST['adresseCommercant']),
+						"codePCommercant"=> htmlspecialchars($_POST['codePCommercant']),
+						"villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
+						"telCommercant" => htmlspecialchars($_POST['telCommercant']),
+						"pointCommercant" => htmlspecialchars(0),
+					);
+					$this->commercant->insert($data);
+					$this->load->view('administrateur/confirmation_ajout_commercant');
+					$this->load->view('administrateur/ajout_commercant');
+				}
+				else {
+					$data['message']="erreur : la confirmation de Mot de passe ne correspond pas au premier";
+					$this->load->view('errors/erreur_formulaire', $data);
+					$this->load->view('administrateur/ajout_commercant');
+				}
+			}
         }
         
-        public function supprimer_produit() {
+        public function supprimer_produit(){
+	
         }
         
-        public function supprimer_client(){
-            
+        public function supprimer_client($id){
+            $this->load->model('client');
+			if (null == $this->client->selectById($id)){
+				$this->load->view('administrateur/index');
+				echo "<div class='alert alert-danger text-center'>Cet id est inexistant</div>";
+			}
+			else{
+				$this->client->delete($id);
+			}
+			
         }
           
           
