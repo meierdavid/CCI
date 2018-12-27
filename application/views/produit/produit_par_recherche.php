@@ -15,9 +15,7 @@
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Catégorie</th>
                                                 <th scope="col">Prix</th>
-                                                <th scope="col">Réduction</th>
-                                                
-                                                
+                                                <th scope="col">Réduction</th> 
                                             </tr>
                                             </thead>
                                             <tbody>

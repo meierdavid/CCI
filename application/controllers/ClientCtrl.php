@@ -83,7 +83,6 @@ class ClientCtrl extends CI_Controller {
 		$this->load->library('form_validation');
                 if(isset($_COOKIE['clientCookie'])){
                     $varmail= $this->input->cookie('clientCookie');
-                    
                     if(isset($varmail)){
                         $data['client'] = $this->client->selectByMail($varmail);
                         var_dump($_COOKIE['clientCookie']);
