@@ -113,11 +113,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</ul>
 					</li>
 					<li class="menu__item dropdown">
-					   <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Soldes <b class="caret"></b></a>
-								<ul class="dropdown-menu agile_short_dropdown">
-									<li><a href="icons.html">En ce moment</a></li>
-									<li><a href="typography.html">A venir...</a></li>
-								</ul>
+					   <a class="menu__link" href="<?php echo base_url(); ?>ProduitCtrl/soldes" >Soldes </a>
+								
 					</li>
 					<li class=" menu__item"><a class="menu__link" href="index.html">Codes de réduction</a></li>
 					<li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Comparateur</a></li>

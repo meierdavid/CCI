@@ -153,6 +153,22 @@ class ProduitCtrl extends CI_Controller {
             }
         }
 
+        public function soldes(){
+            $this->load->helper('form', 'url');
+            $this->load->library('form_validation');
+            $this->load->model('produit');
+            if($this->produit->selectBySoldes() != null){
+                $data['produit'] = $this->produit->selectBySoldes();
+                $this->load->view('client/header');
+                $this->load->view('produit/produit_par_soldes',$data);
+                $this->load->view('client/footer');
+            }
+            else{
+                $this->load->view('client/header');
+                $this->load->view('client/accueil');
+                $this->load->view('client/footer');
+            }
+        }
 
 
 }

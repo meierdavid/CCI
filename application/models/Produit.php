@@ -41,6 +41,14 @@
         } 
             
             
+        public function selectBySoldes(){
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('Produit')
+                ->where('reducProduit >',0)
+                ->get()
+                ->result();
+        }
         
          public function selectProduit($mail){
             $this->load->database();
