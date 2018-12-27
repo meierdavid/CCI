@@ -23,13 +23,7 @@ class ProduitCtrl extends CI_Controller {
         }
 
 
-        public function form_ajout_produit(){
-            $this->load->model('produit');
-            $this->load->helper('form');
-            $this->load->view('commercant/index');
-            $this->load->view('produit/ajout_produit');
-	    }
-
+        
         public function liste_produit(){
             $this->load->model('Produit');
             $data['produit'] = $this->Produit->selectAll();
