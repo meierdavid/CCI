@@ -21,7 +21,6 @@
                                                 <th scope="col">Catégorie</th>
                                                 <th scope="col">Prix</th>
                                                 <th scope="col">Réduction</th>
-                                                <th scope="col">Ajouter</th>
                                                 <th scope="col">Supprimer</th>
                                                 <th scope="col">Modifier</th>
                                                 
@@ -35,9 +34,8 @@
                                                 <td><?php echo $item->categorieProduit; ?></td>
                                                 <td><?php echo $item->prixUnitaireProduit; ?></td>
                                                 <td><?php echo $item->reducProduit; ?></td>
-                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/ajouter_sous_produit/".$item->numSiret );?>">Ajouter un article</a></p></td>
-                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/supprimer_produit/".$item->numSiret );?>">Supprimer le produit</a></p></td>
-                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/modifier_produit/".$item->numSiret );?>">modifier le produit</a></p></td>
+                                                <td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/".$item->idProduit );?>">Supprimer le produit</a></p></td>
+                                                <td><p><a href="<?php echo base_url("ProduitCtrl/modifier_produit/".$item->idProduit );?>">modifier le produit</a></p></td>
                                                 
                                             </tr>
                                             <?php } ?>

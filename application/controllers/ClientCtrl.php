@@ -95,7 +95,7 @@ class ClientCtrl extends CI_Controller {
                 else{
                     var_dump($_COOKIE);
                 }
-		;
+		
 		// modifie le profil à l'envoi du formulaire
 	}
 
