@@ -34,8 +34,22 @@
                         <input type="text" class="form-control" name="descriptionProduit" value="" size="300" required/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">catégorie :</label>
-                        <input type="text" class="form-control" name="categorieProduit" value="" size="300" required/>
+                        <select required>
+                            <option value="">-- Catégorie --</option> 
+                            <option  value="aliments">Aliments</option> 
+                            <option  value="vetements">Vêtements</option>
+                            <option  value="chaussures">Chaussures</option> 
+                            <option  value="beaute">Beauté</option>
+                            <option  value="sport">Sport</option>
+                            <option  value="informatique">Informatique</option>
+                            <option  value="livres">Livres</option>
+                            <option  value="musique">Musique</option>
+                            <option  value="divertissement">Divertissement</option>
+                            <option  value="bricolage">Bricolage</option> 
+                         </select> 
+                    
+                    <br></br>
+                        
                     </div>
                     <div class="form-group">
                         <label class="control-label">Prix unitaire du produit :</label>
