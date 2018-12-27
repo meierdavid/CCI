@@ -32,6 +32,18 @@
                ->result();
         }
         
+         public function selectProduit($mail){
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('Produit')
+                ->join('entreprise','entreprise.numSiret = produit.numSiret')
+                ->join('faire_partie','faire_partie.numSiret = entreprise.numSiret')
+                ->join('commercant', 'commercant.idCommercant = faire_partie.idCommercant')
+                ->where('commercant.mailCommercant',$mail)
+                ->get()
+                ->result();
+        }
+
     	public function insert($data) {
             $this->load->database();
             $this->db->set('nomProduit', $data['nomProduit'])
@@ -52,9 +64,11 @@
         public function update($id, $data) {
         $this->load->database();
         $this->db->set('nomProduit', $data['nomProduit'])
-				->set('descriptionProduit', $data['descriptionProduit'])
+                ->set('categorieProduit', $data['categorieProduit'])
+		->set('descriptionProduit', $data['descriptionProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-				->set('reducProduit', $data['reducProduit'])
+		->set('reducProduit', $data['reducProduit'])
+                ->where('idProduit', $id)
                 ->update($this->table);
         }
 	

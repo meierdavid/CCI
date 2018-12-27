@@ -23,7 +23,12 @@
                     </div>
                     
                     <br></br>
-
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="idProduit" value="<?php echo  $produit[0]->idProduit; ?>" size="30" hidden/>     
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="numSiret" value="<?php echo  $produit[0]->numSiret; ?>" size="30" hidden/>     
+                    </div>
                     <div class="form-group">
                         <label class="control-label">nomProduit</label>
                         <input type="text" class="form-control" name="nomProduit" value="<?php echo  $produit[0]->nomProduit; ?>" size="30" required/> 

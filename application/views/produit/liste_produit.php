@@ -35,7 +35,7 @@
                                                 <td><?php echo $item->prixUnitaireProduit; ?></td>
                                                 <td><?php echo $item->reducProduit; ?></td>
                                                 <td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/".$item->idProduit );?>">Supprimer le produit</a></p></td>
-                                                <td><p><a href="<?php echo base_url("ProduitCtrl/modifier_produit/".$item->idProduit );?>">modifier le produit</a></p></td>
+                                                <td><p><a href="<?php echo base_url("ProduitCtrl/detail_produit/".$item->idProduit );?>">modifier le produit</a></p></td>
                                                 
                                             </tr>
                                             <?php } ?>
