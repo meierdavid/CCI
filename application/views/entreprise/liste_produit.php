@@ -24,7 +24,7 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <?php foreach ($produit as $item) { ?>
+                                                <?php foreach ($produits as $item) { ?>
                                                 <td><?php echo $item->nomProduit; ?></td>
                                                 <td><?php echo $item->descriptionProduit; ?></td>
                                                 <td><?php echo $item->categorieProduit; ?></td>

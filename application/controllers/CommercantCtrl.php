@@ -95,16 +95,35 @@ class CommercantCtrl extends CI_Controller {
         $varid = $this->input->cookie('commercantCookie');
         $data['commercant'] = $this->commercant->selectByMail($varid);
         $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
-	var_dump($data);
+	
         return $data;
         
     }
     public function form_ajout_produit(){
             $this->load->model('produit');
-            $this->load->helper('form');
-            $this->load->view('commercant/index');
-            $data = $this->liste_entreprise_dropbox();
-            $this->load->view('produit/ajout_produit', $data);
+            $this->load->model('commercant');
+            $this->load->model('entreprise');
+            $this->load->helper('form','url');
+            $this->load->helper('cookie');
+            var_dump($_POST);
+            $this->load->library('form_validation');
+            
+            if($this->input->cookie('commercantCookie') != null){
+                 var_dump("cookie");
+                $varMail= $this->input->cookie('commercantCookie');
+                $data['commercant']=$this->commercant->selectByMail($varMail);
+                $data = $this->liste_entreprise_dropbox();
+                if ($this->form_validation->run() == FALSE)
+                {   
+                    var_dump("form");
+                    $this->load->view('commercant/index',$data);
+                    $this->load->view('produit/ajout_produit', $data);
+                }
+            }
+            else{
+                    $this->load->view('pages/deconnexion');
+                    $this->load->view('commercant/connexion');
+            }
 	}
     
 

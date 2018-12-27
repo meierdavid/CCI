@@ -34,6 +34,10 @@
                         <input type="text" class="form-control" name="descriptionProduit" value="" size="300" required/>
                     </div>
                     <div class="form-group">
+                        <label class="control-label">catégorie :</label>
+                        <input type="text" class="form-control" name="categorieProduit" value="" size="300" required/>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label">Prix unitaire du produit :</label>
                         <input type="number" class="form-control" name="prixUnitaireProduit" value="" size="30" required/>
                         <h6 style="color:red;"</h6>
@@ -48,18 +52,15 @@
                         <label class="control-label">Réduction de produit :</label>
                         <input type="number" class="form-control" name="reducProduit" value="" size="30" required/>
                     </div>
+                    <?php var_dump($entreprises)?>
+                     <select name = 'numSiret' id = 'category'> 
+                        
+                            <option value="">-- Select Entreprise --</option> 
+                               <?php foreach($entreprises as $item){ ?> 
+                            <option  value="<?php echo $item->numSiret; ?>"><?php echo $item->nomEntreprise; ?></option> 
+                            <?php } ?> 
+                         </select> 
                     
-                    <label>Entreprise :</label>
-                    <?php 
-                    echo form_dropdown();
-                    foreach($entreprises as $row)
-                    {
-                        echo '<option value="'.$row->numSiret.'">'.$row->nomEntreprise.'</option>';
-                    }
-                    ;?>
-                    <div class="submit">
-                        <input type="submit" name="submit" value="Ajouter" />
-                    </div>
                     <br></br>
 
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmation" /></div>
