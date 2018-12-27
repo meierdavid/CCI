@@ -243,6 +243,28 @@ class AdministrateurCtrl extends CI_Controller {
 			}
         }
         
+        public function liste_commercant(){
+		$this->load->helper('cookie');
+		$this->load->model('commercant');
+		$this->load->model('administrateur');
+		if($this->input->cookie('administrateurCookie') != null){
+			$varid = $this->input->cookie('administrateurCookie');
+			$data['commercant'] = $this->commercant->selectAll($varid);
+                        var_dump($data["commercant"]);
+			if( $data['commercant'] != NULL){
+				$this->load->view('administrateur/index',$data);
+				$this->load->view('administrateur/liste_commercant',$data);
+
+			}
+			else{
+				$this->ajout_commercant();
+			}
+		}
+		else{
+			$this->load->view('commercant/connexion');
+		}
+	}
+        
         public function supprimer_produit(){
 	
         }
