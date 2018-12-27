@@ -100,19 +100,12 @@ CREATE TABLE PRODUIT(
 	descriptionProduit    VARCHAR (2000)  NOT NULL ,
 	prixUnitaireProduit   FLOAT  NOT NULL ,
 	reducProduit          FLOAT ,
+	couleurProduit   VARCHAR (50) NOT NULL ,
+	nbDispoProduit   INT  NOT NULL  ,
+
 	CONSTRAINT PRODUIT_PK PRIMARY KEY (idProduit),
 	CONSTRAINT PRODUIT_ENTREPRISE_FK FOREIGN KEY (numSiret) REFERENCES ENTREPRISE(numSiret));
 
-
-
-CREATE TABLE SOUSPRODUIT(
-	idProduit          INT  NOT NULL ,
-	idSousProduit        INT  NOT NULL ,
-	tailleSousProduit    VARCHAR (50) NOT NULL ,
-	couleurSousProduit   VARCHAR (50) NOT NULL ,
-	nbDispoSousProduit   INT  NOT NULL  ,
-	CONSTRAINT SOUSPRODUIT_PK PRIMARY KEY (idProduit,idSousProduit),
-	CONSTRAINT SOUSPRODUIT_PRODUIT_FK FOREIGN KEY (idProduit) REFERENCES PRODUIT(idProduit));
 
 CREATE TABLE FAIRE_PARTIE(
 	numSiret   INT  NOT NULL ,
@@ -123,18 +116,15 @@ CREATE TABLE FAIRE_PARTIE(
 	,CONSTRAINT FAIRE_PARTIE_COMMERCANT_FK FOREIGN KEY (idCommercant) REFERENCES COMMERCANT(idCommercant)
 );
 
-
-CREATE TABLE COMPORTER_PANIER(
+CREATE TABLE COMMANDER(
 	idProduit              INT  NOT NULL ,
-	idSousProduit            INT  NOT NULL ,
 	idPanier               INT  NOT NULL ,
-	idSousPanier             INT  NOT NULL ,
 	quantiteProd           INT  NOT NULL ,
-	livraisonReservation   TINYINT  NOT NULL  ,
-	CONSTRAINT COMPORTER_PANIER_PK PRIMARY KEY (idProduit,idSousProduit,idPanier,idSousPanier)
+	livraisonCommande  TINYINT  NOT NULL  ,
+	CONSTRAINT COMMANDER_PK PRIMARY KEY (idProduit,idPanier)
 
-	,CONSTRAINT COMPORTER_PANIER_SOUSPRODUIT_FK FOREIGN KEY (idProduit,idSousProduit) REFERENCES SOUSPRODUIT(idProduit,idSousProduit)
-	,CONSTRAINT COMPORTER_PANIER_SOUSPANIER0_FK FOREIGN KEY (idPanier,idSousPanier) REFERENCES SOUSPANIER(idPanier,idSousPanier)
+	,CONSTRAINT COMMANDER_PRODUIT_FK FOREIGN KEY (idProduit) REFERENCES PRODUIT(idProduit)
+	,CONSTRAINT COMPORTER_PANIER_FK FOREIGN KEY (idPanier) REFERENCES PANIER(idPanier)
 );
 
 
