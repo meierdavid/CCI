@@ -37,7 +37,7 @@
                                                 <td><?php echo $item->reducProduit; ?></td>
                                                 <td><p><a href="<?php echo base_url("EntrepriseCtrl/ajouter_sous_produit/".$item->numSiret );?>">Ajouter un article</a></p></td>
                                                 <td><p><a href="<?php echo base_url("EntrepriseCtrl/supprimer_produit/".$item->numSiret );?>">Supprimer le produit</a></p></td>
-                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/modifier_produit/".$item->numSiret );?>">Supprimer le produit</a></p></td>
+                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/modifier_produit/".$item->numSiret );?>">modifier le produit</a></p></td>
                                                 
                                             </tr>
                                             <?php } ?>

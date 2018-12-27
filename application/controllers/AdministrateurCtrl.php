@@ -84,7 +84,8 @@ class AdministrateurCtrl extends CI_Controller {
 			else{
 				if ($administrateur[0]->mdpAdministrateur != $_POST['mdpAdministrateur']) {
 					$this->load->view('administrateur/connexion');
-					echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
+					
+					"<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
 				}
 				else{
 					echo "formumaire bien remplie";
@@ -232,7 +233,7 @@ class AdministrateurCtrl extends CI_Controller {
 					);
 					$this->commercant->insert($data);
 					$this->load->view('administrateur/confirmation_ajout_commercant');
-					$this->load->view('administrateur/ajout_commercant');
+					$this->load->view('administrateur/index');
 				}
 				else {
 					$data['message']="erreur : la confirmation de Mot de passe ne correspond pas au premier";
@@ -242,20 +243,53 @@ class AdministrateurCtrl extends CI_Controller {
 			}
         }
         
+        public function liste_commercant(){
+		$this->load->helper('cookie');
+		$this->load->model('commercant');
+		$this->load->model('administrateur');
+		if($this->input->cookie('administrateurCookie') != null){
+			$varid = $this->input->cookie('administrateurCookie');
+			$data['commercant'] = $this->commercant->selectAll($varid);
+                        var_dump($data["commercant"]);
+			if( $data['commercant'] != NULL){
+				$this->load->view('administrateur/index',$data);
+				$this->load->view('administrateur/liste_commercant',$data);
+
+			}
+			else{
+				$this->ajout_commercant();
+			}
+		}
+		else{
+			$this->load->view('commercant/connexion');
+		}
+	}
+        
         public function supprimer_produit(){
 	
         }
         
-        public function supprimer_client($id){
+        public function supprimer_client(){
             $this->load->model('client');
-			if (null == $this->client->selectById($id)){
-				$this->load->view('administrateur/index');
-				echo "<div class='alert alert-danger text-center'>Cet id est inexistant</div>";
+			$this->load->helper('form','url');
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('idClient', 'Numéro Client', 'integer');
+			$this->load->view('administrateur/index');
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('administrateur/supprimer_client');
 			}
-			else{
-				$this->client->delete($id);
+			else {
+				$id = $_POST['idClient'];
+				if (null == $this->client->selectById($id)){
+
+					$this->load->view('administrateur/supprimer_client');
+					echo "<div class='alert alert-danger text-center'>Cet id est inexistant</div>";
+				}
+				else{
+					$this->client->delete($id);
+
+				}
 			}
-			
         }
           
           
