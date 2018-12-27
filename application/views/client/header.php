@@ -120,23 +120,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</ul>
 					</li>
 					<li class=" menu__item"><a class="menu__link" href="index.html">Codes de réduction</a></li>
-					<li class=" menu__item"><a class="menu__link" href="contact.html">Comparateur</a></li>
-					<li class=" menu__item"><a class="menu__link" href="contact.html">Contacts</a></li>
-					<li class=" menu__item"><a class="menu__link" href="contact.html">Aide</a></li>
+					<li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Comparateur</a></li>
+					<li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Contacts</a></li>
+					<li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Aide</a></li>
 				  </ul>
 				</div>
 			  </div>
 			</nav>
 		</div>
 		<div class="top_nav_right">
-			<div class="wthreecartaits wthreecartaits2 cart cart box_1">
-						<form action="#" method="post" class="last">
-							<input type="hidden" name="cmd" value="_cart">
-							<input type="hidden" name="display" value="1">
-							<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-						</form>
-
-			</div>
+                    <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+                        <form action="#" method="post" class="last">
+                                <input type="hidden" name="cmd" value="_cart">
+                                <input type="hidden" name="display" value="1">
+                                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
 		</div>
 		<div class="clearfix"></div>
 	</div>

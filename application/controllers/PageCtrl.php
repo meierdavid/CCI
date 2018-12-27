@@ -10,13 +10,21 @@ class PageCtrl extends CI_Controller {
         $this->load->helper('form');
         $this->load->view('client/connexion');
         }
+         public function contact()
+        {
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->view('client/header');
+        $this->load->view('template/contact');
+        $this->load->view('client/footer');
+        }
 
         public function Accueil()
         {
             $this->load->helper('url');
             $this->load->view('pages/pageaccueil');
         }
-
+        
         public function ConnexionCommercant(){
             $this->load->helper('form','url');
             $this->load->helper('cookie');
