@@ -31,8 +31,8 @@
                                                 <td><?php echo $item->mailClient; ?></td>
                                                 <td><?php echo $item->nomClient; ?></td>
                                                 <td><?php echo $item->prenomClient; ?></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_client".$item->idCommercant);?>">Supprimer le Commerçant</a></p></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/modifier_client".$item->idCommercant );?>">Modifier le commerçant</a></p></td>
+                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_client/".$item->idClient);?>">Supprimer le client</a></p></td>
+                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/modifier_client/".$item->idClient );?>">Modifier le client</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>

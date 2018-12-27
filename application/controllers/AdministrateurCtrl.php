@@ -233,7 +233,6 @@ class AdministrateurCtrl extends CI_Controller {
 					);
 					$this->commercant->insert($data);
 					$this->load->view('administrateur/confirmation_ajout_commercant');
-					$this->load->view('administrateur/index');
 				}
 				else {
 					$data['message']="erreur : la confirmation de Mot de passe ne correspond pas au premier";
@@ -250,7 +249,6 @@ class AdministrateurCtrl extends CI_Controller {
 		if($this->input->cookie('administrateurCookie') != null){
 			$varid = $this->input->cookie('administrateurCookie');
 			$data['commercant'] = $this->commercant->selectAll($varid);
-						var_dump($data["commercant"]);
 			if( $data['commercant'] != NULL){
 				$this->load->view('administrateur/index',$data);
 				$this->load->view('administrateur/liste_commercant',$data);
@@ -261,7 +259,23 @@ class AdministrateurCtrl extends CI_Controller {
 			}
 		}
 		else{
-			$this->load->view('commercant/connexion');
+			$this->load->view('administrateur/connexion');
+		}
+	}
+        
+        public function liste_client(){
+		$this->load->helper('cookie');
+		$this->load->model('client');
+		$this->load->model('administrateur');
+		if($this->input->cookie('administrateurCookie') != null){
+			$varid = $this->input->cookie('administrateurCookie');
+			$data['client'] = $this->client->selectAll($varid);
+			$this->load->view('administrateur/index',$data);
+			$this->load->view('administrateur/liste_client',$data);
+
+			}
+		else{
+			$this->load->view('administrateur/connexion');
 		}
 	}
 	
