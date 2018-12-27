@@ -299,14 +299,12 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->model('client');
-
         $this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
         $this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
         $this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
         $this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
         $this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
         $this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
-
         $data['client'] = $this->client->selectById($id);
         $mdp = $data['client'][0]->mdpClient;
         $id = $data['client'][0]->idClient;

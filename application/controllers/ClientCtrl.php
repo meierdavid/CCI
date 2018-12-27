@@ -77,23 +77,23 @@ class ClientCtrl extends CI_Controller {
         }
 	public function profil()
 	{
-		$this->load->model('client');
-		$this->load->helper('form', 'url');
-		$this->load->helper('cookie');
-		$this->load->library('form_validation');
-                if(isset($_COOKIE['clientCookie'])){
-                    $varmail= $this->input->cookie('clientCookie');
-                    if(isset($varmail)){
-                        $data['client'] = $this->client->selectByMail($varmail);
-                        var_dump($_COOKIE['clientCookie']);
-                        $this->load->view('client/header');
-                        $this->load->view('client/profil',$data);
-                        $this->load->view('client/footer');
-                    }
+            $this->load->model('client');
+            $this->load->helper('form', 'url');
+            $this->load->helper('cookie');
+            $this->load->library('form_validation');
+            if(isset($_COOKIE['clientCookie'])){
+                $varmail= $this->input->cookie('clientCookie');
+                if(isset($varmail)){
+                    $data['client'] = $this->client->selectByMail($varmail);
+                    var_dump($_COOKIE['clientCookie']);
+                    $this->load->view('client/header');
+                    $this->load->view('client/profil',$data);
+                    $this->load->view('client/footer');
                 }
-                else{
-                    var_dump($_COOKIE);
-                }
+            }
+            else{
+                var_dump($_COOKIE);
+            }
 		
 		// modifie le profil à l'envoi du formulaire
 	}
