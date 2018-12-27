@@ -33,8 +33,8 @@
                         <label class="control-label">Description :</label>
                         <input type="text" class="form-control" name="descriptionProduit" value="" size="300" required/>
                     </div>
-                    <div class="form-group">
-                        <select required>
+                    <div  class="form-group">
+                        <select name ="categorieProduit" required>
                             <option value="">-- Catégorie --</option> 
                             <option  value="aliments">Aliments</option> 
                             <option  value="vetements">Vêtements</option>

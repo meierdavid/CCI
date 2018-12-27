@@ -50,7 +50,7 @@ class ProduitCtrl extends CI_Controller {
                 $this->load->helper('form');
                 if($this->entreprise->selectById($_POST['numSiret']) != null){
                     
-                    
+                    var_dump($_POST);
                    $data=array(
                         "nomProduit"=> htmlspecialchars($_POST['nomProduit']),
                         "categorieProduit"=> htmlspecialchars($_POST['categorieProduit']),
