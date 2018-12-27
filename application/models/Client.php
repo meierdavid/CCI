@@ -16,6 +16,11 @@ class client extends CI_Model{
 		->get()
 		->result();
 	}
+        public function deleteByMail($mail){
+            $this->load->database();
+            return $this->db->where('mailClient',$mail)
+	    ->delete($this->table);
+        }
 
 	public function selectById($id) {
 

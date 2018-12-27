@@ -48,9 +48,10 @@
                         <label class="control-label">Réduction de produit :</label>
                         <input type="number" class="form-control" name="reducProduit" value="" size="30" required/>
                     </div>
-
+                    
                     <label>Entreprise :</label>
-                    <?php echo form_dropdown();
+                    <?php 
+                    echo form_dropdown();
                     foreach($entreprises as $row)
                     {
                         echo '<option value="'.$row->numSiret.'">'.$row->nomEntreprise.'</option>';

@@ -7,11 +7,12 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-            <form>
+            
                 <h2>Votre Profil</h2>
 
                     <br></br>
-
+                    <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
+                    <?php echo form_open('ClientCtrl/modifier'); ?>
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
                         <input type="text" class="form-control" name="prenomClient" value="<?php echo  $client[0]->prenomClient; ?>" size="30" required/> 
@@ -58,6 +59,7 @@
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div>
                     <div class="text-center">
                         <br>
+                        
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
