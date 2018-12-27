@@ -64,7 +64,7 @@ class AdministrateurCtrl extends CI_Controller {
 		}
 	}
         
-        public function connexion(){
+    public function connexion(){
 		$this->load->helper('form', 'url');
 		$this->load->helper('cookie');
 		$this->load->library('form_validation');
@@ -105,7 +105,7 @@ class AdministrateurCtrl extends CI_Controller {
 		}   
         }
           
-        public function deconnexion(){
+    public function deconnexion(){
             $this->load->helper('url');
             $this->load->helper('cookie');
             $this->load->helper('form');
@@ -114,7 +114,7 @@ class AdministrateurCtrl extends CI_Controller {
             $this->load->view('pages/pageconnexion');
         }
         
-        public function ajout_administrateur(){
+    public function ajout_administrateur(){
             // faire envoi de mail
 		$this->load->helper('form', 'url');
 		$this->load->library('form_validation');
@@ -156,7 +156,7 @@ class AdministrateurCtrl extends CI_Controller {
 		}
         }
         
-        public function changer_mdp(){
+    public function changer_mdp(){
             $this->load->helper('cookie');
             $this->load->model('administrateur');
             $this->load->helper('url');
@@ -190,13 +190,13 @@ class AdministrateurCtrl extends CI_Controller {
 		
 		
 		
-        public function ajout_entreprise(){
+    public function ajout_entreprise(){
 			
-        }
+    }
         
 		
 		
-        public function ajout_commercant(){
+    public function ajout_commercant(){
 			$this->load->model('commercant');
 			$this->load->helper('form','url');
 			$this->load->library('form_validation');
@@ -243,14 +243,14 @@ class AdministrateurCtrl extends CI_Controller {
 			}
         }
         
-        public function liste_commercant(){
+    public function liste_commercant(){
 		$this->load->helper('cookie');
 		$this->load->model('commercant');
 		$this->load->model('administrateur');
 		if($this->input->cookie('administrateurCookie') != null){
 			$varid = $this->input->cookie('administrateurCookie');
 			$data['commercant'] = $this->commercant->selectAll($varid);
-                        var_dump($data["commercant"]);
+						var_dump($data["commercant"]);
 			if( $data['commercant'] != NULL){
 				$this->load->view('administrateur/index',$data);
 				$this->load->view('administrateur/liste_commercant',$data);
@@ -264,33 +264,55 @@ class AdministrateurCtrl extends CI_Controller {
 			$this->load->view('commercant/connexion');
 		}
 	}
-        
-        public function supprimer_produit(){
 	
-        }
         
-        public function supprimer_client(){
-            $this->load->model('client');
-			$this->load->helper('form','url');
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('idClient', 'Numéro Client', 'integer');
-			$this->load->view('administrateur/index');
-			if ($this->form_validation->run() == FALSE) {
-				$this->load->view('administrateur/supprimer_client');
-			}
-			else {
-				$id = $_POST['idClient'];
-				if (null == $this->client->selectById($id)){
+	public function supprimer_produit($id){
+		$this->load->model('produit');
+		$this->load->helper('form','url');
+		$this->load->library('form_validation');
+		$this->load->view('administrateur/index');
+		$this->produit->delete($id);
+		echo "produit Supprimé";
+		$this->liste_produit();
+    }
+        
 
-					$this->load->view('administrateur/supprimer_client');
-					echo "<div class='alert alert-danger text-center'>Cet id est inexistant</div>";
-				}
-				else{
-					$this->client->delete($id);
-
-				}
-			}
-        }
+	public function supprimer_client($id){
+		$this->load->model('client');
+		$this->load->helper('form','url');
+		$this->load->library('form_validation');
+		$this->load->view('administrateur/index');
+		$this->client->delete($id);
+		echo "client Supprimé";
+		
+    }
+	
+	
+	public function supprimer_commercant($id){
+		$this->load->database();
+		$this->load->model('commercant');
+		$this->load->model('faire_partie');
+		$this->load->helper('form','url');
+		$this->load->library('form_validation');
+		$this->load->view('administrateur/index');
+		$this->faire_partie->deleteById($id);
+		$this->commercant->delete($id);
+		echo "commercant Supprimé";
+    }
+	
+	
+	public function supprimer_entreprise(id){
+		$this->load->database();
+		$this->load->model('entreprise');
+		$this->load->model('faire_partie');
+		$this->load->helper('form','url');
+		$this->load->library('form_validation');
+		$this->load->view('administrateur/index');
+		$this->faire_partie->deleteByNumSiret($id);
+		$this->entreprise->delete($id);
+		echo "Entreprise Supprimé";
+    }
+	
           
           
 }

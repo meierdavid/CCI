@@ -45,7 +45,17 @@ class faire_partie extends CI_Model{
         ->set('idCommercant', $data['idCommercant'])
   ->insert($this->table);
   }
+  
+  
+  public function deleteByNumSiret($siret) {
+	$this->load->database();
+	$this->db->delete('faire_partie', array('numSiret' => $siret));
+  }
 
+	public function deleteById($id) {
+	  $this->load->database();
+	  $this->db->delete('faire_partie', array('idCommercant' => $id)); 
+  }
 }
 
 ?>
