@@ -294,8 +294,19 @@ class AdministrateurCtrl extends CI_Controller {
         $this->entreprise->delete($id);
         echo "Entreprise Supprimé";
     }
+    
+    public function profil_client($id){
+        $this->load->helper('form', 'url');
+        $this->load->library('form_validation');
+        $this->load->model('client');
+        
+        $data['client'] = $this->client->selectById($id);
+        $this->load->view('administrateur/index');
+        $this->load->view('administrateur/profil_client', $data);
 
-    public function modifier_client($id) {
+    }
+
+    public function modifier_client() {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->model('client');
