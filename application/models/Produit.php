@@ -97,5 +97,11 @@
                 ->update($this->table);
         }
 	
+	
+		public function load_image(){
+			$upload_data = $this->upload->data();
+			$this->db->set('imageProduit', $upload_data['file_name']);
+			return $this->db->insert('produit');  
+		}
     }
 ?>
