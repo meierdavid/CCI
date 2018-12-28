@@ -53,6 +53,8 @@ class poster_avis extends CI_Model{
 	$this->db->delete('poster_avis', array('idClient' => $idClient , 'idProduit' => $idProduit));
   }
 
+  
+  
 }
 
 ?>

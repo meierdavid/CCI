@@ -146,6 +146,7 @@ class ProduitCtrl extends CI_Controller {
         $this->liste_produit();
     }
 
+	
     public function detail_produit($id) {
         $this->load->model('produit');
         $this->load->helper('form', 'url');
@@ -246,5 +247,25 @@ class ProduitCtrl extends CI_Controller {
             
         }
     }
+	
+	
+	public function liste_avis($idProduit){
+		$this->load->model('produit');
+		$this->load->model('poster_avis');
+		
+			$data['produit'] = $this->produit->selectById($idProduit);
+			$data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
+
+			if( $data['avis'] != NULL){
+				$this->load->view('commercant/index',$data);
+				$this->load->view('produit/liste_avis',$data);
+
+			}
+			else{
+				$this->load->view('produit/detail', $data);
+			}
+		
+		
+	}
 
 }
