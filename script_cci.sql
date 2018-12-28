@@ -91,7 +91,7 @@ CREATE TABLE PRODUIT(
 	reducProduit          FLOAT ,
 	couleurProduit   VARCHAR (50) NOT NULL ,
 	nbDispoProduit   INT  NOT NULL  ,
-
+	imageProduit	VARCHAR (2000),
 	CONSTRAINT PRODUIT_PK PRIMARY KEY (idProduit),
 	CONSTRAINT PRODUIT_ENTREPRISE_FK FOREIGN KEY (numSiret) REFERENCES ENTREPRISE(numSiret));
 
