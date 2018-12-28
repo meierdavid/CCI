@@ -76,8 +76,10 @@
 				->set('numSiret', $data['numSiret'])
                 ->set('categorieProduit', $data['categorieProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-		->set('reducProduit', $data['reducProduit'])
-		->set('imageProduit', $data['imageProduit'])
+				->set('reducProduit', $data['reducProduit'])
+				->set('couleurProduit', $data['couleurProduit'])
+		        ->set('nbDispoProduit', $data['nbDispoProduit'])
+				->set('imageProduit', $data['imageProduit'])
 		        ->insert($this->table);
         }  
 
@@ -88,7 +90,9 @@
 				->set('numSiret', $data['numSiret'])
                 ->set('categorieProduit', $data['categorieProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-		->set('reducProduit', $data['reducProduit'])
+				->set('reducProduit', $data['reducProduit'])
+				->set('couleurProduit', $data['couleurProduit'])
+		        ->set('nbDispoProduit', $data['nbDispoProduit'])
 		        ->insert($this->table);
         } 
 			
@@ -105,15 +109,13 @@
 		        ->set('descriptionProduit', $data['descriptionProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
 		        ->set('reducProduit', $data['reducProduit'])
+		        ->set('couleurProduit', $data['couleurProduit'])
+		        ->set('nbDispoProduit', $data['nbDispoProduit'])
                 ->where('idProduit', $id)
                 ->update($this->table);
         }
 	
 	
-		public function load_image(){
-			$upload_data = $this->upload->data();
-			$this->db->set('imageProduit', $upload_data['file_name']);
-			return $this->db->insert('produit');  
-		}
+		
     }
 ?>

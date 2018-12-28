@@ -23,6 +23,13 @@
 
                     <br></br>
 
+					<?php var_dump($entreprises)?>
+                     <select name = 'numSiret' id = 'category'> 
+                            <option value="">-- Select Entreprise --</option> 
+                               <?php foreach($entreprises as $item){ ?> 
+                            <option  value="<?php echo $item->numSiret; ?>"><?php echo $item->nomEntreprise; ?></option> 
+                            <?php } ?> 
+                         </select> 
                     <div class="form-group">
                         <label class="control-label">Nom du produit :</label>
                         <input type="text" class="form-control" name="nomProduit" value="" size="30" required/>
@@ -66,13 +73,16 @@
                         <label class="control-label">Réduction de produit :</label>
                         <input type="number" class="form-control" name="reducProduit" value="" size="30" required/>
                     </div>
-                    <?php var_dump($entreprises)?>
-                     <select name = 'numSiret' id = 'category'> 
-                            <option value="">-- Select Entreprise --</option> 
-                               <?php foreach($entreprises as $item){ ?> 
-                            <option  value="<?php echo $item->numSiret; ?>"><?php echo $item->nomEntreprise; ?></option> 
-                            <?php } ?> 
-                         </select> 
+                    <div class="form-group">
+                        <label class="control-label">Couleur du produit :</label>
+                        <input type="number" class="form-control" name="couleurProduit" value="" size="30" required/>
+                        <h6 style="color:red;"</h6>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label">Quantité disponible du produit :</label>
+                        <input type="number" class="form-control" name="nbDispoProduit" value="0" size="30" required/>
+                        <h6 style="color:red;"</h6>
+                    </div>
                     
                     <br></br>
 

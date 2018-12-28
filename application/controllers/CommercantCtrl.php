@@ -16,6 +16,7 @@ class CommercantCtrl extends CI_Controller {
 	{
 		$this->load->helper('cookie');
 		$this->load->helper('url');
+		$this->load->helper('form');
 
 		if($this->input->cookie('commercantCookie') != Null){
 			$varMail= $this->input->cookie('commercantCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies

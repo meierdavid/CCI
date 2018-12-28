@@ -130,7 +130,7 @@
 												</tbody></table>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Livraison</label>
+                        <label class="control-label">Livraison: </label>
                         <input type="radio"  name="livraisonEntreprise" value="Oui" required/>Oui
                         <input type="radio"  name="livraisonEntreprise" value="Non" required/>Non
                     </div>

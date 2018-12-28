@@ -15,7 +15,9 @@
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Catégorie</th>
                                                 <th scope="col">Prix</th>
-                                                <th scope="col">Réduction</th> 
+                                                <th scope="col">Réduction</th>
+												<th scope="col">Couleur</th>
+												<th scope="col">Quantité Dispo</th>												
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -26,6 +28,8 @@
                                                 <td><?php echo $item->categorieProduit; ?></td>
                                                 <td><?php echo $item->prixUnitaireProduit; ?></td>
                                                 <td><?php echo $item->reducProduit; ?></td>
+												<td><?php echo $item->couleurProduit; ?></td>
+												<td><?php echo $item->nbDispoProduit; ?></td>
                                                 <td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/".$item->idProduit );?>">Ajouter au pannier</a></p></td>
                                                 
                                                 
