@@ -69,7 +69,7 @@
                 ->result();
         }
 
-    	public function insert($data) {
+    	public function insert_with_picture($data) {
             $this->load->database();
             $this->db->set('nomProduit', $data['nomProduit'])
 				->set('descriptionProduit', $data['descriptionProduit'])
@@ -79,7 +79,18 @@
 		->set('reducProduit', $data['reducProduit'])
 		->set('imageProduit', $data['imageProduit'])
 		        ->insert($this->table);
-        }   
+        }  
+
+		public function insert_without_picture($data) {
+            $this->load->database();
+            $this->db->set('nomProduit', $data['nomProduit'])
+				->set('descriptionProduit', $data['descriptionProduit'])
+				->set('numSiret', $data['numSiret'])
+                ->set('categorieProduit', $data['categorieProduit'])
+                ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
+		->set('reducProduit', $data['reducProduit'])
+		        ->insert($this->table);
+        } 
 			
 		public function delete($id){
       		$this->load->database();
