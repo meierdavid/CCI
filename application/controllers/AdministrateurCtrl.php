@@ -236,25 +236,10 @@ class AdministrateurCtrl extends CI_Controller {
         } else {
             $this->load->view('administrateur/connexion');
         }
-<<<<<<< HEAD
+	}
+
 		
-		  
-		
-	
-    public function ajout_commercant(){
-			$this->load->model('commercant');
-			$this->load->helper('form','url');
-			$this->load->library('form_validation');
-			$this->load->view('administrateur/index');
-			$this->form_validation->set_rules('prenomCommercant', 'Prénom', 'alpha_dash');
-			$this->form_validation->set_rules('nomCommercant', 'Nom', 'alpha_numeric_spaces');
-			$this->form_validation->set_rules('mailCommercant', 'Email', 'valid_email');
-			$this->form_validation->set_rules('codePCommercant', 'Code postale', 'integer');
-			$this->form_validation->set_rules('villeCommercant', 'Ville', 'alpha_dash');
-			$this->form_validation->set_rules('telCommercant', 'Numéro de téléphone', 'integer');
-=======
-    }
->>>>>>> origin/master
+
 
     public function liste_client() {
         $this->load->helper('cookie');
@@ -269,6 +254,14 @@ class AdministrateurCtrl extends CI_Controller {
             $this->load->view('administrateur/connexion');
         }
     }
+	
+	
+	public function supprimer_avis($idProduit,$idClient){
+		$this->load->model('poster_avis');
+		$this->poster_avis->delete($idClient,$idProduit);
+		$this->load->view('administrateur/index');
+	}
+	
 
     public function supprimer_produit($id) {
         $this->load->model('produit');
