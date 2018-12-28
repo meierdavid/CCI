@@ -5,7 +5,7 @@
 <!--Pulling Awesome Font -->
     <div class="container">
     <div class="row">
-        <div class="col-md-offset-3 col-md-5">
+        <div  class="col-md-offset-3 col-md-5">
             <div class="form-login" >
                 <br></br>
                 <br></br>
@@ -15,6 +15,9 @@
                     <br></br>
                     <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
                     <?php echo form_open('AdministrateurCtrl/modifier_client'); ?>
+                    
+                    <input type="text" class="form-control" name="idClient" value="<?php echo  $client[0]->idClient; ?>" size="30" required hidden/> 
+                            
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
                         <input type="text" class="form-control" name="prenomClient" value="<?php echo  $client[0]->prenomClient; ?>" size="30" required/> 

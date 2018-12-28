@@ -244,7 +244,7 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->model('administrateur');
         if ($this->input->cookie('administrateurCookie') != null) {
             $varid = $this->input->cookie('administrateurCookie');
-            $data['client'] = $this->client->selectAll($varid);
+            $data['client'] = $this->client->selectAll();
             $this->load->view('administrateur/index', $data);
             $this->load->view('administrateur/liste_client', $data);
         } else {
@@ -316,12 +316,14 @@ class AdministrateurCtrl extends CI_Controller {
         $this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
         $this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
         $this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
-        $data['client'] = $this->client->selectById($id);
-        $mdp = $data['client'][0]->mdpClient;
+        $data['client'] = $this->client->selectById($_POST['idClient']);
+        $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
+        $mdp = $data['administrateur'][0]->mdpAdministrateur;
         $id = $data['client'][0]->idClient;
-
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('administrateur/liste_client');
+            $this->load->view('administrateur/index');
+            $data['client'] = $this->client->selectAll();
+            $this->load->view('administrateur/liste_client',$data);
         } 
         else {
             if ($_POST['mdpClient'] == $_POST['mdpClient2'] && $mdp == $_POST['mdpClient']) {
@@ -338,8 +340,9 @@ class AdministrateurCtrl extends CI_Controller {
                 );
 
                 $this->client->update($id, $data);
-                $data['client'] = $this->client->selectByMail($varmail);
-                $this->load->view('administrateur/liste_client');
+                $this->load->view('administrateur/index');
+                $data['client'] = $this->client->selectAll();
+                $this->load->view('administrateur/liste_client',$data);
             } else {
                 $data['message'] = "erreur : la confirmation de Mot de passe ne correspond pas au premier";
                 $this->load->view('errors/erreur_formulaire', $data);

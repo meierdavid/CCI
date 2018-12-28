@@ -84,6 +84,7 @@
                 ->set('villeAdministrateur', $data['villeAdministrateur'])
                 ->set('telAdministrateur', $data['telAdministrateur'])
                 ->set('mdpAdministrateur', $data['mdpAdministrateur'])
+                ->where('idAdministrateur', $id)
                 ->update($this->table);
         }
         

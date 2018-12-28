@@ -93,6 +93,7 @@ class client extends CI_Model{
 		->set('telClient', $data['telClient'])
 		->set('mdpClient', $data['mdpClient'])
 		->set('pointClient', $data['pointClient'])
+                ->where('idClient', $id)
 		->update($this->table);
 	}
 
