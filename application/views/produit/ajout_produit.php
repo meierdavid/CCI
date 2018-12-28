@@ -13,7 +13,7 @@
             <div class="form-login" >
                 <h2 class="text-center"> CCI Hérault - Bienvenue cher Commercant !</h2>
 
-                <?php echo form_open('ProduitCtrl/ajout_produit'); ?>
+                <?php echo form_open_multipart('ProduitCtrl/ajout_produit'); ?>
 
                 <form>
                     <br></br>

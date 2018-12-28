@@ -72,11 +72,12 @@
     	public function insert($data) {
             $this->load->database();
             $this->db->set('nomProduit', $data['nomProduit'])
-		->set('descriptionProduit', $data['descriptionProduit'])
-                ->set('numSiret', $data['numSiret'])
+				->set('descriptionProduit', $data['descriptionProduit'])
+				->set('numSiret', $data['numSiret'])
                 ->set('categorieProduit', $data['categorieProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
 		->set('reducProduit', $data['reducProduit'])
+		->set('imageProduit', $data['imageProduit'])
 		        ->insert($this->table);
         }   
 			

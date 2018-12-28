@@ -62,6 +62,30 @@ class ProduitCtrl extends CI_Controller {
             $data = $this->liste_entreprise_dropbox();
                 if ($this->entreprise->selectById($_POST['numSiret']) != null) {
                 var_dump($_POST);
+				var_dump($data);
+                
+                $config = array(
+					'upload_path' => "./assets/image/Produits",
+					'allowed_types' => "gif|jpg|png|jpeg|pdf",
+					'overwrite' => TRUE,
+					'max_size' => "4096000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+					'max_height' => "768",
+					'max_width' => "1024"
+				);
+                $this->load->library('upload', $config);
+                if (!($this->upload->do_upload('imageProduit'))) {
+                    
+                    log_message('error', $this->upload->display_errors());
+                    $data['message'] = "erreur : la photo n'a pas pu s'importer";
+                    $this->load->view('errors/erreur_formulaire', $data);
+                    $this->load->view('commercant/index', $data);
+                    $this->liste_produit();
+                } else {
+					var_dump("insert ");
+                    //$this->produit->load_image();
+                    $file_data = $this->upload->data();
+                    
+                }
                 $data = array(
                     "nomProduit" => htmlspecialchars($_POST['nomProduit']),
                     "categorieProduit" => htmlspecialchars($_POST['categorieProduit']),
@@ -69,27 +93,12 @@ class ProduitCtrl extends CI_Controller {
                     "descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
                     "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
                     "reducProduit" => htmlspecialchars($_POST['reducProduit']),
+					"imageProduit" => htmlspecialchars($file_data['file_name']),
                 );
-                var_dump($data);
                 $this->produit->insert($data);
-                $config['upload_path'] = './assets/image/Produits';
-                $config['allowed_types'] = 'gif|jpg|png';
-                $config['overwrite'] = TRUE;
-                $this->load->library('upload', $config);
-                if (!($this->upload->do_upload($_POST['imageProduit']))) {
-                    var_dump("insert ");
-                    log_message('error', $this->upload->display_errors());
-                    $data['message'] = "erreur : la photo n'a pas pu s'importer";
-                    $this->load->view('errors/erreur_formulaire', $data);
-                    $this->load->view('commercant/index', $data);
-                    $this->liste_produit();
-                } else {
-                    $this->produit->load_image();
-                    $file_data = $this->upload->data();
-                    $data['produit'] = $this->produit->selectAll();
-                    $this->load->view('commercant/index', $data);
-                    $this->liste_produit();
-                }
+				$data['produit'] = $this->produit->selectAll();
+                $this->load->view('commercant/index', $data);
+                $this->liste_produit();
             }
             else {
                 var_dump("mauvais ");
