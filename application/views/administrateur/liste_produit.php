@@ -31,8 +31,8 @@
                                                 <td><?php echo $item->idProduit; ?></td>
                                                 <td><?php echo $item->nomProduit; ?></td>
                                                 <td><?php echo $item->prixProduit; ?></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_produit".$item->idProduit);?>">Supprimer le Produit</a></p></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/modifier_produit".$item->idProduit );?>">Modifier le Produit</a></p></td>
+                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_produit/".$item->idProduit);?>">Supprimer le Produit</a></p></td>
+                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/modifier_produit/".$item->idProduit );?>">Modifier le Produit</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>

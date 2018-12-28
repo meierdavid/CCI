@@ -5,7 +5,7 @@
                 <div style="margin-left: 60px" class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="box">
-                            <h2>Liste des clients</h2>
+                            <h2>Liste des Paniers</h2>
                             <div class="row">
                                 <article class=" col-md-1 col-lg-1">
 
@@ -16,23 +16,27 @@
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
-                                                <th scope="col">Identifiant</th>
-                                                <th scope="col">Mail</th>
                                                 <th scope="col">Nom</th>
-                                                <th scope="col">Prénom</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Catégorie</th>
+                                                <th scope="col">Prix</th>
+                                                <th scope="col">Réduction</th>
+                                                <th scope="col">Ajouter</th>
                                                 <th scope="col">Supprimer</th>
                                                 <th scope="col">Modifier</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <?php foreach ($client as $item) { ?>
-                                                <td><?php echo $item->idClient; ?></td>
-                                                <td><?php echo $item->mailClient; ?></td>
-                                                <td><?php echo $item->nomClient; ?></td>
-                                                <td><?php echo $item->prenomClient; ?></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_client/".$item->idClient);?>">Supprimer le client</a></p></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/profil_client/".$item->idClient);?>">Modifier le client</a></p></td>
+                                                <?php foreach ($produits as $item) { ?>
+                                                <td><?php echo $item->nomProduit; ?></td>
+                                                <td><?php echo $item->descriptionProduit; ?></td>
+                                                <td><?php echo $item->categorieProduit; ?></td>
+                                                <td><?php echo $item->prixUnitaireProduit; ?></td>
+                                                <td><?php echo $item->reducProduit; ?></td>
+                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/ajouter_sous_produit/".$item->numSiret );?>">Ajouter un article</a></p></td>
+                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/supprimer_produit/".$item->numSiret );?>">Supprimer le produit</a></p></td>
+                                                <td><p><a href="<?php echo base_url("EntrepriseCtrl/modifier_produit/".$item->numSiret );?>">modifier  le produit</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>
@@ -51,7 +55,3 @@
 
         </div>
     </div>
-</div>
-
-
-

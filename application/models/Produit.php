@@ -31,7 +31,32 @@
                ->get()
                ->result();
         }
-        
+        public function selectByCategorie($categorie){
+           $this->load->database();
+            return $this->db->select('*')
+               ->from('produit')
+               ->where('categorieProduit', $categorie)
+               ->get()
+               ->result();
+        } 
+            
+            
+        public function selectBySoldes(){
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('produit')
+                ->where('reducProduit >',0)
+                ->get()
+                ->result();
+        }
+        public function search($str){
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('produit')
+                ->like('nomProduit',$str)
+                ->get()
+                ->result();
+        }
          public function selectProduit($mail){
             $this->load->database();
             return $this->db->select('*')
@@ -65,9 +90,9 @@
         $this->load->database();
         $this->db->set('nomProduit', $data['nomProduit'])
                 ->set('categorieProduit', $data['categorieProduit'])
-		->set('descriptionProduit', $data['descriptionProduit'])
+		        ->set('descriptionProduit', $data['descriptionProduit'])
                 ->set('prixUnitaireProduit', $data['prixUnitaireProduit'])
-		->set('reducProduit', $data['reducProduit'])
+		        ->set('reducProduit', $data['reducProduit'])
                 ->where('idProduit', $id)
                 ->update($this->table);
         }

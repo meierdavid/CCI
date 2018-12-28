@@ -163,7 +163,60 @@ class ProduitCtrl extends CI_Controller {
                 $this->load->view('pages/deconnexion');
             }
         }
+        
+        public function categorie($categorie){
+            $this->load->helper('form', 'url');
+            $this->load->library('form_validation');
+            $this->load->model('produit');
+            if($this->produit->selectByCategorie($categorie) != null){
+                $data['produit'] = $this->produit->selectByCategorie($categorie);
+                $this->load->view('client/header');
+                $this->load->view('produit/produit_par_categorie',$data);
+                $this->load->view('client/footer');
+            }
+            else{
+                $this->load->view('client/header');
+                $this->load->view('client/accueil');
+                $this->load->view('client/footer');
+            }
+        }
 
+        public function soldes(){
+            $this->load->helper('form', 'url');
+            $this->load->library('form_validation');
+            $this->load->model('produit');
+            if($this->produit->selectBySoldes() != null){
+                $data['produit'] = $this->produit->selectBySoldes();
+                $this->load->view('client/header');
+                $this->load->view('produit/produit_par_soldes',$data);
+                $this->load->view('client/footer');
+            }
+            else{
+                $this->load->view('client/header');
+                $this->load->view('client/accueil');
+                $this->load->view('client/footer');
+            }
+        }
 
-
+        public function search(){
+            $this->load->helper('form', 'url');
+            $this->load->library('form_validation');
+            $this->load->model('produit');
+            if(isset($_POST['search'])){
+                $str = $_POST['search'];
+                $str = preg_replace("#[^0-9a-z]#i","",$str);
+                if($this->produit->search($str)!=null){
+                    $data['produit'] = $this->produit->search($str);
+                    $this->load->view('client/header');
+                    $this->load->view('produit/produit_par_recherche',$data);
+                    $this->load->view('client/footer');
+                }
+                else{
+                    
+                }
+            }
+            else{
+                
+            }
+        }
 }

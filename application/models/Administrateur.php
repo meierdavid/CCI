@@ -67,10 +67,9 @@
                 ->insert($this->table);
         }   
 			
-		public function delete($id){
-      		$this->load->database();
-      		return $this->db->where('idAdministrateur',$id)
-                    	->delete($this->table);
+        public function delete($id){
+            $this->load->database();
+            return $this->db->where('idAdministrateur',$id) ->delete($this->table);
     	}
         
         public function update($id, $data) {
