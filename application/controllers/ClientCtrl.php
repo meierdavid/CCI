@@ -282,9 +282,53 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/accueil');
         }
     }
+	
+	
+	
+	public function ajouter_avis($idProduit){
+		$this->load->model('client');
+		$this->load->model('poster_avis');
+		$this->load->helper('form','url');
+		$this->load->helper('cookie');
+		$this->load->library('form_validation');
+
+		$cookie=$this->input->cookie('clientCookie');
+		$cli=$this->client->selectByMail($cookie);
+		$this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
+		var_dump($idProduit);
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			var_dump("test");
+			$this->load->view('client/avis_produit');
+		}
+		else {
+			var_dump($_POST);
+			var_dump("test");
+			var_dump($cli);
+			if( $cli[0] == null){
+				$data['message']="erreur : pas de client";
+				$this->load->view('errors/erreur_formulaire', $data);
+				$this->load->view('client/deconnexion');
+			}
+			else {
+					
+				$data=array(
+					"idProduit"=> htmlspecialchars($idProduit),
+					"idClient"=> htmlspecialchars($cli[0]->idClient),
+					"avisClient"=> htmlspecialchars($_POST['avisClient'])
+				);
+				var_dump($data);
+				$this->poster_avis->insert($data);
+				$this->load->view('client/avis_produit');
+			}
+		}
+	}
+	
+	
 
 		public function deconnexion(){
-                        $this->load->helper('form', 'url');
+            $this->load->helper('form', 'url');
 			$this->load->helper('cookie');
 			setcookie("clientCookie","",time()-36000);
 			$this->load->view('pages/deconnexion');

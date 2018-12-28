@@ -5,7 +5,7 @@
                 <div style="margin-left: 60px" class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="box">
-                            <h2>Liste des Produits</h2>
+                            <h2 class="text-center"> Liste des entreprises</h2>
                             <div class="row">
                                 <article class=" col-md-1 col-lg-1">
 
