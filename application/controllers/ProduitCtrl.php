@@ -206,6 +206,23 @@ class ProduitCtrl extends CI_Controller {
             $this->load->view('client/footer');
         }
     }
+    
+     public function produit_entreprise($idEntreprise) {
+        $this->load->helper('form', 'url');
+        $this->load->library('form_validation');
+        $this->load->model('produit','entreprise');
+        if ($this->produit->selectByEntreprise($idEntreprise) != null) {
+            $data['produit'] = $this->produit->selectByEntreprise($idEntreprise);
+            $data['entreprise'] = $this->entreprise->selectById($idEntreprise);
+            $this->load->view('client/header');
+            $this->load->view('produit/produit_par_entreprise', $data);
+            $this->load->view('client/footer');
+        } else {
+            $this->load->view('client/header');
+            $this->load->view('client/accueil');
+            $this->load->view('client/footer');
+        }
+    }
 
     public function soldes() {
         $this->load->helper('form', 'url');

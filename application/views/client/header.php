@@ -98,11 +98,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="col-sm-3 multi-gd-img">
 										<ul class="multi-column-dropdown">
 											<h2>Magasins</h2>
-											<li><a href="mens.html">Magasin 1</a></li>
-											<li><a href="mens.html">Magasin 2</a></li>
-											<li><a href="mens.html">Magasin 3</a></li>
-											<li><a href="mens.html">Magasin 4</a></li>
-											<li><a href="mens.html">Magasin 5</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-6 multi-gd-img multi-gd-text ">
