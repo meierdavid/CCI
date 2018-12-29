@@ -286,26 +286,29 @@ class ClientCtrl extends CI_Controller {
 	
 	
 	public function ajouter_avis($idProduit){
-		$this->load->model('client');
+		$this->load->model('client','produit');
 		$this->load->model('poster_avis');
 		$this->load->helper('form','url');
 		$this->load->helper('cookie');
 		$this->load->library('form_validation');
-
+                $data['produit'] = $this->produit->selectById($idProduit);
 		$cookie=$this->input->cookie('clientCookie');
 		$cli=$this->client->selectByMail($cookie);
+                
 		$this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
 		var_dump($idProduit);
-		
+		var_dump($_POST);
 		if ($this->form_validation->run() == FALSE)
 		{
 			var_dump("test");
-			$this->load->view('client/avis_produit');
+                        $this->load->view('client/header');
+			$this->load->view('client/avis_produit',$data);
+                        $this->load->view('client/footer');
 		}
 		else {
 			var_dump($_POST);
 			var_dump("test");
-			var_dump($cli);
+			
 			if( $cli[0] == null){
 				$data['message']="erreur : pas de client";
 				$this->load->view('errors/erreur_formulaire', $data);
@@ -320,11 +323,15 @@ class ClientCtrl extends CI_Controller {
 				);
 				var_dump($data);
 				$this->poster_avis->insert($data);
-				$this->load->view('client/avis_produit');
+                                $this->load->view('client/header');
+				$this->load->view('client/avis_produit',$data);
+                                $this->load->view('client/footer');
 			}
 		}
 	}
-	
+                public function modifier_avis($idProduit){
+
+                }
 	
 
 		public function deconnexion(){
