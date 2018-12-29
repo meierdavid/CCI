@@ -32,6 +32,10 @@
                                             <tbody>
                                             <tr>
                                                 <?php foreach ($produit as $item) { ?>
+												<?php if ($item->imageProduit == NULL) {
+													var_dump("chatte");
+													$item->imageProduit = "not_found.jpg";
+												}?>
 												<td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="img-thumbnail"></td>
                                                 <td><?php echo $item->nomProduit; ?></td>
                                                 <td><?php echo $item->descriptionProduit; ?></td>
