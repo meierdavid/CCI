@@ -172,7 +172,13 @@ class ProduitCtrl extends CI_Controller {
             $this->load->view('pages/deconnexion');
         }
     }
+	
+	public function moyenne_note_produit($idProduit){
+		$this->load->model('poster_avis');
+		return $this->poster_avis->moyenne($idProduit);
+	}
 
+	
     public function modifier() {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
@@ -202,11 +208,17 @@ class ProduitCtrl extends CI_Controller {
     }
 
     public function categorie($categorie) {
+		$i=0;
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->model('produit');
         if ($this->produit->selectByCategorie($categorie) != null) {
             $data['produit'] = $this->produit->selectByCategorie($categorie);
+			foreach ($data['produit'] as $item) {
+				$data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
+				$i=$i+1;
+			}
+			var_dump($data);
             $this->load->view('client/header');
             $this->load->view('produit/produit_par_categorie(2)', $data);
             $this->load->view('client/footer');

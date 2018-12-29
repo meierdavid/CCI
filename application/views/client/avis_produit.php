@@ -19,6 +19,11 @@
                 echo form_open($action); ?>
 
                     <div class="form-group">
+                        <label class="control-label">Note sur 10 :</label>
+                        <input type="number" class="form-control" name="noteClient" value="0" min="0" max="10" size="30" required/>
+                    </div>
+					
+					<div class="form-group">
                         <label class="control-label">Avis :</label>
                         <input type="text" class="form-control" name="avisClient" value="" size="3000" required/>
                     </div>

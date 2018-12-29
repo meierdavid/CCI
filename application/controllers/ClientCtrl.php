@@ -220,9 +220,11 @@ class ClientCtrl extends CI_Controller {
         $this->load->library('form_validation');
         $data['produit'] = $this->produit->selectById($idProduit);
         $cookie = $this->input->cookie('clientCookie');
+		$data['client']=$this->client->selectByMail($cookie);
         $cli = $this->client->selectByMail($cookie);
 
         $this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
+		$this->form_validation->set_rules('noteClient', 'Note', 'integer');
         var_dump($idProduit);
         var_dump($_POST);
         if ($this->form_validation->run() == FALSE) {
@@ -243,16 +245,23 @@ class ClientCtrl extends CI_Controller {
                 $data = array(
                     "idProduit" => htmlspecialchars($idProduit),
                     "idClient" => htmlspecialchars($cli[0]->idClient),
-                    "avisClient" => htmlspecialchars($_POST['avisClient'])
+                    "avisClient" => htmlspecialchars($_POST['avisClient']),
+					"noteClient" => htmlspecialchars($_POST['noteClient'])
                 );
+				
                 var_dump($data);
                 $this->poster_avis->insert($data);
+				$data['client']=$this->client->selectByMail($cookie);
+				$data['produit'] = $this->produit->selectById($idProduit);
                 $this->load->view('client/header');
                 $this->load->view('client/avis_produit', $data);
                 $this->load->view('client/footer');
             }
         }
     }
+	
+	
+	
     //permet de voir le détail d'un avis sur un produit dont l'idée est passé en paramètre
     //permet de modifier un avis après envoie du formulaire dans la view client/detail_avis
     public function detail_avis($idProduit){

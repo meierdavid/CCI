@@ -26,6 +26,16 @@ class poster_avis extends CI_Model{
     ->get()
     ->result();
   }
+  
+  public function selectByNote($note){
+    $this->load->database();
+
+    return $this->db->select('*')
+    ->from('poster_avis')
+    ->where('noteClient', $note)
+    ->get()
+    ->result();
+  }
 
   public function selectByIdProduit($id){
 
@@ -45,8 +55,27 @@ class poster_avis extends CI_Model{
   $this->db->set('idClient', $data['idClient'])
         ->set('idProduit', $data['idProduit'])
 		->set('avisClient', $data['avisClient'])
+		->set('noteClient', $data['noteClient'])
 		->insert($this->table);
   }
+  
+  
+	public function moyenne($id){
+		$produit = $this->selectByIdProduit($id);
+		$somme = 0 ;
+		$nb = 0;
+		foreach ($produit as $item) {
+			$somme = $somme+$item->noteClient; 
+			$nb=$nb+1;
+		}
+		if ($nb==0) {
+			return 0;
+		}
+		else {
+			return $somme/$nb;
+		}
+		
+	}
   
   
    public function deleteByidClient($idClient) {
