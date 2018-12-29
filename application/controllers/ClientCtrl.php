@@ -6,6 +6,7 @@ class ClientCtrl extends CI_Controller {
 
     // cette view sera utilisé pour afficher l'index du client quand le principe des cookies
     // fonctionnera. On l'appellera directement dans connection
+    // si il n'y a pas de cookie client cette action redirige vers la page de déconnection
     public function index() {
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
@@ -20,12 +21,12 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('pages/deconnexion');
         }
     }
-
+    
+    //Modifie le profil du client après validation du formulaire à la view client/profil
     public function modifier() {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->model('client');
-
         $this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
         $this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
         $this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
@@ -74,7 +75,7 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('pages/deconnexion');
         }
     }
-
+    // affiche la view client/profil si il y a un cookie client sinon déconnecte l'utilisateur
     public function profil() {
         $this->load->model('client');
         $this->load->helper('form', 'url');
@@ -84,7 +85,6 @@ class ClientCtrl extends CI_Controller {
             $varmail = $this->input->cookie('clientCookie');
             if (isset($varmail)) {
                 $data['client'] = $this->client->selectByMail($varmail);
-                var_dump($_COOKIE['clientCookie']);
                 $this->load->view('client/header');
                 $this->load->view('client/profil', $data);
                 $this->load->view('client/footer');
@@ -96,19 +96,19 @@ class ClientCtrl extends CI_Controller {
         // modifie le profil à l'envoi du formulaire
     }
 
+    //Permet l'inscription du client. On doit verrifier qu'aucun autre client n'a déja utilisé cette adresse mail
+    // ---On peut sécuriser cette fonction par envoie de mail---
     public function inscription() {
         // faire envoi de mail
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->model('client');
-
         $this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
         $this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
         $this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
         $this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
         $this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
         $this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
-
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('client/inscription');
         } else {
@@ -137,18 +137,9 @@ class ClientCtrl extends CI_Controller {
             }
         }
     }
-
-    /* $this->load->library('email');
-
-      $this->email->from('cci@yopmail.com', 'Piscine');
-      $this->email->to($data['mailClient']);
-      $this->email->subject('CCI Email Validation');
-      $this->email->message('follow this link');
-
-      $this->load->view('client/validationEmail');
-
-      $this->email->send(); */
-
+    // vérifie la validité du formulaire client/connexion et créer le 'clientCookie'
+    // Le cookie  est disponible sur le domaine: localhost aux chemins enfants de /cci/index.php
+    
     public function connexion() {
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
@@ -191,71 +182,12 @@ class ClientCtrl extends CI_Controller {
         }
     }
 
-    public function check_connexion() {
-        $this->load->helper('cookie');
-        $this->load->helper('form', 'url');
-        if (isset($_POST['mail']) && isset($_POST['mdp'])) {
-            $this->load->model('client');
-            $data['client'] = $this->client->selectByMail($_POST['mail']);
-
-            if ($data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient) {
-                $cookie = array(
-                    'name' => 'clientCookie',
-                    'value' => $data['client'][0]->mailClient,
-                    'expire' => '86500',
-                    'domain' => 'localhost',
-                    'path' => base_url(),
-                );
-                $this->input->set_cookie($cookie);
-
-                echo $this->input->cookie('clientCookie');
-            } else {
-                $data['message'] = "erreur : mauvais mot de passe ou mauvaise adresse mail";
-                $this->load->view('errors/erreur_formulaire', $data);
-                $this->load->view('client/connexion');
-            }
-        } else {
-            // erreur
-        }
-    }
-
-    /*
-     *
-      public function changer_mdp(){
-      $this->load->model('client');
-      $this->load->helper('url');
-      $this->load->library('form_validation');
-      if(isset($_COOKIE['clientCookie'])){
-      $varid= $this->input->cookie('clientCookie');
-      $data['client'] = $this->client->selectByMail($varid);
-      if(isset($_POST['mdpclientAncien']) && ($_POST['mdpclientAncien'] == $data['client'][0]->mdpClient) ){
-      if($_POST['mdpClientNouveau'] == $_POST['mdpClientConf']){
-      $newMdp = $_POST['mdpClientNouveau'];
-      $this->client->updateMdp($varid,$newMdp);
-      delete_cookie("clientCookie");
-      $this->load->view('client/connexion');
-      }
-      else{
-      $this->load->view('client/index',$data);
-      $this->load->view('client/changer_mdp',$data);
-      }
-      }
-      else{
-      $this->load->view('client/index',$data);
-      $this->load->view('client/changer_mdp',$data);
-      }
-      }
-      else{
-      $this->load->view('client/connexion');
-      }
-      }
-     */
-
+  
+    // Permet au client de changer son mot de passe
     public function changer_mdp() {
         $this->load->model('client');
         $this->load->helper('url');
         $this->load->library('form_validation');
-
         if (isset($_COOKIE['clientCookie'])) {
             $varid = $this->input->cookie('clientCookie');
             $data['client'] = $this->client->selectByMail($varid);
@@ -279,7 +211,7 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/accueil');
         }
     }
-
+    // permet au client de modifier son avis sur le produit passé en paramètre
     public function ajouter_avis($idProduit) {
         $this->load->model('client', 'produit');
         $this->load->model('poster_avis');
@@ -321,6 +253,8 @@ class ClientCtrl extends CI_Controller {
             }
         }
     }
+    //permet de voir le détail d'un avis sur un produit dont l'idée est passé en paramètre
+    //permet de modifier un avis après envoie du formulaire dans la view client/detail_avis
     public function detail_avis($idProduit){
         $this->load->helper('form', 'url');
         $this->load->model('produit','client');
@@ -338,6 +272,9 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('produit/detail', $data);
         }
     }
+    // permet de modifier l'avis du client ayant l'adresse mail contenue dans le cookie client par rapport
+    // au produit dont l'id est passé en paramètre
+    // Un client ne peut avoir qu'un avis sur un produit
     public function modifier_avis($idProduit) {
         $this->load->model('client', 'produit');
         $this->load->model('poster_avis');
@@ -365,11 +302,11 @@ class ClientCtrl extends CI_Controller {
             }
         }
     }
-
+    //deconnecte le client le redirige vers la page de connexion et enleve la durée de vie du cookie
     public function deconnexion() {
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
-        delete_cookie("clientCookie");
+        setcookie("clientCookie", "", time() - 86500);
         $this->load->view('pages/deconnexion');
         $this->connexion();
     }
