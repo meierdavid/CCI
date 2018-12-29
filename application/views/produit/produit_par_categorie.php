@@ -31,7 +31,7 @@
 												<td><?php echo $item->couleurProduit; ?></td>
 												<td><?php echo $item->nbDispoProduit; ?></td>
                                                 <td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/".$item->idProduit );?>">Ajouter au pannier</a></p></td>
-                                                
+                                                <td><p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $item->idProduit); ?>">Voir les avis</a></p></td>
                                                 
                                             </tr>
                                             <?php } ?>
