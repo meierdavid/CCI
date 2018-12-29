@@ -62,8 +62,7 @@ class ProduitCtrl extends CI_Controller {
             $data['commercant'] = $this->commercant->selectByMail($varMail);
             $data = $this->liste_entreprise_dropbox();
             if ($this->entreprise->selectById($_POST['numSiret']) != null) {
-                //var_dump($_POST);
-                //var_dump($data);
+              
 
                 $config = array(
                     'upload_path' => "./assets/image/Produits",
@@ -78,48 +77,6 @@ class ProduitCtrl extends CI_Controller {
 
                 //SI IL N'Y A PAS DE FICHIER
 
-<<<<<<< HEAD
-					if (!($this->upload->do_upload('imageProduit'))) {
-						
-						log_message('error', $this->upload->display_errors());
-						$data['message'] = "erreur : la photo n'a pas pu s'importer";
-						$this->load->view('errors/erreur_formulaire', $data);
-						$this->liste_produit();
-					} else {
-						$file_data = $this->upload->data();
-						
-					}
-					$data = array(
-						"nomProduit" => htmlspecialchars($_POST['nomProduit']),
-						"categorieProduit" => htmlspecialchars($_POST['categorieProduit']),
-						"numSiret" => htmlspecialchars($_POST['numSiret']),
-						"descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
-						"prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
-						"reducProduit" => htmlspecialchars($_POST['reducProduit']),
-						"couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
-						"nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
-						"imageProduit" => htmlspecialchars($file_data['file_name'])
-					);
-					$this->produit->insert_with_picture($data);
-					$data['produit'] = $this->produit->selectAll();
-					$this->modifier_image($file_data['file_name']);
-					
-				}
-			}
-			else {
-				var_dump("mauvais ");
-				$data['message'] = "erreur : mauvais numéro de Siret";
-				$this->load->view('errors/erreur_formulaire', $data);
-				$this->load->view('commercant/index', $data);
-				$this->load->view('produit/ajout_produit',$data);
-			}
-         
-		}
-		else {
-			$this->load->view('pages/deconnexion');
-			$this->load->view('pages/pageConnexionSellers');
-		}
-=======
                 if (!(isset($_FILES['imageProduit']['name']) && !empty($_FILES['imageProduit']['name']))) {
                     $data = array(
                         "nomProduit" => htmlspecialchars($_POST['nomProduit']),
@@ -144,10 +101,13 @@ class ProduitCtrl extends CI_Controller {
                         log_message('error', $this->upload->display_errors());
                         $data['message'] = "erreur : la photo n'a pas pu s'importer";
                         $this->load->view('errors/erreur_formulaire', $data);
-                        $this->liste_produit();
-                    } else {
+						$this->load->view('commercant/index', $data);
+						$this->load->view('produit/ajout_produit');
+                        
+                    } 
+					else {
                         $file_data = $this->upload->data();
-                    }
+                    
                     $data = array(
                         "nomProduit" => htmlspecialchars($_POST['nomProduit']),
                         "categorieProduit" => htmlspecialchars($_POST['categorieProduit']),
@@ -161,19 +121,24 @@ class ProduitCtrl extends CI_Controller {
                     );
                     $this->produit->insert_with_picture($data);
                     $data['produit'] = $this->produit->selectAll();
-                    $this->liste_produit();
+                    $this->modifier_image($file_data['file_name']);
+					}
                 }
-            } else {
-                var_dump("mauvais ");
+            } 
+			else {
+                
                 $data['message'] = "erreur : mauvais numéro de Siret";
                 $this->load->view('errors/erreur_formulaire', $data);
                 $this->load->view('commercant/index', $data);
                 $this->load->view('produit/ajout_produit', $data);
             }
-        } else {
-            $this->load->view('pages/deconnexion');
-        }
->>>>>>> origin/master
+        } 
+		else 
+		{
+			$this->load->view('pages/deconnexion');
+			$this->load->view('pages/pageConnexionSellers');
+		}
+
     }
 
     public function supprimer_produit($id) {
@@ -243,7 +208,7 @@ class ProduitCtrl extends CI_Controller {
         if ($this->produit->selectByCategorie($categorie) != null) {
             $data['produit'] = $this->produit->selectByCategorie($categorie);
             $this->load->view('client/header');
-            $this->load->view('produit/produit_par_categorie', $data);
+            $this->load->view('produit/produit_par_categorie(2)', $data);
             $this->load->view('client/footer');
         } else {
             $this->load->view('client/header');
@@ -305,18 +270,8 @@ class ProduitCtrl extends CI_Controller {
         }
     }
 
-<<<<<<< HEAD
-			if( $data['avis'] != NULL){
-				$this->load->view('commercant/index',$data);
-				$this->load->view('produit/liste_avis',$data);
 
-			}
-			else{
-				$this->load->view('produit/detail', $data);
-			}
-		
-		
-	}
+			
 	
 	public function modifier_image($imageProduit){
 		$this->load->library('image_lib');
@@ -325,14 +280,15 @@ class ProduitCtrl extends CI_Controller {
 		//$config['new_image'] = './assets/image/Produits/resized_img.jpg';
 		//$config['create_thumb'] = TRUE;
 		$config['maintain_ratio'] = TRUE;
-		$config['width']         = 100;
-		$config['height']       = 100;
+		$config['width']         = 200;
+		$config['height']       = 200;
 		$this->image_lib->initialize($config);
 		var_dump($config);
 		$this->image_lib->resize();
 		$this->liste_produit();
 	}
-=======
+
+
     public function liste_avis($idProduit) {
         $this->load->helper('form', 'url');
         $this->load->model('produit','client');
@@ -351,6 +307,6 @@ class ProduitCtrl extends CI_Controller {
             $this->load->view('produit/detail', $data);
         }
     }
->>>>>>> origin/master
+
 
 }

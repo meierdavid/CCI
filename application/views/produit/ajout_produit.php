@@ -23,7 +23,7 @@
 
                     <br></br>
 
-					<?php var_dump($entreprises)?>
+
                      <select name = 'numSiret' id = 'category'> 
                             <option value="">-- Select Entreprise --</option> 
                                <?php foreach($entreprises as $item){ ?> 

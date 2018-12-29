@@ -32,7 +32,7 @@
                                             <tbody>
                                             <tr>
                                                 <?php foreach ($produit as $item) { ?>
-												<td><img src="<?php echo site_url('./asset/image/Produits/'.$item->imageProduit); ?>" /></td>
+												<td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="img-thumbnail"></td>
                                                 <td><?php echo $item->nomProduit; ?></td>
                                                 <td><?php echo $item->descriptionProduit; ?></td>
                                                 <td><?php echo $item->categorieProduit; ?></td>
