@@ -3,10 +3,6 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-
-<!--Pulling Awesome Font -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
     <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
