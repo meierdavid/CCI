@@ -5,6 +5,9 @@
 		<div class="col-md-3 footer-left">
 			<h2><a href="index.html"><span>H</span>érrault E-Commerce</a></h2>
 			<p>Crée par la CCI Hérault</p>
+                        <br><br>
+                        <p> Avec : </p>
+                        <img src="<?php echo base_url("../assets/image/polygo.svg"); ?>" alt="" width="80%" height="20%"/>
 		</div>
 		<div class="col-md-9 footer-right">
 			<div class="sign-grds">

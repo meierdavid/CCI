@@ -11,7 +11,7 @@
             <div class="form-login" >
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Consommateur !</h2>
             
-            <?php ?> // Détail
+            <?php ?> // Affichage jolie du produit ( A FAIRE ) avec photo ECT
 
             <?php echo form_open('ProduitCtrl/modifier'); ?>
                 <br></br>

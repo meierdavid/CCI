@@ -15,7 +15,8 @@
                 <h2 class="text-center"> Poster un avis</h2>
 
 
-                <?php echo form_open('ClientCtrl/ajouter_avis'); ?>
+                <?php $action= 'ClientCtrl/ajouter_avis/'. $produit[0]->idProduit;
+                echo form_open($action); ?>
 
                     <div class="form-group">
                         <label class="control-label">Avis :</label>

@@ -37,7 +37,8 @@ class ProduitCtrl extends CI_Controller {
             $this->load->view('commercant/connexion');
         }
     }
-    public function liste_entreprise_dropbox(){
+
+    public function liste_entreprise_dropbox() {
         $this->load->helper('cookie');
         $this->load->model('commercant');
         $this->load->model('entreprise');
@@ -45,10 +46,10 @@ class ProduitCtrl extends CI_Controller {
         $varid = $this->input->cookie('commercantCookie');
         $data['commercant'] = $this->commercant->selectByMail($varid);
         $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
-	
+
         return $data;
-        
     }
+
     public function ajout_produit() {
         // faire envoi de mail
         // envoi de mail lors de l'inscription d'un produit ?
@@ -60,43 +61,24 @@ class ProduitCtrl extends CI_Controller {
             $varMail = $this->input->cookie('commercantCookie');
             $data['commercant'] = $this->commercant->selectByMail($varMail);
             $data = $this->liste_entreprise_dropbox();
-			if ($this->entreprise->selectById($_POST['numSiret']) != null) {
-				//var_dump($_POST);
-				//var_dump($data);
-				
-				$config = array(
-					'upload_path' => "./assets/image/Produits",
-					'allowed_types' => "gif|jpg|png|jpeg|pdf",
-					'overwrite' => FALSE,
-					'max_size' => "8192000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-					'max_height' => "1536",
-					'max_width' => "2048",
-					'encrypt_name' => TRUE
-				);
-				$this->load->library('upload', $config);
-			
-			//SI IL N'Y A PAS DE FICHIER
+            if ($this->entreprise->selectById($_POST['numSiret']) != null) {
+                //var_dump($_POST);
+                //var_dump($data);
 
-				if (!(isset($_FILES['imageProduit']['name']) && !empty($_FILES['imageProduit']['name']))) {
-					$data = array(
-						"nomProduit" => htmlspecialchars($_POST['nomProduit']),
-						"categorieProduit" => htmlspecialchars($_POST['categorieProduit']),
-						"numSiret" => htmlspecialchars($_POST['numSiret']),
-						"descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
-						"prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
-						"reducProduit" => htmlspecialchars($_POST['reducProduit']),
-						"couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
-						"nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit'])
-					);
-					$this->produit->insert_without_picture($data);
-					$data['produit'] = $this->produit->selectAll();
-					$this->liste_produit();
-				}
-				
-			// SI IL Y A UN FICHIER
-			
-				else {
+                $config = array(
+                    'upload_path' => "./assets/image/Produits",
+                    'allowed_types' => "gif|jpg|png|jpeg|pdf",
+                    'overwrite' => FALSE,
+                    'max_size' => "8192000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+                    'max_height' => "1536",
+                    'max_width' => "2048",
+                    'encrypt_name' => TRUE
+                );
+                $this->load->library('upload', $config);
 
+                //SI IL N'Y A PAS DE FICHIER
+
+<<<<<<< HEAD
 					if (!($this->upload->do_upload('imageProduit'))) {
 						
 						log_message('error', $this->upload->display_errors());
@@ -137,6 +119,61 @@ class ProduitCtrl extends CI_Controller {
 			$this->load->view('pages/deconnexion');
 			$this->load->view('pages/pageConnexionSellers');
 		}
+=======
+                if (!(isset($_FILES['imageProduit']['name']) && !empty($_FILES['imageProduit']['name']))) {
+                    $data = array(
+                        "nomProduit" => htmlspecialchars($_POST['nomProduit']),
+                        "categorieProduit" => htmlspecialchars($_POST['categorieProduit']),
+                        "numSiret" => htmlspecialchars($_POST['numSiret']),
+                        "descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
+                        "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
+                        "reducProduit" => htmlspecialchars($_POST['reducProduit']),
+                        "couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
+                        "nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit'])
+                    );
+                    $this->produit->insert_without_picture($data);
+                    $data['produit'] = $this->produit->selectAll();
+                    $this->liste_produit();
+                }
+
+                // SI IL Y A UN FICHIER
+                else {
+
+                    if (!($this->upload->do_upload('imageProduit'))) {
+
+                        log_message('error', $this->upload->display_errors());
+                        $data['message'] = "erreur : la photo n'a pas pu s'importer";
+                        $this->load->view('errors/erreur_formulaire', $data);
+                        $this->liste_produit();
+                    } else {
+                        $file_data = $this->upload->data();
+                    }
+                    $data = array(
+                        "nomProduit" => htmlspecialchars($_POST['nomProduit']),
+                        "categorieProduit" => htmlspecialchars($_POST['categorieProduit']),
+                        "numSiret" => htmlspecialchars($_POST['numSiret']),
+                        "descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
+                        "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
+                        "reducProduit" => htmlspecialchars($_POST['reducProduit']),
+                        "couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
+                        "nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
+                        "imageProduit" => htmlspecialchars($file_data['file_name'])
+                    );
+                    $this->produit->insert_with_picture($data);
+                    $data['produit'] = $this->produit->selectAll();
+                    $this->liste_produit();
+                }
+            } else {
+                var_dump("mauvais ");
+                $data['message'] = "erreur : mauvais numéro de Siret";
+                $this->load->view('errors/erreur_formulaire', $data);
+                $this->load->view('commercant/index', $data);
+                $this->load->view('produit/ajout_produit', $data);
+            }
+        } else {
+            $this->load->view('pages/deconnexion');
+        }
+>>>>>>> origin/master
     }
 
     public function supprimer_produit($id) {
@@ -150,7 +187,6 @@ class ProduitCtrl extends CI_Controller {
         $this->liste_produit();
     }
 
-	
     public function detail_produit($id) {
         $this->load->model('produit');
         $this->load->helper('form', 'url');
@@ -187,8 +223,8 @@ class ProduitCtrl extends CI_Controller {
                 "descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
                 "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
                 "reducProduit" => htmlspecialchars($_POST['reducProduit']),
-				"couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
-				"nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
+                "couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
+                "nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
             );
             $this->produit->update($id, $data);
             $data['produit'] = $this->produit->selectById($id);
@@ -215,6 +251,23 @@ class ProduitCtrl extends CI_Controller {
             $this->load->view('client/footer');
         }
     }
+    
+     public function produit_entreprise($idEntreprise) {
+        $this->load->helper('form', 'url');
+        $this->load->library('form_validation');
+        $this->load->model('produit','entreprise');
+        if ($this->produit->selectByEntreprise($idEntreprise) != null) {
+            $data['produit'] = $this->produit->selectByEntreprise($idEntreprise);
+            $data['entreprise'] = $this->entreprise->selectById($idEntreprise);
+            $this->load->view('client/header');
+            $this->load->view('produit/produit_par_entreprise', $data);
+            $this->load->view('client/footer');
+        } else {
+            $this->load->view('client/header');
+            $this->load->view('client/accueil');
+            $this->load->view('client/footer');
+        }
+    }
 
     public function soldes() {
         $this->load->helper('form', 'url');
@@ -233,7 +286,7 @@ class ProduitCtrl extends CI_Controller {
     }
 
     public function search() {
-        $this->load->helper('form', 'url');
+        $this->load->helper('form', 'url','cookie');
         $this->load->library('form_validation');
         $this->load->model('produit');
         if (isset($_POST['search'])) {
@@ -245,21 +298,14 @@ class ProduitCtrl extends CI_Controller {
                 $this->load->view('produit/produit_par_recherche', $data);
                 $this->load->view('client/footer');
             } else {
-                
+                //
             }
         } else {
-            
+            //
         }
     }
-	
-	
-	public function liste_avis($idProduit){
-		$this->load->model('produit');
-		$this->load->model('poster_avis');
-		
-			$data['produit'] = $this->produit->selectById($idProduit);
-			$data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
 
+<<<<<<< HEAD
 			if( $data['avis'] != NULL){
 				$this->load->view('commercant/index',$data);
 				$this->load->view('produit/liste_avis',$data);
@@ -286,5 +332,25 @@ class ProduitCtrl extends CI_Controller {
 		$this->image_lib->resize();
 		$this->liste_produit();
 	}
+=======
+    public function liste_avis($idProduit) {
+        $this->load->helper('form', 'url');
+        $this->load->model('produit','client');
+        $this->load->model('poster_avis');
+        $varMail = $this->input->cookie('clientCookie');
+        $data['client'] = $this->client->selectByMail($varMail);
+        $data['produit'] = $this->produit->selectById($idProduit);
+        $data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
+        
+        if ($data['avis'] != NULL) {
+            $this->load->view('client/header');
+            $this->load->view('produit/detail', $data);
+            $this->load->view('produit/liste_avis', $data);
+            $this->load->view('client/footer');
+        } else {
+            $this->load->view('produit/detail', $data);
+        }
+    }
+>>>>>>> origin/master
 
 }

@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h1><a href="index.html"><img src="<?php echo base_url()."../template/images/logo.png"; ?>"></a></h1>
 		</div>
 		<div class="col-md-4 header-middle">
-			<?php echo form_open('ProduitCtrl/search'); ?>
+			<?php echo form_open('ProduitCtrl/search'); var_dump($_COOKIE); ?>
 					<input type="search" name="search" placeholder="Rechercher sur le site..." required="">
 					<input type="submit" value=" ">
 				<div class="clearfix"></div>
@@ -98,11 +98,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="col-sm-3 multi-gd-img">
 										<ul class="multi-column-dropdown">
 											<h2>Magasins</h2>
-											<li><a href="mens.html">Magasin 1</a></li>
-											<li><a href="mens.html">Magasin 2</a></li>
-											<li><a href="mens.html">Magasin 3</a></li>
-											<li><a href="mens.html">Magasin 4</a></li>
-											<li><a href="mens.html">Magasin 5</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-6 multi-gd-img multi-gd-text ">
