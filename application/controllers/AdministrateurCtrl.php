@@ -278,6 +278,7 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->view('administrateur/index');
+		$this->poster_avis->deleteByidClient($id);
         $this->client->delete($id);
         echo "client Supprimé";
     }

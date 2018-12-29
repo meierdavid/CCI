@@ -120,7 +120,8 @@ class ProduitCtrl extends CI_Controller {
 					);
 					$this->produit->insert_with_picture($data);
 					$data['produit'] = $this->produit->selectAll();
-					$this->liste_produit();
+					$this->modifier_image($file_data['file_name']);
+					
 				}
 			}
 			else {
@@ -134,13 +135,16 @@ class ProduitCtrl extends CI_Controller {
 		}
 		else {
 			$this->load->view('pages/deconnexion');
+			$this->load->view('pages/pageConnexionSellers');
 		}
     }
 
     public function supprimer_produit($id) {
         $this->load->model('produit');
+		$this->load->model('poster_avis');
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
+		$this->poster_avis->deleteByidProduit($id);
         $this->produit->delete($id);
         echo "produit Supprimé";
         $this->liste_produit();
@@ -266,6 +270,21 @@ class ProduitCtrl extends CI_Controller {
 			}
 		
 		
+	}
+	
+	public function modifier_image($imageProduit){
+		$this->load->library('image_lib');
+		$config['image_library'] = 'gd2';
+		$config['source_image'] = './assets/image/Produits/'.$imageProduit;
+		//$config['new_image'] = './assets/image/Produits/resized_img.jpg';
+		//$config['create_thumb'] = TRUE;
+		$config['maintain_ratio'] = TRUE;
+		$config['width']         = 100;
+		$config['height']       = 100;
+		$this->image_lib->initialize($config);
+		var_dump($config);
+		$this->image_lib->resize();
+		$this->liste_produit();
 	}
 
 }
