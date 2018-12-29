@@ -14,18 +14,21 @@
                                 <tr>
                                     <th scope="col">Identifiant Client</th>
                                     <th scope="col">Avis</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                           <tbody>
                                 <tr>
-                                  <?php var_dump($_COOKIE);foreach ($avis as $item) { ?>
+                                  <?php foreach ($avis as $item) { ?>
                                     <td><?php echo $item->idClient; ?></td>
                                     <td><?php echo $item->avisClient; ?></td>
-                                    
+                                    <?php if($client[0]->idClient == $item->idClient){?>
+                                    <td><a href="<?php echo base_url("ClientCtrl/detail_avis/").$produit[0]->idProduit; ?>">Modifiez votre avis</a></td>
+                                    <?php } ?>
 
-                                  
+                                  </tr>
                                   <?php } ?>
-                                </tr>
+                                
                                 </tbody>
                               </table>
                            </div>

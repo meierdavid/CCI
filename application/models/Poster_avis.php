@@ -1,60 +1,66 @@
 <?php
-class poster_avis extends CI_Model{
 
-  protected $table ='poster_avis';
+class poster_avis extends CI_Model {
 
-  public function __construct(){
-    parent::__construct();
-  }
+    protected $table = 'poster_avis';
 
-  public function selectAll(){
-    $this->load->database();
+    public function __construct() {
+        parent::__construct();
+    }
 
-    return $this->db->select('*')
-    ->from('poster_avis')
-    ->get()
-    ->result();
-  }
+    public function selectAll() {
+        $this->load->database();
 
-  public function selectByIdClient($id){
-    $this->load->database();
+        return $this->db->select('*')
+                        ->from('poster_avis')
+                        ->get()
+                        ->result();
+    }
 
-    return $this->db->select('*')
-    ->from('poster_avis')
-    ->where('idClient', $id)
-    ->get()
-    ->result();
-  }
+    public function selectByIdClient($id) {
+        $this->load->database();
 
-  public function selectByIdProduit($id){
+        return $this->db->select('*')
+                        ->from('poster_avis')
+                        ->where('idClient', $id)
+                        ->get()
+                        ->result();
+    }
 
-    $this->load->database();
+    public function selectByIdProduit($id) {
 
-    return $this->db->select('*')
-    ->from('poster_avis')
-    ->where('idProduit', $id)
-    ->get()
-    ->result();
-  }
+        $this->load->database();
 
-  public function insert($data) {
+        return $this->db->select('*')
+                        ->from('poster_avis')
+                        ->where('idProduit', $id)
+                        ->get()
+                        ->result();
+    }
 
-  $this->load->database();
+    public function insert($data) {
 
-  $this->db->set('idClient', $data['idClient'])
-        ->set('idProduit', $data['idProduit'])
-		->set('avisClient', $data['avisClient'])
-		->insert($this->table);
-  }
-  
-  
-  public function delete($idClient,$idProduit) {
-	$this->load->database();
-	$this->db->delete('poster_avis', array('idClient' => $idClient , 'idProduit' => $idProduit));
-  }
+        $this->load->database();
 
-  
-  
+        $this->db->set('idClient', $data['idClient'])
+                ->set('idProduit', $data['idProduit'])
+                ->set('avisClient', $data['avisClient'])
+                ->insert($this->table);
+    }
+
+    public function delete($idClient, $idProduit) {
+        $this->load->database();
+        $this->db->delete('poster_avis', array('idClient' => $idClient, 'idProduit' => $idProduit));
+    }
+
+    public function update($idProduit, $idClient, $avis) {
+        $this->load->database();
+        $this->db->set('avisClient', $avis)
+                ->where('idProduit', $idProduit)
+                ->where('idClient', $idClient)
+                ->update($this->table);
+    }
+
 }
 
 ?>

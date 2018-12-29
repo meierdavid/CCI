@@ -245,12 +245,16 @@ class ProduitCtrl extends CI_Controller {
 
     public function liste_avis($idProduit) {
         $this->load->helper('form', 'url');
-        $this->load->model('produit');
+        $this->load->model('produit','client');
         $this->load->model('poster_avis');
+        $varMail = $this->input->cookie('clientCookie');
+        $data['client'] = $this->client->selectByMail($varMail);
         $data['produit'] = $this->produit->selectById($idProduit);
         $data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
+        
         if ($data['avis'] != NULL) {
             $this->load->view('client/header');
+            $this->load->view('produit/detail', $data);
             $this->load->view('produit/liste_avis', $data);
             $this->load->view('client/footer');
         } else {
