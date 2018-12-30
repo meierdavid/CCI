@@ -42,7 +42,7 @@ class AdministrateurCtrl extends CI_Controller {
           "prenomAdministrateur" => htmlspecialchars($_POST['prenomAdministrateur']),
           "nomAdministrateur" => htmlspecialchars($_POST['nomAdministrateur']),
           "mailAdministrateur" => htmlspecialchars($_POST['mailAdministrateur']),
-          "mdpAdministrateur" => htmlspecialchars($_POST['mdpAdministrateur']),
+          "mdpAdministrateur" => htmlspecialchars(crypt($_POST['mdpAdministrateur'])),
           "adresseAdministrateur" => htmlspecialchars($_POST['adresseAdministrateur']),
           "codePAdministrateur" => htmlspecialchars($_POST['codePAdministrateur']),
           "villeAdministrateur" => htmlspecialchars($_POST['villeAdministrateur']),
@@ -77,13 +77,13 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->view('errors/erreur_formulaire', $data);
         $this->load->view('administrateur/connexion');
       } else {
-        if ($administrateur[0]->mdpAdministrateur != $_POST['mdpAdministrateur']) {
+        if (!password_verify($_POST['mdpAdministrateur'], $administrateur[0]->mdpAdministrateur)) {
           $data['message'] = "erreur : Mauvais mot de passe";
           $this->load->view('errors/erreur_formulaire', $data);
           $this->load->view('administrateur/connexion');
         } else {
           $data['administrateur'] = $administrateur;
-          if ($data['administrateur'] != NULL && $_POST['mdpAdministrateur'] == $data['administrateur'][0]->mdpAdministrateur) {
+          if ($data['administrateur'] != NULL && password_verify($_POST['mdpAdministrateur'], $administrateur[0]->mdpAdministrateur)) {
             $cookie = array(
               'name' => 'administrateurCookie',
               'value' => $data['administrateur'][0]->mailAdministrateur,
@@ -100,12 +100,11 @@ class AdministrateurCtrl extends CI_Controller {
 
   public function deconnexion() {
     $this->load->helper('url');
-    $this->load->helper('cookie');
-    $this->load->helper('form');
+    $this->load->helper('cookie', 'form');
     delete_cookie("administrateurCookie");
     $data['message'] = "Vous avez été déconnecté avec succès";
     $this->load->view('errors/validation_formulaire', $data);
-    $this->load->view('pages/pageconnexion');
+    $this->load->view('administrateur/connexion', $data);
   }
 
   public function ajout_administrateur() {
@@ -134,7 +133,7 @@ class AdministrateurCtrl extends CI_Controller {
           "prenomAdministrateur" => htmlspecialchars($_POST['prenomAdministrateur']),
           "nomAdministrateur" => htmlspecialchars($_POST['nomAdministrateur']),
           "mailAdministrateur" => htmlspecialchars($_POST['mailAdministrateur']),
-          "mdpAdministrateur" => htmlspecialchars($_POST['mdpAdministrateur']),
+          "mdpAdministrateur" => htmlspecialchars(crypt($_POST['mdpAdministrateur'])),
           "adresseAdministrateur" => htmlspecialchars($_POST['adresseAdministrateur']),
           "codePAdministrateur" => htmlspecialchars($_POST['codePAdministrateur']),
           "villeAdministrateur" => htmlspecialchars($_POST['villeAdministrateur']),
@@ -162,9 +161,9 @@ class AdministrateurCtrl extends CI_Controller {
       $data['administrateur'] = $this->administrateur->selectByMail($varid);
 
       if (isset($_POST['ancienMdp'])) {
-        if ($_POST['ancienMdp'] == $data['administrateur'][0]->mdpAdministrateur){
+        if (password_verify($_POST['ancienMdp'], $data['administrateur'][0]->mdpAdministrateur)){
           if ($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']) {
-            $newMdp = $_POST['mdpAdministrateur'];
+            $newMdp = crypt($_POST['mdpAdministrateur']);
             $this->administrateur->updateMdp($varid, $newMdp);
             delete_cookie("administrateurCookie");
 
@@ -235,7 +234,7 @@ class AdministrateurCtrl extends CI_Controller {
           "prenomCommercant" => htmlspecialchars($_POST['prenomCommercant']),
           "nomCommercant" => htmlspecialchars($_POST['nomCommercant']),
           "mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
-          "mdpCommercant" => htmlspecialchars($_POST['mdpCommercant']),
+          "mdpCommercant" => htmlspecialchars(crypt($_POST['mdpCommercant'])),
           "adresseCommercant" => htmlspecialchars($_POST['adresseCommercant']),
           "codePCommercant" => htmlspecialchars($_POST['codePCommercant']),
           "villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
