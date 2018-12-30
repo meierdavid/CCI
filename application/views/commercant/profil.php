@@ -13,53 +13,54 @@
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
             <h2 class="text-center"> Profil Commerçant !</h2>
-            <form>
+            <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
+            <?php echo form_open('CommercantCtrl/modifier_commercant'); ?>
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
-                        <input type="text" class="form-control" name="prenomCommercant" value="<?php echo  $commercant[0]->prenomCommercant; ?>" size="30" required/> 
+                        <input type="text" class="form-control" name="prenomCommercant" value="<?php echo  $commercant[0]->prenomCommercant; ?>" size="30" required/>
                             <h6 style="color:red;"</h6>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="control-label">Nom</label>
                         <input type="text" class="form-control" name="nomCommercant" value=" <?php echo $commercant[0]->nomCommercant; ?>" size="30" required/>
-                    </div>    
+                    </div>
                     <div class="form-group">
                         <label class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mailCommercant" value="<?php echo $commercant[0]->mailCommercant; ?>" size="30" required/> 
+                        <input type="text" class="form-control" name="mailCommercant" value="<?php echo $commercant[0]->mailCommercant; ?>" size="30" required/>
                             <h6 style="color:red;"</h6>
-                    </div>  
-                    
-          
+                    </div>
+
+
                     <div class="form-group">
                         <label class="control-label">Adresse</label>
                         <input type="text" class="form-control" name="adresseCommercant" value="<?php echo $commercant[0]->adresseCommercant; ?>" size="30" required/>
-                    </div>    
+                    </div>
                     <div class="form-group">
                         <label class="control-label">Code postale</label>
                             <input type="text" class="form-control" name="codePCommercant" value="<?php  echo $commercant[0]->codePCommercant; ?>" size="30" required/>
-                    </div> 
+                    </div>
                     <div class="form-group">
                         <label class="control-label">Ville</label>
                         <input type="text" class="form-control" name="villeCommercant" value="<?php echo $commercant[0]->villeCommercant; ?>" size="30" required/>
-                    </div>    
+                    </div>
                     <div class="form-group">
                         <label class="control-label">Numéro de téléphone</label>
                         <input type="text" class="form-control" name="telCommercant" value="<?php echo $commercant[0]->telCommercant; ?>" size="30" required/>
-                    </div>    
-                    
-                    
-                    
-                    <!-- <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div> -->
+                    </div>
+
+                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div>
                     <div class="text-center">
                         <br>
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
-                </form>
-            <br></br>
-            <br></br>
 
-            
+                </form>
+
+            <div class="text-center">
+                <a class="btn btn-primary" href="<?php echo base_url()?>CommercantCtrl/changer_mdp" role="button">Voulez vous changer votre mot de passe ?</a>
+            </div>
+          </br>
 
             </div>
         </div>
