@@ -53,7 +53,7 @@ class ClientCtrl extends CI_Controller {
             "prenomClient" => htmlspecialchars($_POST['prenomClient']),
             "nomClient" => htmlspecialchars($_POST['nomClient']),
             "mailClient" => htmlspecialchars($_POST['mailClient']),
-            "mdpClient" => htmlspecialchars(crypt($_POST['mdpClient'])),
+            "mdpClient" => htmlspecialchars(crypt($_POST['mdpClient'],'md5')),
             "adresseClient" => htmlspecialchars($_POST['adresseClient']),
             "codePClient" => htmlspecialchars($_POST['codePClient']),
             "villeClient" => htmlspecialchars($_POST['villeClient']),
@@ -129,7 +129,7 @@ class ClientCtrl extends CI_Controller {
           "prenomClient" => htmlspecialchars($_POST['prenomClient']),
           "nomClient" => htmlspecialchars($_POST['nomClient']),
           "mailClient" => htmlspecialchars($_POST['mailClient']),
-          "mdpClient" => htmlspecialchars(crypt($_POST['mdpClient'])),
+          "mdpClient" => htmlspecialchars(crypt($_POST['mdpClient'],'md5')),
           "adresseClient" => htmlspecialchars($_POST['adresseClient']),
           "codePClient" => htmlspecialchars($_POST['codePClient']),
           "villeClient" => htmlspecialchars($_POST['villeClient']),
@@ -204,7 +204,7 @@ class ClientCtrl extends CI_Controller {
       if (isset($_POST['mdpClientAncien'])) {
         if (password_verify($_POST['mdpClientAncien'], $data['client'][0]->mdpClient)){
 			if ($_POST['mdpClientNouveau'] == $_POST['mdpClientConf']) {
-            $newMdp = crypt($_POST['mdpClientNouveau']);
+            $newMdp = crypt($_POST['mdpClientNouveau'],'md5');
             $this->client->updateMdp($varid, $newMdp);
             setcookie("clientCookie", "", time() - 36000);
 

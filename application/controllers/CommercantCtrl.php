@@ -41,7 +41,7 @@ class CommercantCtrl extends CI_Controller {
 			$data['commercant'] = $this->commercant->selectByMail($varid);
 			if(isset($_POST['mdpCommercantAncien']) && (password_verify($_POST['mdpCommercantAncien'], $data['commercant'][0]->mdpCommercant))){ //dé-hashage
 				if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
-					$newMdp = crypt($_POST['mdpCommercantNouveau']);
+					$newMdp = crypt($_POST['mdpCommercantNouveau'],'md5');
 					$this->commercant->updateMdp($varid,$newMdp);
 					setcookie("clientCookie", "", time() - 36000);
 
@@ -51,7 +51,7 @@ class CommercantCtrl extends CI_Controller {
 				}
 				else{
 					$data['message'] = "ereur : La confirmation de mot de passe ne correspond pas au premier";
-	        $this->load->view('errors/erreur_formulaire', $data);
+	                $this->load->view('errors/erreur_formulaire', $data);
 					$this->load->view('commercant/index',$data);
 					$this->load->view('commercant/changer_mdp',$data);
 				}
@@ -403,7 +403,7 @@ public function inscription(){
 				"prenomCommercant"=> htmlspecialchars($_POST['prenomCommercant']),
 				"nomCommercant"=> htmlspecialchars($_POST['nomCommercant']),
 				"mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
-				"mdpCommercant" => htmlspecialchars(crypt($_POST['mdpCommercant'])), //mot de passe en hashage
+				"mdpCommercant" => htmlspecialchars(crypt($_POST['mdpCommercant'],'md5')), //mot de passe en hashage
 				"adresseCommercant"=> htmlspecialchars($_POST['adresseCommercant']),
 				"codePCommercant"=> htmlspecialchars($_POST['codePCommercant']),
 				"villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
