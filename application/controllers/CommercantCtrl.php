@@ -42,13 +42,7 @@ class CommercantCtrl extends CI_Controller {
 				if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
 					$newMdp = $_POST['mdpCommercantNouveau'];
 					$this->commercant->updateMdp($varid,$newMdp);
-					delete_cookie("commercantCookie");
-					$cookie = array(
-						'name'   => 'commercantCookie',
-						'value'  => $data['commercant'][0]->mailCommercant,
-						'expire' => '3600'
-					);
-					$this->input->set_cookie($cookie);
+					setcookie("clientCookie", "", time() - 36000);
 
 					$data['message'] = "Votre mot de passe a été modifié avec succès";
 	        $this->load->view('errors/validation_formulaire', $data);
