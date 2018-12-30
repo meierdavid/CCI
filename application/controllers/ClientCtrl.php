@@ -163,11 +163,7 @@ class ClientCtrl extends CI_Controller {
       $client = $this->client->selectByMail($_POST['mailClient']);
       //le client qui essaye de se connecter
 
-<<<<<<< HEAD
-        $this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
-		$this->form_validation->set_rules('noteClient', 'Note', 'integer');
-        if ($this->form_validation->run() == FALSE) {
-=======
+
       if ($client == null) {
         $data['message'] = "erreur : cet email n'existe pas";
         $this->load->view('errors/erreur_formulaire', $data);
@@ -188,38 +184,13 @@ class ClientCtrl extends CI_Controller {
               'path' => '/cci/index.php',
             );
             $this->input->set_cookie($cookie);
->>>>>>> origin/master
             $this->load->view('client/header');
             $this->load->view('client/accueil');
             $this->load->view('client/footer');
-<<<<<<< HEAD
-        } else {
-
-            if ($cli[0] == null) {
-                $data['message'] = "erreur : pas de client";
-                $this->load->view('errors/erreur_formulaire', $data);
-                $this->load->view('client/deconnexion');
-            } else {
-
-                $data = array(
-                    "idProduit" => htmlspecialchars($idProduit),
-                    "idClient" => htmlspecialchars($cli[0]->idClient),
-                    "avisClient" => htmlspecialchars($_POST['avisClient']),
-					"noteClient" => htmlspecialchars($_POST['noteClient'])
-                );
-                $this->poster_avis->insert($data);
-				$data['client']=$this->client->selectByMail($cookie);
-				$data['produit'] = $this->produit->selectById($idProduit);
-                $this->load->view('client/header');
-                $this->load->view('client/avis_produit', $data);
-                $this->load->view('client/footer');
-            }
-=======
-          }
->>>>>>> origin/master
         }
       }
     }
+  }
   }
 
 
@@ -234,7 +205,7 @@ class ClientCtrl extends CI_Controller {
       $data['client'] = $this->client->selectByMail($varid);
       if (isset($_POST['mdpClientAncien'])) {
         if ($_POST['mdpClientAncien'] == $data['client'][0]->mdpClient){
-          if ($_POST['mdpClientNouveau'] == $_POST['mdpClientConf']) {
+			if ($_POST['mdpClientNouveau'] == $_POST['mdpClientConf']) {
             $newMdp = $_POST['mdpClientNouveau'];
             $this->client->updateMdp($varid, $newMdp);
             setcookie("clientCookie", "", time() - 36000);
@@ -242,16 +213,46 @@ class ClientCtrl extends CI_Controller {
             $data['message'] = "Votre mot de passe a été modifié avec succès";
             $this->load->view('errors/validation_formulaire', $data);
             $this->load->view('client/header');
-<<<<<<< HEAD
-            $this->load->view('client/detail_avis', $data);
+			$this->load->view('client/accueil');
             $this->load->view('client/footer');
-        } else {
-            $this->load->view('produit/detail', $data);
+          }
+          else {
+            $data['message'] = "erreur : La confirmation de mot de passe ne correspond pas au premier";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('client/header');
+            $this->load->view('client/changer_mdp', $data);
+            $this->load->view('client/footer');
+          }
         }
+        else {
+          $data['message'] = "erreur :  L'ancien mot de passe n'est pas conforme";
+          $this->load->view('errors/erreur_formulaire', $data);
+          $this->load->view('client/header');
+          $this->load->view('client/changer_mdp', $data);
+          $this->load->view('client/footer');
+		}
+	  }
+	
+	else {
+        $this->load->view('client/header');
+        $this->load->view('client/changer_mdp');
+        $this->load->view('client/footer');
+      }
+	}
+	else {
+      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+      $this->load->view('errors/erreur_formulaire', $data);
+      $this->load->view('client/connexion');
     }
+	
+  }
+	
     // permet de modifier l'avis du client ayant l'adresse mail contenue dans le cookie client par rapport
     // au produit dont l'id est passé en paramètre
     // Un client ne peut avoir qu'un avis sur un produit
+	
+	
+	
     public function modifier_avis($idProduit) {
         $this->load->model('client', 'produit');
         $this->load->model('poster_avis');
@@ -263,14 +264,14 @@ class ClientCtrl extends CI_Controller {
 		$data['client']=$this->client->selectByMail($cookie);
 		$data['avis']=$this->poster_avis->selectByIdClientIdProduit($data['client'][0]->idClient,$idProduit);
         $cli = $this->client->selectByMail($cookie);
-
-        $this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
+		$this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
 		$this->form_validation->set_rules('noteClient', 'Note', 'integer');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('client/header');
             $this->load->view('client/modifier_avis', $data);
             $this->load->view('client/footer');
-        } else {
+        } 
+		else {
 
             if ($cli[0] == null) {
                 $data['message'] = "erreur : pas de client";
@@ -292,38 +293,11 @@ class ClientCtrl extends CI_Controller {
                 $this->load->view('produit/liste_avis', $data);
                 $this->load->view('client/footer');
             }
-=======
-            $this->load->view('client/accueil');
-            $this->load->view('client/footer');
-          }
-          else {
-            $data['message'] = "erreur : La confirmation de mot de passe ne correspond pas au premier";
-            $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('client/header');
-            $this->load->view('client/changer_mdp', $data);
-            $this->load->view('client/footer');
-          }
         }
-        else {
-          $data['message'] = "erreur :  L'ancien mot de passe n'est pas conforme";
-          $this->load->view('errors/erreur_formulaire', $data);
-          $this->load->view('client/header');
-          $this->load->view('client/changer_mdp', $data);
-          $this->load->view('client/footer');
->>>>>>> origin/master
-        }
-      }
-      else {
-        $this->load->view('client/header');
-        $this->load->view('client/changer_mdp');
-        $this->load->view('client/footer');
-      }
-    }
-    else {
-      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
-      $this->load->view('errors/erreur_formulaire', $data);
-      $this->load->view('client/connexion');
-    }
+     
+      
+    
+    
   }
 
 // permet au client de modifier son avis sur le produit passé en paramètre
@@ -399,7 +373,7 @@ public function detail_avis($idProduit){
 // permet de modifier l'avis du client ayant l'adresse mail contenue dans le cookie client par rapport
 // au produit dont l'id est passé en paramètre
 // Un client ne peut avoir qu'un avis sur un produit
-public function modifier_avis($idProduit) {
+/*public function modifier_avis($idProduit) {
   $this->load->model('client', 'produit');
   $this->load->model('poster_avis');
   $this->load->helper('form', 'url');
@@ -427,7 +401,7 @@ public function modifier_avis($idProduit) {
       $this->load->view('client/footer');
     }
   }
-}
+}*/
 //deconnecte le client le redirige vers la page de connexion et enleve la durée de vie du cookie
 public function deconnexion() {
   $this->load->helper('form', 'url');
