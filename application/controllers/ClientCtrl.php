@@ -247,11 +247,10 @@ class ClientCtrl extends CI_Controller {
 	
   }
 	
+	
     // permet de modifier l'avis du client ayant l'adresse mail contenue dans le cookie client par rapport
     // au produit dont l'id est passé en paramètre
     // Un client ne peut avoir qu'un avis sur un produit
-	
-	
 	
     public function modifier_avis($idProduit) {
         $this->load->model('client', 'produit');
@@ -350,7 +349,6 @@ public function ajouter_avis($idProduit) {
 }
 
 
-
 //permet de voir le détail d'un avis sur un produit dont l'idée est passé en paramètre
 //permet de modifier un avis après envoie du formulaire dans la view client/detail_avis
 public function detail_avis($idProduit){
@@ -370,38 +368,7 @@ public function detail_avis($idProduit){
     $this->load->view('produit/detail', $data);
   }
 }
-// permet de modifier l'avis du client ayant l'adresse mail contenue dans le cookie client par rapport
-// au produit dont l'id est passé en paramètre
-// Un client ne peut avoir qu'un avis sur un produit
-/*public function modifier_avis($idProduit) {
-  $this->load->model('client', 'produit');
-  $this->load->model('poster_avis');
-  $this->load->helper('form', 'url');
-  $this->load->helper('cookie');
-  $this->load->library('form_validation');
-  $data['produit'] = $this->produit->selectById($idProduit);
-  $cookie = $this->input->cookie('clientCookie');
-  $cli = $this->client->selectByMail($cookie);
-  $this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
-  if ($this->form_validation->run() == FALSE) {
-    $this->load->view('client/header');
-    $this->load->view('client/detail_avis', $data);
-    $this->load->view('client/footer');
-  } else {
-    if ($cli[0] == null) {
-      $data['message'] = "erreur : pas de client";
-      $this->load->view('errors/erreur_formulaire', $data);
-      $this->load->view('client/deconnexion');
-    } else {
-      $this->poster_avis->update($idProduit,$cli[0]->idClient,$_POST['avisClient']);
-      $data['message'] = "Votre avis a été modifié avec succès";
-      $this->load->view('errors/validation_formulaire', $data);
-      $this->load->view('client/header');
-      $this->load->view('client/detail_avis', $data);
-      $this->load->view('client/footer');
-    }
-  }
-}*/
+
 //deconnecte le client le redirige vers la page de connexion et enleve la durée de vie du cookie
 public function deconnexion() {
   $this->load->helper('form', 'url');
