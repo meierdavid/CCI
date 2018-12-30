@@ -51,8 +51,8 @@
 					<div class="form-group">
                         <label class="control-label">Couleur du Produit</label>
                         <input type="text" class="form-control" name="couleurProduit" value="<?php  echo $produit[0]->couleurProduit; ?>" size="30" required/>
-                    </div> 		
-					<div class="form-group">
+                    </div> 	
+                    <div class="form-group">
                         <label class="control-label">Quantité disponible du Produit</label>
                         <input type="text" class="form-control" name="nbDispoProduit" value="<?php  echo $produit[0]->nbDispoProduit; ?>" size="30" required/>
                     </div> 							
