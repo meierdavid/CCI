@@ -42,7 +42,7 @@ class AdministrateurCtrl extends CI_Controller {
           "prenomAdministrateur" => htmlspecialchars($_POST['prenomAdministrateur']),
           "nomAdministrateur" => htmlspecialchars($_POST['nomAdministrateur']),
           "mailAdministrateur" => htmlspecialchars($_POST['mailAdministrateur']),
-          "mdpAdministrateur" => htmlspecialchars(crypt($_POST['mdpAdministrateur'])),
+          "mdpAdministrateur" => htmlspecialchars(crypt($_POST['mdpAdministrateur'],'md5')),
           "adresseAdministrateur" => htmlspecialchars($_POST['adresseAdministrateur']),
           "codePAdministrateur" => htmlspecialchars($_POST['codePAdministrateur']),
           "villeAdministrateur" => htmlspecialchars($_POST['villeAdministrateur']),
@@ -133,7 +133,7 @@ class AdministrateurCtrl extends CI_Controller {
           "prenomAdministrateur" => htmlspecialchars($_POST['prenomAdministrateur']),
           "nomAdministrateur" => htmlspecialchars($_POST['nomAdministrateur']),
           "mailAdministrateur" => htmlspecialchars($_POST['mailAdministrateur']),
-          "mdpAdministrateur" => htmlspecialchars(crypt($_POST['mdpAdministrateur'])),
+          "mdpAdministrateur" => htmlspecialchars(crypt($_POST['mdpAdministrateur'],'md5')),
           "adresseAdministrateur" => htmlspecialchars($_POST['adresseAdministrateur']),
           "codePAdministrateur" => htmlspecialchars($_POST['codePAdministrateur']),
           "villeAdministrateur" => htmlspecialchars($_POST['villeAdministrateur']),
@@ -163,7 +163,7 @@ class AdministrateurCtrl extends CI_Controller {
       if (isset($_POST['ancienMdp'])) {
         if (password_verify($_POST['ancienMdp'], $data['administrateur'][0]->mdpAdministrateur)){
           if ($_POST['mdpAdministrateur'] == $_POST['mdpAdministrateur2']) {
-            $newMdp = crypt($_POST['mdpAdministrateur']);
+            $newMdp = crypt($_POST['mdpAdministrateur'],'md5');
             $this->administrateur->updateMdp($varid, $newMdp);
             delete_cookie("administrateurCookie");
 
@@ -234,7 +234,7 @@ class AdministrateurCtrl extends CI_Controller {
           "prenomCommercant" => htmlspecialchars($_POST['prenomCommercant']),
           "nomCommercant" => htmlspecialchars($_POST['nomCommercant']),
           "mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
-          "mdpCommercant" => htmlspecialchars(crypt($_POST['mdpCommercant'])),
+          "mdpCommercant" => htmlspecialchars(crypt($_POST['mdpCommercant'],'md5')),
           "adresseCommercant" => htmlspecialchars($_POST['adresseCommercant']),
           "codePCommercant" => htmlspecialchars($_POST['codePCommercant']),
           "villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
