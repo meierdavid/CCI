@@ -21,18 +21,20 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('pages/deconnexion');
         }
     }
-    
+
     //Modifie le profil du client après validation du formulaire à la view client/profil
     public function modifier() {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->model('client');
+
         $this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
         $this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
         $this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
         $this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
         $this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
         $this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
+        
         if (isset($_COOKIE['clientCookie'])) {
             $varmail = $this->input->cookie('clientCookie');
             $data['client'] = $this->client->selectByMail($varmail);
@@ -139,7 +141,7 @@ class ClientCtrl extends CI_Controller {
     }
     // vérifie la validité du formulaire client/connexion et créer le 'clientCookie'
     // Le cookie  est disponible sur le domaine: localhost aux chemins enfants de /cci/index.php
-    
+
     public function connexion() {
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
@@ -182,7 +184,7 @@ class ClientCtrl extends CI_Controller {
         }
     }
 
-  
+
     // Permet au client de changer son mot de passe
     public function changer_mdp() {
         $this->load->model('client');
@@ -248,7 +250,7 @@ class ClientCtrl extends CI_Controller {
                     "avisClient" => htmlspecialchars($_POST['avisClient']),
 					"noteClient" => htmlspecialchars($_POST['noteClient'])
                 );
-				
+
                 var_dump($data);
                 $this->poster_avis->insert($data);
 				$data['client']=$this->client->selectByMail($cookie);
@@ -259,9 +261,9 @@ class ClientCtrl extends CI_Controller {
             }
         }
     }
-	
-	
-	
+
+
+
     //permet de voir le détail d'un avis sur un produit dont l'idée est passé en paramètre
     //permet de modifier un avis après envoie du formulaire dans la view client/detail_avis
     public function detail_avis($idProduit){
