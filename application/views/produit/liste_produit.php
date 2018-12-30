@@ -5,7 +5,7 @@
                 <div style="margin-left: 60px" class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="box">
-                            <h2 class="text-center"> Liste des entreprises</h2>
+                            <h2 class="text-center"> Liste des produits</h2>
                             <div class="row">
                                 <article class=" col-md-1 col-lg-1">
 
@@ -16,6 +16,7 @@
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
+												<th scope="col">Image</th>
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Catégorie</th>
@@ -31,6 +32,11 @@
                                             <tbody>
                                             <tr>
                                                 <?php foreach ($produit as $item) { ?>
+												<?php if ($item->imageProduit == NULL) {
+													var_dump("chatte");
+													$item->imageProduit = "not_found.jpg";
+												}?>
+												<td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="img-thumbnail"></td>
                                                 <td><?php echo $item->nomProduit; ?></td>
                                                 <td><?php echo $item->descriptionProduit; ?></td>
                                                 <td><?php echo $item->categorieProduit; ?></td>

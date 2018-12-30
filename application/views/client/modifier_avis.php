@@ -4,12 +4,17 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-                <h2 class="text-center"> Poster un avis</h2>
+                <h2 class="text-center"> Mettre à jour un avis</h2>
 
 
                 <?php $action= 'ClientCtrl/modifier_avis/'. $produit[0]->idProduit;
                 echo form_open($action); ?>
 
+					<div class="form-group">
+                        <label class="control-label">Note sur 10 :</label>
+                        <input type="number" class="form-control" name="noteClient" value="<?php echo $avis[0]->noteClient; ?>" min="0" max="10" size="30" required/>
+                    </div>
+					
                     <div class="form-group">
                         <label class="control-label">Avis :</label>
                         <input type="text" class="form-control" name="avisClient" value="<?php echo $avis[0]->avisClient; ?>" size="3000" required/>

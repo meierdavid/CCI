@@ -5,7 +5,7 @@
                 <div class="row">
                     
                         <div class="box">
-                            <h2>Recherche</h2>
+                            <h2>Soldes</h2>
                             
                                 <div class="table-responsive">
                                         <table class="table table-striped">

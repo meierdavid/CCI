@@ -5,7 +5,7 @@
                 <div class="row">
                     
                         <div class="box">
-                            <h2>Recherche</h2>
+                            <h2><?php echo $produit[0]->categorieProduit; ?></h2>
                             
                                 <div class="table-responsive">
                                         <table class="table table-striped">

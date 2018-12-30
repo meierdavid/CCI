@@ -7,46 +7,35 @@ class PanierCtrl extends CI_Controller {
     public function index()
     {
         $this->load->helper('url');
-        $this->load->view('produit/profil');
+        $this->load->view('client/accueil');
     }
 
-    public function profil()
-    {
-        $this->load->model('produit');
-        $data['produit'] = $this->produit->selectById(1);
-        // mettre mail pour la sélection
-        $this->load->helper('url');
-        $this->load->view('produit/profil',$data);
 
-        // modifie le profil à l'envoi du formulaire
-        // ptdddr pas mal les cc
-    }
-
-    public function liste_produit(){
-        $this->load->model('Produit');
-        if($this->input->cookie('commercantCookie') != null){
-            $varid = $this->input->cookie('commercantCookie');
-            $data['commercant'] = $this->commercant->selectByMail($varid);
-            $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
-            if( $data['entreprises'] != NULL){
+    public function liste_panier(){
+        $this->load->model('Panier');
+        if($this->input->cookie('clientCookie') != null){
+            $varid = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varid);
+            $data['paniers'] = $this->commercant->selectPanier($data['client'][0]->idClient);
+            if( $data['paniers'] != NULL){
                 $data['produit'] = $this->Produit->selectProduit($varid);
-                $this->load->view('commercant/index',$data);
-                $this->load->view('produit/liste_produit',$data);
+                $this->load->view('client/accueil',$data);
+                $this->load->view('client/liste_panier',$data);
             }
             else{
-                $this->ajout_entreprise();
+                $this->ajout_panier();
             }
         }
         else{
-            $this->load->view('commercant/connexion');
+            $this->load->view('client/connexion');
         }
     }
 
-    public function ajout_produit(){
+    public function ajout_panier(){
         // faire envoi de mail
         // envoi de mail lors de l'inscription d'un produit ?
+        $this->load->model('panier');
         $this->load->model('produit');
-        $this->load->model('entreprise');
         $this->load->helper('form');
         if($this->entreprise->selectById($_POST['numSiret']) != null){
 
@@ -67,7 +56,7 @@ class PanierCtrl extends CI_Controller {
         }
         else
         {
-            var_dump("mauvais ");
+            var_dump("mauvais");
             $data['message']="erreur : mauvais numéro de Siret";
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('commercant/index',$data);
@@ -75,60 +64,37 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
-    public function supprimer_produit($id){
-        $this->load->model('produit');
+    public function supprimer_panier($id){
+        $this->load->model('panier');
         $this->load->helper('form','url');
         $this->load->library('form_validation');
-        $this->load->view('administrateur/index');
+        $this->load->view('client/accueil');
         $this->produit->delete($id);
-        echo "produit Supprimé";
-        $this->liste_produit();
-    }
-
-    public function detail_produit($id){
-        $this->load->model('produit');
-        $this->load->helper('form', 'url');
-        $this->load->helper('cookie');
-        $this->load->library('form_validation');
-        var_dump("detail");
-        if(isset($_COOKIE['commercantCookie'])){
-            if($this->produit->selectById($id) != Null){
-                var_dump("produit");
-                $data['produit'] = $this->produit->selectById($id);
-                $this->load->view('commercant/index');
-                $this->load->view('produit/detail',$data);
-            }
-            else{
-                //ereur le produit n'existe pas
-                $this->liste_produit();
-            }
-        }
-        else{
-            // deconnecter le commercant
-        }
+        echo "panier Supprimé";
+        $this->liste_panier();
     }
 
     public function modifier(){
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
-        $this->load->model('produit');
-        if(isset($_COOKIE['commercantCookie'])){
-            $id = $_POST['idProduit'];
+        $this->load->model('panier');
+        if(isset($_COOKIE['clientCookie'])){
+            $id = $_POST['idPanier'];
             var_dump($id);
             var_dump($_POST);
             $data=array(
-                "nomProduit"=> htmlspecialchars($_POST['nomProduit']),
-                "categorieProduit"=> htmlspecialchars($_POST['categorieProduit']),
-                "numSiret"=> htmlspecialchars($_POST['numSiret']),
-                "descriptionProduit"=> htmlspecialchars($_POST['descriptionProduit']),
-                "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
-                "reducProduit" => htmlspecialchars($_POST['reducProduit']),
+                "datePanier"=> htmlspecialchars($_POST['datePanier']),
+                "codePromo"=> htmlspecialchars($_POST['codePromo']),
+                "annulationPanier"=> htmlspecialchars($_POST['annulationPanier']),
+                "finaliserPanier"=> htmlspecialchars($_POST['finaliserPanier']),
+                "paiementPanier" => htmlspecialchars($_POST['paiementPanier']),
+                "prixTotPanier" => htmlspecialchars($_POST['prixTotPanier']),
             );
-            $this->produit->update($id,$data);
-            $data['produit']= $this->produit->selectById($id);
-            $this->load->view('commercant/index');
+            $this->panier->update($id,$data);
+            $data['panier']= $this->panier->selectById($id);
 
-            $this->load->view('produit/detail',$data);
+            $this->load->view('client/accueil');
+            $this->load->view('panier/detail',$data);
 
         }
         else{
