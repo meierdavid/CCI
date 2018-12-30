@@ -35,12 +35,13 @@ class CommercantCtrl extends CI_Controller {
 		$this->load->model('commercant');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+
 		if(isset($_COOKIE['commercantCookie'])){
 			$varid= $this->input->cookie('commercantCookie');
 			$data['commercant'] = $this->commercant->selectByMail($varid);
-			if(isset($_POST['mdpCommercantAncien']) && ($_POST['mdpCommercantAncien'] == $data['commercant'][0]->mdpCommercant) ){ // + tester Bon Ancien mot de passe
+			if(isset($_POST['mdpCommercantAncien']) && (password_verify($_POST['mdpCommercantAncien'], $data['commercant'][0]->mdpCommercant))){ //dé-hashage
 				if($_POST['mdpCommercantNouveau'] == $_POST['mdpCommercantConf']){
-					$newMdp = $_POST['mdpCommercantNouveau'];
+					$newMdp = crypt($_POST['mdpCommercantNouveau']);
 					$this->commercant->updateMdp($varid,$newMdp);
 					setcookie("clientCookie", "", time() - 36000);
 
@@ -49,16 +50,22 @@ class CommercantCtrl extends CI_Controller {
 					$this->load->view('commercant/index');
 				}
 				else{
+					$data['message'] = "ereur : La confirmation de mot de passe ne correspond pas au premier";
+	        $this->load->view('errors/erreur_formulaire', $data);
 					$this->load->view('commercant/index',$data);
 					$this->load->view('commercant/changer_mdp',$data);
 				}
 			}
 			else{
+				$data['message'] = "ereur : L'ancien mot de passe n'est pas conforme";
+				$this->load->view('errors/erreur_formulaire', $data);
 				$this->load->view('commercant/index',$data);
 				$this->load->view('commercant/changer_mdp',$data);
 			}
 		}
 		else{
+			$data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
+			$this->load->view('errors/erreur_formulaire', $data);
 			$this->load->view('commercant/connexion');
 		}
 	}
@@ -126,7 +133,8 @@ class CommercantCtrl extends CI_Controller {
 			}
 		}
 		else{
-			$this->load->view('pages/deconnexion');
+			$data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
+			$this->load->view('errors/erreur_formulaire', $data);
 			$this->load->view('commercant/connexion');
 		}
 	}
@@ -229,7 +237,8 @@ class CommercantCtrl extends CI_Controller {
 			}
 		}
 		else{
-			$this->load->view('pages/deconnexion');
+			$data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
+			$this->load->view('errors/erreur_formulaire', $data);
 			$this->load->view('commercant/connexion');
 		}
 	}
@@ -290,7 +299,7 @@ public function connexion(){
 			$this->load->view('commercant/connexion');
 		}
 		else{
-			if($com[0]->mdpCommercant != $_POST['mdp']){
+			if(!password_verify($_POST['mdp'], $com[0]->mdpCommercant)){ //dé-hashage
 				$data['message']="erreur : mauvais mot de passe";
 				$this->load->view('errors/erreur_formulaire', $data);
 				$this->load->view('commercant/connexion');
@@ -299,9 +308,8 @@ public function connexion(){
 				//mettre la connexion dans les cookies
 				//setcookie('commercantCookie',$com[0]->idCommercant,time()+3600,'/','');
 				//	$this->load->view('commercant/index',$data);
-
 				$data['commercant'] = $com;
-				if( $data['commercant'] != NULL && $_POST['mdp'] == $data['commercant'][0]->mdpCommercant ){
+				if($data['commercant'] != NULL && password_verify($_POST['mdp'], $com[0]->mdpCommercant)){ //dé-hashage
 					$cookie = array(
 						'name'   => 'commercantCookie',
 						'value'  => $data['commercant'][0]->mailCommercant,
@@ -309,11 +317,10 @@ public function connexion(){
 					);
 					$this->input->set_cookie($cookie);
 					echo $this->input->cookie('commercantCookie');
-					$this->load->view('commercant/index',$data);
+					$this->load->view('commercant/index');
 				}
 			}
 		}
-
 	}
 }
 
@@ -397,7 +404,7 @@ public function inscription(){
 				"prenomCommercant"=> htmlspecialchars($_POST['prenomCommercant']),
 				"nomCommercant"=> htmlspecialchars($_POST['nomCommercant']),
 				"mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
-				"mdpCommercant" => htmlspecialchars($_POST['mdpCommercant']),
+				"mdpCommercant" => htmlspecialchars(crypt($_POST['mdpCommercant'])), //mot de passe en hashage
 				"adresseCommercant"=> htmlspecialchars($_POST['adresseCommercant']),
 				"codePCommercant"=> htmlspecialchars($_POST['codePCommercant']),
 				"villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
