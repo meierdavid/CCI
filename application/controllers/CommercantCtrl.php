@@ -327,7 +327,6 @@ public function connexion(){
 public function deconnexion(){
 	$this->load->helper('url');
 	$this->load->helper('cookie');
-	$this->load->library('form_validation');
 	delete_cookie("commercantCookie");
 	$data['message'] = "Vous avez bien été deconnecté";
 	$this->load->view('errors/validation_formulaire', $data);

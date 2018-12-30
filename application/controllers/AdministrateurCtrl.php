@@ -104,7 +104,7 @@ class AdministrateurCtrl extends CI_Controller {
     delete_cookie("administrateurCookie");
     $data['message'] = "Vous avez été déconnecté avec succès";
     $this->load->view('errors/validation_formulaire', $data);
-    $this->load->view('administrateur/connexion', $data);
+    $this->load->view('administrateur/connexion');
   }
 
   public function ajout_administrateur() {

@@ -48,12 +48,12 @@ class ClientCtrl extends CI_Controller {
           $data['message'] = "erreur : Vous ne pouvez pas changer votre adresse email";
           $this->load->view('errors/erreur_formulaire', $data);
           $this->load->view('client/inscription');
-        } else if ($_POST['mdpClient'] == $_POST['mdpClient2'] && $mdp == $_POST['mdpClient']) {
+        } else if ($_POST['mdpClient'] == $_POST['mdpClient2'] && password_verify($_POST['mdpClient'], $mdp)) {
           $data = array(
             "prenomClient" => htmlspecialchars($_POST['prenomClient']),
             "nomClient" => htmlspecialchars($_POST['nomClient']),
             "mailClient" => htmlspecialchars($_POST['mailClient']),
-            "mdpClient" => htmlspecialchars($_POST['mdpClient']),
+            "mdpClient" => htmlspecialchars(crypt($_POST['mdpClient'])),
             "adresseClient" => htmlspecialchars($_POST['adresseClient']),
             "codePClient" => htmlspecialchars($_POST['codePClient']),
             "villeClient" => htmlspecialchars($_POST['villeClient']),
@@ -129,7 +129,7 @@ class ClientCtrl extends CI_Controller {
           "prenomClient" => htmlspecialchars($_POST['prenomClient']),
           "nomClient" => htmlspecialchars($_POST['nomClient']),
           "mailClient" => htmlspecialchars($_POST['mailClient']),
-          "mdpClient" => htmlspecialchars($_POST['mdpClient']),
+          "mdpClient" => htmlspecialchars(crypt($_POST['mdpClient'])),
           "adresseClient" => htmlspecialchars($_POST['adresseClient']),
           "codePClient" => htmlspecialchars($_POST['codePClient']),
           "villeClient" => htmlspecialchars($_POST['villeClient']),
@@ -162,20 +162,18 @@ class ClientCtrl extends CI_Controller {
     } else {
       $client = $this->client->selectByMail($_POST['mailClient']);
       //le client qui essaye de se connecter
-
-
       if ($client == null) {
         $data['message'] = "erreur : cet email n'existe pas";
         $this->load->view('errors/erreur_formulaire', $data);
         $this->load->view('client/connexion');
       } else {
-        if ($client[0]->mdpClient != $_POST['mdp']) {
+        if (!password_verify($_POST['mdp'], $client[0]->mdpClient)) {
           $data['message'] = "erreur : mauvais mot de passe";
           $this->load->view('errors/erreur_formulaire', $data);
           $this->load->view('client/connexion');
         } else {
           $data['client'] = $client;
-          if ($data['client'] != NULL && $_POST['mdp'] == $data['client'][0]->mdpClient) {
+          if ($data['client'] != NULL && password_verify($_POST['mdp'], $data['client'][0]->mdpClient)) {
             $cookie = array(
               'name' => 'clientCookie',
               'value' => $data['client'][0]->mailClient,
@@ -204,16 +202,16 @@ class ClientCtrl extends CI_Controller {
       $varid = $this->input->cookie('clientCookie');
       $data['client'] = $this->client->selectByMail($varid);
       if (isset($_POST['mdpClientAncien'])) {
-        if ($_POST['mdpClientAncien'] == $data['client'][0]->mdpClient){
+        if (password_verify($_POST['mdpClientAncien'], $data['client'][0]->mdpClient)){
 			if ($_POST['mdpClientNouveau'] == $_POST['mdpClientConf']) {
-            $newMdp = $_POST['mdpClientNouveau'];
+            $newMdp = crypt($_POST['mdpClientNouveau']);
             $this->client->updateMdp($varid, $newMdp);
             setcookie("clientCookie", "", time() - 36000);
 
             $data['message'] = "Votre mot de passe a été modifié avec succès";
             $this->load->view('errors/validation_formulaire', $data);
             $this->load->view('client/header');
-			$this->load->view('client/accueil');
+			      $this->load->view('client/accueil');
             $this->load->view('client/footer');
           }
           else {
@@ -232,7 +230,7 @@ class ClientCtrl extends CI_Controller {
           $this->load->view('client/footer');
 		}
 	  }
-	
+
 	else {
         $this->load->view('client/header');
         $this->load->view('client/changer_mdp');
@@ -244,14 +242,14 @@ class ClientCtrl extends CI_Controller {
       $this->load->view('errors/erreur_formulaire', $data);
       $this->load->view('client/connexion');
     }
-	
+
   }
-	
-	
+
+
     // permet de modifier l'avis du client ayant l'adresse mail contenue dans le cookie client par rapport
     // au produit dont l'id est passé en paramètre
     // Un client ne peut avoir qu'un avis sur un produit
-	
+
     public function modifier_avis($idProduit) {
         $this->load->model('client', 'produit');
         $this->load->model('poster_avis');
@@ -269,7 +267,7 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/header');
             $this->load->view('client/modifier_avis', $data);
             $this->load->view('client/footer');
-        } 
+        }
 		else {
 
             if ($cli[0] == null) {
@@ -293,10 +291,10 @@ class ClientCtrl extends CI_Controller {
                 $this->load->view('client/footer');
             }
         }
-     
-      
-    
-    
+
+
+
+
   }
 
 // permet au client de modifier son avis sur le produit passé en paramètre
