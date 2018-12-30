@@ -1,19 +1,14 @@
-
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
-<!--Pulling Awesome Font -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
-            <div class="form-login" >
-            <h2 class="text-center"> Profil de l'entreprise: </h2>
-              <form>
+            <div class="form-login" style="margin-left: 200px;">
+            <?php echo form_open('EntrepriseCtrl/modifier_entreprise');?>
+                    <br></br>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="numSiret" value="<?php echo  $entreprise[0]->numSiret; ?>" size="30" hidden/>
+                    </div>
                     <div class="form-group">
                         <label class="control-label">Nom de L'entreprise</label>
                         <input type="text" class="form-control" name="nomEntreprise" value=" <?php echo $entreprise[0]->nomEntreprise; ?>" size="30" required/>
@@ -44,9 +39,6 @@
                         <input type="text" class="form-control" name="tempsReservMax" value="<?php echo $entreprise[0]->tempsReservMax; ?>" size="30" required/>
                     </div>
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div>
-
-
-                    <!-- <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div> -->
                     <div class="text-center">
                         <br>
                         <h1 style="color:darkslategrey; "></h1>
@@ -54,9 +46,6 @@
                 </form>
             <br></br>
             <br></br>
-
-
-
             </div>
         </div>
     </div>

@@ -30,21 +30,42 @@ class EntrepriseCtrl extends CI_Controller {
 		}
 	}
 
+	public function detail_entreprise($id){
+		$this->load->helper('form', 'url');
+		$this->load->model('entreprise');
+		$this->load->helper('cookie');
+
+		if (isset($_COOKIE['commercantCookie'])) {
+		  if ($this->entreprise->selectById($id) != Null) {
+		    $data['entreprise'] = $this->entreprise->selectById($id);
+		    $this->load->view('commercant/index');
+		    $this->load->view('entreprise/profil', $data);
+		  }
+		  else {
+		    $data['message'] = "erreur : L'entreprise n'existe pas";
+		    $this->load->view('errors/erreur_formulaire', $data);
+		    $this->liste_entreprise();
+		  }
+		}
+		else{
+		  $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+		  $this->load->view('errors/erreur_formulaire', $data);
+		  $this->load->view('commercant/connexion');
+		}
+	}
+
 	public function modifier_entreprise(){
 		$this->load->helper('form', 'url');
 		$this->load->model('entreprise');
 
 		if (isset($_COOKIE['commercantCookie'])){
 			$id = $_POST['numSiret'];
-			var_dump($id);
-			var_dump($_POST);
 			$data = array(
 				"numSiret" => htmlspecialchars($_POST['numSiret']),
 				"nomEntreprise" => htmlspecialchars($_POST['nomEntreprise']),
 				"adresseEntreprise" => htmlspecialchars($_POST['adresseEntreprise']),
 				"codePEntreprise" => htmlspecialchars($_POST['codePEntreprise']),
-				"descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
-				"villeEntrepriset" => htmlspecialchars($_POST['villeEntreprise']),
+				"villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
 				"horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
 				"livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
 				"tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
@@ -61,15 +82,6 @@ class EntrepriseCtrl extends CI_Controller {
 			$this->load->view('errors/erreur_formulaire', $data);
 			$this->load->view('commercant/connexion');
 		}
-	}
-
-	public function supprimer_entreprise($id){
-		$this->load->model('entreprise');
-    $this->load->helper('form', 'url');
-    $this->entreprise->delete($id);
-    $data['message'] = "L'entrepriset a bien été supprimé";
-    $this->load->view('errors/validation_formulaire', $data);
-    $this->liste_entreprise();
 	}
 
 	public function liste_produit($num){

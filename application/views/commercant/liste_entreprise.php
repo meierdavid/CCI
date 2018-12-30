@@ -24,7 +24,6 @@
                                     <th scope="col">horairesEntreprise</th>
                                     <th scope="col">livraisonEntreprise</th>
                                     <th scope="col">tempsReservMax</th>
-                                    <th scope="col">Supprimer</th>
                                     <th scope="col">Modifier</th>
 
 
@@ -32,7 +31,7 @@
                             </thead>
                           <tbody>
                                 <tr>
-                                  <?php foreach ($entreprises as $item) { ?>
+                                  <?php foreach ($entreprise as $item) { ?>
                                     <td><?php echo $item->numSiret; ?></td>
                                     <td><?php echo $item->nomEntreprise; ?></td>
                                     <td><?php echo $item->adresseEntreprise; ?></td>
@@ -41,8 +40,7 @@
                                     <td><?php echo $item->horairesEntreprise; ?></td>
                                     <td><?php echo $item->livraisonEntreprise; ?></td>
                                     <td><?php echo $item->tempsReservMax; ?></td>
-                                    <td><p><a href="<?php echo base_url("EntrepriseCtrl/supprimer_produit/".$item->numSiret );?>">Supprimer l'entreprise'</a></p></td>
-                                    <td><p><a href="<?php echo base_url("EntrepriseCtrl/profil/".$item->numSiret );?>">modifier l'entreprise'</a></p></td>
+                                    <td><p><a href="<?php echo base_url("EntrepriseCtrl/detail_entreprise/".$item->numSiret );?>">modifier l'entreprise</a></p></td>
                                   </tr>
                                   <?php } ?>
                                 </tbody>
