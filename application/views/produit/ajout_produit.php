@@ -24,12 +24,12 @@
                     <br></br>
 
 
-                     <select name = 'numSiret' id = 'category'> 
-                            <option value="">-- Select Entreprise --</option> 
-                               <?php foreach($entreprises as $item){ ?> 
-                            <option  value="<?php echo $item->numSiret; ?>"><?php echo $item->nomEntreprise; ?></option> 
-                            <?php } ?> 
-                         </select> 
+                     <select name = 'numSiret' id = 'category'>
+                            <option value="">-- Select Entreprise --</option>
+                               <?php foreach($entreprises as $item){ ?>
+                            <option  value="<?php echo $item->numSiret; ?>"><?php echo $item->nomEntreprise; ?></option>
+                            <?php } ?>
+                         </select>
                     <div class="form-group">
                         <label class="control-label">Nom du produit :</label>
                         <input type="text" class="form-control" name="nomProduit" value="" size="30" required/>
@@ -42,40 +42,40 @@
                     </div>
                     <div  class="form-group">
                         <select name ="categorieProduit" required>
-                            <option value="">-- Catégorie --</option> 
-                            <option  value="aliments">Aliments</option> 
+                            <option value="">-- Catégorie --</option>
+                            <option  value="aliments">Aliments</option>
                             <option  value="vetements">Vêtements</option>
-                            <option  value="chaussures">Chaussures</option> 
+                            <option  value="chaussures">Chaussures</option>
                             <option  value="beaute">Beauté</option>
                             <option  value="sport">Sport</option>
                             <option  value="informatique">Informatique</option>
                             <option  value="livres">Livres</option>
                             <option  value="musique">Musique</option>
                             <option  value="divertissement">Divertissement</option>
-                            <option  value="bricolage">Bricolage</option> 
-                         </select> 
-                    
+                            <option  value="bricolage">Bricolage</option>
+                         </select>
+
                     <br></br>
-                        
+
                     </div>
                     <div class="form-group">
                         <label class="control-label">Prix unitaire du produit :</label>
-                        <input type="number" class="form-control" name="prixUnitaireProduit" value="" size="30" required/>
+                        <input type="number" class="form-control" name="prixUnitaireProduit" step="any" size="30" required/>
                         <h6 style="color:red;"</h6>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Photo du produit :</label>
-                        <input type="file" class="form-control" name="imageProduit" value="" size="30" accept "image/*"/>
+                        <input type="file" class="form-control" name="imageProduit" size="30" accept "image/*"/>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Réduction de produit :</label>
-                        <input type="number" class="form-control" name="reducProduit" value="" size="30" required/>
+                        <input type="number" class="form-control" name="reducProduit" step="any" size="30" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Couleur du produit :</label>
-                        <input type="text" class="form-control" name="couleurProduit" value="" size="30" required/>
+                        <input type="text" class="form-control" name="couleurProduit" size="30" required/>
                         <h6 style="color:red;"</h6>
                     </div>
 					<div class="form-group">
@@ -83,7 +83,7 @@
                         <input type="number" class="form-control" name="nbDispoProduit" value="0" size="30" required/>
                         <h6 style="color:red;"</h6>
                     </div>
-                    
+
                     <br></br>
 
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmation" /></div>
