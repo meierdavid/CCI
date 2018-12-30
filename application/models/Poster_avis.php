@@ -27,6 +27,17 @@ class poster_avis extends CI_Model{
     ->result();
   }
   
+  public function selectByIdClientIdProduit($idClient,$idProduit){
+    $this->load->database();
+
+    return $this->db->select('*')
+    ->from('poster_avis')
+    ->where('idClient', $idClient)
+	->where('idProduit',$idProduit)
+    ->get()
+    ->result();
+  }
+  
   public function selectByNote($note){
     $this->load->database();
 
@@ -90,9 +101,10 @@ class poster_avis extends CI_Model{
   
   
 
-    public function update($idProduit, $idClient, $avis) {
+    public function update($idProduit, $idClient, $avis, $note) {
         $this->load->database();
         $this->db->set('avisClient', $avis)
+				 ->set('noteClient',$note)
                 ->where('idProduit', $idProduit)
                 ->where('idClient', $idClient)
                 ->update($this->table);

@@ -227,16 +227,11 @@ class ClientCtrl extends CI_Controller {
 
         $this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
 		$this->form_validation->set_rules('noteClient', 'Note', 'integer');
-        var_dump($idProduit);
-        var_dump($_POST);
         if ($this->form_validation->run() == FALSE) {
-            var_dump("test");
             $this->load->view('client/header');
             $this->load->view('client/avis_produit', $data);
             $this->load->view('client/footer');
         } else {
-            var_dump($_POST);
-            var_dump("test");
 
             if ($cli[0] == null) {
                 $data['message'] = "erreur : pas de client";
@@ -250,8 +245,6 @@ class ClientCtrl extends CI_Controller {
                     "avisClient" => htmlspecialchars($_POST['avisClient']),
 					"noteClient" => htmlspecialchars($_POST['noteClient'])
                 );
-
-                var_dump($data);
                 $this->poster_avis->insert($data);
 				$data['client']=$this->client->selectByMail($cookie);
 				$data['produit'] = $this->produit->selectById($idProduit);
@@ -276,7 +269,6 @@ class ClientCtrl extends CI_Controller {
         $data['avis'] = $this->poster_avis->selectByIdClient($data['client'][0]->idClient);
         if ($data['avis'] != NULL) {
             $this->load->view('client/header');
-            $this->load->view('produit/detail', $data);
             $this->load->view('client/detail_avis', $data);
             $this->load->view('client/footer');
         } else {
@@ -294,21 +286,36 @@ class ClientCtrl extends CI_Controller {
         $this->load->library('form_validation');
         $data['produit'] = $this->produit->selectById($idProduit);
         $cookie = $this->input->cookie('clientCookie');
+		$data['client']=$this->client->selectByMail($cookie);
+		$data['avis']=$this->poster_avis->selectByIdClientIdProduit($data['client'][0]->idClient,$idProduit);
         $cli = $this->client->selectByMail($cookie);
+
         $this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
+		$this->form_validation->set_rules('noteClient', 'Note', 'integer');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('client/header');
-            $this->load->view('client/detail_avis', $data);
+            $this->load->view('client/modifier_avis', $data);
             $this->load->view('client/footer');
         } else {
+
             if ($cli[0] == null) {
                 $data['message'] = "erreur : pas de client";
                 $this->load->view('errors/erreur_formulaire', $data);
                 $this->load->view('client/deconnexion');
             } else {
-                $this->poster_avis->update($idProduit,$cli[0]->idClient,$_POST['avisClient']);
+
+                $data = array(
+                    "idProduit" => htmlspecialchars($idProduit),
+                    "idClient" => htmlspecialchars($cli[0]->idClient),
+                    "avisClient" => htmlspecialchars($_POST['avisClient']),
+					"noteClient" => htmlspecialchars($_POST['noteClient'])
+                );
+                $this->poster_avis->update($idProduit,$cli[0]->idClient,$data['avisClient'],$data['noteClient']);
+				$data['client']=$this->client->selectByMail($cookie);
+				$data['produit'] = $this->produit->selectById($idProduit);
+				$data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
                 $this->load->view('client/header');
-                $this->load->view('client/detail_avis', $data);
+                $this->load->view('produit/liste_avis', $data);
                 $this->load->view('client/footer');
             }
         }

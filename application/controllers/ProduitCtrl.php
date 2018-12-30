@@ -171,6 +171,7 @@ class ProduitCtrl extends CI_Controller {
       }
     } else {
       $this->load->view('pages/deconnexion');
+	  $this->load->view('pages/pageConnexion');
     }
   }
 
@@ -221,7 +222,6 @@ class ProduitCtrl extends CI_Controller {
         $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
         $i=$i+1;
       }
-      var_dump($data);
       $this->load->view('client/header');
       $this->load->view('produit/produit_par_categorie(2)', $data);
       $this->load->view('client/footer');
@@ -233,14 +233,19 @@ class ProduitCtrl extends CI_Controller {
   }
 
   public function produit_entreprise($idEntreprise) {
+	$i=0;
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('produit','entreprise');
     if ($this->produit->selectByEntreprise($idEntreprise) != null) {
       $data['produit'] = $this->produit->selectByEntreprise($idEntreprise);
+	  foreach ($data['produit'] as $item) {
+        $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
+        $i=$i+1;
+      }
       $data['entreprise'] = $this->entreprise->selectById($idEntreprise);
       $this->load->view('client/header');
-      $this->load->view('produit/produit_par_entreprise', $data);
+      $this->load->view('produit/produit_par_entreprise(2)', $data);
       $this->load->view('client/footer');
     } else {
       $this->load->view('client/header');
@@ -250,13 +255,18 @@ class ProduitCtrl extends CI_Controller {
   }
 
   public function soldes() {
+	$i=0;
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('produit');
     if ($this->produit->selectBySoldes() != null) {
       $data['produit'] = $this->produit->selectBySoldes();
+	  foreach ($data['produit'] as $item) {
+        $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
+        $i=$i+1;
+      }
       $this->load->view('client/header');
-      $this->load->view('produit/produit_par_soldes', $data);
+      $this->load->view('produit/produit_par_soldes(2)', $data);
       $this->load->view('client/footer');
     } else {
       $this->load->view('client/header');
@@ -266,6 +276,7 @@ class ProduitCtrl extends CI_Controller {
   }
 
   public function search() {
+	$i=0;
     $this->load->helper('form', 'url','cookie');
     $this->load->library('form_validation');
     $this->load->model('produit');
@@ -274,8 +285,12 @@ class ProduitCtrl extends CI_Controller {
       $str = preg_replace("#[^0-9a-z]#i", "", $str);
       if ($this->produit->search($str) != null) {
         $data['produit'] = $this->produit->search($str);
+		foreach ($data['produit'] as $item) {
+        $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
+        $i=$i+1;
+      }
         $this->load->view('client/header');
-        $this->load->view('produit/produit_par_recherche', $data);
+        $this->load->view('produit/produit_par_recherche(2)', $data);
         $this->load->view('client/footer');
       } else {
         //
@@ -315,11 +330,9 @@ class ProduitCtrl extends CI_Controller {
 
     if ($data['avis'] != NULL) {
       $this->load->view('client/header');
-      $this->load->view('produit/detail', $data);
       $this->load->view('produit/liste_avis', $data);
       $this->load->view('client/footer');
     } else {
-      $this->load->view('produit/detail', $data);
     }
   }
 
