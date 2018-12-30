@@ -207,7 +207,9 @@ class ProduitCtrl extends CI_Controller {
       $this->load->view('commercant/index');
       $this->load->view('produit/detail', $data);
     } else {
-      $this->load->view('pages/deconnexion');
+      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+      $this->load->view('errors/erreur_formulaire', $data);
+      $this->load->view('commercant/connexion');
     }
   }
 

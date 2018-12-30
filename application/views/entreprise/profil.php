@@ -43,7 +43,7 @@
                         <label class="control-label">Temps de réservation Maximum</label>
                         <input type="text" class="form-control" name="tempsReservMax" value="<?php echo $entreprise[0]->tempsReservMax; ?>" size="30" required/>
                     </div>
-
+                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div>
 
 
                     <!-- <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div> -->
