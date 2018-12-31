@@ -43,6 +43,7 @@
             <p>Prix : <?php echo $produit[0]->prixUnitaireProduit; ?> € </p>
             <?php if ($produit[0]->reducProduit > 0) {
                 echo "<p> bénéficiez d'une réducion de " . $produit[0]->reducProduit . "% </p>";
+				echo "<p> Soit au prix exceptionnel de : " . (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 ))  . "€ </p>" ;
             }
             ?>
             <br>
