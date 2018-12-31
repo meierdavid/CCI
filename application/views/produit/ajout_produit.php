@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Couleur du produit :</label>
-                        <input type="text" class="form-control" name="couleurProduit" size="30" required/>
+                        <input type="color" class="form-control" name="couleurProduit" size="30" required/>
                         <h6 style="color:red;"</h6>
                     </div>
 					<div class="form-group">

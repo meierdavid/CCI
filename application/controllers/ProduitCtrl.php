@@ -178,7 +178,7 @@ class ProduitCtrl extends CI_Controller {
   
   //comme détail produit mais pour le client ( ne permet pas la modification )
 public function affichage_produit($id) {
-    $this->load->model('produit');
+    $this->load->model('produit','entreprise');
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
@@ -187,6 +187,8 @@ public function affichage_produit($id) {
       if ($this->produit->selectById($id) != Null) {
         var_dump("produit");
         $data['produit'] = $this->produit->selectById($id);
+        $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
+        $data['note']=$this->moyenne_note_produit(($data['produit'][0]->idProduit));
         $this->load->view('client/header');
         $this->load->view('produit/affichage_produit', $data);
         $this->load->view('client/footer');
