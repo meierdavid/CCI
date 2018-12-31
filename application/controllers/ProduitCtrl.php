@@ -189,6 +189,7 @@ public function affichage_produit($id) {
         $data['produit'] = $this->produit->selectById($id);
         $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
         $data['note']=$this->moyenne_note_produit(($data['produit'][0]->idProduit));
+        $data['produitsProposés']=$this->produit->selectPropose($data['produit'][0]->categorieProduit,$id);
         $this->load->view('client/header');
         $this->load->view('produit/affichage_produit', $data);
         $this->load->view('client/footer');

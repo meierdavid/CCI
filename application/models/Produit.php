@@ -68,7 +68,18 @@
                 ->get()
                 ->result();
         }
-
+        
+        public function selectPropose($categorie,$id){
+            return $this->db->limit(3)
+                    ->select('*')
+                    ->from('produit')
+                    ->where('idProduit !=', $id)
+                    ->where('categorieProduit', $categorie)
+                    ->get()
+                    ->result();
+            
+  		}
+        
     	public function insert_with_picture($data) {
             $this->load->database();
             $this->db->set('nomProduit', $data['nomProduit'])
