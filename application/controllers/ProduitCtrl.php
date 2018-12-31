@@ -182,7 +182,6 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
-    var_dump("detail");
     if (isset($_COOKIE['clientCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
         var_dump("produit");
@@ -192,6 +191,39 @@ public function affichage_produit($id) {
         $data['produitsProposés']=$this->produit->selectPropose($data['produit'][0]->categorieProduit,$id);
         $this->load->view('client/header');
         $this->load->view('produit/affichage_produit', $data);
+        $this->load->view('client/footer');
+      } else {
+        //ereur le produit n'existe pas
+        $this->liste_produit();
+      }
+    } else {
+      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+			$this->load->view('errors/erreur_formulaire', $data);
+			$this->load->view('client/connexion');
+    }
+  }
+  
+  public function comparer_produit($id){
+    $this->load->model('produit','entreprise');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    if (isset($_COOKIE['clientCookie']) ) {
+      if ($this->produit->selectById($id) != Null) {
+        $data['produit'] = $this->produit->selectById($id);
+        $data['entreprises']['entreprise0'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
+        $data['notes'][0]=$this->moyenne_note_produit(($data['produit'][0]->idProduit));
+        $data['produitsProposés']=$this->produit->selectPropose($data['produit'][0]->categorieProduit,$id);
+        foreach ($data['produitsProposés'] as $item){
+            array_push($data['notes'],$this->moyenne_note_produit($item->idProduit));
+        }
+        $i = 1;
+        foreach ($data['produitsProposés'] as $item){
+            $data['entreprises']['entreprise'.$i] =$this->entreprise->selectById($item->numSiret);
+            $i= $i +1;
+        }   
+        $this->load->view('client/header');
+        $this->load->view('produit/comparaison_produit',$data);
         $this->load->view('client/footer');
       } else {
         //ereur le produit n'existe pas
