@@ -274,7 +274,7 @@ class ClientCtrl extends CI_Controller {
 		$data['client']=$this->client->selectByMail($cookie);
 		$data['avis']=$this->poster_avis->selectByIdClientIdProduit($data['client'][0]->idClient,$idProduit);
         $cli = $this->client->selectByMail($cookie);
-		$this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
+		$this->form_validation->set_rules('avisClient', 'Avis', 'required');
 		$this->form_validation->set_rules('noteClient', 'Note', 'integer');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('client/header');
@@ -322,18 +322,15 @@ public function ajouter_avis($idProduit) {
   $data['client']=$this->client->selectByMail($cookie);
   $cli = $this->client->selectByMail($cookie);
 
-  $this->form_validation->set_rules('avisClient', 'Avis', 'alpha_dash');
+  $this->form_validation->set_rules('avisClient', 'Avis', 'required');
   $this->form_validation->set_rules('noteClient', 'Note', 'integer');
-  var_dump($idProduit);
-  var_dump($_POST);
   if ($this->form_validation->run() == FALSE) {
-    var_dump("test");
     $this->load->view('client/header');
     $this->load->view('client/avis_produit', $data);
     $this->load->view('client/footer');
+	var_dump("bug");
   } else {
-    var_dump($_POST);
-    var_dump("test");
+
 
     if ($cli[0] == null) {
       $data['message'] = "erreur : pas de client";
@@ -347,8 +344,6 @@ public function ajouter_avis($idProduit) {
         "avisClient" => htmlspecialchars($_POST['avisClient']),
         "noteClient" => htmlspecialchars($_POST['noteClient'])
       );
-
-      var_dump($data);
       $this->poster_avis->insert($data);
       $data['client']=$this->client->selectByMail($cookie);
       $data['produit'] = $this->produit->selectById($idProduit);

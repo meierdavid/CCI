@@ -70,8 +70,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">Réduction de produit :</label>
-                        <input type="number" class="form-control" name="reducProduit" step="any" size="30" required/>
+                        <label class="control-label">Réduction de produit ( en % ) :</label>
+                        <input type="number" class="form-control" name="reducProduit" step="any" min="0" max="100" size="30" required/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Couleur du produit :</label>

@@ -125,6 +125,11 @@
                 ->where('idProduit', $id)
                 ->update($this->table);
         }
+		
+		public function prix_a_afficher($id){
+			$produit = $this->selectById($id);
+			return intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100);
+		}
 	
 	
 		

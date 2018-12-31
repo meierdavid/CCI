@@ -401,5 +401,11 @@ public function affichage_produit($id) {
     }
   }
 
+  
+  public function prix_a_afficher($idProduit){
+	  $this->load->model('produit');
+	  var_dump ($this->produit->prix_a_afficher($idProduit));
+    return ($this->produit->prix_a_afficher($idProduit));
+  }
 
 }
