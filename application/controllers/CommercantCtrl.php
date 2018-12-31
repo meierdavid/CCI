@@ -339,9 +339,7 @@ public function connexion(){
 	$this->load->helper('cookie');
 	$this->load->library('form_validation');
 	$this->load->model('commercant');
-
 	$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
-
 	if ($this->form_validation->run() == FALSE)
 	{
 		$this->load->view('commercant/connexion');

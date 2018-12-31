@@ -14,7 +14,7 @@
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Commercant !</h2>
 
             
-            <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
+            <?php var_dump($_COOKIE); echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
             <?php echo form_open('CommercantCtrl/connexion'); ?>
 

@@ -34,7 +34,9 @@
                                 </tbody>
                               </table>
                            </div>
+                                <?php if($client[0]->idClient != $item->idClient){?>
                                <a href="<?php echo base_url("ClientCtrl/ajouter_avis/").$produit[0]->idProduit; ?>">Donnez votre avis</a>
+                                <?php } ?>
                            </article>
                                 
                             </div>

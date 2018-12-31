@@ -53,7 +53,9 @@
             <p> Il reste : <?php echo $produit[0]->nbDispoProduit; ?>	articles disponibles </p>					
             <br>
             <p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/" . $produit[0]->idProduit); ?>">Ajouter au pannier</a></p>
-            <br><br>
+            <br>
+            <p><a href="<?php echo base_url("ProduitCtrl/comparer_produit/" . $produit[0]->idProduit); ?>">Comparer avec des articles similaires</a></p>
+            <br>
         </div>
             
 

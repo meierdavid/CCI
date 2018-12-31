@@ -156,7 +156,6 @@ class ClientCtrl extends CI_Controller {
     $this->load->library('form_validation');
     $this->load->model('client');
     $this->form_validation->set_rules('mailClient', 'Email', 'required');
-
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('client/connexion');
     } else {
@@ -174,22 +173,36 @@ class ClientCtrl extends CI_Controller {
         } else {
           $data['client'] = $client;
           if ($data['client'] != NULL && password_verify($_POST['mdp'], $data['client'][0]->mdpClient)) {
-            $cookie = array(
+            /*$cookie = array(
               'name' => 'clientCookie',
               'value' => $data['client'][0]->mailClient,
               'expire' => '86500',
               'domain' => 'localhost',
               'path' => '/cci/index.php',
-            );
+            );*/
+            $cookie = array(
+                            'name' => 'clientCookie',
+                            'value' => $data['client'][0]->mailClient,
+                            'expire' => '3600'
+                        );
             $this->input->set_cookie($cookie);
             $this->load->view('client/header');
             $this->load->view('client/accueil');
             $this->load->view('client/footer');
-        }
+          }
       }
     }
   }
   }
+  public function deconnexion() {
+  $this->load->helper('form', 'url');
+  $this->load->helper('cookie');
+  $this->load->library('form_validation');
+  delete_cookie("clientCookie");
+  $data['message'] = "Vous avez été déconnecté avec succès";
+  $this->load->view('errors/validation_formulaire', $data);
+  $this->connexion();
+}
 
 
   // Permet au client de changer son mot de passe
@@ -368,14 +381,6 @@ public function detail_avis($idProduit){
 }
 
 //deconnecte le client le redirige vers la page de connexion et enleve la durée de vie du cookie
-public function deconnexion() {
-  $this->load->helper('form', 'url');
-  $this->load->helper('cookie');
-  $this->load->library('form_validation');
-  delete_cookie("administrateurCookie");
-  $data['message'] = "Vous avez été déconnecté avec succès";
-  $this->load->view('errors/validation_formulaire', $data);
-  $this->connexion();
-}
+
 
 }

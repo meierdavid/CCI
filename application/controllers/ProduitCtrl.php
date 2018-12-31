@@ -362,6 +362,9 @@ public function affichage_produit($id) {
       $this->load->view('produit/liste_avis', $data);
       $this->load->view('client/footer');
     } else {
+      $this->load->view('client/header');
+      $this->load->view('produit/premier_avis', $data);
+      $this->load->view('client/footer');
     }
   }
 
