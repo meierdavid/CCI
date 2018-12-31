@@ -371,6 +371,7 @@ public function detail_avis($idProduit){
 public function deconnexion() {
   $this->load->helper('form', 'url');
   $this->load->helper('cookie');
+  $this->load->library('form_validation');
   delete_cookie("administrateurCookie");
   $data['message'] = "Vous avez été déconnecté avec succès";
   $this->load->view('errors/validation_formulaire', $data);

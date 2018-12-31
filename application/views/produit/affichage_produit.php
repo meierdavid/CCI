@@ -3,17 +3,13 @@
 
 
 <!--Pulling Awesome Font -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-5">
-            <div class="form-login" >
-            <h2 class="text-center"> CCI Hérault - Bienvenue cher Consommateur !</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-5">
+      <div class="form-login" style="margin-left: 200px;">
             
-            <?php ?> // Affichage jolie du produit ( A FAIRE ) avec photo ECT
-
-            <?php echo form_open('ProduitCtrl/modifier'); ?>
                 <br></br>
                     <div class="text-center">
                     
@@ -51,23 +47,21 @@
 					<div class="form-group">
                         <label class="control-label">Couleur du Produit</label>
                         <input type="text" class="form-control" name="couleurProduit" value="<?php  echo $produit[0]->couleurProduit; ?>" size="30" required/>
-                    </div> 		
-					<div class="form-group">
+                    </div> 	
+                    <div class="form-group">
                         <label class="control-label">Quantité disponible du Produit</label>
                         <input type="text" class="form-control" name="nbDispoProduit" value="<?php  echo $produit[0]->nbDispoProduit; ?>" size="30" required/>
                     </div> 							
-                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div>
+                        
                     <div class="text-center">
                         <br>
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
-                </form>
+                
             <br></br>
             <br></br>
 
-            
-
-            </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>

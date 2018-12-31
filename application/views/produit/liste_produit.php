@@ -15,40 +15,42 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
-                                            <tr>
-												<th scope="col">Image</th>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Catégorie</th>
-                                                <th scope="col">Prix</th>
-                                                <th scope="col">Réduction</th>
-												<th scope="col">Couleur</th>
-												<th scope="col">Quantité Dispo</th>
-                                                <th scope="col">Supprimer</th>
-                                                <th scope="col">Modifier</th>
-                                                
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Image</th>
+                                                    <th scope="col">Nom</th>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Catégorie</th>
+                                                    <th scope="col">Prix</th>
+                                                    <th scope="col">Réduction</th>
+                                                    <th scope="col">Couleur</th>
+                                                    <th scope="col">Quantité Dispo</th>
+                                                    <th scope="col">Supprimer</th>
+                                                    <th scope="col">Modifier</th>
+
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <?php foreach ($produit as $item) { ?>
-												<?php if ($item->imageProduit == NULL) {
-													var_dump("chatte");
-													$item->imageProduit = "not_found.jpg";
-												}?>
-												<td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="img-thumbnail"></td>
-                                                <td><?php echo $item->nomProduit; ?></td>
-                                                <td><?php echo $item->descriptionProduit; ?></td>
-                                                <td><?php echo $item->categorieProduit; ?></td>
-                                                <td><?php echo $item->prixUnitaireProduit; ?></td>
-                                                <td><?php echo $item->reducProduit; ?></td>
-												<td><?php echo $item->couleurProduit; ?></td>
-												<td><?php echo $item->nbDispoProduit; ?></td>
-                                                <td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/".$item->idProduit );?>">Supprimer le produit</a></p></td>
-                                                <td><p><a href="<?php echo base_url("ProduitCtrl/detail_produit/".$item->idProduit );?>">modifier le produit</a></p></td>
-                                                
-                                            </tr>
-                                            <?php } ?>
+                                                <tr>
+                                                    <?php foreach ($produit as $item) { ?>
+                                                        <?php
+                                                        if ($item->imageProduit == NULL) {
+                                                            var_dump("chatte");
+                                                            $item->imageProduit = "not_found.jpg";
+                                                        }
+                                                        ?>
+                                                        <td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="img-thumbnail"></td>
+                                                        <td><?php echo $item->nomProduit; ?></td>
+                                                        <td><?php echo $item->descriptionProduit; ?></td>
+                                                        <td><?php echo $item->categorieProduit; ?></td>
+                                                        <td><?php echo $item->prixUnitaireProduit; ?>€</td>
+                                                        <td><?php echo $item->reducProduit; ?>%</td>
+                                                        <td><?php echo $item->couleurProduit; ?></td>
+                                                        <td><?php echo $item->nbDispoProduit; ?></td>
+                                                        <td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/" . $item->idProduit); ?>">Supprimer le produit</a></p></td>
+                                                        <td><p><a href="<?php echo base_url("ProduitCtrl/detail_produit/" . $item->idProduit); ?>">modifier le produit</a></p></td>
+
+                                                    </tr>
+                                                        <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>

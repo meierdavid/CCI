@@ -15,7 +15,7 @@
 												<th scope="col"></th>
 												<th scope="col"></th>
 												<th scope="col"></th>
-												<th scope="col">Note</th>
+												<th scope="col"></th>
 												<th scope="col"></th>
                                             </tr>
                                             </thead>

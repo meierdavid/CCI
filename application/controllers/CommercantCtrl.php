@@ -389,7 +389,7 @@ public function deconnexion(){
 	delete_cookie("commercantCookie");
 	$data['message'] = "Vous avez bien été deconnecté";
 	$this->load->view('errors/validation_formulaire', $data);
-	$this->load->view('commercant/connexion');
+	$this->connexion();
 }
 
 public function lie_commercant(){

@@ -159,7 +159,7 @@ class ProduitCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->library('form_validation');
     var_dump("detail");
-    if (isset($_COOKIE['commercantCookie'])) {
+    if (isset($_COOKIE['commercantCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
         var_dump("produit");
         $data['produit'] = $this->produit->selectById($id);
@@ -175,7 +175,31 @@ class ProduitCtrl extends CI_Controller {
 			$this->load->view('commercant/connexion');
     }
   }
-
+  
+  //comme détail produit mais pour le client ( ne permet pas la modification )
+public function affichage_produit($id) {
+    $this->load->model('produit');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    var_dump("detail");
+    if (isset($_COOKIE['clientCookie']) ) {
+      if ($this->produit->selectById($id) != Null) {
+        var_dump("produit");
+        $data['produit'] = $this->produit->selectById($id);
+        $this->load->view('client/header');
+        $this->load->view('produit/affichage_produit', $data);
+        $this->load->view('client/footer');
+      } else {
+        //ereur le produit n'existe pas
+        $this->liste_produit();
+      }
+    } else {
+      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+			$this->load->view('errors/erreur_formulaire', $data);
+			$this->load->view('client/connexion');
+    }
+  }
   public function moyenne_note_produit($idProduit){
     $this->load->model('poster_avis');
     return $this->poster_avis->moyenne($idProduit);
