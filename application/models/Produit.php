@@ -115,6 +115,7 @@
         
         public function update($id, $data) {
         $this->load->database();
+		var_dump($data);
         $this->db->set('nomProduit', $data['nomProduit'])
                 ->set('categorieProduit', $data['categorieProduit'])
 		        ->set('descriptionProduit', $data['descriptionProduit'])
@@ -122,6 +123,7 @@
 		        ->set('reducProduit', $data['reducProduit'])
 		        ->set('couleurProduit', $data['couleurProduit'])
 		        ->set('nbDispoProduit', $data['nbDispoProduit'])
+				->set('imageProduit', $data['imageProduit'])
                 ->where('idProduit', $id)
                 ->update($this->table);
         }

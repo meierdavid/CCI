@@ -245,34 +245,129 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('produit');
-
     if (isset($_COOKIE['commercantCookie'])) {
       $id = $_POST['idProduit'];
-      var_dump($id);
-      var_dump($_POST);
-      $data = array(
-        "nomProduit" => htmlspecialchars($_POST['nomProduit']),
-        "categorieProduit" => htmlspecialchars($_POST['categorieProduit']),
-        "numSiret" => htmlspecialchars($_POST['numSiret']),
-        "descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
-        "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
-        "reducProduit" => htmlspecialchars($_POST['reducProduit']),
-        "couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
-        "nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
-      );
-      $this->produit->update($id, $data);
-      $data['produit'] = $this->produit->selectById($id);
-      $data['message'] = "Le produit a été modifié avec succès";
-      $this->load->view('errors/validation_formulaire', $data);
-      $this->load->view('commercant/index');
-      $this->load->view('produit/detail', $data);
-    } else {
-      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
-      $this->load->view('errors/erreur_formulaire', $data);
-      $this->load->view('commercant/connexion');
-    }
+	  $produit = $this->produit->selectById($id);
+	  if($_POST['categorieProduit'] == NULL){
+		  $categorie=$produit[0]->categorieProduit;
+	  }
+	  else {
+		  $categorie=$_POST['categorieProduit'];
+	  }
+	  //SI IL N'Y A PAS DE NOUVELLE IMAGE
+	  if (!(isset($_FILES['imageProduit']['name']) && !empty($_FILES['imageProduit']['name']))) {
+		  var_dump("detecte pas image");
+		  // SI IL Y EN AVAIT UNE AVANT 
+		  if($produit[0]->imageProduit != "null" ){
+				$data = array(
+			"nomProduit" => htmlspecialchars($_POST['nomProduit']),
+			"categorieProduit" => htmlspecialchars($categorie),
+			"numSiret" => htmlspecialchars($_POST['numSiret']),
+			"descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
+			"prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
+			"reducProduit" => htmlspecialchars($_POST['reducProduit']),
+			"couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
+			"nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
+			"imageProduit" => htmlspecialchars($produit[0]->imageProduit)
+		  );
+		  }
+			else {
+			//SI IL N'Y EN AVAIT PAS AVANT 
+				$data = array(
+			"nomProduit" => htmlspecialchars($_POST['nomProduit']),
+			"categorieProduit" => htmlspecialchars($categorie),
+			"numSiret" => htmlspecialchars($_POST['numSiret']),
+			"descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
+			"prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
+			"reducProduit" => htmlspecialchars($_POST['reducProduit']),
+			"couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
+			"nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
+		  );
+			}
+			 $this->produit->update($id, $data);
+		  $data['produit'] = $this->produit->selectById($id);
+		  $data['message'] = "Le produit a été modifié avec succès";
+		  $this->load->view('errors/validation_formulaire', $data);
+		  $this->liste_produit();
+	  }
+	  
+	  //SI IL Y A UNE NOUVELLE IMAGE	
+	  else {
+		  var_dump("detecte image");
+		  $config = array(
+          'upload_path' => "./assets/image/Produits",
+          'allowed_types' => "gif|jpg|png|jpeg|pdf",
+          'overwrite' => FALSE,
+          'max_size' => "8192000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+          'max_height' => "1536",
+          'max_width' => "2048",
+          'encrypt_name' => TRUE
+        );
+        $this->load->library('upload', $config);
+		  if (!($this->upload->do_upload('imageProduit'))) {
+
+            log_message('error', $this->upload->display_errors());
+            $data['message'] = "erreur : la photo n'a pas pu s'importer";
+            $this->load->view('errors/erreur_formulaire', $data);
+          	$this->load->view('commercant/index');
+			$this->load->view('produit/detail', $data);
+
+          }
+          else {
+            $file_data = $this->upload->data();
+
+            $data = array(
+              "nomProduit" => htmlspecialchars($_POST['nomProduit']),
+              "categorieProduit" => htmlspecialchars($categorie),
+              "numSiret" => htmlspecialchars($_POST['numSiret']),
+              "descriptionProduit" => htmlspecialchars($_POST['descriptionProduit']),
+              "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit']),
+              "reducProduit" => htmlspecialchars($_POST['reducProduit']),
+              "couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
+              "nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
+              "imageProduit" => htmlspecialchars($file_data['file_name'])
+            );		  
+			$this->produit->update($id, $data);
+			  $data['produit'] = $this->produit->selectById($id);
+			  $data['message'] = "Le produit a été modifié avec succès";
+			  $this->load->view('errors/validation_formulaire', $data);
+			  $this->modifier_image($file_data['file_name']);
+		  }
+	  }
+		  
+		 
+		} 
+	else {
+		  $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+		  $this->load->view('errors/erreur_formulaire', $data);
+		  $this->load->view('commercant/connexion');
+	}
+	
   }
 
+  
+  public function supprimer_image($id){
+	$this->load->model('produit');
+	$produit = $this->produit->selectById($id);
+	$data = array(
+              "nomProduit" => htmlspecialchars($produit[0]->nomProduit),
+              "categorieProduit" => htmlspecialchars($produit[0]->categorieProduit),
+              "numSiret" => htmlspecialchars($produit[0]->numSiret),
+              "descriptionProduit" => htmlspecialchars($produit[0]->descriptionProduit),
+              "prixUnitaireProduit" => htmlspecialchars($produit[0]->prixUnitaireProduit),
+              "reducProduit" => htmlspecialchars($produit[0]->reducProduit),
+              "couleurProduit" => htmlspecialchars($produit[0]->couleurProduit),
+              "nbDispoProduit" => htmlspecialchars($produit[0]->nbDispoProduit),
+			   "imageProduit" => htmlspecialchars(NULL),
+            );	
+	$this->produit->update($id, $data);
+	$data['produit'] = $this->produit->selectById($id);
+	$data['message'] = "L'image a été supprimée avec succès";
+	$this->load->view('errors/validation_formulaire', $data);
+    $this->liste_produit();
+  }
+  
+  
   public function categorie($categorie) {
     $i=0;
     $this->load->helper('form', 'url');
