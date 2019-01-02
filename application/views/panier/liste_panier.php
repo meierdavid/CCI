@@ -5,7 +5,7 @@
                 <div style="margin-left: 60px" class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="box">
-                            <h2>Liste des Paniers</h2>
+                            <h2>Votre panier</h2>
                             <div class="row">
                                 <article class=" col-md-1 col-lg-1">
 
@@ -17,17 +17,14 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">date Panier</th>
-                                                <th scope="col">paiement Panier</th>
                                                 <th scope="col">code Promo appliqué</th>
                                                 <th scope="col">Prix total du panier</th>
-                                                <th scope="col">Etat</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <?php foreach ($panier as $item) { ?>
                                                 <td><?php echo $item->datePanier; ?></td>
-                                                <td><?php echo $item->paiementPanier; ?></td>
                                                 <td><?php echo $item->codePromo; ?></td>
                                                 <td><?php echo $item->prixTotPanier; ?></td>
                                                 <td><p><a href="<?php echo base_url("PanierCtrl/finaliser/".$item->finaliserPanier );?>">Finaliser</a></p></td>

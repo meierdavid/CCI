@@ -38,7 +38,7 @@
 											}
 											?></td>
                                             <td><p><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>">Détails du produit</a></p></td>
-                                            <td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au pannier</a></p></td>
+                                            <td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au panier</a></p></td>
                                             <td><?php echo $note[$i] . "/10";
                                             $i = $i + 1;
                                             ?></td>
