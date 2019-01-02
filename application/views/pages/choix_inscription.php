@@ -28,5 +28,13 @@
  <div class="text-center">
             <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/inscription" role="button">Vous êtes Client? Cliquez ici</a>
   </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="text-center">
+            <a class="btn btn-primary" href="<?php echo base_url()?>AdministrateurCtrl/inscription" role="button">Vous êtes faites partie de la merveilleuse équipe 7 de dév ?? Cliquez ici</a>
+        </div>
         
     </div>
