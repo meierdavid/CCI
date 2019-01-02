@@ -66,7 +66,9 @@
                         <input type="text" class="form-control" name="telClient" value="" size="30" required/>
                     </div>
 
-
+                    <div class="form-group">
+                        <input type="checkbox" name="conditionsUtilisation" required/> Je m'engage à respecter les <a href="<?php echo base_url("ClientCtrl/condition_utilisation/");?>">conditions d'utilisation</a> de ce site
+                    </div>
 
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Inscription" /></div>
                     <div class="text-center">

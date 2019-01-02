@@ -377,5 +377,10 @@ public function detail_avis($idProduit){
 
 //deconnecte le client le redirige vers la page de connexion et enleve la durée de vie du cookie
 
+public function condition_utilisation(){
+  $this->load->helper('form', 'url');
+
+  $this->load->view('conditions');
+}
 
 }

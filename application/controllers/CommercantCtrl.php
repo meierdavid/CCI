@@ -487,4 +487,10 @@ public function inscription(){
 	}
 }
 
+public function condition_utilisation(){
+  $this->load->helper('form', 'url');
+
+  $this->load->view('conditions');
+}
+
 }
