@@ -3,10 +3,10 @@
         <div class="animated fadeIn">
             <div>
                 <div class="row">
-                    
+
                         <div class="box">
                             <h2>Recherche</h2>
-                            
+
                                 <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
@@ -28,20 +28,20 @@
 												}?>
 												<td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible"></td>
 												<td><?php echo $item->prixUnitaireProduit . "€"; ?></td>
-                                                <td><p><a href="<?php echo base_url("ProduitCtrl/detail_produit/".$item->idProduit );?>">Details du produit</a></p></td> 
-												<td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/".$item->idProduit );?>">Ajouter au pannier</a></p></td>
-												<td><?php echo $note[$i] . "/10"; 
+                                                <td><p><a href="<?php echo base_url("ProduitCtrl/detail_produit/".$item->idProduit );?>">Details du produit</a></p></td>
+												<td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au pannier</a></p></td>
+												<td><?php echo $note[$i] . "/10";
 												$i=$i+1 ;?></td>
 												<td><p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $item->idProduit); ?>">Voir les avis</a></p></td>
-                                                
+
                                             </tr>
                                             <?php } ?>
                                             </tbody>
                                         </table>
                                 </div>
-                       
+
                         </div>
-                    
+
                 </div>
             </div>
 

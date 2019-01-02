@@ -80,7 +80,6 @@ class ClientCtrl extends CI_Controller {
       $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
       $this->load->view('errors/erreur_formulaire', $data);
       $this->load->view('client/connexion');
-
     }
   }
   // affiche la view client/profil si il y a un cookie client sinon déconnecte l'utilisateur

@@ -3,10 +3,10 @@
         <div class="animated fadeIn">
             <div>
                 <div class="row">
-                    
+
                         <div class="box">
                             <h2><?php echo $entreprise[0]->nomEntreprise; ?></h2>
-                            
+
                                 <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
@@ -30,17 +30,17 @@
                                                 <td><?php echo $item->reducProduit; ?></td>
 												<td><?php echo $item->couleurProduit; ?></td>
 												<td><?php echo $item->nbDispoProduit; ?></td>
-                                                <td><p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/".$item->idProduit );?>">Ajouter au pannier</a></p></td>
+                                                <td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au pannier</a></p></td>
                                                 <td><p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $item->idProduit); ?>">Voir les avis</a></p></td>
-                                                
+
                                             </tr>
                                             <?php } ?>
                                             </tbody>
                                         </table>
                                 </div>
-                       
+
                         </div>
-                    
+
                 </div>
             </div>
 

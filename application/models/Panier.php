@@ -23,6 +23,15 @@
                 ->result();
         }
 
+        public function selectByIdClient($id) {
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('panier')
+                ->where('idClient', $id)
+                ->get()
+                ->result();
+        }
+
         public function finaliser($id) {
             $this->load->database();
             $this->db->set('finaliserPanier', 1); // 0 ou null si non finaliser, 1 si finaliser
@@ -33,10 +42,9 @@
             $this->db->set('datePanier', $data['datePanier'])
                 ->set('annulationPanier', $data['annulationPanier'])
                 ->set('codePromo', $data['codePromo'])
-                ->set('datePanier', $data['datePanier'])
+                ->set('paiementPanier', $data['paiementPanier'])
                 ->set('finaliserPanier', $data['finaliserPanier'])
                 ->set('idClient', $data['idClient'])
-                ->set('numSiret', $data['numSiret'])
                 ->set('prixTotPanier', $data['prixTotPanier'])
                 ->insert($this->table);
         }
@@ -53,10 +61,9 @@
                 ->set('codePromo', $data['codePromo'])
                 ->set('datePanier', $data['datePanier'])
                 ->set('finaliserPanier', $data['finaliserPanier'])
-                ->set('numSiret', $data['numSiret'])
                 ->set('paiementPanier', $data['paiementPanier'])
                 ->set('prixTotPanier', $data['prixTotPanier'])
-                ->set('idClient', $data['idClient'])
+                ->where('idPanier', $id)
                 ->update($this->table);
         }
 

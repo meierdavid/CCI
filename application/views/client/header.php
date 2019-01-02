@@ -66,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<span class="icon-bar"></span>
 				  </button>
 				</div>
-                               
+
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav menu__list">
@@ -113,7 +113,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</li>
 					<li class="menu__item dropdown">
 					   <a class="menu__link" href="<?php echo base_url(); ?>ProduitCtrl/soldes" >Soldes </a>
-								
+
 					</li>
 					<li class=" menu__item"><a class="menu__link" href="index.html">Codes de réduction</a></li>
 					<li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Comparateur</a></li>
@@ -129,7 +129,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <form action="#" method="post" class="last">
                                 <input type="hidden" name="cmd" value="_cart">
                                 <input type="hidden" name="display" value="1">
-                                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                                <button class="w3view-cart" type="submit" name="submit" value="">
+																	<i class="fa fa-cart-arrow-down" aria-hidden="true">
+																		<a href="<?php echo base_url("PanierCtrl/liste_panier"); ?>">P</a>
+																	</i>
+																</button>
                         </form>
                     </div>
 		</div>
