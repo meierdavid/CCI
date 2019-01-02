@@ -21,7 +21,11 @@
                 ->where('idPanier', $id)
                 ->get()
                 ->result();
+        }
 
+        public function finaliser($id) {
+            $this->load->database();
+            $this->db->set('finaliserPanier', 1); // 0 ou null si non finaliser, 1 si finaliser
         }
 
         public function insert($data) {
