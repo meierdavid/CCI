@@ -31,7 +31,7 @@
                             </thead>
                           <tbody>
                                 <tr>
-                                  <?php foreach ($entreprise as $item) { ?>
+                                  <?php foreach ($entreprises as $item) { ?>
                                     <td><?php echo $item->numSiret; ?></td>
                                     <td><?php echo $item->nomEntreprise; ?></td>
                                     <td><?php echo $item->adresseEntreprise; ?></td>

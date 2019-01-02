@@ -267,6 +267,13 @@ public function ajout_entreprise() {
 				$_POST['dimanche_matin_ouverture']."-".$_POST['dimanche_matin_fermeture']."/".
 				$_POST['dimanche_soir_ouverture']."-".$_POST['dimanche_soir_fermeture'];
 
+				if($_POST['livraisonEntreprise'] == "Oui"){ //livraison OUI
+					$livraison = 1;
+				}
+				else{
+					$livraison = 0;
+				}
+
 				$data=array(
 					"numSiret"=> htmlspecialchars($_POST['numSiret']),
 					"nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
@@ -274,7 +281,7 @@ public function ajout_entreprise() {
 					"codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
 					"villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
 					"horairesEntreprise" => htmlspecialchars($horairesEntreprise),
-					"livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
+					"livraisonEntreprise" => htmlspecialchars($livraison),
 					"tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
 				);
 
