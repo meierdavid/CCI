@@ -10,6 +10,22 @@ class PanierCtrl extends CI_Controller {
         $this->load->view('client/accueil');
     }
 
+    public function finaliser(){
+        $this->load->model('panier');
+        $this->load->helper('form', 'url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
+            if (isset($_COOKIE['clientCookie'])) {
+
+                //
+
+            }else{
+                $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+                $this->load->view('client/connexion');
+            }
+        }
+    }
+
 
     public function liste_panier(){
         $this->load->model('Panier');
