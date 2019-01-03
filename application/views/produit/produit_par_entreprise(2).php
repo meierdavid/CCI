@@ -5,7 +5,7 @@
                 <div class="row">
 
                     <div class="box">
-                        <h2><?php echo $entreprise[0]->nomEntreprise; ?></h2>
+                        <h2><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></h2>
 
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -29,8 +29,15 @@
                                             }
                                             ?>
                                             <td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible"></td>
-                                            <td><?php echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100 )  . "€" . "  AU LIEU DE  " . $item->prixUnitaireProduit . "€" ?></td>
-                                            <td><p><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>">Détails du produit</a></p></td>
+                                            <td><?php
+											if ($item->reducProduit !=0){
+												echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100 )  . "€" . "  AU LIEU DE  " . $item->prixUnitaireProduit . "€" ;
+											}
+											else {
+												echo $item->prixUnitaireProduit . "€" ;
+											}
+											?></td>
+											<td><p><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>">Détails du produit</a></p></td>
                                             <td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p></td>
                                             <td><?php echo $note[$i] . "/10";
                                             $i = $i + 1;

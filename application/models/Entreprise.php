@@ -63,6 +63,9 @@
               ->set('horairesEntreprise', $data['horairesEntreprise'])
               ->set('livraisonEntreprise', $data['livraisonEntreprise'])
               ->set('tempsReservMax', $data['tempsReservMax'])
+			  ->set('siteWebEntreprise', $data['siteWebEntreprise'])
+			  ->set('logoEntreprise', $data['logoEntreprise'])
+
 				->insert($this->table);
         $this->db->set('idCommercant',$id)
                 ->set('numSiret',$data['numSiret'])
@@ -90,6 +93,9 @@
               ->set('horairesEntreprise', $data['horairesEntreprise'])
               ->set('livraisonEntreprise', $data['livraisonEntreprise'])
               ->set('tempsReservMax', $data['tempsReservMax'])
+			  ->set('siteWebEntreprise', $data['siteWebEntreprise'])
+			  ->set('logoEntreprise', $data['logoEntreprise'])
+
 				->update($this->table);
     	}
     }

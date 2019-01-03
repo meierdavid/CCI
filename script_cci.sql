@@ -61,6 +61,8 @@ CREATE TABLE ENTREPRISE(
 	horairesEntreprise    VARCHAR (2000)  NOT NULL ,
 	livraisonEntreprise   TINYINT  NOT NULL ,
 	tempsReservMax   INT  ,
+	siteWebEntreprise VARCHAR (100),
+	logoEntreprise	VARCHAR (2000),
 	CONSTRAINT ENTREPRISE_PK PRIMARY KEY (numSiret)
 );
 

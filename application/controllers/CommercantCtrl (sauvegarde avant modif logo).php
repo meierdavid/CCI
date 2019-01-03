@@ -196,30 +196,6 @@ public function form_ajout_produit(){
 	}
 }
 
-    public function form_ajout_bonreduc(){
-        $this->load->model('bonreduc');
-        $this->load->model('commercant');
-        $this->load->model('entreprise');
-        $this->load->helper('form','url');
-        $this->load->helper('cookie');
-        $this->load->library('form_validation');
-
-        if($this->input->cookie('commercantCookie') != null){
-            $varMail= $this->input->cookie('commercantCookie');
-            $data['commercant']=$this->commercant->selectByMail($varMail);
-            $data = $this->liste_entreprise_dropbox();
-            if ($this->form_validation->run() == FALSE)
-            {
-                $this->load->view('commercant/index',$data);
-                $this->load->view('bonreduc/ajout_bonreduc', $data);
-            }
-        }
-        else{
-            $data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
-            $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('commercant/connexion');
-        }
-    }
 
 public function liste_entreprise(){
 	$this->load->helper('cookie');
@@ -245,30 +221,34 @@ public function liste_entreprise(){
 }
 
 public function ajout_entreprise() {
-	
-    $this->load->helper('form','url');
+
+	//mettre parametre mail ou utiliser cookie
+	//use insert for model entreprise paramètre $data , $idCommercant
+
+	$this->load->helper('form','url');
 	$this->load->helper('cookie');
 	$this->load->library('form_validation');
 	$this->load->model('entreprise');
 	$this->load->model('commercant');
-	
+
 	$this->form_validation->set_rules('numSiret', 'n° SIRET', 'required');
 	$this->form_validation->set_rules('nomEntreprise', "Nom de l'entreprise", 'alpha_numeric_spaces');
 	$this->form_validation->set_rules('codePEntreprise', 'Code postale', 'integer');
 	$this->form_validation->set_rules('villeEntreprise', 'Ville', 'alpha_dash');
 	$this->form_validation->set_rules('TempsReservMax', 'Temps maximum de réservation en heure', 'integer');
 
-    if ($this->input->cookie('commercantCookie') != null) {
-      $varMail = $this->input->cookie('commercantCookie');
-      $data['commercant'] = $this->commercant->selectByMail($varMail);
-	  if ($this->form_validation->run() == FALSE)
+	
+	if($this->input->cookie('commercantCookie') != null){
+		$varMail= $this->input->cookie('commercantCookie');
+		$data['commercant']=$this->commercant->selectByMail($varMail);
+		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('commercant/index',$data);
 			$this->load->view('commercant/ajout_entreprise');
 		}
-		else {
-		  if ($this->entreprise->selectById($_POST['numSiret']) == null) {
-
+		else
+		{
+			if($this->entreprise->selectById($_POST['numSiret']) == null){
 				$id= $data['commercant'][0]->idCommercant;
 
 				$horairesEntreprise=$_POST['lundi_matin_ouverture']."-".$_POST['lundi_matin_fermeture']."/".
@@ -293,21 +273,7 @@ public function ajout_entreprise() {
 					$livraison = 0;
 				}
 
-			$config = array(
-			  'upload_path' => "./assets/image/Logos",
-			  'allowed_types' => "gif|jpg|png|jpeg|pdf",
-			  'overwrite' => FALSE,
-			  'max_size' => "8192000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-			  'max_height' => "1536",
-			  'max_width' => "2048",
-			  'encrypt_name' => TRUE
-			);
-			$this->load->library('upload', $config);
-
-			//SI IL N'Y A PAS DE FICHIER
-
-			if (!(isset($_FILES['logoEntreprise']['name']) && !empty($_FILES['logoEntreprise']['name']))) {
-			  $data=array(
+				$data=array(
 					"numSiret"=> htmlspecialchars($_POST['numSiret']),
 					"nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
 					"adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
@@ -326,238 +292,21 @@ public function ajout_entreprise() {
 				$data['entreprise'] =$this->entreprise->selectById($_POST['numSiret']);
 				$this->load->view('entreprise/profil',$data);
 			}
-
-			// SI IL Y A UN FICHIER
-			else {
-
-			  if (!($this->upload->do_upload('logoEntreprise'))) {
-
-				log_message('error', $this->upload->display_errors());
-				$data['message'] = "erreur : le logo n'a pas pu s'importer";
+			else
+			{
+				$data['message']="erreur : ce numéro SIRET corrspond déjà à une entreprise";
 				$this->load->view('errors/erreur_formulaire', $data);
-				$this->load->view('commercant/index', $data);
+				$this->load->view('commercant/index',$data);
 				$this->load->view('commercant/ajout_entreprise');
-
-			  }
-			  else {
-				$file_data = $this->upload->data();
-
-				$data=array(
-					"numSiret"=> htmlspecialchars($_POST['numSiret']),
-					"nomEntreprise"=> htmlspecialchars($_POST['nomEntreprise']),
-					"adresseEntreprise"=> htmlspecialchars($_POST['adresseEntreprise']),
-					"codePEntreprise"=> htmlspecialchars($_POST['codePEntreprise']),
-					"villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
-					"horairesEntreprise" => htmlspecialchars($horairesEntreprise),
-					"livraisonEntreprise" => htmlspecialchars($livraison),
-					"tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
-					"siteWebEntreprise" => htmlspecialchars($_POST['siteWebEntreprise']),
-					"siteWebEntreprise" => htmlspecialchars($_POST['siteWebEntreprise']),
-					"logoEntreprise" => htmlspecialchars($file_data['file_name'])
-
-				);
-
-				$this->entreprise->insert($data,$id);
-				$data['message'] = "L'entreprise a bien été ajoutée";
-				$this->load->view('errors/validation_formulaire', $data);
-				$this->modifier_logo($file_data['file_name']);
-
-			  }
 			}
-		  }
-		  else {
-
-			$data['message'] = "erreur : mauvais numéro de Siret";
-			$this->load->view('errors/erreur_formulaire', $data);
-			$this->load->view('commercant/index', $data);
-			$this->load->view('commercant/ajout_entreprise', $data);
-		  }
 		}
 	}
-    else
-    {
-      $this->load->view('pages/deconnexion');
-      $this->load->view('pages/pageConnexionSellers');
-    }
-	
-
-  }
-  
-  
-  
-  
-      public function modifier_entreprise() {
-    $this->load->helper('form', 'url');
-    $this->load->library('form_validation');
-    $this->load->model('entreprise');
-    if (isset($_COOKIE['commercantCookie'])) {
-		$id=$_POST['numSiret'];
-	  $entreprise = $this->entreprise->selectById($id);
-	  var_dump($entreprise);
-	  $varMail = $this->input->cookie('commercantCookie');
-      $data['commercant'] = $this->commercant->selectByMail($varMail);
-
-	  //SI IL N'Y A PAS DE NOUVELLE IMAGE
-	  if (!(isset($_FILES['logoEntreprise']['name']) && !empty($_FILES['logoEntreprise']['name']))) {
-		  var_dump("detecte pas image");
-		  var_dump($_POST);
-		  // SI IL Y EN AVAIT UNE AVANT 
-		  if($entreprise[0]->logoEntreprise != "null" ){
-			$data = array(
-				"numSiret" => htmlspecialchars($_POST['numSiret']),
-                "nomEntreprise" => htmlspecialchars($_POST['nomEntreprise']),
-                "adresseEntreprise" => htmlspecialchars($_POST['adresseEntreprise']),
-                "codePEntreprise" => htmlspecialchars($_POST['codePEntreprise']),
-                "villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
-                "horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
-                "livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
-                "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
-                "siteWebEntreprise" => htmlspecialchars($_POST['siteWebEntreprise']),
-				"logoEntreprise" => htmlspecialchars($entreprise[0]->logoEntreprise)
-		  );
-		  }
-			else {
-			//SI IL N'Y EN AVAIT PAS AVANT 
-				$data = array(
-				"numSiret" => htmlspecialchars($_POST['numSiret']),
-                "nomEntreprise" => htmlspecialchars($_POST['nomEntreprise']),
-                "adresseEntreprise" => htmlspecialchars($_POST['adresseEntreprise']),
-                "codePEntreprise" => htmlspecialchars($_POST['codePEntreprise']),
-                "villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
-                "horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
-                "livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
-                "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
-                "siteWebEntreprise" => htmlspecialchars($_POST['siteWebEntreprise']),
-		  );
-			}
-			 $this->entreprise->update($id, $data);
-		  $data['entreprise'] = $this->entreprise->selectById($id);
-		  $data['message'] = "L'entreprise a été modifié avec succès";
-		  $this->load->view('errors/validation_formulaire', $data);
-		  $this->liste_entreprise();
-	  }
-	  
-	  //SI IL Y A UNE NOUVELLE IMAGE	
-	  else {
-		  var_dump("detecte image");
-		  $config = array(
-          'upload_path' => "./assets/image/Logos",
-          'allowed_types' => "gif|jpg|png|jpeg|pdf",
-          'overwrite' => FALSE,
-          'max_size' => "8192000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-          'max_height' => "1536",
-          'max_width' => "2048",
-          'encrypt_name' => TRUE
-        );
-        $this->load->library('upload', $config);
-		  if (!($this->upload->do_upload('logoEntreprise'))) {
-
-            log_message('error', $this->upload->display_errors());
-            $data['message'] = "erreur : le logo n'a pas pu s'importer";
-            $this->load->view('errors/erreur_formulaire', $data);
-          	$this->load->view('commercant/index');
-			$this->load->view('entreprise/profil', $data);
-
-          }
-          else {
-            $file_data = $this->upload->data();
-
-            $data = array(
-                "numSiret" => htmlspecialchars($_POST['numSiret']),
-                "nomEntreprise" => htmlspecialchars($_POST['nomEntreprise']),
-                "adresseEntreprise" => htmlspecialchars($_POST['adresseEntreprise']),
-                "codePEntreprise" => htmlspecialchars($_POST['codePEntreprise']),
-                "villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
-                "horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
-                "livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
-                "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
-                "siteWebEntreprise" => htmlspecialchars($_POST['siteWebEntreprise']),
-				"logoEntreprise" => htmlspecialchars($file_data['file_name'])
-            );		  
-			$this->entreprise->update($id, $data);
-			  $data['entreprise'] = $this->entreprise->selectById($id);
-			  $data['message'] = "L'entreprise a été modifié avec succès";
-			  $this->load->view('errors/validation_formulaire', $data);
-			  $this->modifier_logo($file_data['file_name']);
-		  }
-	  }
+	else{
+		$data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
+		$this->load->view('errors/erreur_formulaire', $data);
+		$this->load->view('commercant/connexion');
 	}
-	else {
-		  $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
-		  $this->load->view('errors/erreur_formulaire', $data);
-		  $this->load->view('commercant/connexion');
-	}
-	
-  }
-  
-  
-  public function detail_entreprise($id) {
-    $this->load->model('commercant');
-    $this->load->helper('form', 'url');
-    $this->load->helper('cookie');
-    $this->load->library('form_validation');
-    $this->load->model('entreprise');
-    $data['entreprises_header'] = $this->entreprise->selectAll();
-    var_dump("detail");
-    if (isset($_COOKIE['commercantCookie']) ) {
-      if ($this->entreprise->selectById($id) != Null) {
-        var_dump("entreprise");
-        $data['entreprise'] = $this->entreprise->selectById($id);
-        $this->load->view('commercant/index');
-        $this->load->view('entreprise/profil', $data);
-      } else {
-        //ereur le produit n'existe pas
-        $this->liste_entreprise();
-      }
-    } else {
-      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
-			$this->load->view('errors/erreur_formulaire', $data);
-			$this->load->view('commercant/connexion');
-    }
-  }
-  
-  
-  
-  
-  
-  public function modifier_logo($logoEntreprise){
-    $this->load->library('image_lib');
-    $config['image_library'] = 'gd2';
-    $config['source_image'] = './assets/image/Logos/'.$logoEntreprise;
-    //$config['new_image'] = './assets/image/Produits/resized_img.jpg';
-    //$config['create_thumb'] = TRUE;
-    $config['maintain_ratio'] = TRUE;
-    $config['width'] = 200;
-    $config['height'] = 200;
-    $this->image_lib->initialize($config);
-    $this->image_lib->resize();
-    $this->liste_entreprise();
-  }
-  
-  
-  public function supprimer_logo($id){
-	$this->load->model('entreprise');
-	$entreprise = $this->entreprise->selectById($id);
-	$data = array(
-              "numSiret" => htmlspecialchars($entreprise[0]->numSiret),
-                "nomEntreprise" => htmlspecialchars($entreprise[0]->nomEntreprise),
-                "adresseEntreprise" => htmlspecialchars($entreprise[0]->adresseEntreprise),
-                "codePEntreprise" => htmlspecialchars($entreprise[0]->codePEntreprise),
-                "villeEntreprise" => htmlspecialchars($entreprise[0]->villeEntreprise),
-                "horairesEntreprise" => htmlspecialchars($entreprise[0]->horairesEntreprise),
-                "livraisonEntreprise" => htmlspecialchars($entreprise[0]->livraisonEntreprise),
-                "tempsReservMax" => htmlspecialchars($entreprise[0]->tempsReservMax),
-                "siteWebEntreprise" => htmlspecialchars($entreprise[0]->siteWebEntreprise),
-			   "logoEntreprise" => htmlspecialchars(NULL),
-            );	
-	$this->entreprise->update($id, $data);
-	$data['entreprise'] = $this->entreprise->selectById($id);
-	$data['message'] = "Le logo a été supprimée avec succès";
-	$this->load->view('errors/validation_formulaire', $data);
-    $this->liste_entreprise();
-  }
-  
-  
+}
 // Cette fonction est en commentaire car le but était d'ajouter un produit à une entreprise
 // OR ce sont les sous produit qui sont lié à une entreprise
 /* public function ajout_produit() {

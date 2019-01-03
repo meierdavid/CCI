@@ -33,7 +33,7 @@
 
 
             <p><?php echo $produit[0]->descriptionProduit; ?> </p>
-            <p> de : <?php echo $entreprise[0]->nomEntreprise; ?>
+            <p> de : <a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a>
                 <br>
             <p><?php echo $note . "/10"; ?></p>
             <p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $produit[0]->idProduit); ?>">Voir les avis</a></p>
