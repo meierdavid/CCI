@@ -14,12 +14,16 @@ class PanierCtrl extends CI_Controller {
     $this->load->model('panier');
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie'])) {
-
+      $data['client'] = $this->client->selectByMail($this->input->cookie('clientCookie'));
       //acheter !
-      $this->load->view('panier');
-
+      $this->load->view('client/header',$data);
+      $this->load->view('client/adresse',$data);
+      $this->load->view('client/footer');
+      
+      
     }else{
       $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
       $this->load->view('errors/erreur_formulaire', $data);
@@ -31,6 +35,8 @@ class PanierCtrl extends CI_Controller {
 
   public function liste_panier(){
     $this->load->helper('cookie');
+    $this->load->helper('url');
+    $this->load->helper('form');
     $this->load->model('panier');
     $this->load->model('commander');
     $this->load->model('produit');
@@ -38,7 +44,7 @@ class PanierCtrl extends CI_Controller {
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if(isset($_COOKIE['clientCookie'])){
       $varid = $this->input->cookie('clientCookie');
-
+     
       $data['client'] = $this->client->selectByMail($varid);
       $data['panier'] = $this->panier->selectByIdClient($data['client'][0]->idClient);
 
