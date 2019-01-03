@@ -26,15 +26,14 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <?php foreach ($entreprises as $item)  ?>
-
+                                                <?php foreach ($bonreduc as $item) { ?>
                                                 <td><?php echo $item->libelleBon; ?></td>
                                                 <td><?php echo $item->numSiret; ?></td>
-                                                <td><?php echo $item->pourcentageBon; ?>%</td>
-                                                <td><p><a href="<?php echo base_url("BonReducCtrl/supprimer_bon/" . $item->idBonReduc); ?>">Supprimer le Bon de réduction</a></p></td>
-                                                <td><p><a href="">Modifier le Bon de réduction</a></p></td>
-
+                                                <td><?php echo $item->pourcentageBon; ?></td>
+                                                <td><p><a href="<?php echo base_url("BonReducCtrl/supprimer_bonreduc/" . $item->idBon); ?>">Supprimer le Bon de réduction</a></p></td>
+                                                <td><p><a href="<?php echo base_url("BonReducCtrl/detail_bonreduc/" . $item->idBon); ?>">Modifier le Bon de réduction</a></p></td>
                                             </tr>
+                                            <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
