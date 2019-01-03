@@ -80,12 +80,12 @@ class PanierCtrl extends CI_Controller {
       if ($this->form_validation->run() == FALSE)
       {
         $this->load->view('client/header');
-        $this->load->view('panier/ajout_panier', $data['produit']);
+        $this->load->view('panier/ajout_panier', $data);
         $this->load->view('client/footer');
       }
       else
       {
-        $prix = $this->produit->prix_a_afficher($idProduit);
+        $prix = $this->produit->prix_a_afficher($idProduit)*$_POST['quantite'];
         $date = date("d-m-y H:i:s");
 
         $data['panier'] = $this->panier->selectByIdClient($idClient);
@@ -109,6 +109,7 @@ class PanierCtrl extends CI_Controller {
           $this->load->view('client/footer');
         }
         else{ //panier déjà existant : MAJ
+          $prix = $this->produit->prix_a_afficher($idProduit)*$_POST['quantite'];
           $prix = $prix + $data['panier'][0]->prixTotPanier;
           $idPanier = $data['panier'][0]->idPanier;
 
@@ -129,7 +130,10 @@ class PanierCtrl extends CI_Controller {
           $this->load->view('client/footer');
         }
         //Insertion dans table Commander
-        if($_POST['Livraison']==Oui){
+        $data['panier'] = $this->panier->selectByIdClient($idClient);
+        $idPanier = $data['panier'][0]->idPanier;
+
+        if($_POST['livraison']=='Oui'){
           $livraison = 1;
         }
         else{
@@ -138,7 +142,7 @@ class PanierCtrl extends CI_Controller {
 
         $data=array(
           "idProduit"=> htmlspecialchars($idProduit),
-          "idPanier"=> htmlspecialchars($data['panier'][0]->idPanier),
+          "idPanier"=> htmlspecialchars($idPanier),
           "quantiteProd"=> htmlspecialchars($_POST['quantite']),
           "livraisonCommande"=> htmlspecialchars($livraison),
         );
