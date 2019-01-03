@@ -29,8 +29,8 @@
                                           </thead>
                                           <tbody>
                                               <tr>
-                                                  <?php foreach ($produits as $item) { ?>
-                                                      <?php
+                                                  <?php $i=0;
+                                                   foreach ($produits as $item) {
                                                       if ($item->imageProduit == NULL) {
                                                           $item->imageProduit = "not_found.jpg";
                                                       }
@@ -43,16 +43,17 @@
                                                       <td><?php echo $item->reducProduit; ?>%</td>
                                                       <td><?php echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100); ?>€</td>
                                                       <td><?php echo $item->couleurProduit; ?></td>
-                                                      <td><?php echo $commander[0]->quantiteProd; ?></td>
-                                                      <td><?php if ($commander[0]->livraisonCommande == 1){
+                                                      <td><?php echo $commander[$i]->quantiteProd; ?></td>
+                                                      <td><?php if ($commander[$i]->livraisonCommande == 1){
                                                         echo "Oui";
                                                       }
                                                       else echo  "Non"?></td>
                                                       <td><p><a href="<?php echo base_url("PanierCtrl/supprimer_produit_panier/" . $item->idProduit); ?>">Supprimer le produit</a></p></td>
-                                                      <td><p><a href="<?php echo base_url("PanierCtrl/detail_produit/" . $item->idProduit); ?>">Modifier le produit</a></p></td>
+                                                      <td><p><a href="<?php echo base_url("PanierCtrl/modifier/" . $item->idProduit); ?>">Modifier le produit</a></p></td>
 
                                                   </tr>
-                                                      <?php } ?>
+                                                      <?php $i=$i+1;
+                                                    } ?>
                                           </tbody>
                                       </table>
                                       <div class="text-center">
@@ -60,7 +61,7 @@
                                         <input type="text" disabled="disabled" class="form-control" name="prixTotal" step="any" value="<?php echo $panier[0]->prixTotPanier ?>" size="10"/>
                                       </div>
                                       <p><a href="<?php echo base_url("PanierCtrl/supprimer_panier/".$panier[0]->idPanier); ?>">Supprimer le panier</a></p>
-                                      <p><a href="<?php echo base_url("PanierCtrl/acheter/".$panier[0]->idPanier); ?>">Acheter</a></p>
+                                      <p><a href="<?php echo base_url("PanierCtrl/finaliser/".$panier[0]->idPanier); ?>">Acheter</a></p>
                                   </div>
                               </article>
                             </div>

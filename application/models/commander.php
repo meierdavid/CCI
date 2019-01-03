@@ -23,6 +23,16 @@
                 ->result();
         }
 
+        public function selectByIds($idPanier, $idProduit) {
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('commander')
+                ->where('idPanier', $idPanier)
+                ->where('idProduit', $idProduit)
+                ->get()
+                ->result();
+        }
+
         public function insert($data) {
             $this->load->database();
             $this->db->set('idProduit', $data['idProduit'])
@@ -45,11 +55,12 @@
                 ->delete($this->table);
         }
 
-        public function update($id, $data) {
+        public function update($idPanier, $idProduit, $data) {
             $this->load->database();
             $this->db->set('quantiteProd', $data['quantiteProd'])
                 ->set('livraisonCommande', $data['livraisonCommande'])
-                ->where('idPanier', $id)
+                ->where('idPanier', $idPanier)
+                ->where('idProduit', $idProduit)
                 ->update($this->table);
         }
 

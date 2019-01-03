@@ -10,14 +10,14 @@ class PanierCtrl extends CI_Controller {
     $this->load->view('client/accueil');
   }
 
-  public function finaliser(){
+  public function finaliser($idPanier){
     $this->load->model('panier');
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
-    $this->load->library('form_validation');
+
     if (isset($_COOKIE['clientCookie'])) {
 
-      //
+      //acheter !
 
     }else{
       $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
@@ -121,10 +121,6 @@ class PanierCtrl extends CI_Controller {
             "prixTotPanier" => htmlspecialchars($prix),
           );
           $this->panier->update($idPanier, $data);
-
-          $data['message'] = "Le produit a bien été ajouté au panier";
-          $this->load->view('errors/validation_formulaire', $data);
-          $this->liste_panier();
         }
         //Insertion dans table Commander
         $data['panier'] = $this->panier->selectByIdClient($idClient);
@@ -241,31 +237,78 @@ class PanierCtrl extends CI_Controller {
     }
   }
 
-  public function modifier(){
+  public function modifier($idProduit){
     $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
     $this->load->library('form_validation');
+
+    $this->load->model('commander');
+    $this->load->model('produit');
     $this->load->model('panier');
+
+    $this->form_validation->set_rules('quantite', 'quantité souhaitée', 'integer');
+
     if(isset($_COOKIE['clientCookie'])){
-      $id = $_POST['idPanier'];
-      var_dump($id);
-      var_dump($_POST);
-      $data=array(
-        "datePanier"=> htmlspecialchars($_POST['datePanier']),
-        "codePromo"=> htmlspecialchars($_POST['codePromo']),
-        "annulationPanier"=> htmlspecialchars($_POST['annulationPanier']),
-        "finaliserPanier"=> htmlspecialchars($_POST['finaliserPanier']),
-        "paiementPanier" => htmlspecialchars($_POST['paiementPanier']),
-        "prixTotPanier" => htmlspecialchars($_POST['prixTotPanier']),
-      );
-      $this->panier->update($id,$data);
-      $data['panier']= $this->panier->selectById($id);
+      $varmail = $this->input->cookie('clientCookie');
+      $data['client'] = $this->client->selectByMail($varmail);
+      $idClient = $data['client'][0]->idClient;
 
-      $this->load->view('client/accueil');
-      $this->load->view('panier/detail',$data);
+      $data['panier'] = $this->panier->selectByIdClient($idClient);
+      $idPanier = $data['panier'][0]->idPanier;
+      $data['produit'] = $this->produit->selectById($idProduit);
+      $data['commander'] = $this->commander->selectByIds($idPanier, $idProduit);
+      $quantiteInitiale = $data['commander'][0]->quantiteProd;
 
+      if ($this->form_validation->run() == FALSE)
+      {
+        $this->load->view('client/header');
+        $this->load->view('panier/detail_panier', $data);
+        $this->load->view('client/footer');
+      }
+      else
+      {
+        $prixInitial = $this->produit->prix_a_afficher($idProduit)*$quantiteInitiale;
+        $prixNouveau = $this->produit->prix_a_afficher($idProduit)*$_POST['quantite'];
+        $prix = $data['panier'][0]->prixTotPanier - $prixInitial + $prixNouveau;
+        $date = date("d-m-y H:i:s");
+
+        $idPanier = $data['panier'][0]->idPanier;
+
+        $data=array(
+          "annulationPanier"=> htmlspecialchars(0),
+          "codePromo"=> htmlspecialchars(0),
+          "datePanier"=> htmlspecialchars($date),
+          "finaliserPanier" => htmlspecialchars(0),
+          "paiementPanier"=> htmlspecialchars(0),
+          "prixTotPanier" => htmlspecialchars($prix),
+        );
+        $this->panier->update($idPanier, $data);
+
+        $data['panier'] = $this->panier->selectByIdClient($idClient);
+        $idPanier = $data['panier'][0]->idPanier;
+
+        if($_POST['livraison']=='Oui'){
+          $livraison = 1;
+        }
+        else{
+          $livraison = 0;
+        }
+
+        $data=array(
+          "quantiteProd"=> htmlspecialchars($_POST['quantite']),
+          "livraisonCommande"=> htmlspecialchars($livraison),
+        );
+        $this->commander->update($idPanier, $idProduit, $data);
+
+        $data['message'] = "Le produit a bien été modifié";
+        $this->load->view('errors/validation_formulaire', $data);
+        $this->liste_panier();
     }
+  }
     else{
-      $this->load->view('pages/deconnexion');
+      $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+      $this->load->view('errors/erreur_formulaire', $data);
+      $this->load->view('client/connexion');
     }
   }
 
