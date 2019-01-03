@@ -30,8 +30,7 @@
                                                 <td><?php echo $item->reducProduit; ?></td>
 												<td><?php echo $item->couleurProduit; ?></td>
 												<td><?php echo $item->nbDispoProduit; ?></td>
-                                                <!-- <td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au panier</a></p></td> -->
-                                                <td><p><a href="<?php echo base_url()?>PanierCtrl/ajout_panier">Ajouter au panier</a></p></td>
+                                                <td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p></td>
                                                 <td><p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $item->idProduit); ?>">Voir les avis</a></p></td>
 
                                             </tr>

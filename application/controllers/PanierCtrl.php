@@ -29,18 +29,22 @@ class PanierCtrl extends CI_Controller {
 
 
   public function liste_panier(){
+    $this->load->helper('cookie');
     $this->load->model('panier');
+    $this->load->model('commander');
     $this->load->model('produit');
 
-    if($this->input->cookie('clientCookie') != null){
+    if(isset($_COOKIE['clientCookie'])){
       $varid = $this->input->cookie('clientCookie');
-      $data['client'] = $this->client->selectByMail($varid);
 
+      $data['client'] = $this->client->selectByMail($varid);
       $data['panier'] = $this->panier->selectByIdClient($data['client'][0]->idClient);
+      $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
+      $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
+
       if( $data['panier'] != NULL){
-        $data['produit'] = $this->produit->selectProduit($varid);
         $this->load->view('client/header');
-        $this->load->view('client/liste_panier',$data);
+        $this->load->view('panier/liste_panier',$data);
         $this->load->view('client/footer');
       }
       else{

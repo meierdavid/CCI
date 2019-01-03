@@ -13,7 +13,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <link href="<?php echo base_url()."../template/css/bootstrap.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <link href= "<?php echo base_url()."../template/css/style.css"; ?>" rel="stylesheet" type="text/css" media="all" />
-<link href="<?php echo base_url()."../template/css/font-awesome.css"; ?> rel="stylesheet">
+<link href= "<?php echo base_url()."../template/css/font-awesome.css"; ?>" rel="stylesheet" />
 <link href="<?php echo base_url()."../template/css/easy-responsive-tabs.css"; ?>" rel='stylesheet' type='text/css'/>
 <!-- //for bootstrap working -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
@@ -26,7 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header" id="home">
 	<div class="container">
 		<ul>
-                        <li> <a href="<?php echo base_url() ?>ClientCtrl/profil"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Profil </a></li>
+      <li> <a href="<?php echo base_url() ?>ClientCtrl/profil"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Profil </a></li>
 			<li> <a href="<?php echo base_url() ?>ClientCtrl/deconnexion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Se déconnecter </a></li>
 			<li><i class="fa fa-phone" aria-hidden="true"></i> Appeler : 0123456789</li>
 			<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">cci_assistance@gmail.com</a></li>
@@ -41,7 +41,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h1><a href="index.html"><img src="<?php echo base_url()."../template/images/logo.png"; ?>"></a></h1>
 		</div>
 		<div class="col-md-4 header-middle">
-			<?php echo form_open('ProduitCtrl/search'); var_dump($_COOKIE); ?>
+			<?php //echo form_open('ProduitCtrl/search'); var_dump($_COOKIE); ?>
+			<!-- J'avais une erreure du à cela donc je l'ai commenté -->
+			<form>
 					<input type="search" name="search" placeholder="Rechercher sur le site..." required="">
 					<input type="submit" value=" ">
 				<div class="clearfix"></div>
@@ -97,11 +99,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="col-sm-3 multi-gd-img">
 										<ul class="multi-column-dropdown">
 											<h2>Magasins</h2>
-											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
-											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
-											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Nom d'un magasin</a></li>
-											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Nom d'un magasin</a></li>
-											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Nom d'un magasin</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Magasin 1</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Magasin 2</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Magasin 3</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1");// 1 correspond au numéro de siret de l'entreprise  ?>">Magasin 4</a></li>
+											<li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/1"); // 1 correspond au numéro de siret de l'entreprise ?>">Magasin 5</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-6 multi-gd-img multi-gd-text ">
