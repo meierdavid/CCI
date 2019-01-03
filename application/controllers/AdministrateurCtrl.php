@@ -349,6 +349,17 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->view('administrateur/profil_client', $data);
 
   }
+  
+   public function profil_commercant($id){
+    $this->load->helper('form', 'url');
+    $this->load->library('form_validation');
+    $this->load->model('commercant');
+
+    $data['commercant'] = $this->commercant->selectById($id);
+    $this->load->view('administrateur/index');
+    $this->load->view('administrateur/profil_commercant', $data);
+
+  }
 
   public function modifier_client() {
     $this->load->helper('form', 'url');
@@ -360,6 +371,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
     $this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
     $this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
+    $this->form_validation->set_rules('pointClient', 'Point de fidelité', 'integer');
     $data['client'] = $this->client->selectById($_POST['idClient']);
     $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
     $mdp = $data['administrateur'][0]->mdpAdministrateur;
@@ -370,17 +382,17 @@ class AdministrateurCtrl extends CI_Controller {
       $this->load->view('administrateur/liste_client',$data);
     }
     else {
-      if ($_POST['mdpClient'] == $_POST['mdpClient2'] && $mdp == $_POST['mdpClient']) {
+      if ($_POST['mdpClient'] == $_POST['mdpClient2']) {
         $data = array(
           "prenomClient" => htmlspecialchars($_POST['prenomClient']),
           "nomClient" => htmlspecialchars($_POST['nomClient']),
           "mailClient" => htmlspecialchars($_POST['mailClient']),
-          "mdpClient" => htmlspecialchars($_POST['mdpClient']),
+          "mdpClient" => htmlspecialchars(crypt($_POST['mdpClient'],'md5')),
           "adresseClient" => htmlspecialchars($_POST['adresseClient']),
           "codePClient" => htmlspecialchars($_POST['codePClient']),
           "villeClient" => htmlspecialchars($_POST['villeClient']),
           "telClient" => htmlspecialchars($_POST['telClient']),
-          "pointClient" => htmlspecialchars(0),
+          "pointClient" => htmlspecialchars($_POST['pointClient']),
         );
 
         $this->client->update($id, $data);
@@ -395,5 +407,51 @@ class AdministrateurCtrl extends CI_Controller {
     }
 
   }
+  
+ 
 
+  public function modifier_commercant() {
+    $this->load->helper('form', 'url');
+    $this->load->library('form_validation');
+    $this->load->model('commercant');
+    $this->form_validation->set_rules('prenomCommercant', 'Prénom', 'alpha_dash');
+    $this->form_validation->set_rules('nomCommercant', 'Nom', 'alpha_numeric_spaces');
+    $this->form_validation->set_rules('mailCommercant', 'Email', 'valid_email');
+    $this->form_validation->set_rules('codePCommercant', 'Code postale', 'integer');
+    $this->form_validation->set_rules('villeCommercant', 'Ville', 'alpha_dash');
+    $this->form_validation->set_rules('telCommercant', 'Numéro de téléphone', 'integer');
+    $data['commercant'] = $this->commercant->selectById($_POST['idCommercant']);
+    $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
+    $mdp = $data['administrateur'][0]->mdpAdministrateur;
+    $id = $data['commercant'][0]->idCommercant;
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('administrateur/index');
+      $data['commercant'] = $this->commercant->selectAll();
+      $this->load->view('administrateur/liste_commercant',$data);
+    }
+    else {
+      if ($_POST['mdpCommercant'] == $_POST['mdpCommercant2']) {
+        $data = array(
+          "prenomCommercant" => htmlspecialchars($_POST['prenomCommercant']),
+          "nomCommercant" => htmlspecialchars($_POST['nomCommercant']),
+          "mailCommercant" => htmlspecialchars($_POST['mailCommercant']),
+          "mdpCommercant" => htmlspecialchars(crypt($_POST['mdpCommercant'],'md5')),
+          "adresseCommercant" => htmlspecialchars($_POST['adresseCommercant']),
+          "codePCommercant" => htmlspecialchars($_POST['codePCommercant']),
+          "villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
+          "telCommercant" => htmlspecialchars($_POST['telCommercant']),
+        );
+
+        $this->commercant->update($id, $data);
+        $this->load->view('administrateur/index');
+        $data['commercant'] = $this->commercant->selectAll();
+        $this->load->view('administrateur/liste_commercant',$data);
+      } else {
+        $data['message'] = "erreur : la confirmation de Mot de passe ne correspond pas au premier";
+        $this->load->view('errors/erreur_formulaire', $data);
+        $this->load->view('administrateur/liste_commercant');
+      }
+    }
+
+  }
 }
