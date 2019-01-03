@@ -48,7 +48,7 @@
                                                         echo "Oui";
                                                       }
                                                       else echo  "Non"?></td>
-                                                      <td><p><a href="<?php echo base_url("PanierCtrl/supprimer_produit/" . $item->idProduit); ?>">Supprimer le produit</a></p></td>
+                                                      <td><p><a href="<?php echo base_url("PanierCtrl/supprimer_produit_panier/" . $item->idProduit); ?>">Supprimer le produit</a></p></td>
                                                       <td><p><a href="<?php echo base_url("PanierCtrl/detail_produit/" . $item->idProduit); ?>">Modifier le produit</a></p></td>
 
                                                   </tr>

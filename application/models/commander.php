@@ -32,9 +32,10 @@
                 ->insert($this->table);
         }
 
-        public function delete($id){
+        public function delete($idProduit, $idPanier){
             $this->load->database();
-            return $this->db->where('idPanier',$id)
+            return $this->db->where('idProduit',$idProduit)
+                ->where('idPanier',$idPanier)
                 ->delete($this->table);
         }
 
