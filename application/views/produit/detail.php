@@ -41,8 +41,8 @@
                             <option  value="divertissement">Divertissement</option>
                             <option  value="bricolage">Bricolage</option>
                          </select>
-						 
-                    </div>    
+					
+				    </div>    
                     <div class="form-group">
                         <label class="control-label">Description du Produit</label>
                         <input type="text" class="form-control" name="descriptionProduit" value="<?php echo $produit[0]->descriptionProduit; ?>" size="30" required/> 
