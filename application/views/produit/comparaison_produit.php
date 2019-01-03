@@ -48,9 +48,6 @@
                 </tr>
                  <tr>
 
-                     <td>
-                         <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p>
-                     </td>
                      <?php foreach($produitsProposés as $item) {?>
                      <td>
                          <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p>
@@ -80,7 +77,7 @@
                      <?php $i = 0;
                      while(isset($entreprises['entreprise'.$i])) {?>
                      <td>
-                         <p>Vendu par :  <?php echo $entreprises['entreprise'.$i][0]->nomEntreprise; ?></p>
+                         <p>Vendu par :  <a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprises['entreprise'.$i][0]->numSiret); ?>"><?php echo $entreprises['entreprise'.$i][0]->nomEntreprise; ?></a></p>
                      </td>
 
                      <?php $i = $i +1;

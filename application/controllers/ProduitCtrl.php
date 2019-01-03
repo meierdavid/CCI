@@ -158,6 +158,8 @@ class ProduitCtrl extends CI_Controller {
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     var_dump("detail");
     if (isset($_COOKIE['commercantCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
@@ -182,6 +184,8 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
         var_dump("produit");
@@ -189,7 +193,7 @@ public function affichage_produit($id) {
         $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
         $data['note']=$this->moyenne_note_produit(($data['produit'][0]->idProduit));
         $data['produitsProposés']=$this->produit->selectPropose($data['produit'][0]->categorieProduit,$id);
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('produit/affichage_produit', $data);
         $this->load->view('client/footer');
       } else {
@@ -208,6 +212,8 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
         $data['produit'] = $this->produit->selectById($id);
@@ -222,7 +228,7 @@ public function affichage_produit($id) {
             $data['entreprises']['entreprise'.$i] =$this->entreprise->selectById($item->numSiret);
             $i= $i +1;
         }   
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('produit/comparaison_produit',$data);
         $this->load->view('client/footer');
       } else {
@@ -373,17 +379,19 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('produit');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if ($this->produit->selectByCategorie($categorie) != null) {
       $data['produit'] = $this->produit->selectByCategorie($categorie);
       foreach ($data['produit'] as $item) {
         $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
         $i=$i+1;
       }
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('produit/produit_par_categorie(2)', $data);
       $this->load->view('client/footer');
     } else {
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('client/accueil');
       $this->load->view('client/footer');
     }
@@ -394,6 +402,8 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('produit','entreprise');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if ($this->produit->selectByEntreprise($idEntreprise) != null) {
       $data['produit'] = $this->produit->selectByEntreprise($idEntreprise);
 	  foreach ($data['produit'] as $item) {
@@ -401,11 +411,11 @@ public function affichage_produit($id) {
         $i=$i+1;
       }
       $data['entreprise'] = $this->entreprise->selectById($idEntreprise);
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('produit/produit_par_entreprise(2)', $data);
       $this->load->view('client/footer');
     } else {
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('client/accueil');
       $this->load->view('client/footer');
     }
@@ -416,17 +426,19 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('produit');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if ($this->produit->selectBySoldes() != null) {
       $data['produit'] = $this->produit->selectBySoldes();
 	  foreach ($data['produit'] as $item) {
         $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
         $i=$i+1;
       }
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('produit/produit_par_soldes(2)', $data);
       $this->load->view('client/footer');
     } else {
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('client/accueil');
       $this->load->view('client/footer');
     }
@@ -437,6 +449,8 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url','cookie');
     $this->load->library('form_validation');
     $this->load->model('produit');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_POST['search'])) {
       $str = $_POST['search'];
       $str = preg_replace("#[^0-9a-z]#i", "", $str);
@@ -446,7 +460,7 @@ public function affichage_produit($id) {
         $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
         $i=$i+1;
       }
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('produit/produit_par_recherche(2)', $data);
         $this->load->view('client/footer');
       } else {
@@ -480,17 +494,19 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url');
     $this->load->model('produit','client');
     $this->load->model('poster_avis');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     $varMail = $this->input->cookie('clientCookie');
     $data['client'] = $this->client->selectByMail($varMail);
     $data['produit'] = $this->produit->selectById($idProduit);
     $data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
 
     if ($data['avis'] != NULL) {
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('produit/liste_avis', $data);
       $this->load->view('client/footer');
     } else {
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('produit/premier_avis', $data);
       $this->load->view('client/footer');
     }
@@ -500,7 +516,7 @@ public function affichage_produit($id) {
   public function prix_a_afficher($idProduit){
 	  $this->load->model('produit');
 	  var_dump ($this->produit->prix_a_afficher($idProduit));
-    return ($this->produit->prix_a_afficher($idProduit));
+            return ($this->produit->prix_a_afficher($idProduit));
   }
 
 }

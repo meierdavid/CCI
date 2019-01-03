@@ -5,7 +5,7 @@
                 <div class="row">
 
                     <div class="box">
-                        <h2><?php echo $entreprise[0]->nomEntreprise; ?></h2>
+                        <h2><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></h2>
 
                         <div class="table-responsive">
                             <table class="table table-striped">

@@ -12,9 +12,11 @@ class ClientCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->library('form_validation');
     $this->load->model('client');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     var_dump($_COOKIE['clientCookie']);
     if (isset($_COOKIE['clientCookie'])) {
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('client/accueil');
       $this->load->view('client/footer');
     } else {
@@ -27,7 +29,8 @@ class ClientCtrl extends CI_Controller {
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('client');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     $this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
     $this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
     $this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
@@ -65,13 +68,13 @@ class ClientCtrl extends CI_Controller {
           $data['client'] = $this->client->selectByMail($varmail);
           $data['message'] = "Votre profil client a été modifié avec succès";
           $this->load->view('errors/validation_formulaire', $data);
-          $this->load->view('client/header');
+          $this->load->view('client/header',$data);
           $this->load->view('client/profil', $data);
           $this->load->view('client/footer');
         } else {
           $data['message'] = "erreur : Votre mot de passe n'est pas correct, si vous souhaitez modifier votre mot de passe cliquez sur le bouton en bas de page";
           $this->load->view('errors/erreur_formulaire', $data);
-          $this->load->view('client/header');
+          $this->load->view('client/header',$data);
           $this->load->view('client/profil', $data);
           $this->load->view('client/footer');
         }
@@ -88,11 +91,13 @@ class ClientCtrl extends CI_Controller {
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie'])) {
       $varmail = $this->input->cookie('clientCookie');
       if (isset($varmail)) {
         $data['client'] = $this->client->selectByMail($varmail);
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('client/profil', $data);
         $this->load->view('client/footer');
       }
@@ -154,6 +159,8 @@ class ClientCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->library('form_validation');
     $this->load->model('client');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     $this->form_validation->set_rules('mailClient', 'Email', 'required');
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('client/connexion');
@@ -185,7 +192,7 @@ class ClientCtrl extends CI_Controller {
                             'expire' => '3600'
                         );
             $this->input->set_cookie($cookie);
-            $this->load->view('client/header');
+            $this->load->view('client/header',$data);
             $this->load->view('client/accueil');
             $this->load->view('client/footer');
           }
@@ -209,7 +216,8 @@ class ClientCtrl extends CI_Controller {
     $this->load->model('client');
     $this->load->helper('url', 'cookie');
     $this->load->library('form_validation');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie'])) {
       $varid = $this->input->cookie('clientCookie');
       $data['client'] = $this->client->selectByMail($varid);
@@ -222,14 +230,14 @@ class ClientCtrl extends CI_Controller {
 
             $data['message'] = "Votre mot de passe a été modifié avec succès";
             $this->load->view('errors/validation_formulaire', $data);
-            $this->load->view('client/header');
+            $this->load->view('client/header',$data);
 			      $this->load->view('client/accueil');
             $this->load->view('client/footer');
           }
           else {
             $data['message'] = "erreur : La confirmation de mot de passe ne correspond pas au premier";
             $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('client/header');
+            $this->load->view('client/header',$data);
             $this->load->view('client/changer_mdp', $data);
             $this->load->view('client/footer');
           }
@@ -237,14 +245,14 @@ class ClientCtrl extends CI_Controller {
         else {
           $data['message'] = "erreur :  L'ancien mot de passe n'est pas conforme";
           $this->load->view('errors/erreur_formulaire', $data);
-          $this->load->view('client/header');
+          $this->load->view('client/header',$data);
           $this->load->view('client/changer_mdp', $data);
           $this->load->view('client/footer');
 		}
 	  }
 
 	else {
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('client/changer_mdp');
         $this->load->view('client/footer');
       }
@@ -268,6 +276,8 @@ class ClientCtrl extends CI_Controller {
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
         $this->load->library('form_validation');
+        $this->load->model('entreprise');
+        $data['entreprises_header'] = $this->entreprise->selectAll();
         $data['produit'] = $this->produit->selectById($idProduit);
         $cookie = $this->input->cookie('clientCookie');
 		$data['client']=$this->client->selectByMail($cookie);
@@ -276,7 +286,7 @@ class ClientCtrl extends CI_Controller {
 		$this->form_validation->set_rules('avisClient', 'Avis', 'required');
 		$this->form_validation->set_rules('noteClient', 'Note', 'integer');
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('client/header');
+            $this->load->view('client/header',$data);
             $this->load->view('client/modifier_avis', $data);
             $this->load->view('client/footer');
         }
@@ -298,7 +308,7 @@ class ClientCtrl extends CI_Controller {
 				$data['client']=$this->client->selectByMail($cookie);
 				$data['produit'] = $this->produit->selectById($idProduit);
 				$data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
-                $this->load->view('client/header');
+                $this->load->view('client/header',$data);
                 $this->load->view('produit/liste_avis', $data);
                 $this->load->view('client/footer');
             }
@@ -316,6 +326,8 @@ public function ajouter_avis($idProduit) {
   $this->load->helper('form', 'url');
   $this->load->helper('cookie');
   $this->load->library('form_validation');
+  $this->load->model('entreprise');
+  $data['entreprises_header'] = $this->entreprise->selectAll();
   $data['produit'] = $this->produit->selectById($idProduit);
   $cookie = $this->input->cookie('clientCookie');
   $data['client']=$this->client->selectByMail($cookie);
@@ -324,7 +336,7 @@ public function ajouter_avis($idProduit) {
   $this->form_validation->set_rules('avisClient', 'Avis', 'required');
   $this->form_validation->set_rules('noteClient', 'Note', 'integer');
   if ($this->form_validation->run() == FALSE) {
-    $this->load->view('client/header');
+    $this->load->view('client/header',$data);
     $this->load->view('client/avis_produit', $data);
     $this->load->view('client/footer');
 	var_dump("bug");
@@ -346,7 +358,7 @@ public function ajouter_avis($idProduit) {
       $this->poster_avis->insert($data);
       $data['client']=$this->client->selectByMail($cookie);
       $data['produit'] = $this->produit->selectById($idProduit);
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('client/avis_produit', $data);
       $this->load->view('client/footer');
     }
@@ -360,12 +372,14 @@ public function detail_avis($idProduit){
   $this->load->helper('form', 'url');
   $this->load->model('produit','client');
   $this->load->model('poster_avis');
+  $this->load->model('entreprise');
+  $data['entreprises_header'] = $this->entreprise->selectAll();
   $varMail = $this->input->cookie('clientCookie');
   $data['client'] = $this->client->selectByMail($varMail);
   $data['produit'] = $this->produit->selectById($idProduit);
   $data['avis'] = $this->poster_avis->selectByIdClient($data['client'][0]->idClient);
   if ($data['avis'] != NULL) {
-    $this->load->view('client/header');
+    $this->load->view('client/header',$data);
     $this->load->view('produit/detail', $data);
     $this->load->view('client/detail_avis', $data);
     $this->load->view('client/footer');
