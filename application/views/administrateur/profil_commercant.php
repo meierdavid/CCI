@@ -36,11 +36,11 @@
                     
                     <div class="form-group">
                         <label class="control-label">Mot de passe</label>
-                        <input type="password" class="form-control" name="mdpCommercant" value="" size="30" required/>
+                        <input type="password" class="form-control" name="mdpCommercant" value="<?php echo $commercant[0]->mdpCommercant; ?>" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Mot de passe2</label>
-                        <input type="password" class="form-control" name="mdpCommercant2" value="" size="30" required/>
+                        <input type="password" class="form-control" name="mdpCommercant2" value="<?php echo $commercant[0]->mdpCommercant; ?>" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Adresse</label>
