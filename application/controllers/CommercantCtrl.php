@@ -221,28 +221,28 @@ public function form_ajout_produit(){
         }
     }
 
-public function liste_entreprise(){
-	$this->load->helper('cookie');
-	$this->load->model('commercant');
-	$this->load->model('entreprise');
-	if($this->input->cookie('commercantCookie') != null){
-		$varid = $this->input->cookie('commercantCookie');
-		$data['commercant'] = $this->commercant->selectByMail($varid);
-		$data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+        public function liste_entreprise(){
+            $this->load->helper('cookie');
+            $this->load->model('commercant');
+            $this->load->model('entreprise');
+            if($this->input->cookie('commercantCookie') != null){
+                $varid = $this->input->cookie('commercantCookie');
+                $data['commercant'] = $this->commercant->selectByMail($varid);
+                $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
 
-		if( $data['entreprises'] != NULL){
-			$this->load->view('commercant/index',$data);
-			$this->load->view('commercant/liste_entreprise',$data);
+                if( $data['entreprises'] != NULL){
+                    $this->load->view('commercant/index',$data);
+                    $this->load->view('commercant/liste_entreprise',$data);
 
-		}
-		else{
-			$this->ajout_entreprise();
-		}
-	}
-	else{
-		$this->load->view('commercant/connexion');
-	}
-}
+                }
+                else{
+                    $this->ajout_entreprise();
+                }
+            }
+            else{
+                $this->load->view('commercant/connexion');
+            }
+        }
 
 public function ajout_entreprise() {
 	

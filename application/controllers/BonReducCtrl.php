@@ -23,6 +23,21 @@ class BonReducCtrl extends CI_Controller {
         }
     }
 
+    public function liste_bonreduc_client() {
+        $this->load->model('BonReduc');
+        $this->load->helper('form', 'url');
+
+        if ($this->input->cookie('clientCookie') != null) {
+            $varid = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varid);
+            $data['bonreduc'] = $this->BonReduc->SelectAll();
+            $this->load->view('client/header', $data);
+            $this->load->view('bonreduc/liste_bonreduc_client', $data);
+            $this->load->view('client/footer');
+            var_dump($data);
+        }
+    }
+
     public function liste_entreprise_dropbox() {
         $this->load->helper('cookie');
         $this->load->model('commercant');
