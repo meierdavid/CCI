@@ -73,7 +73,7 @@ class PanierCtrl extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
-        $this->form_validation->set_rules('quantite', 'quantité souhaitée', 'integer');
+        $this->form_validation->set_rules('quantite', 'quantité souhaitée', 'is_natural');
 
         if (isset($_COOKIE['clientCookie'])) {
             $varmail = $this->input->cookie('clientCookie');
@@ -83,30 +83,30 @@ class PanierCtrl extends CI_Controller {
             $data['produit'] = $this->produit->selectById($idProduit);
             $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
 
-            if ($this->form_validation->run() == FALSE) {
+            if ($this->form_validation->run() == FALSE ) {
                 $this->load->view('client/header', $data);
                 $this->load->view('panier/ajout_panier', $data);
                 $this->load->view('client/footer');
             } else {
                 if ($this->commander->checkId($idProduit) == Null) {
-                $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
-                $date = date("d-m-y H:i:s");
+                    if($data['produit'][0]->nbDispoProduit >= $_POST['quantite']){
+                    $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
+                    $date = date("d-m-y H:i:s");
 
-                $data['panier'] = $this->panier->selectByIdClient($idClient);
-                
-                if ($data['panier'] == null) { //panier inexistant : on le créé
-                    $data = array(
-                        "datePanier" => htmlspecialchars($date),
-                        "annulationPanier" => htmlspecialchars(0),
-                        "codePromo" => htmlspecialchars(0),
-                        "paiementPanier" => htmlspecialchars(0),
-                        "finaliserPanier" => htmlspecialchars(0),
-                        "idClient" => htmlspecialchars($idClient),
-                        "prixTotPanier" => htmlspecialchars($prix),
-                    );
-                    $this->panier->insert($data);
-                } else { //panier déjà existant : MAJ
-                    
+                    $data['panier'] = $this->panier->selectByIdClient($idClient);
+
+                    if ($data['panier'] == null) { //panier inexistant : on le créé
+                        $data = array(
+                            "datePanier" => htmlspecialchars($date),
+                            "annulationPanier" => htmlspecialchars(0),
+                            "codePromo" => htmlspecialchars(0),
+                            "paiementPanier" => htmlspecialchars(0),
+                            "finaliserPanier" => htmlspecialchars(0),
+                            "idClient" => htmlspecialchars($idClient),
+                            "prixTotPanier" => htmlspecialchars($prix),
+                        );
+                        $this->panier->insert($data);
+                    } else { //panier déjà existant : MAJ
                         $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
                         $prix = $prix + $data['panier'][0]->prixTotPanier;
                         $idPanier = $data['panier'][0]->idPanier;
@@ -142,10 +142,14 @@ class PanierCtrl extends CI_Controller {
                     $data['message'] = "Le produit a bien été ajouté au panier";
                     $this->load->view('errors/validation_formulaire', $data);
                     $this->liste_panier();
-                }
-                else{
+                    }else{
+                    $data['message'] = "Il n'y a pas assez d'articles disponibles";
+                    $this->load->view('errors/erreur_formulaire', $data);
+                    $this->liste_panier();
+                    }
+                } else {
                     $data['message'] = "Ce produit est déjà dans votre panier";
-                    $this->load->view('errors/validation_formulaire', $data);
+                    $this->load->view('errors/erreur_formulaire', $data);
                     $this->liste_panier();
                 }
             }
@@ -245,8 +249,8 @@ class PanierCtrl extends CI_Controller {
         $this->load->model('commander');
         $this->load->model('produit');
         $this->load->model('panier');
-        
-        $this->form_validation->set_rules('quantite', 'quantité souhaitée', 'integer');
+
+        $this->form_validation->set_rules('quantite', 'quantité souhaitée', 'is_natural');
 
         if (isset($_COOKIE['clientCookie'])) {
             $varmail = $this->input->cookie('clientCookie');
@@ -257,14 +261,14 @@ class PanierCtrl extends CI_Controller {
             $idPanier = $data['panier'][0]->idPanier;
             $data['produit'] = $this->produit->selectById($idProduit);
             $data['commander'] = $this->commander->selectByIds($idPanier, $idProduit);
-            $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
             $quantiteInitiale = $data['commander'][0]->quantiteProd;
-
+            $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('client/header', $data);
                 $this->load->view('panier/detail_panier', $data);
                 $this->load->view('client/footer');
             } else {
+                if($data['produit'][0]->nbDispoProduit >= $_POST['quantite']){
                 $prixInitial = $this->produit->prix_a_afficher($idProduit) * $quantiteInitiale;
                 $prixNouveau = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
                 $prix = $data['panier'][0]->prixTotPanier - $prixInitial + $prixNouveau;
@@ -300,6 +304,14 @@ class PanierCtrl extends CI_Controller {
                 $data['message'] = "Le produit a bien été modifié";
                 $this->load->view('errors/validation_formulaire', $data);
                 $this->liste_panier();
+            
+            
+                }
+            else{
+                $data['message'] = "Il n'y a pas assez d'articles disponibles";
+                    $this->load->view('errors/erreur_formulaire', $data);
+                    $this->liste_panier();
+            }
             }
         } else {
             $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
