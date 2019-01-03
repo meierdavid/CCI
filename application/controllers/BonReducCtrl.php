@@ -11,10 +11,10 @@ class BonReducCtrl extends CI_Controller {
             $data['commercant'] = $this->commercant->selectByMail($varid);
             $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
             if ($data['entreprises'] != NULL) {
-                var_dump($data);
-                $data['bonreduc'] = $this->BonReduc->selectById($varid);
+                $data['bonreduc'] = $this->BonReduc->selectBonReduc($varid);
                 $this->load->view('commercant/index', $data);
                 $this->load->view('bonreduc/liste_bonreduc', $data);
+
             } else {
                 $this->ajout_bon();
             }
@@ -23,14 +23,25 @@ class BonReducCtrl extends CI_Controller {
         }
     }
 
+    public function liste_entreprise_dropbox() {
+        $this->load->helper('cookie');
+        $this->load->model('commercant');
+        $this->load->model('entreprise');
+        $varid = $this->input->cookie('commercantCookie');
+        $data['commercant'] = $this->commercant->selectByMail($varid);
+        $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+
+        return $data;
+    }
+
     public function supprimer_bonreduc($id) {
         $this->load->model('BonReduc');
         $this->load->model('Entreprise');
         $this->load->helper('form', 'url');
-        $this->bonreduc->delete($id);
+        $this->BonReduc->delete($id);
         $data['message'] = "Le bon a bien été supprimé";
         $this->load->view('errors/validation_formulaire', $data);
-        $this->liste_bon();
+        $this->liste_bonreduc();
     }
 
     public function ajout_bonreduc() {
@@ -49,11 +60,10 @@ class BonReducCtrl extends CI_Controller {
                         "libelleBon" => htmlspecialchars($_POST['libelleBon']),
                         "numSiret" => htmlspecialchars($_POST['numSiret']),
                         "pourcentageBon" => htmlspecialchars($_POST['pourcentageBon']),
-                        "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit'])
                     );
-                    $this->BonReduc->insert($data);
-                    $data['bonreduc'] = $this->BonReduc->selectAll();
-                    $this->liste_produit();
+                    $this->bonreduc->insert($data);
+                    $data['bonreduc'] = $this->bonreduc->selectAll();
+                    $this->liste_bonreduc();
 
             }
             else {
@@ -71,6 +81,7 @@ class BonReducCtrl extends CI_Controller {
         }
 
     }
+
 
 
 
