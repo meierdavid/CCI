@@ -43,9 +43,9 @@ class PanierCtrl extends CI_Controller {
       if( $data['panier'] != NULL){
         $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
         $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
-        
+
         $this->load->view('client/header');
-        $this->load->view('panier/liste_panier',$data);
+        $this->load->view('panier/liste_panier', $data);
         $this->load->view('client/footer');
       }
       else{
@@ -219,9 +219,14 @@ class PanierCtrl extends CI_Controller {
 
   public function supprimer_panier($id){
     $this->load->model('panier');
+    $this->load->model('commander');
     $this->load->helper('form','url');
 
     if(isset($_COOKIE['clientCookie'])){
+      //suppression dans Commander
+      $this->commander->deletePanier($id);
+
+      //suppression dans Panier
       $this->panier->delete($id);
       $data['message'] = "Votre panier a été supprimer avec succès";
       $this->load->view('errors/validation_formulaire', $data);

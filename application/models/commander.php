@@ -39,6 +39,12 @@
                 ->delete($this->table);
         }
 
+        public function deletePanier($idPanier){
+            $this->load->database();
+            return $this->db->where('idPanier',$idPanier)
+                ->delete($this->table);
+        }
+
         public function update($id, $data) {
             $this->load->database();
             $this->db->set('quantiteProd', $data['quantiteProd'])

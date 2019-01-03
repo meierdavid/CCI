@@ -55,6 +55,12 @@
                                                       <?php } ?>
                                           </tbody>
                                       </table>
+                                      <div class="text-center">
+                                        <label class="control-label">prix total du panier </label>
+                                        <input type="text" disabled="disabled" class="form-control" name="prixTotal" step="any" value="<?php echo $panier[0]->prixTotPanier ?>" size="10"/>
+                                      </div>
+                                      <p><a href="<?php echo base_url("PanierCtrl/supprimer_panier/".$panier[0]->idPanier); ?>">Supprimer le panier</a></p>
+                                      <p><a href="<?php echo base_url("PanierCtrl/acheter/".$panier[0]->idPanier); ?>">Acheter</a></p>
                                   </div>
                               </article>
                             </div>
