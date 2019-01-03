@@ -34,7 +34,8 @@ class PanierCtrl extends CI_Controller {
     $this->load->model('panier');
     $this->load->model('commander');
     $this->load->model('produit');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if(isset($_COOKIE['clientCookie'])){
       $varid = $this->input->cookie('clientCookie');
 
@@ -45,14 +46,14 @@ class PanierCtrl extends CI_Controller {
         $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
         $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
 
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('panier/liste_panier', $data);
         $this->load->view('client/footer');
       }
       else{
         $data['message'] = "erreur : Vous n'avez pas de produits dans votre panier";
         $this->load->view('errors/erreur_formulaire', $data);
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('client/accueil');
         $this->load->view('client/footer');
       }
@@ -159,7 +160,8 @@ class PanierCtrl extends CI_Controller {
     $this->load->model('commander');
     $this->load->model('produit');
     $this->load->helper('form','url');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if(isset($_COOKIE['clientCookie'])){
       $varmail = $this->input->cookie('clientCookie');
       $data['client'] = $this->client->selectByMail($varmail);
@@ -202,7 +204,7 @@ class PanierCtrl extends CI_Controller {
       else{
         $data['message'] = "erreur : Votre panier n'existe pas";
         $this->load->view('errors/erreur_formulaire', $data);
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('client/accueil');
         $this->load->view('client/footer');
       }
@@ -218,7 +220,8 @@ class PanierCtrl extends CI_Controller {
     $this->load->model('panier');
     $this->load->model('commander');
     $this->load->helper('form','url');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     if(isset($_COOKIE['clientCookie'])){
       //suppression dans Commander
       $this->commander->deletePanier($id);
@@ -227,7 +230,7 @@ class PanierCtrl extends CI_Controller {
       $this->panier->delete($id);
       $data['message'] = "Votre panier a été supprimer avec succès";
       $this->load->view('errors/validation_formulaire', $data);
-      $this->load->view('client/header');
+      $this->load->view('client/header',$data);
       $this->load->view('client/accueil');
       $this->load->view('client/footer');
     }
@@ -242,7 +245,8 @@ class PanierCtrl extends CI_Controller {
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     $this->load->model('commander');
     $this->load->model('produit');
     $this->load->model('panier');
@@ -262,7 +266,7 @@ class PanierCtrl extends CI_Controller {
 
       if ($this->form_validation->run() == FALSE)
       {
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('panier/detail_panier', $data);
         $this->load->view('client/footer');
       }

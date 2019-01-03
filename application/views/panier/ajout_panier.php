@@ -96,14 +96,12 @@
                 </div>
 
                 <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Ajouter"/></div>
-                <div class="text-center">
-
-                </div>
+               
                 </form>
                 <br></br>
                 <br></br>
             </div></div>
-
+        
 
 
     </div>
