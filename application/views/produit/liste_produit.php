@@ -34,7 +34,7 @@
                                                     <?php foreach ($produit as $item) { ?>
                                                         <?php
                                                         if ($item->imageProduit == NULL) {
-                                                            var_dump("chatte");
+                                                            var_dump("");
                                                             $item->imageProduit = "not_found.jpg";
                                                         }
                                                         ?>
