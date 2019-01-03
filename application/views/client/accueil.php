@@ -12,7 +12,7 @@
 					<div class="carousel-caption">
 						<h3>La meilleure <span>offre </span></h3>
 						<p>du jour</p>
-						<a class="hvr-outline-out button2" href="mens.html">Acheter</a>
+						<a class="hvr-outline-out button2" href="<?php echo base_url("ProduitCtrl/produit_offre"); ?>">voir</a>
 					</div>
 				</div>
 			</div>
@@ -21,7 +21,7 @@
 					<div class="carousel-caption">
 						<h3>Nouvel <span>arrivage</span></h3>
 						<p>Saisissez l'occasion</p>
-						<a class="hvr-outline-out button2" href="mens.html">Acheter</a>
+						<a class="hvr-outline-out button2" href="<?php echo base_url("ProduitCtrl/produit_recent"); ?>">Voir</a>
 					</div>
 				</div>
 			</div>

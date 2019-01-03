@@ -41,10 +41,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h1><a href="index.html"><img src="<?php echo base_url()."../template/images/logo.png"; ?>"></a></h1>
 		</div>
 		<div class="col-md-4 header-middle">
-			<?php //echo form_open('ProduitCtrl/search'); var_dump($_COOKIE); ?>
-			<!-- J'avais une erreure du à cela donc je l'ai commenté -->
-			<form>
-					<input type="search" name="search" placeholder="Rechercher sur le site..." required="">
+			<?php echo form_open('ProduitCtrl/search'); ?>
+					<input type="search" name="search" placeholder="Rechercher sur le site..." value="" required="">
 					<input type="submit" value=" ">
 				<div class="clearfix"></div>
 			</form>

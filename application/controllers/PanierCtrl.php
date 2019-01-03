@@ -18,6 +18,7 @@ class PanierCtrl extends CI_Controller {
     if (isset($_COOKIE['clientCookie'])) {
 
       //acheter !
+      $this->load->view('panier');
 
     }else{
       $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
@@ -67,11 +68,11 @@ class PanierCtrl extends CI_Controller {
     $this->load->model('panier');
     $this->load->model('produit');
     $this->load->model('commander');
-
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->library('form_validation');
-
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
     $this->form_validation->set_rules('quantite', 'quantité souhaitée', 'integer');
 
     if(isset($_COOKIE['clientCookie'])){
@@ -80,11 +81,11 @@ class PanierCtrl extends CI_Controller {
       $idClient = $data['client'][0]->idClient;
 
       $data['produit'] = $this->produit->selectById($idProduit);
-
+      $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
 
       if ($this->form_validation->run() == FALSE)
       {
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('panier/ajout_panier', $data);
         $this->load->view('client/footer');
       }

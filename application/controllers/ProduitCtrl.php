@@ -445,9 +445,9 @@ public function affichage_produit($id) {
   }
 
   public function search() {
-	$i=0;
+    $i=0;
+    var_dump($_POST);
     $this->load->helper('form', 'url','cookie');
-    $this->load->library('form_validation');
     $this->load->model('produit');
     $this->load->model('entreprise');
     $data['entreprises_header'] = $this->entreprise->selectAll();
@@ -456,7 +456,7 @@ public function affichage_produit($id) {
       $str = preg_replace("#[^0-9a-z]#i", "", $str);
       if ($this->produit->search($str) != null) {
         $data['produit'] = $this->produit->search($str);
-		foreach ($data['produit'] as $item) {
+	foreach ($data['produit'] as $item) {
         $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
         $i=$i+1;
       }
@@ -464,7 +464,9 @@ public function affichage_produit($id) {
         $this->load->view('produit/produit_par_recherche(2)', $data);
         $this->load->view('client/footer');
       } else {
-        //
+        $data['message'] = "aucun produit trouvé";
+        $this->load->view('errors/erreur_formulaire', $data);        
+         
       }
     } else {
       //
@@ -481,8 +483,8 @@ public function affichage_produit($id) {
     //$config['new_image'] = './assets/image/Produits/resized_img.jpg';
     //$config['create_thumb'] = TRUE;
     $config['maintain_ratio'] = TRUE;
-    $config['width']         = 200;
-    $config['height']       = 200;
+    $config['width'] = 200;
+    $config['height'] = 200;
     $this->image_lib->initialize($config);
     var_dump($config);
     $this->image_lib->resize();
@@ -516,7 +518,18 @@ public function affichage_produit($id) {
   public function prix_a_afficher($idProduit){
 	  $this->load->model('produit');
 	  var_dump ($this->produit->prix_a_afficher($idProduit));
-            return ($this->produit->prix_a_afficher($idProduit));
+          return ($this->produit->prix_a_afficher($idProduit));
   }
 
+  public function produit_offre(){
+      $this->load->model('produit');
+      $data['produit']= $this->produit->selectByOffre();
+      $this->affichage_produit($data['produit'][0]->idProduit);
+  }
+  
+  public function produit_recent(){
+      $this->load->model('produit');
+      $data['produit']= $this->produit->selectByRecent();
+      $this->affichage_produit($data['produit'][0]->idProduit);
+  }
 }

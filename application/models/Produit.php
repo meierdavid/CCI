@@ -79,7 +79,27 @@
                     ->result();
 
   		}
-
+        public function selectByRecent(){
+             $this->load->database();
+            return $this->db->select_max('idProduit')
+                ->from('produit')
+                ->get()
+                ->result();
+        }
+        
+        public function selectByOffre(){
+            $this->load->database();
+            $max = $this->db->select_max('reducProduit')
+                ->from('produit')
+                ->get()
+                ->result();
+            
+            return $this->db->select('idProduit')
+                ->from('produit')
+                ->where('reducProduit =', $max[0]->reducProduit)
+                ->get()
+                ->result();
+        }
     	public function insert_with_picture($data) {
             $this->load->database();
             $this->db->set('nomProduit', $data['nomProduit'])
