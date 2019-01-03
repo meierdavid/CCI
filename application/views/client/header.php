@@ -114,7 +114,7 @@
                                     <li class="menu__item dropdown">
                                         <a class="menu__link" href="<?php echo base_url(); ?>ProduitCtrl/soldes" >Soldes </a>
                                     </li>
-                                    <li class=" menu__item"><a class="menu__link" href="index.html">Codes de réduction</a></li>
+                                    <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>BonReducCtrl/liste_bonreduc_client">Codes de réduction</a></li>
                                     <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Comparateur</a></li>
                                     <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Contacts</a></li>
                                     <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Aide</a></li>
