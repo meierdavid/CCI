@@ -13,7 +13,7 @@
         <div class="text-center">
             <h2>Ajouter au panier</h2>
             <br>
-            <h4>veuillez remplir la quantité souhatée</h4>
+            <h4>veuillez remplir la quantité souhaitée</h4>
         </div>
         <br><br>
         <div class="row mb-2">
