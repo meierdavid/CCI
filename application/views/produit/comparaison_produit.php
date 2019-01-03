@@ -17,7 +17,7 @@
         <table>
             <tbody>
                 <tr>
-                    
+
                     <th>
                         <div style="margin-right: 5em">
                             <a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $produit[0]->idProduit); ?> "><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible"></a>
@@ -42,18 +42,18 @@
                         </div>
                     </th>
                     <?php }?>
-                    
-                    
-               
+
+
+
                 </tr>
                  <tr>
-                     
+
                      <td>
-                         <p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/" . $produit[0]->idProduit); ?>">Ajouter au pannier</a></p>
+                         <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p>
                      </td>
                      <?php foreach($produitsProposés as $item) {?>
                      <td>
-                         <p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/" . $item->idProduit); ?>">Ajouter au pannier</a></p>
+                         <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p>
                      </td>
                      <?php }?>
                 </tr>
@@ -63,10 +63,10 @@
                         <p><?php echo $item . "/10"; ?></p>
                      </td>
                      <?php }?>
-                     
+
                 </tr>
                 <tr>
-                    
+
                      <td>
                          <p>Prix : <?php echo $produit[0]->prixUnitaireProduit; ?> € </p>
                      </td>
@@ -82,14 +82,13 @@
                      <td>
                          <p>Vendu par :  <?php echo $entreprises['entreprise'.$i][0]->nomEntreprise; ?></p>
                      </td>
-                     
+
                      <?php $i = $i +1;
                      }?>
                 </tr>
-                
+
             </tbody>
         </table>
 </center>
     </div>
 </div>
-

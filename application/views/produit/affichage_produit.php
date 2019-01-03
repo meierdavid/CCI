@@ -47,17 +47,17 @@
             }
             ?>
             <br>
-            <?php if ($entreprise[0]->livraisonEntreprise == TRUE) { ?>  
-                <p> Cet article est éligible à la livraison </p> 
+            <?php if ($entreprise[0]->livraisonEntreprise == TRUE) { ?>
+                <p> Cet article est éligible à la livraison </p>
             <?php
             } else {
                 echo "<p> Cet article n'est pas éligible à la livraison </p>";
             }
             ?>
 
-            <p> Il reste : <?php echo $produit[0]->nbDispoProduit; ?>	articles disponibles </p>					
+            <p> Il reste : <?php echo $produit[0]->nbDispoProduit; ?>	articles disponibles </p>
             <br>
-            <p><a href="<?php echo base_url("ProduitCtrl/supprimer_produit/" . $produit[0]->idProduit); ?>">Ajouter au pannier</a></p>
+            <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au panier</a></p>
             <br>
             <p><a href="<?php echo base_url("ProduitCtrl/comparer_produit/" . $produit[0]->idProduit); ?>">Comparer avec des articles similaires</a></p>
             <br>
@@ -79,7 +79,7 @@
         <div class="col-md-4">
                          <?php
                          echo $item->nomProduit . " <br><br>";
-                         
+
                          if ($item->imageProduit == NULL) {
                              $item->imageProduit = "not_found.jpg";
                          }
@@ -90,4 +90,3 @@
 
     </div>
 </div>
-

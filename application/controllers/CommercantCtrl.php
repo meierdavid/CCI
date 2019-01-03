@@ -236,7 +236,6 @@ public function ajout_entreprise() {
 	$this->form_validation->set_rules('nomEntreprise', "Nom de l'entreprise", 'alpha_numeric_spaces');
 	$this->form_validation->set_rules('codePEntreprise', 'Code postale', 'integer');
 	$this->form_validation->set_rules('villeEntreprise', 'Ville', 'alpha_dash');
-	//	$this->form_validation->set_rules('horairesEntreprise', 'Horaires', ''); je ne sais pas comment géré ce champ
 	$this->form_validation->set_rules('TempsReservMax', 'Temps maximum de réservation en heure', 'integer');
 
 	if($this->input->cookie('commercantCookie') != null){
