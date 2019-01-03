@@ -28,7 +28,7 @@ class EntrepriseCtrl extends CI_Controller {
         }
     }
 
-    /*public function detail_entreprise($id) {
+    public function detail_entreprise($id) {
         $this->load->helper('form', 'url');
         $this->load->model('entreprise');
         $this->load->helper('cookie');
@@ -48,13 +48,37 @@ class EntrepriseCtrl extends CI_Controller {
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('commercant/connexion');
         }
-    }*/
+    }
 
-	
+    public function modifier_entreprise() {
+        $this->load->helper('form', 'url');
+        $this->load->model('entreprise');
 
-  
-  
-  
+        if (isset($_COOKIE['commercantCookie'])) {
+            $id = $_POST['numSiret'];
+            $data = array(
+                "numSiret" => htmlspecialchars($_POST['numSiret']),
+                "nomEntreprise" => htmlspecialchars($_POST['nomEntreprise']),
+                "adresseEntreprise" => htmlspecialchars($_POST['adresseEntreprise']),
+                "codePEntreprise" => htmlspecialchars($_POST['codePEntreprise']),
+                "villeEntreprise" => htmlspecialchars($_POST['villeEntreprise']),
+                "horairesEntreprise" => htmlspecialchars($_POST['horairesEntreprise']),
+                "livraisonEntreprise" => htmlspecialchars($_POST['livraisonEntreprise']),
+                "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
+                "siteWebEntreprise" => htmlspecialchars($_POST['siteWebEntreprise']),
+            );
+            $this->entreprise->update($id, $data);
+            $data['entreprise'] = $this->entreprise->selectById($id);
+            $data['message'] = "L'entreprise a été modifié avec succès";
+            $this->load->view('errors/validation_formulaire', $data);
+            $this->load->view('commercant/index');
+            $this->load->view('commercant/liste_entreprise', $data);
+        } else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('commercant/connexion');
+        }
+    }
 
     public function liste_produit($num) {
         $this->load->helper('cookie');

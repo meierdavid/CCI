@@ -17,6 +17,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">NumSiret</th>
+									<th scope="col">Logo</th>
                                     <th scope="col">nomEntreprise</th>
                                     <th scope="col">adresseEntreprise</th>
                                     <th scope="col">codePEntreprise</th>
@@ -24,6 +25,7 @@
                                     <th scope="col">horairesEntreprise</th>
                                     <th scope="col">livraisonEntreprise</th>
                                     <th scope="col">tempsReservMax</th>
+									<th scope="col">Site Web</th>
                                     <th scope="col">Modifier</th>
 
 
@@ -33,6 +35,12 @@
                                 <tr>
                                   <?php foreach ($entreprises as $item) { ?>
                                     <td><?php echo $item->numSiret; ?></td>
+									<?php
+									if ($item->logoEntreprise == NULL) {
+										$item->logoEntreprise = "not_found.jpg";
+									}
+									?>
+									<td><img src="http://localhost/cci/index.php/../assets/image/logos/<?php echo $item->logoEntreprise; ?>"  class="img-thumbnail"></td>
                                     <td><?php echo $item->nomEntreprise; ?></td>
                                     <td><?php echo $item->adresseEntreprise; ?></td>
                                     <td><?php echo $item->codePEntreprise; ?></td>
@@ -40,7 +48,8 @@
                                     <td><?php echo $item->horairesEntreprise; ?></td>
                                     <td><?php echo $item->livraisonEntreprise; ?></td>
                                     <td><?php echo $item->tempsReservMax; ?></td>
-                                    <td><p><a href="<?php echo base_url("EntrepriseCtrl/detail_entreprise/".$item->numSiret );?>">modifier l'entreprise</a></p></td>
+									<td><?php echo $item->siteWebEntreprise; ?></td>
+                                    <td><p><a href="<?php echo base_url("CommercantCtrl/detail_entreprise/".$item->numSiret );?>">Modifier l'entreprise</a></p></td>
                                   </tr>
                                   <?php } ?>
                                 </tbody>
