@@ -82,6 +82,57 @@ class BonReducCtrl extends CI_Controller {
 
     }
 
+    public function detail_bonreduc($id) {
+        $this->load->model('bonreduc');
+        $this->load->helper('form', 'url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
+        var_dump("detail");
+        if (isset($_COOKIE['commercantCookie']) ) {
+            if ($this->bonreduc->selectById($id) != Null) {
+                var_dump("bonreduc");
+                $data['bonreduc'] = $this->bonreduc->selectById($id);
+                $this->load->view('commercant/index');
+                $this->load->view('bonreduc/detail', $data);
+                var_dump($data);
+            } else {
+                //ereur le produit n'existe pas
+                $this->liste_bonreduc();
+            }
+        } else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('commercant/connexion');
+        }
+    }
+
+    public function modifier() {
+        $this->load->helper('form', 'url');
+        $this->load->library('form_validation');
+        $this->load->model('bonreduc');
+        if (isset($_COOKIE['commercantCookie'])) {
+            $id = $_POST['idBon'];
+            $data = array(
+                "libelleBon" => htmlspecialchars($_POST['libelleBon']),
+                "numSiret" => htmlspecialchars($_POST['numSiret']),
+                "pourcentageBon" => htmlspecialchars($_POST['pourcentageBon']),
+                "idBon" => htmlspecialchars($_POST['idBon']),
+            );
+            $this->bonreduc->update($id, $data);
+            $data['bonreduc'] = $this->bonreduc->selectById($id);
+            $data['message'] = "Le Bon a été modifié avec succès";
+            $this->load->view('commercant/index');
+            $this->load->view('bonreduc/liste_bonreduc', $data);
+        }
+
+        else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('commercant/connexion');
+        }
+
+    }
+
 
 
 
