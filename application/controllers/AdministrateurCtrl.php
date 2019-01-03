@@ -113,6 +113,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('administrateur');
+    
     $this->load->view('administrateur/index');
 
     $this->form_validation->set_rules('prenomAdministrateur', 'Prénom', 'alpha_dash');
@@ -240,7 +241,6 @@ class AdministrateurCtrl extends CI_Controller {
           "codePCommercant" => htmlspecialchars($_POST['codePCommercant']),
           "villeCommercant" => htmlspecialchars($_POST['villeCommercant']),
           "telCommercant" => htmlspecialchars($_POST['telCommercant']),
-          "pointCommercant" => htmlspecialchars(0),
         );
         $this->commercant->insert($data);
         $this->load->view('administrateur/confirmation_ajout_commercant');

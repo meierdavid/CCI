@@ -32,7 +32,7 @@
                                                 <td><?php echo $item->nomCommercant; ?></td>
                                                 <td><?php echo $item->prenomCommercant; ?></td>
                                                 <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_commercant/".$item->idCommercant);?>">Supprimer le Commerçant</a></p></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/modifier_commercant/".$item->idCommercant );?>">Modifier le commerçant</a></p></td>
+                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/liste_commercant/".$item->idCommercant );?>">Modifier le commerçant</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>
