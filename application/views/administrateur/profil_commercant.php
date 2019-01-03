@@ -52,7 +52,7 @@
                     </div> 
                     <div class="form-group">
                         <label class="control-label">Ville</label>
-                        <input type="text" class="form-control" name="villeCommercant" value="<?php echo $commmercant[0]->villeCommercant; ?>" size="30" required/>
+                        <input type="text" class="form-control" name="villeCommercant" value="<?php echo $commercant[0]->villeCommercant; ?>" size="30" required/>
                     </div>    
                     <div class="form-group">
                         <label class="control-label">Numéro de téléphone</label>
