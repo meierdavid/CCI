@@ -421,10 +421,13 @@ class PanierCtrl extends CI_Controller {
                 );
                 $this->panier->insert($data);
 
-                
-                $data['message'] = "Votre payement à bien été accepté";
+                $data['client'] = $this->client->selectByMail($varmail);
+                $data['message'] = "Votre paiement à bien été accepté";
                 $this->load->view('errors/validation_formulaire', $data);
-                $this->liste_panier();
+                $this->load->view('client/header', $data);
+                $this->load->view('client/accueil');
+                $this->load->view('client/footer');
+ 
             } else {
                 $data['message'] = "erreur : Veuillez réapprovisionner votre compte";
                 $this->load->view('errors/erreur_formulaire', $data);
