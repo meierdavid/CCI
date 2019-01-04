@@ -7,7 +7,6 @@
                     <div class="box">
                         <br>
                         <div class="text-center">
-                        <h1>Historique des commandes</h1>
                         </div>
                         <br>
                         <br>
