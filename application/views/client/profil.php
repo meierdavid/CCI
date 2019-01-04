@@ -55,7 +55,10 @@
                         <label class="control-label">Numéro de téléphone</label>
                         <input type="text" class="form-control" name="telClient" value="<?php echo $client[0]->telClient; ?>" size="30" required/>
                     </div>    
-                    
+                    <div class="text-center">
+                        <label class="control-label">Vos points de fidélité </label>
+                        <input type="text" disabled="disabled" class="form-control" name="pointClient" step="any" value="<?php echo $client[0]->pointClient ?>" size="10"/>
+                     </div>
                     <div class="text-center">
                         <label class="control-label">Votre Crédit </label>
                         <input type="text" disabled="disabled" class="form-control" name="creditClient" step="any" value="<?php echo $client[0]->creditClient ?>" size="10"/>

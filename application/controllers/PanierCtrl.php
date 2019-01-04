@@ -176,7 +176,7 @@ class PanierCtrl extends CI_Controller {
                 $idPanier = $data['panier'][0]->idPanier;
                 $data['commander'] = $this->commander->selectByIdPanier($idPanier);
                 $data['produit'] = $this->produit->selectById($data['commander'][0]->idProduit);
-                $idProduit = $data['produit'][0]->idProduit;
+                
 
                 $date = date("d-m-y H:i:s");
                 $prixPanier = $data['panier'][0]->prixTotPanier;
@@ -225,10 +225,20 @@ class PanierCtrl extends CI_Controller {
         if (isset($_COOKIE['clientCookie'])) {
             //suppression dans Commander
             $this->commander->deletePanier($id);
-
+            $date = date("d-m-y H:i:s");
             //suppression dans Panier
-            $this->panier->delete($id);
-            $data['message'] = "Votre panier a été supprimer avec succès";
+            $data = array(
+                        "annulationPanier" => htmlspecialchars(0),
+                        "codePromo" => htmlspecialchars(0),
+                        "datePanier" => htmlspecialchars($date),
+                        "finaliserPanier" => htmlspecialchars(0),
+                        "paiementPanier" => htmlspecialchars(0),
+                        "prixTotPanier" => htmlspecialchars(0),
+                    );
+             $this->panier->update($id, $data);
+            $varmail = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varmail);
+            $data['message'] = "Votre panier a été vidé avec succès";
             $this->load->view('errors/validation_formulaire', $data);
             $this->load->view('client/header', $data);
             $this->load->view('client/accueil');
@@ -392,6 +402,10 @@ class PanierCtrl extends CI_Controller {
                     $this->produit->updateQuantite($item->idProduit,$nouvelleQuantite);
                     $i = $i +1;
                 }
+                //ajouter les points de fidélité
+                $data['client'] = $this->client->selectByMail($varmail);
+                $nouveauPoint = $data['client'][0]->pointClient + ($data['panier'][0]->prixTotPanier / 10);
+                $this->client->updatePoint($idClient,$nouveauPoint);
                 
                 //créer un nouveau panier
                 $data = array(

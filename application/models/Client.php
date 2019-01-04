@@ -114,6 +114,14 @@ class client extends CI_Model{
 			->update($this->table);
             
         }
+        
+        public function updatePoint($id,$point){
+            $this->load->database();
+            
+            return $this->db->where('idClient',$id)
+			->set('pointClient',$point)
+			->update($this->table);
+        }
 
 }
 ?>
