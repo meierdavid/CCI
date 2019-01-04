@@ -105,7 +105,15 @@ class client extends CI_Model{
 			->set('mdpClient',$mdp)
 			->update($this->table);
 	}
-
+        
+        public function updateCredit($id,$credit){
+            $this->load->database();
+            
+            return $this->db->where('idClient',$id)
+			->set('creditClient',$credit)
+			->update($this->table);
+            
+        }
 
 }
 ?>

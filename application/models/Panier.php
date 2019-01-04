@@ -24,10 +24,15 @@
         }
 
         public function selectByIdClient($id) {
+            $max = $this->db->select_max('idPanier')
+                ->from('panier')
+                ->where('idClient', $id)
+                ->get()
+                ->result();
             $this->load->database();
             return $this->db->select('*')
                 ->from('panier')
-                ->where('idClient', $id)
+                ->where('idPanier', $max[0]->idPanier)
                 ->get()
                 ->result();
         }
@@ -76,7 +81,15 @@
                 ->where('idPanier', $id)
                 ->update($this->table);
         }
-
+        
+        public function updatepaye($id, $data){
+            $this->load->database();
+            $this->db       
+                ->set('datePanier', $data['datePanier'])
+                ->set('paiementPanier', $data['paiementPanier'])               
+                ->where('idPanier', $id)
+                ->update($this->table);
+        }
 
 
     }

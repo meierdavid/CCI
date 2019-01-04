@@ -83,69 +83,69 @@ class PanierCtrl extends CI_Controller {
             $data['produit'] = $this->produit->selectById($idProduit);
             $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
 
-            if ($this->form_validation->run() == FALSE ) {
+            if ($this->form_validation->run() == FALSE) {
                 $this->load->view('client/header', $data);
                 $this->load->view('panier/ajout_panier - Copie', $data);
                 $this->load->view('client/footer');
             } else {
                 if ($this->commander->checkId($idProduit) == Null) {
-                    if($data['produit'][0]->nbDispoProduit >= $_POST['quantite']){
-                    $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
-                    $date = date("d-m-y H:i:s");
-
-                    $data['panier'] = $this->panier->selectByIdClient($idClient);
-
-                    if ($data['panier'] == null) { //panier inexistant : on le créé
-                        $data = array(
-                            "datePanier" => htmlspecialchars($date),
-                            "annulationPanier" => htmlspecialchars(0),
-                            "codePromo" => htmlspecialchars(0),
-                            "paiementPanier" => htmlspecialchars(0),
-                            "finaliserPanier" => htmlspecialchars(0),
-                            "idClient" => htmlspecialchars($idClient),
-                            "prixTotPanier" => htmlspecialchars($prix),
-                        );
-                        $this->panier->insert($data);
-                    } else { //panier déjà existant : MAJ
+                    if ($data['produit'][0]->nbDispoProduit >= $_POST['quantite']) {
                         $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
-                        $prix = $prix + $data['panier'][0]->prixTotPanier;
+                        $date = date("d-m-y H:i:s");
+
+                        $data['panier'] = $this->panier->selectByIdClient($idClient);
+
+                        if ($data['panier'] == null) { //panier inexistant : on le créé
+                            $data = array(
+                                "datePanier" => htmlspecialchars($date),
+                                "annulationPanier" => htmlspecialchars(0),
+                                "codePromo" => htmlspecialchars(0),
+                                "paiementPanier" => htmlspecialchars(0),
+                                "finaliserPanier" => htmlspecialchars(0),
+                                "idClient" => htmlspecialchars($idClient),
+                                "prixTotPanier" => htmlspecialchars($prix),
+                            );
+                            $this->panier->insert($data);
+                        } else { //panier déjà existant : MAJ
+                            $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
+                            $prix = $prix + $data['panier'][0]->prixTotPanier;
+                            $idPanier = $data['panier'][0]->idPanier;
+
+                            $data = array(
+                                "annulationPanier" => htmlspecialchars(0),
+                                "codePromo" => htmlspecialchars(0),
+                                "datePanier" => htmlspecialchars($date),
+                                "finaliserPanier" => htmlspecialchars(0),
+                                "paiementPanier" => htmlspecialchars(0),
+                                "prixTotPanier" => htmlspecialchars($prix),
+                            );
+                            $this->panier->update($idPanier, $data);
+                        }
+                        //Insertion dans table Commander
+                        $data['panier'] = $this->panier->selectByIdClient($idClient);
                         $idPanier = $data['panier'][0]->idPanier;
 
+                        if ($_POST['livraison'] == 'Oui') {
+                            $livraison = 1;
+                        } else {
+                            $livraison = 0;
+                        }
+
                         $data = array(
-                            "annulationPanier" => htmlspecialchars(0),
-                            "codePromo" => htmlspecialchars(0),
-                            "datePanier" => htmlspecialchars($date),
-                            "finaliserPanier" => htmlspecialchars(0),
-                            "paiementPanier" => htmlspecialchars(0),
-                            "prixTotPanier" => htmlspecialchars($prix),
+                            "idProduit" => htmlspecialchars($idProduit),
+                            "idPanier" => htmlspecialchars($idPanier),
+                            "quantiteProd" => htmlspecialchars($_POST['quantite']),
+                            "livraisonCommande" => htmlspecialchars($livraison),
                         );
-                        $this->panier->update($idPanier, $data);
-                    }
-                    //Insertion dans table Commander
-                    $data['panier'] = $this->panier->selectByIdClient($idClient);
-                    $idPanier = $data['panier'][0]->idPanier;
+                        $this->commander->insert($data);
 
-                    if ($_POST['livraison'] == 'Oui') {
-                        $livraison = 1;
+                        $data['message'] = "Le produit a bien été ajouté au panier";
+                        $this->load->view('errors/validation_formulaire', $data);
+                        $this->liste_panier();
                     } else {
-                        $livraison = 0;
-                    }
-
-                    $data = array(
-                        "idProduit" => htmlspecialchars($idProduit),
-                        "idPanier" => htmlspecialchars($idPanier),
-                        "quantiteProd" => htmlspecialchars($_POST['quantite']),
-                        "livraisonCommande" => htmlspecialchars($livraison),
-                    );
-                    $this->commander->insert($data);
-
-                    $data['message'] = "Le produit a bien été ajouté au panier";
-                    $this->load->view('errors/validation_formulaire', $data);
-                    $this->liste_panier();
-                    }else{
-                    $data['message'] = "Il n'y a pas assez d'articles disponibles";
-                    $this->load->view('errors/erreur_formulaire', $data);
-                    $this->liste_panier();
+                        $data['message'] = "Il n'y a pas assez d'articles disponibles";
+                        $this->load->view('errors/erreur_formulaire', $data);
+                        $this->liste_panier();
                     }
                 } else {
                     $data['message'] = "Ce produit est déjà dans votre panier";
@@ -268,50 +268,47 @@ class PanierCtrl extends CI_Controller {
                 $this->load->view('panier/detail_panier', $data);
                 $this->load->view('client/footer');
             } else {
-                if($data['produit'][0]->nbDispoProduit >= $_POST['quantite']){
-                $prixInitial = $this->produit->prix_a_afficher($idProduit) * $quantiteInitiale;
-                $prixNouveau = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
-                $prix = $data['panier'][0]->prixTotPanier - $prixInitial + $prixNouveau;
-                $date = date("d-m-y H:i:s");
+                if ($data['produit'][0]->nbDispoProduit >= $_POST['quantite']) {
+                    $prixInitial = $this->produit->prix_a_afficher($idProduit) * $quantiteInitiale;
+                    $prixNouveau = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
+                    $prix = $data['panier'][0]->prixTotPanier - $prixInitial + $prixNouveau;
+                    $date = date("d-m-y H:i:s");
 
-                $idPanier = $data['panier'][0]->idPanier;
+                    $idPanier = $data['panier'][0]->idPanier;
 
-                $data = array(
-                    "annulationPanier" => htmlspecialchars(0),
-                    "codePromo" => htmlspecialchars(0),
-                    "datePanier" => htmlspecialchars($date),
-                    "finaliserPanier" => htmlspecialchars(0),
-                    "paiementPanier" => htmlspecialchars(0),
-                    "prixTotPanier" => htmlspecialchars($prix),
-                );
-                $this->panier->update($idPanier, $data);
+                    $data = array(
+                        "annulationPanier" => htmlspecialchars(0),
+                        "codePromo" => htmlspecialchars(0),
+                        "datePanier" => htmlspecialchars($date),
+                        "finaliserPanier" => htmlspecialchars(0),
+                        "paiementPanier" => htmlspecialchars(0),
+                        "prixTotPanier" => htmlspecialchars($prix),
+                    );
+                    $this->panier->update($idPanier, $data);
 
-                $data['panier'] = $this->panier->selectByIdClient($idClient);
-                $idPanier = $data['panier'][0]->idPanier;
+                    $data['panier'] = $this->panier->selectByIdClient($idClient);
+                    $idPanier = $data['panier'][0]->idPanier;
 
-                if ($_POST['livraison'] == 'Oui') {
-                    $livraison = 1;
+                    if ($_POST['livraison'] == 'Oui') {
+                        $livraison = 1;
+                    } else {
+                        $livraison = 0;
+                    }
+
+                    $data = array(
+                        "quantiteProd" => htmlspecialchars($_POST['quantite']),
+                        "livraisonCommande" => htmlspecialchars($livraison),
+                    );
+                    $this->commander->update($idPanier, $idProduit, $data);
+
+                    $data['message'] = "Le produit a bien été modifié";
+                    $this->load->view('errors/validation_formulaire', $data);
+                    $this->liste_panier();
                 } else {
-                    $livraison = 0;
-                }
-
-                $data = array(
-                    "quantiteProd" => htmlspecialchars($_POST['quantite']),
-                    "livraisonCommande" => htmlspecialchars($livraison),
-                );
-                $this->commander->update($idPanier, $idProduit, $data);
-
-                $data['message'] = "Le produit a bien été modifié";
-                $this->load->view('errors/validation_formulaire', $data);
-                $this->liste_panier();
-            
-            
-                }
-            else{
-                $data['message'] = "Il n'y a pas assez d'articles disponibles";
+                    $data['message'] = "Il n'y a pas assez d'articles disponibles";
                     $this->load->view('errors/erreur_formulaire', $data);
                     $this->liste_panier();
-            }
+                }
             }
         } else {
             $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
@@ -319,8 +316,8 @@ class PanierCtrl extends CI_Controller {
             $this->load->view('client/connexion');
         }
     }
-    
-    public function confirmation(){
+
+    public function confirmation() {
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -355,4 +352,63 @@ class PanierCtrl extends CI_Controller {
             $this->load->view('client/connexion');
         }
     }
+
+    public function payement() {
+        $this->load->model('panier');
+        $this->load->model('produit');
+        $this->load->model('commander');
+        $this->load->model('client');
+        $this->load->helper('form', 'url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
+        $this->load->model('entreprise');
+        $data['entreprises_header'] = $this->entreprise->selectAll();
+
+
+        if (isset($_COOKIE['clientCookie'])) {
+            $varmail = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varmail);
+            $idClient = $data['client'][0]->idClient;
+            $data['panier'] = $this->panier->selectByIdClient($idClient);
+            if ($data['panier'][0]->prixTotPanier < $data['client'][0]->creditClient) {
+                $nouveauSoldeClient = $data['client'][0]->creditClient - $data['panier'][0]->prixTotPanier;
+                $this->client->updateCredit($idClient, $nouveauSoldeClient);
+                //modifie le panier en cours
+                $date = date("d-m-y H:i:s");
+                $idPanier = $data['panier'][0]->idPanier;
+                $data = array(
+                    "datePanier" => htmlspecialchars($date),
+                    "paiementPanier" => htmlspecialchars(1),
+                );
+                $this->panier->updatePaye($idPanier, $data);
+                //créer un nouveau panier
+                $data = array(
+                    "datePanier" => htmlspecialchars($date),
+                    "annulationPanier" => htmlspecialchars(0),
+                    "codePromo" => htmlspecialchars(0),
+                    "paiementPanier" => htmlspecialchars(0),
+                    "finaliserPanier" => htmlspecialchars(0),
+                    "idClient" => htmlspecialchars($idClient),
+                    "prixTotPanier" => htmlspecialchars(0),
+                );
+                $this->panier->insert($data);
+
+                
+                $data['message'] = "Votre payement à bien été accepté";
+                $this->load->view('errors/validation_formulaire', $data);
+                $this->liste_panier();
+            } else {
+                $data['message'] = "erreur : Veuillez réapprovisionner votre compte";
+                $this->load->view('errors/erreur_formulaire', $data);
+                $this->load->view('client/header', $data);
+                $this->load->view('client/profil', $data);
+                $this->load->view('client/footer');
+            }
+        } else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('client/connexion');
+        }
+    }
+
 }

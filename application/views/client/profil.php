@@ -7,12 +7,12 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-                <br></br>
-                <br></br>
+                <br>
+                
 
                 <h2>Votre Profil</h2>
 
-                    <br></br>
+                    <br>
                     <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
                     <?php echo form_open('ClientCtrl/modifier'); ?>
                     <div class="form-group">
@@ -56,8 +56,12 @@
                         <input type="text" class="form-control" name="telClient" value="<?php echo $client[0]->telClient; ?>" size="30" required/>
                     </div>    
                     
-                    
-                    
+                    <div class="text-center">
+                        <label class="control-label">Votre Crédit </label>
+                        <input type="text" disabled="disabled" class="form-control" name="creditClient" step="any" value="<?php echo $client[0]->creditClient ?>" size="10"/>
+                     </div>
+
+                    <br>
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div>
                     <div class="text-center">
                         <br>
@@ -65,16 +69,19 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            
 
-                <br></br>
+                <br>
 
                 <div class="text-center">
                     <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/changer_mdp" role="button">Voulez vous changer votre mot de passe ?</a>
                 </div>
-
-                <br></br>
+                <br>
+                <div class="text-center">
+                    <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/modifier_credit" role="button">Approvisionner votre compte</a>
+                </div>
+                <br>
 
             </div>
         </div>

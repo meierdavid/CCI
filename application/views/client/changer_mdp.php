@@ -1,7 +1,5 @@
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <!------ Include the above in your HEAD tag ---------->
 
 
@@ -12,8 +10,9 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
+                <br>
                 <h2 class="text-center"> Changer de mot de passe</h2>
-
+                <br><br>
 
                 <form method="post" action="changer_mdp">
 

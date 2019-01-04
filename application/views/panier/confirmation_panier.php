@@ -62,7 +62,7 @@
             <a class="btn btn-success" href="<?php echo base_url('PanierCtrl/finaliser/').$panier[0]->idPanier ?>" role="button">vers l'étape précédente</a>
         </div>
         <div class="text-center" style="float: right;">
-            <a class="btn btn-success" href="<?php echo base_url() ?>PanierCtrl/payement" role="button">vers l'étape suivante</a>
+            <a class="btn btn-success" href="<?php echo base_url('PanierCtrl/payement') ?>" role="button">Confirmer et Payer</a>
         </div>
 
     </div>
