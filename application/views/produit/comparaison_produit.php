@@ -47,7 +47,9 @@
 
                 </tr>
                  <tr>
-
+                     <td>
+                         <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au panier</a></p>
+                     </td>
                      <?php foreach($produitsProposés as $item) {?>
                      <td>
                          <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p>
