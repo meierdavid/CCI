@@ -1,79 +1,66 @@
-
+<link href="<?php echo base_url()."../template/css/affichage_produit.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <!------ Include the above in your HEAD tag ---------->
 
 
-<!--Pulling Awesome Font -->
-<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="container">
-    <div class="row">
+    <title>eCommerce Product Detail</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 
+  </head>
 
-        <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
-        <div class="text-center">
-            <h2>Modifier</h2>
-            <br>
-            <h4>veuillez remplir la quantité souhaitée</h4>
-        </div>
-        <br><br>
-        <div class="row mb-2">
-            <div class="col-md-4">
-                <br></br>
+  <body>
+	
+	<div class="container">
+	<?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						
+						<div class="preview-pic tab-content">
+						<?php
+				if ($produit[0]->imageProduit == NULL) {
+					$produit[0]->imageProduit = "not_found.jpg";
+				}
+				?>
+						  <div class="tab-pane active" id="pic-1"><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>" /></div>
+						</div>						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title"><?php echo $produit[0]->nomProduit; ?></h3>
+						
+						<h6>Vendu par : <strong><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></br></br></h6></br>
 
-                <img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible">
-                <br></br>
-                Couleur de l'article :
-                <div style="background-color: <?php echo $produit[0]->couleurProduit; ?>; width: 40px;
-                     height: 40px; border-radius: 20px;">
-                </div>
+						<h4 class="price">Prix: <?php
+											if ($produit[0]->reducProduit !=0){
+												echo  "<span>" . (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 ))  . "€ </span>" . "  au lieu de <span> " . $produit[0]->prixUnitaireProduit . "€ </span>" ;
+											}
+											else {
+												echo "<span>" .$produit[0]->prixUnitaireProduit . "€ </span>" ;
+											}
+											?> </h4>
+						
+						
+						<h6>
+						<?php if ($entreprise[0]->livraisonEntreprise == TRUE) { 
+                echo "<p><strong> Cet article est éligible à la livraison </strong></p><br/><br/>";
+            
+            } else {
+                echo "<p><strong> Cet article n'est pas éligible à la livraison </strong></p>";
+            }
+            ?>
+					</h6>	
+					<h6> Il reste <strong><?php echo "  ".$produit[0]->nbDispoProduit . "  "; ?></strong>	 articles disponibles </br></br></h6>	
+					
+					<div class="form-login" >
 
-            </div>
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label class="control-label"><?php echo $produit[0]->nomProduit; ?></label>
-                </div>
-
-
-                <p><?php echo $produit[0]->descriptionProduit; ?> </p>
-                <p> de : <a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/" . $entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a>
-                    <br>
-
-                <p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $produit[0]->idProduit); ?>">Voir les avis</a></p>
-                ____________________________________________________________________
-
-                <br><br>
-                <p>Prix : <?php echo $produit[0]->prixUnitaireProduit; ?> € </p>
-                <?php
-                if ($produit[0]->reducProduit > 0) {
-                    echo "<p> bénéficiez d'une réducion de " . $produit[0]->reducProduit . "% </p>";
-                    echo "<p> Soit au prix exceptionnel de : " . (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 )) . "€ </p>";
-                }
-                ?>
-                <br>
-                <?php if ($entreprise[0]->livraisonEntreprise == TRUE) { ?>
-                    <p> Cet article est éligible à la livraison </p>
-                    <?php
-                } else {
-                    echo "<p> Cet article n'est pas éligible à la livraison </p>";
-                }
-                ?>
-
-                <p> Il reste : <?php echo $produit[0]->nbDispoProduit; ?>	articles disponibles </p>
-                <br>
-                <p><a href="<?php echo base_url("ProduitCtrl/comparer_produit/" . $produit[0]->idProduit); ?>">Comparer avec des articles similaires</a></p>
-                <br>
-            </div>
-
-
-            <br></br>
-            <br></br>
-
-
-        </div>
-
-        <div class="col-md-offset-3 col-md-5">
-            <div class="form-login" >
-<?php echo form_open('PanierCtrl/modifier/' . $produit[0]->idProduit); ?>
+			<?php echo form_open_multipart('PanierCtrl/modifier/' . $produit[0]->idProduit); ?>
                 <br></br>
 
                 <br>
@@ -86,23 +73,38 @@
                 <input type="hidden" class="form-control" name="couleurProduit" value="<?php echo $produit[0]->couleurProduit; ?>" size="30" required/>                   
                 <div class="text-center">
                     <label class="control-label">Quantité souhaitée</label>
-                    <input type="number" class="form-control" name="quantite" value="1" size="30" required/>
+                    <input type="number" class="form-control" name="quantite" value="<?php echo $commander[0]->quantiteProd ?>" size="30" min="0" max="<?php echo $produit[0]->nbDispoProduit; ?>" required/>
                 </div>
-
+				</br>
+<?php if ($commander[0]->livraisonCommande==1) {?>
                 <div class="text-center">
                     <label class="control-label">Livraison: </label>
-                    <input type="radio"  name="livraison" value="Oui" required/>Oui
+                    <input type="radio"  name="livraison" value="Oui" required checked>Oui
                     <input type="radio"  name="livraison" value="Non" required/>Non
                 </div>
+<?php }
+ else {?>
+					<div class="text-center">
+                    <label class="control-label">Livraison: </label>
+                    <input type="radio"  name="livraison" value="Oui" required >Oui
+                    <input type="radio"  name="livraison" value="Non" required checked >Non
+                </div>
+ <?php } ?>
+				</br>
 
-                <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier"/></div>
-               
+					
+
+						<div class="text-center"><input class="add-to-cart btn btn-default" type="submit" value="Ajouter au panier" href="<?php echo base_url("PanierCtrl/modifier/".$produit[0]->idProduit); ?>" ></div>
+	   
                 </form>
                 <br></br>
-                <br></br>
-            </div></div>
-        
+            </div>
+			</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>
 
-
-    </div>
-</div>
