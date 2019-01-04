@@ -12,9 +12,11 @@ class PageCtrl extends CI_Controller {
         }
          public function contact()
         {
+		$cookie=$this->input->cookie('clientCookie');
+		$data['client']=$this->client->SelectByMail($cookie);
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->view('client/header');
+        $this->load->view('client/header',$data);
         $this->load->view('template/contact');
         $this->load->view('client/footer');
         }

@@ -77,6 +77,8 @@ class EntrepriseCtrl extends CI_Controller {
         $this->load->helper('cookie');
         $this->load->library('form_validation');
         $this->load->model('entreprise');
+		$cookie=$this->input->cookie('clientCookie');
+		$data['client']=$this->client->SelectByMail($cookie);
         $data['entreprises_header'] = $this->entreprise->selectAll();
         if (isset($_COOKIE['clientCookie'])) {
             if ($this->entreprise->selectById($id) != Null) {

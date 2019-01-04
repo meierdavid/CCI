@@ -67,6 +67,10 @@
 							<a class="like btn btn-default" type="button" href="<?php echo base_url("ProduitCtrl/liste_avis/" . $produit[0]->idProduit); ?>" ><span class="fa fa-heart"  >AVIS</span></a>
 						</div>
 					</div>
+					<div class="action">
+						<a class= "btn btn-default"href="<?php echo base_url("ProduitCtrl/comparer_produit/" . $produit[0]->idProduit); ?>">Comparer avec des articles similaires</a>					
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
