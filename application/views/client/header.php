@@ -27,9 +27,9 @@
             <div class="container">
                 <ul>
                     <li> <a href="<?php echo base_url() ?>ClientCtrl/profil"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Profil </a></li>
-                    <li> <a href="<?php echo base_url() ?>ClientCtrl/deconnexion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Se déconnecter </a></li>
+                    <li><a href="<?php echo base_url() ?>ClientCtrl/historique">Historique des commandes</a></li>
                     <li> Crédit : <?php echo $client[0]->creditClient . "€"; ?></li>
-                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">cci_assistance@gmail.com</a></li>
+                    <li> <a href="<?php echo base_url() ?>ClientCtrl/deconnexion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Se déconnecter </a></li>
                 </ul>
             </div>
         </div>
@@ -70,7 +70,7 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav menu__list">
-                                    <li class="active menu__item menu__item--current"><a class="menu__link" href="<?php echo base_url(); ?>ClientCtrl/index">Accueil<span class="sr-only">(current)</span></a></li>
+                                    <li class="menu__item"><a class="menu__link" href="<?php echo base_url(); ?>ClientCtrl/index">Accueil<span class="sr-only">(current)</span></a></li>
                                     <li class="dropdown menu__item">
                                         <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catégories<span class="caret"></span></a>
                                         <ul class="dropdown-menu multi-column columns-3">
