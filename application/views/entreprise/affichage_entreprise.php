@@ -1,7 +1,4 @@
 <link href="<?php echo base_url()."../template/css/profil_entreprise.css"; ?>" rel="stylesheet" type="text/css" media="all" />
-<link href= "<?php echo base_url()."../template/css/style.css"; ?>" rel="stylesheet" type="text/css" media="all" />
-<link href= "<?php echo base_url()."../template/css/font-awesome.css"; ?>" rel="stylesheet" />
-<link href="<?php echo base_url()."../template/css/easy-responsive-tabs.css"; ?>" rel='stylesheet' type='text/css'/>
 <!-- //for bootstrap working -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
@@ -32,7 +29,7 @@
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>Numéro de Siret :</td>
+                        <td>Numéro de Siret:</td>
                         <td><?php echo  $entreprise[0]->numSiret; ?></td>
                       </tr>
                       <tr>
@@ -66,7 +63,7 @@
                         <td><?php echo "Le délai maximal est de  " . $entreprise[0]->tempsReservMax . "  Heures"; ?></td>
                       </tr>
                       <tr>
-                        <td>Email</td>
+                        <td>Email :</td>
                         <td><?php 
 						$this->load->model('faire_partie');
 						$this->load->model('commercant');
@@ -75,7 +72,7 @@
 						echo $commercant[0]->mailCommercant
 						?>	</td>
                       </tr>
-                        <td>Numéro de Téléphone</td>
+                        <td>Numéro de Téléphone:</td>
                         <td><?php 
 						$this->load->model('faire_partie');
 						$this->load->model('commercant');
@@ -85,7 +82,7 @@
 						?>
                         </td>
                       </tr>
-					  <td>Site Web</td>
+					  <td>Site Web :</td>
                         <td> <a href= "http://<?php echo $entreprise[0]->siteWebEntreprise;?>"><?php echo $entreprise[0]->siteWebEntreprise;?> </a>
                         </td>
                       </tr>

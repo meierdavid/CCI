@@ -87,6 +87,15 @@ class poster_avis extends CI_Model{
 		}
 		
 	}
+	
+	public function nombre_avis($idProduit){
+		$avis = $this->selectByIdProduit($idProduit);
+		$nb=0;
+		foreach ($avis as $item) {
+			$nb = $nb + 1;
+		}
+		return $nb;
+	}
   
   
    public function deleteByidClient($idClient) {

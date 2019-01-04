@@ -1,54 +1,39 @@
- <div class="container">
-          <div class="content mt-3">
-                <div class="animated fadeIn">
-                  <div>
-                      
-                          <div class="box">
-                            <h2 class="text-center"> Liste des avis</h2>
-                            <div class="row">
-                           
-                           <article class=" col-md-11 col-lg-11">
-                           <div class="table-responsive">
-                            <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Identifiant Client</th>
-									<th scope="col">Note</th>
-                                    <th scope="col">Avis</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                          <tbody>
-                                <tr>
-                                  <?php foreach ($avis as $item) { ?>
-                                    <td><?php echo $item->idClient; ?></td>
-									 <td><?php echo $item->noteClient . "/10"; ?></td>
-                                    <td><?php echo $item->avisClient; ?></td>
-                                    <?php if($client[0]->idClient == $item->idClient){?>
-                                    <td><a href="<?php echo base_url("ClientCtrl/modifier_avis/").$produit[0]->idProduit; ?>">Modifiez votre avis</a></td>
-                                    <?php } ?>
+<link href="<?php echo base_url()."../template/css/liste_avis.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 
-                                  </tr>
-                                  <?php } ?>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+            <div class="row">
+			
+                <div class="col-md-8">
+                  <div class="page-header">
+                    <h1><small class="pull-right"><?php 
+					$this->load->model('poster_avis');
+					echo ("Il y a <strong>" . $this->poster_avis->nombre_avis($avis[0]->idProduit)) . "</strong> Avis";
+					
+					?></small> Avis </h1>
+                  </div> 
+                   <div class="comments-list">
+				   <?php foreach ($avis as $item) { ?>
+                       <div class="media">
+                          
+                            <div class="media-body">
                                 
-                                </tbody>
-                              </table>
-                           </div>
-                                <?php if($client[0]->idClient != $item->idClient){?>
-                               <a href="<?php echo base_url("ClientCtrl/ajouter_avis/").$produit[0]->idProduit; ?>">Donnez votre avis</a>
-                                <?php } ?>
-                           </article>
-                                
+                              <h4 class="media-heading user_name"><?php 
+						  $this->load->model('client');
+						  $client=$this->client->selectById($item->idClient);
+						echo $client[0]->prenomClient . "  " . $client[0]->nomClient ?> <p class="pull-right"><small><?php echo "Note: " .  $item->noteClient . " / 10"?></small></p></h4>
+                              <?php echo $item->avisClient?>
+                              
+                              </br></br>
                             </div>
-                            </div>
-                         
-                         
-                        </div>
-
-                  <br></br>
-                      <br></br>
-
-                     
-                      </div>
-                      </div> 
- </div>
+                          </div>
+				   <?php } ?>
+                       
+                   </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
