@@ -17,16 +17,16 @@
 }
 
 .table-user-information > tbody > tr {
-    border-top: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(221, 221, 221); horitontal-align:middle;
 }
 
 .table-user-information > tbody > tr:first-child {
-    border-top: 0;
+    border-top: 0;vertical-align:middle;
 }
 
 
 .table-user-information > tbody > tr > td {
-    border-top: 0;
+    border-top: 0;vertical-align:middle;
 }
 .toppad
 {margin-top:20px;

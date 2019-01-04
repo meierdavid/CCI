@@ -17,6 +17,7 @@
   <body>
 	
 	<div class="container">
+	<?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
 		<div class="card">
 			<div class="container-fliud">
 				<div class="wrapper row">
@@ -59,7 +60,7 @@
 					
 					<div class="form-login" >
 
-			<?php echo form_open('PanierCtrl/ajout_panier/' . $produit[0]->idProduit); ?>
+			<?php echo form_open_multipart('PanierCtrl/ajout_panier/' . $produit[0]->idProduit); ?>
                 <br></br>
 
                 <br>
@@ -82,11 +83,15 @@
                     <input type="radio"  name="livraison" value="Non" required/>Non
                 </div>
 				</br>
-						<a class="add-to-cart btn btn-default" type="submit" href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>" >Ajouter au panier</a>
-               
+
+					
+
+						<div class="text-center"><input class="add-to-cart btn btn-default" type="submit" value="Ajouter au panier" href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>" ></div>
+	   
                 </form>
                 <br></br>
             </div>
+			</div>
 					
 					<div class="action">
 						<a class= "btn btn-default"href="<?php echo base_url("ProduitCtrl/comparer_produit/" . $produit[0]->idProduit); ?>">Comparer avec des articles similaires</a>					
