@@ -381,6 +381,18 @@ class PanierCtrl extends CI_Controller {
                     "paiementPanier" => htmlspecialchars(1),
                 );
                 $this->panier->updatePaye($idPanier, $data);
+                // retirer la quantite dispo du produit 
+                
+                $data['panier'] = $this->panier->selectByIdClient($idClient);
+                $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
+                $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
+                $i = 0;
+                foreach ($data['commander'] as $item){
+                    $nouvelleQuantite = $data['produits'][$i]->nbDispoProduit - $item->quantiteProd;
+                    $this->produit->updateQuantite($item->idProduit,$nouvelleQuantite);
+                    $i = $i +1;
+                }
+                
                 //créer un nouveau panier
                 $data = array(
                     "datePanier" => htmlspecialchars($date),
