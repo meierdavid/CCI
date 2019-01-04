@@ -1,88 +1,112 @@
+<!------ Include the above in your HEAD tag ---------->
+
 <div class="container">
-    <div class="content">
-        <div class="animated fadeIn">
-            <div class="text-center">
-                
-                    
-                        <div class="box">
-                            <h2>Votre panier</h2>
-                            <div class="row">
-                              <article class=" col-md-11 col-lg-11">
-                                  <div class="table-responsive">
-                                      <table class="table table-striped">
-                                          <thead>
-                                              <tr>
-                                                  <th scope="col">Image</th>
-                                                  <th scope="col">Nom</th>
-                                                  
-
-                                                  <th scope="col">Prix</th>
-                                                  <th scope="col">Réduction</th>
-                                                  <th scope="col">Prix final</th>
-                                                  
-                                                  <th scope="col">Quantité</th>
-                                                  <th scope="col">Livraison</th>
-                                                  <th scope="col">Supprimer</th>
-                                                  <th scope="col">Modifier</th>
-
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                              <tr>
-                                                  <?php $i=0;
-                                                   foreach ($produits as $item) {
-                                                      if ($item->imageProduit == NULL) {
-                                                          $item->imageProduit = "not_found.jpg";
-                                                      }
-                                                      ?>
-                                                      <td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="img-thumbnail"></td>
-                                                      <td><?php echo $item->nomProduit; ?></td>
-                                                      
-                                                      
-                                                      <td><?php echo $item->prixUnitaireProduit; ?>€</td>
-                                                      <td><?php echo $item->reducProduit; ?>%</td>
-                                                      <td><?php echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100); ?>€</td>
-                                                      
-                                                      <td><?php echo $commander[$i]->quantiteProd; ?></td>
-                                                      <td><?php if ($commander[$i]->livraisonCommande == 1){
-                                                        echo "Oui";
-                                                      }
-                                                      else echo  "Non"?></td>
-                                                      <td><p><a href="<?php echo base_url("PanierCtrl/supprimer_produit_panier/" . $item->idProduit); ?>">Supprimer le produit</a></p></td>
-                                                      <td><p><a href="<?php echo base_url("PanierCtrl/modifier/" . $item->idProduit); ?>">Modifier le produit</a></p></td>
-
-                                                  </tr>
-                                                      <?php $i=$i+1;
-                                                    } ?>
-                                          </tbody>
-                                      </table>
-                                      <div>
-                                          <?php echo form_open('bonReducCtrl/utiliser_bonReduc/'); ?>
-                                            <div class="text-center">
-                                              <label class="control-label">Saisir votre code promo: </label>
-                                              <input type="text" class="form-control" name="couleurProduit" value=" " size="30" required/>                   
-                                            </div>
-                                          <br>
-                                            <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Valider"/></div>
-                                          </form>
-                                      </div>
-                                      <div class="text-center">
-                                        <label class="control-label">prix total du panier </label>
-                                        <input type="text" disabled="disabled" class="form-control" name="prixTotal" step="any" value="<?php echo $panier[0]->prixTotPanier ?>" size="10"/>
-                                      </div>
-                                      <p><a href="<?php echo base_url("PanierCtrl/supprimer_panier/".$panier[0]->idPanier); ?>">Supprimer le panier</a></p>
-                                      <p><a href="<?php echo base_url("PanierCtrl/finaliser/".$panier[0]->idPanier); ?>">Acheter</a></p>
-                                  </div>
-                              </article>
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th class="text-center">Prix</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+				<?php $i=0;
+				$this->load->model('entreprise');
+				   foreach ($produits as $item) {
+					  $entreprise=$this->entreprise->selectById($item->numSiret);
+					  if ($item->imageProduit == NULL) {
+						  $item->imageProduit = "not_found.jpg";
+					  }
+					
+					  ?>
+                    <tr>
+                        <td class="col-sm-8 col-md-6">
+                        <div class="media">
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>" style="width: 72px; height: 72px;"> </a>
+                            <div class="media-body">
+                                <h4 style="margin-left: 15px; margin-top: 0px;" class="media-heading"><a href="#"><?php echo $item->nomProduit ;?></a></h4>
+                                <h5 style="margin-left: 15px; margin-top: 0px;" class="media-heading"> by <a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$item->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></h5>
+                                <span style="margin-left: 15px; margin-top: 0px;">Quantité restante : </span><span class="text-success"><strong><?php echo "  ".$item->nbDispoProduit . "  "; ?></strong></span>
                             </div>
-                        </div>
-                   
-            </div>
-
-            <br></br>
-            <br></br>
-
-
+                        </div></td>
+                        <td class="col-sm-1 col-md-1" style="text-align: center">
+                       <h5><?php echo $commander[$i]->quantiteProd; ?></h5>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong><?php echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100); ?>€</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong><?php echo (intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100))*$commander[$i]->quantiteProd; ?>€</strong></td>
+                        <td class="col-sm-1 col-md-1">
+						<a href="<?php echo base_url("PanierCtrl/supprimer_produit_panier/" . $item->idProduit); ?>">
+                        <button type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove" ></span> Supprimer
+                        </button></a></td>
+						<td class="action">
+						<a href="<?php echo base_url("PanierCtrl/modifier/" . $item->idProduit); ?>">
+                        <button type="button" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-pencil"  ></span> Modifier
+                        </button></a></td>
+                    </tr>
+					<?php $i=$i+1;?>
+				   <?php } ?>
+                    
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Sous-Total</h5></td>
+                        <td class="text-right"><h5><strong><?php echo $panier[0]->prixTotPanier . " €" ?></strong></h5></td>
+                    </tr>
+                    
+					
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Code Promo :</h5></td>
+						<?php echo form_open('bonReducCtrl/utiliser_bonReduc/'); ?>
+                        <td class="text-right"><h5><input type="text" class="form-control" name="couleurProduit" value=" " size="30" required/></h5></td>
+                    </tr>
+					
+					<tr>
+                 
+                        <td><h5>Nombre de points client : </h5></td>
+                        <td><h5><strong><?php echo $client[0]->pointClient . "</strong>" ?></h5></td>
+                        <td>   </td>
+						<td>   
+						<a href="#">
+                        <button type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-eur"></span> Utiliser mes points
+                        </button></a>
+						</td>
+                        <td> </td>
+                    </tr>
+					
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong><?php echo $panier[0]->prixTotPanier . " €" ?></strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+						<a href="<?php echo base_url("PanierCtrl/supprimer_panier/".$panier[0]->idPanier); ?>">
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-erase"></span> Supprimer le panier
+                        </button></a></td>
+                        <td>
+                        <button type="button" class="btn btn-success">
+                            Acheter <span class="glyphicon glyphicon-play"></span>
+                        </button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

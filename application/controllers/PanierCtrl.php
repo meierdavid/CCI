@@ -222,6 +222,8 @@ class PanierCtrl extends CI_Controller {
         $this->load->helper('form', 'url');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
+		$cookie=$this->input->cookie('clientCookie');
+		$data['client']=$this->client->SelectByMail($cookie);
         if (isset($_COOKIE['clientCookie'])) {
             //suppression dans Commander
             $this->commander->deletePanier($id);
