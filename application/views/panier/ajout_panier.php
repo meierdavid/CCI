@@ -86,7 +86,7 @@
                
                 </form>
                 <br></br>
-            </div></div>
+            </div>
 					
 					<div class="action">
 						<a class= "btn btn-default"href="<?php echo base_url("ProduitCtrl/comparer_produit/" . $produit[0]->idProduit); ?>">Comparer avec des articles similaires</a>					

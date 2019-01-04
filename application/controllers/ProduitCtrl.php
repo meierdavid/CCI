@@ -30,7 +30,6 @@ class ProduitCtrl extends CI_Controller {
         $data['produit'] = $this->Produit->selectProduit($varid);
         $this->load->view('commercant/index', $data);
         $this->load->view('produit/liste_produit', $data);
-        var_dump($data);
 
       } else {
         $this->ajout_entreprise();
@@ -482,13 +481,11 @@ public function affichage_produit($id) {
     $this->load->library('image_lib');
     $config['image_library'] = 'gd2';
     $config['source_image'] = './assets/image/Produits/'.$imageProduit;
-    //$config['new_image'] = './assets/image/Produits/resized_img.jpg';
-    //$config['create_thumb'] = TRUE;
-    $config['maintain_ratio'] = TRUE;
-    $config['width'] = 200;
-    $config['height'] = 200;
+    $config['maintain_ratio'] = FALSE;
+    $config['width'] = 150;
+    $config['height'] = 150;
     $this->image_lib->initialize($config);
-    var_dump($config);
+    var_dump("modif image");
     $this->image_lib->resize();
     $this->liste_produit();
   }

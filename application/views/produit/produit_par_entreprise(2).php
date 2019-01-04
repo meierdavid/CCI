@@ -1,64 +1,51 @@
+<link href="<?php echo base_url()."../template/css/liste_produit_client.css"; ?>" rel="stylesheet" type="text/css" media="all" />
+
+
 <div class="container">
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div>
-                <div class="row">
-
-                    <div class="box">
-                        <h2><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></h2>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th scope="col">Note</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <?php $i = 0; ?>
-                                        <?php foreach ($produit as $item) { ?>
-                                            <?php
-                                            if ($item->imageProduit == NULL) {
-                                                $item->imageProduit = "not_found.jpg";
-                                            }
-                                            ?>
-                                            <td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible"></td>
-                                            <td><?php
+    <h3 class="h3"></br><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></h3>
+    <div class="row">
+	</br>
+	<?php foreach ($produit as $item) { ?>
+		<?php
+			if ($item->imageProduit == 'NULL') {
+				$item->imageProduit = "not_found.jpg";
+			}
+		?>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid7">
+                <div class="product-image7">
+                    <a href="#">
+                        <img class="pic-1" width="150" height="150" src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>" width=5 height=150>
+                    </a>
+                    <ul class="social">
+                        <li><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>" class="fa fa-search"></a></li>
+                        <li><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>" class="fa fa-shopping-bag"></a></li>
+                        <li><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $produit[0]->idProduit); ?>" class="fa fa-heart"></a></li>
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>"><?php echo $item->nomProduit?></a></h3>
+                    <div class="price"><?php
 											if ($item->reducProduit !=0){
-												echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100 )  . "€" . "  AU LIEU DE  " . $item->prixUnitaireProduit . "€" ;
+												echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100 )  . "€" ;
 											}
 											else {
 												echo $item->prixUnitaireProduit . "€" ;
 											}
-											?></td>
-											<td><p><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>">Détails du produit</a></p></td>
-                                            <td><p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>">Ajouter au panier</a></p></td>
-                                            <td><?php echo $note[$i] . "/10";
-                                            $i = $i + 1;
-                                            ?></td>
-                                            <td><p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $item->idProduit); ?>">Voir les avis</a></p></td>
-
-                                        </tr>
-<?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-
+											?>
+                        <span><?php
+											if ($item->reducProduit !=0){
+												echo $item->prixUnitaireProduit . "€" ;
+											}
+											?>
+											</span>
+											</br></br>
                     </div>
-
                 </div>
             </div>
-
-            <br></br>
-            <br></br>
-
-
         </div>
+	<?php } ?>
+        
     </div>
 </div>
+<hr>
