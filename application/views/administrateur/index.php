@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </head>
     <body>
     <center>
-        <h1>Bienvenue <?php if(isset($commercant)){ echo $commercant[0]->prenomCommercant; echo ' '; echo $commercant[0]->nomCommercant ;}    ?> sur votre espace administrateur</h1>
+        <h1>Bienvenue sur votre espace administrateur</h1>
     </center>
     <div class="vertical-menu" style="position: absolute; margin-top: 70px;">
         <a href="<?php echo base_url()?>AdministrateurCtrl/index">Accueil</a>

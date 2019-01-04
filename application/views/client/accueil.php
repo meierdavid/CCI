@@ -43,7 +43,7 @@
             <div class="banner_bottom_agile_info_inner_w3ls">
     	           <div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
 						<figure class="effect-roxy">
-							<img src="<?php echo base_url()."../template/images/bottom1.jpg"; ?>" alt=" " class="img-responsive" />
+							<img src="<?php echo base_url()."../assets/image/bottom1.jpg"; ?>" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>P</span>roduits</h3>
 							</figcaption>
@@ -51,7 +51,7 @@
 					</div>
 					 <div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
 						<figure class="effect-roxy">
-							<img src="<?php echo base_url()."../template/images/bottom2.jpg"; ?>" alt=" " class="img-responsive" />
+							<img src="<?php echo base_url()."../assets/image/bottom2.jpg"; ?>" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>M</span>agasins</h3>
 							</figcaption>

@@ -5,8 +5,10 @@
                 <div class="row">
 
                     <div class="box">
+					<br/>
+					<br/>
                         <h2><?php echo $produit[0]->categorieProduit; ?></h2>
-
+						<br/>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>

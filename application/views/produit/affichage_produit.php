@@ -1,92 +1,75 @@
-
+<link href="<?php echo base_url()."../template/css/affichage_produit.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <!------ Include the above in your HEAD tag ---------->
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--Pulling Awesome Font -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>eCommerce Product Detail</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 
-<div class="container">
-    <div class="text-center">
-        <div class="form-group">
-            <label class="control-label"><?php echo $produit[0]->categorieProduit; ?></label>
+  </head>
 
-        </div>
-    </div>
-    <div class="row mb-2">
-        <div class="col-md-4">
-            <br></br>
-
-            <img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible">
-            <br></br>
-            Couleur de l'article :
-            <div style="background-color: <?php echo $produit[0]->couleurProduit; ?>; width: 40px;
-                 height: 40px; border-radius: 20px;">
-            </div>
-
-        </div>
-        <div class="col-md-8">
-            <div class="form-group">
-                <label class="control-label"><?php echo $produit[0]->nomProduit; ?></label>
-
-
-            </div>
-
-
-            <p><?php echo $produit[0]->descriptionProduit; ?> </p>
-            <p> de : <a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a>
-                <br>
-            <p><?php echo $note . "/10"; ?></p>
-            <p><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $produit[0]->idProduit); ?>">Voir les avis</a></p>
-            ____________________________________________________________________
-
-            <br><br>
-            <p>Prix : <?php echo $produit[0]->prixUnitaireProduit; ?> € </p>
-            <?php if ($produit[0]->reducProduit > 0) {
-                echo "<p> bénéficiez d'une réducion de " . $produit[0]->reducProduit . "% </p>";
-				echo "<p> Soit au prix exceptionnel de : " . (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 ))  . "€ </p>" ;
-            }
-            ?>
-            <br>
-            <?php if ($entreprise[0]->livraisonEntreprise == TRUE) { ?>
-                <p> Cet article est éligible à la livraison </p>
-            <?php
+  <body>
+	
+	<div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						
+						<div class="preview-pic tab-content">
+						  <div class="tab-pane active" id="pic-1"><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>" /></div>
+						</div>						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title"><?php echo $produit[0]->nomProduit; ?></h3>
+						
+						<h6>Vendu par : <strong><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></br></br></h6></br>
+						<h6>Catégorie : <strong><?php echo $produit[0]->categorieProduit; ?></strong></br></br></h6>
+						<p class="product-description"><?php echo $produit[0]->descriptionProduit; ?></p>
+						<h4 class="price">Prix: <?php
+											if ($produit[0]->reducProduit !=0){
+												echo  "<span>" . (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 ))  . "€ </span>" . "  au lieu de <span> " . $produit[0]->prixUnitaireProduit . "€ </span>" ;
+											}
+											else {
+												echo "<span>" .$produit[0]->prixUnitaireProduit . "€ </span>" ;
+											}
+											?> </h4>
+						
+						<p class="vote">Les consommateurs ont mis une note de : <strong><?php
+						$this->load->model('poster_avis');
+						echo $this->poster_avis->moyenne($produit[0]->idProduit);
+						?></strong></p>
+						<h6>
+						<?php if ($entreprise[0]->livraisonEntreprise == TRUE) { 
+                echo "<p><strong> Cet article est éligible à la livraison </strong></p><br/><br/>";
+            
             } else {
-                echo "<p> Cet article n'est pas éligible à la livraison </p>";
+                echo "<p><strong> Cet article n'est pas éligible à la livraison </strong></p>";
             }
             ?>
-
-            <p> Il reste : <?php echo $produit[0]->nbDispoProduit; ?>	articles disponibles </p>
-            <br>
-            <p><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>">Ajouter au panier</a></p>
-            <br>
-            <p><a href="<?php echo base_url("ProduitCtrl/comparer_produit/" . $produit[0]->idProduit); ?>">Comparer avec des articles similaires</a></p>
-            <br>
-        </div>
-
-
-        <br></br>
-        <br></br>
-
-
-    </div>
-    <br>
-    <br>
-    ____________________________________________________________________________
-    <h4>Autres produits pouvant vous intéresser :</h4>
-    <br>
-    <div class="row mb-2">
-                     <?php foreach ($produitsProposés as $item) { ?>
-        <div class="col-md-4">
-                         <?php
-                         echo $item->nomProduit . " <br><br>";
-
-                         if ($item->imageProduit == NULL) {
-                             $item->imageProduit = "not_found.jpg";
-                         }
-                         ?>
-            <a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?> "><img  src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible"></a>
+					</h6>	
+					<h6> Il reste <strong><?php echo "  ".$produit[0]->nbDispoProduit . "  "; ?></strong>	 articles disponibles </br></br></h6>	
+						<h5 class="colors">Couleur : 
+							<div  class="text-center" style="background-color: <?php echo $produit[0]->couleurProduit; ?>; width: 40px;
+                 height: 40px; border-radius: 40px; margin-left: 20px; display: inline-block; vertical-align: middle;">
             </div>
-<?php } ?>
 
-    </div>
-</div>
+							</br></br>
+						</h5>
+						
+						<div class="action">
+							<a class="add-to-cart btn btn-default" type="button" href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>" >Ajouter au panier</a>
+							<a class="like btn btn-default" type="button" href="<?php echo base_url("ProduitCtrl/liste_avis/" . $produit[0]->idProduit); ?>" ><span class="fa fa-heart"  >AVIS</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>
