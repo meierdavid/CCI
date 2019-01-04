@@ -14,7 +14,7 @@ class ClientCtrl extends CI_Controller {
         $this->load->model('client');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
-        
+
         var_dump($_COOKIE['clientCookie']);
         if (isset($_COOKIE['clientCookie'])) {
             $varmail = $this->input->cookie('clientCookie');
@@ -274,29 +274,29 @@ class ClientCtrl extends CI_Controller {
             $varid = $this->input->cookie('clientCookie');
             $data['client'] = $this->client->selectByMail($varid);
             $idClient = $data['client'][0]->idClient;
-            if(isset($_POST['mdpClient'])){
-            if (password_verify($_POST['mdpClient'], $data['client'][0]->mdpClient)) {
-                if ($_POST['mdpClient'] == $_POST['mdpClient2']) {
-                    $nouveauSolde = $data['client'][0]->creditClient + $_POST['creditClient'];
-                    $this->client->updateCredit($idClient, $nouveauSolde);
-                    $data['message'] = "Votre compte à été crédité de " . $_POST['creditClient'] . "€ il est maintenant de " . $nouveauSolde . "€";
-                    $this->load->view('errors/validation_formulaire', $data);
-                    $this->profil();
+            if (isset($_POST['mdpClient'])) {
+                if (password_verify($_POST['mdpClient'], $data['client'][0]->mdpClient)) {
+                    if ($_POST['mdpClient'] == $_POST['mdpClient2']) {
+                        $nouveauSolde = $data['client'][0]->creditClient + $_POST['creditClient'];
+                        $this->client->updateCredit($idClient, $nouveauSolde);
+                        $data['message'] = "Votre compte à été crédité de " . $_POST['creditClient'] . "€ il est maintenant de " . $nouveauSolde . "€";
+                        $this->load->view('errors/validation_formulaire', $data);
+                        $this->profil();
+                    } else {
+                        $data['message'] = "erreur : La confirmation de mot de passe ne correspond pas au premier";
+                        $this->load->view('errors/erreur_formulaire', $data);
+                        $this->load->view('client/header', $data);
+                        $this->load->view('client/credit');
+                        $this->load->view('client/footer');
+                    }
                 } else {
-                    $data['message'] = "erreur : La confirmation de mot de passe ne correspond pas au premier";
+                    $data['message'] = "erreur :  Votre mot de passe n'est pas conforme";
                     $this->load->view('errors/erreur_formulaire', $data);
-                    $this->load->view('client/header', $data);
-                    $this->load->view('client/credit');
+                    $this->load->view('client/header');
+                    $this->load->view('client/credit', $data);
                     $this->load->view('client/footer');
                 }
             } else {
-                $data['message'] = "erreur :  Votre mot de passe n'est pas conforme";
-                $this->load->view('errors/erreur_formulaire', $data);
-                $this->load->view('client/header');
-                $this->load->view('client/credit', $data);
-                $this->load->view('client/footer');
-            }}
-            else{
                 $this->load->view('client/header');
                 $this->load->view('client/credit', $data);
                 $this->load->view('client/footer');
@@ -376,7 +376,6 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/header', $data);
             $this->load->view('client/avis_produit', $data);
             $this->load->view('client/footer');
-            
         } else {
 
 
@@ -435,7 +434,8 @@ class ClientCtrl extends CI_Controller {
     public function liste_bonreduc() {
         $this->load->model('BonReduc');
         $this->load->helper('form', 'url');
-
+        $this->load->model('entreprise');
+        $data['entreprises_header'] = $this->entreprise->selectAll();
         if ($this->input->cookie('clientCookie') != null) {
             $varid = $this->input->cookie('clientCookie');
             $data['client'] = $this->client->selectByMail($varid);
@@ -444,6 +444,37 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('bonreduc/liste_bonreduc', $data);
             $this->load->view('client/footer');
             var_dump($data);
+        }
+    }
+
+    public function historique() {
+        $this->load->model('panier');
+        $this->load->model('produit');
+        $this->load->model('commander');
+        $this->load->helper('form', 'url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
+        $this->load->model('entreprise');
+        $data['entreprises_header'] = $this->entreprise->selectAll();
+        if (isset($_COOKIE['clientCookie'])) {
+            $varid = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varid);
+            $id = $data['client'][0]->idClient;
+            $data['paniers'] = $this->panier->selectAllByIdClient($id);
+            
+            $this->load->view('client/header',$data);
+            // mettre dans data chaque produit pour 
+            foreach($data['paniers'] as $item){
+            $data['panier'] = $item;
+            $data['commander'] = $this->commander->selectByIdPanier($item->idPanier);
+            $data['produit'] = $this->panier->selectProduits($item->idPanier);
+            $this->load->view('client/historique_client',$data);
+            }
+            $this->load->view('client/footer');
+        } else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('client/connexion');
         }
     }
 

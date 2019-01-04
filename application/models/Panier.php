@@ -22,14 +22,21 @@
                 ->get()
                 ->result();
         }
-
+        public function selectAllByIdClient($id){
+            return $this->db->select('*')
+                ->from('panier')
+                ->where('idClient', $id)
+                ->get()
+                ->result();
+        }
         public function selectByIdClient($id) {
+            $this->load->database();
             $max = $this->db->select_max('idPanier')
                 ->from('panier')
                 ->where('idClient', $id)
                 ->get()
                 ->result();
-            $this->load->database();
+            
             return $this->db->select('*')
                 ->from('panier')
                 ->where('idPanier', $max[0]->idPanier)
