@@ -36,7 +36,21 @@
                 ->get()
                 ->result();
         }
-
+        public function checkId($idProduit, $idClient){
+            $max = $this->db->select_max('idPanier')
+                ->from('panier')
+                ->where('idClient', $idClient)
+                ->get()
+                ->result();
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('panier')
+                ->where('panier.idPanier', $max[0]->idPanier)
+                ->join('commander','commander.idPanier = panier.idPanier')
+                ->where('idProduit', $idProduit)
+                ->get()
+                ->result();
+        }
         public function selectProduits($id){
             $this->load->database();
             return $this->db->select('*')

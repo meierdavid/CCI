@@ -88,7 +88,7 @@ class PanierCtrl extends CI_Controller {
                 $this->load->view('panier/ajout_panier', $data);
                 $this->load->view('client/footer');
             } else {
-                if ($this->commander->checkId($idProduit) == Null) {
+                if ($this->panier->checkId($idProduit,$idClient) == Null) {
                     if ($data['produit'][0]->nbDispoProduit >= $_POST['quantite']) {
                         $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
                         $date = date("d-m-y H:i:s");
