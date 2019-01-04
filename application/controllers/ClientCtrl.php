@@ -292,12 +292,12 @@ class ClientCtrl extends CI_Controller {
                 } else {
                     $data['message'] = "erreur :  Votre mot de passe n'est pas conforme";
                     $this->load->view('errors/erreur_formulaire', $data);
-                    $this->load->view('client/header');
+                    $this->load->view('client/header',$data);
                     $this->load->view('client/credit', $data);
                     $this->load->view('client/footer');
                 }
             } else {
-                $this->load->view('client/header');
+                $this->load->view('client/header',$data);
                 $this->load->view('client/credit', $data);
                 $this->load->view('client/footer');
             }
