@@ -25,7 +25,7 @@
                          <a class="btn btn-success" href="<?php echo base_url()?>PanierCtrl/liste_panier" role="button">vers le panier</a>
     </div>
     <div class="text-center" style="float: right;">
-                         <a class="btn btn-success" href="<?php echo base_url()?>ClientCtrl/profil" role="button">vers l'étape suivante</a>
+                         <a class="btn btn-success" href="<?php echo base_url()?>PanierCtrl/confirmation" role="button">vers l'étape suivante</a>
     </div>
     <br><br><br>
     

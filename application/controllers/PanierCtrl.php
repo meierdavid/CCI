@@ -319,5 +319,40 @@ class PanierCtrl extends CI_Controller {
             $this->load->view('client/connexion');
         }
     }
+    
+    public function confirmation(){
+        $this->load->helper('cookie');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('panier');
+        $this->load->model('commander');
+        $this->load->model('produit');
+        $this->load->model('entreprise');
+        $data['entreprises_header'] = $this->entreprise->selectAll();
+        if (isset($_COOKIE['clientCookie'])) {
+            $varid = $this->input->cookie('clientCookie');
 
+            $data['client'] = $this->client->selectByMail($varid);
+            $data['panier'] = $this->panier->selectByIdClient($data['client'][0]->idClient);
+
+            if ($data['panier'] != NULL) {
+                $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
+                $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
+
+                $this->load->view('client/header', $data);
+                $this->load->view('panier/confirmation_panier', $data);
+                $this->load->view('client/footer');
+            } else {
+                $data['message'] = "erreur : Vous n'avez pas de produits dans votre panier";
+                $this->load->view('errors/erreur_formulaire', $data);
+                $this->load->view('client/header', $data);
+                $this->load->view('client/accueil');
+                $this->load->view('client/footer');
+            }
+        } else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('client/connexion');
+        }
+    }
 }
