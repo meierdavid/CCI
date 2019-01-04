@@ -194,7 +194,7 @@ class ClientCtrl extends CI_Controller {
                         $cookie = array(
                             'name' => 'clientCookie',
                             'value' => $data['client'][0]->mailClient,
-                            'expire' => '3600'
+                            'expire' => '86500'
                         );
                         $this->input->set_cookie($cookie);
                         $this->load->view('client/header', $data);
