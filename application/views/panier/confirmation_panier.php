@@ -18,7 +18,7 @@
                         }
                         ?>
                         <img style="height: 100px; width: 100px; float:left;" src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="img-thumbnail">
-                        <?php echo $item->nomProduit . " " . $item->descriptionProduit; ?>
+                        <?php echo "<strong>" .$item->nomProduit . "</strong> " . $item->descriptionProduit; ?>
 
                     </div>
                     <div class="col-md-3">
