@@ -101,9 +101,10 @@
                             <span class="glyphicon glyphicon-erase"></span> Supprimer le panier
                         </button></a></td>
                         <td>
+                        <a href="<?php echo base_url("PanierCtrl/finaliser/".$panier[0]->idPanier); ?>">
                         <button type="button" class="btn btn-success">
                             Acheter <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
+                        </button></a></td>
                     </tr>
                 </tbody>
             </table>
