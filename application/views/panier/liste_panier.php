@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <?php if($produits != null) { ?>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -108,6 +109,11 @@
                     </tr>
                 </tbody>
             </table>
+            <?php } else{
+                echo "<br><br>";
+                echo " <div class='alert alert-danger text-center'>Votre panier est vide </div>";
+                echo "<br><br>";
+            }?>
         </div>
     </div>
 </div>
