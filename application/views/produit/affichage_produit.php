@@ -72,7 +72,29 @@
 						</div>
 					</div>
 				</div>
+				 </br></br></br></br></br></br>
+    <h6><strong>Autres produits pouvant vous intéresser :</strong></h6>
+    <br>
+    <div class="row mb-2">
+                     <?php foreach ($produitsProposés as $item) { ?>
+        <div class="col-md-4">
+			<div class="text-center">
+                         <?php
+                         echo "<h6>" . $item->nomProduit . " </h6><br>";
+
+                         if ($item->imageProduit == NULL) {
+                             $item->imageProduit = "not_found.jpg";
+                         }
+                         ?>
+			
+            <a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?> "><img  src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible"></a>
+            </div>
+		</div>
+<?php } ?>
+
+    </div>
 			</div>
+			
 		</div>
 	</div>
   </body>

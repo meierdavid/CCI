@@ -388,7 +388,7 @@ public function affichage_produit($id) {
     $this->load->model('produit');
     $this->load->model('entreprise');
     $cookie = $this->input->cookie('clientCookie');
-        $data['client'] = $this->client->selectByMail($cookie);
+    $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if ($this->produit->selectByCategorie($categorie) != null) {
       $data['produit'] = $this->produit->selectByCategorie($categorie);
