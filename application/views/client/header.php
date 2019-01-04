@@ -28,7 +28,7 @@
                 <ul>
                     <li> <a href="<?php echo base_url() ?>ClientCtrl/profil"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Profil </a></li>
                     <li> <a href="<?php echo base_url() ?>ClientCtrl/deconnexion"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Se déconnecter </a></li>
-                    <li><i class="fa fa-phone" aria-hidden="true"></i> Appeler : 0123456789</li>
+                    <li> Crédit : <?php echo $client[0]->creditClient . "€"; ?></li>
                     <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">cci_assistance@gmail.com</a></li>
                 </ul>
             </div>

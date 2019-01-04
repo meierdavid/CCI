@@ -160,6 +160,8 @@ class ProduitCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->library('form_validation');
     $this->load->model('entreprise');
+    $cookie = $this->input->cookie('clientCookie');
+        $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     var_dump("detail");
     if (isset($_COOKIE['commercantCookie']) ) {
@@ -186,6 +188,8 @@ public function affichage_produit($id) {
     $this->load->helper('cookie');
     $this->load->library('form_validation');
     $this->load->model('entreprise');
+    $cookie = $this->input->cookie('clientCookie');
+        $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
@@ -214,6 +218,8 @@ public function affichage_produit($id) {
     $this->load->helper('cookie');
     $this->load->library('form_validation');
     $this->load->model('entreprise');
+    $cookie = $this->input->cookie('clientCookie');
+        $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
@@ -381,6 +387,8 @@ public function affichage_produit($id) {
     $this->load->library('form_validation');
     $this->load->model('produit');
     $this->load->model('entreprise');
+    $cookie = $this->input->cookie('clientCookie');
+        $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if ($this->produit->selectByCategorie($categorie) != null) {
       $data['produit'] = $this->produit->selectByCategorie($categorie);
@@ -404,6 +412,8 @@ public function affichage_produit($id) {
     $this->load->library('form_validation');
     $this->load->model('produit','entreprise');
     $this->load->model('entreprise');
+    $cookie = $this->input->cookie('clientCookie');
+    $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if ($this->produit->selectByEntreprise($idEntreprise) != null) {
       $data['produit'] = $this->produit->selectByEntreprise($idEntreprise);
@@ -428,6 +438,8 @@ public function affichage_produit($id) {
     $this->load->library('form_validation');
     $this->load->model('produit');
     $this->load->model('entreprise');
+    $cookie = $this->input->cookie('clientCookie');
+    $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if ($this->produit->selectBySoldes() != null) {
       $data['produit'] = $this->produit->selectBySoldes();
@@ -451,6 +463,8 @@ public function affichage_produit($id) {
     $this->load->helper('form', 'url','cookie');
     $this->load->model('produit');
     $this->load->model('entreprise');
+    $cookie = $this->input->cookie('clientCookie');
+    $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_POST['search'])) {
       $str = $_POST['search'];

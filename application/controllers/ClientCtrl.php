@@ -14,8 +14,11 @@ class ClientCtrl extends CI_Controller {
         $this->load->model('client');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
+        
         var_dump($_COOKIE['clientCookie']);
         if (isset($_COOKIE['clientCookie'])) {
+            $varmail = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varmail);
             $this->load->view('client/header', $data);
             $this->load->view('client/accueil');
             $this->load->view('client/footer');
@@ -373,7 +376,7 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/header', $data);
             $this->load->view('client/avis_produit', $data);
             $this->load->view('client/footer');
-            var_dump("bug");
+            
         } else {
 
 
@@ -393,7 +396,7 @@ class ClientCtrl extends CI_Controller {
                 $data['client'] = $this->client->selectByMail($cookie);
                 $data['produit'] = $this->produit->selectById($idProduit);
                 $this->load->view('client/header', $data);
-                $this->load->view('client/avis_produit', $data);
+                $this->load->view('client/liste_avis', $data);
                 $this->load->view('client/footer');
             }
         }
