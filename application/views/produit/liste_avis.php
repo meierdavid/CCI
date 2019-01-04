@@ -19,12 +19,18 @@
                           
                             <div class="media-body">
                                 
-                              <h4 class="media-heading user_name"><?php 
+                              <h4 class="media-heading user_name">
+							  <?php 
 						  $this->load->model('client');
 						  $client=$this->client->selectById($item->idClient);
-						echo $client[0]->prenomClient . "  " . $client[0]->nomClient ?> <p class="pull-right"><small><?php echo "Note: " .  $item->noteClient . " / 10"?></small></p></h4>
+						echo "</br>" . $client[0]->prenomClient . "  " . $client[0]->nomClient ?> <p class="pull-right"><small><?php echo "Note: " .  $item->noteClient . " / 10"?></small></p></h4>
                               <?php echo $item->avisClient?>
-                              
+                              <p<small class="pull-right">
+							<?php if($client[0]->idClient == $item->idClient){?>
+								<td></br><a href="<?php echo base_url("ClientCtrl/modifier_avis/").$produit[0]->idProduit; ?>">Modifiez votre avis</a></td>
+							<?php } ?>
+
+							  </small></p>
                               </br></br>
                             </div>
                           </div>
