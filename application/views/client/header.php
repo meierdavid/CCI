@@ -76,7 +76,7 @@
                                         <ul class="dropdown-menu multi-column columns-3">
                                             <div class="agile_inner_drop_nav_info">
                                                 <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                                    <img src="<?php echo base_url("../template/images/chariot.png"); ?>" alt=""/>
+                                                    <img src="<?php echo base_url("../assets/image/chariot.png"); ?>" alt=""/>
                                                 </div>
                                                 <div class="col-sm-3 multi-gd-img">
                                                     <ul class="multi-column-dropdown">
@@ -105,7 +105,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                                                    <a href="womens.html"><img src="<?php echo base_url() . "../template/images/top1.jpg"; ?>" alt=" "/></a>
+                                                    <a href="womens.html"><img src="<?php echo base_url() . "../assets/image/top1.jpg"; ?>" alt=" "/></a>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>

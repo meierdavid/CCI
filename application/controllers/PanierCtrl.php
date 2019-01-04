@@ -85,7 +85,7 @@ class PanierCtrl extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE ) {
                 $this->load->view('client/header', $data);
-                $this->load->view('panier/ajout_panier', $data);
+                $this->load->view('panier/ajout_panier - Copie', $data);
                 $this->load->view('client/footer');
             } else {
                 if ($this->commander->checkId($idProduit) == Null) {
