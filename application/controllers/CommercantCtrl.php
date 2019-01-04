@@ -196,29 +196,53 @@ public function form_ajout_produit(){
 	}
 }
 
+    public function form_ajout_bonreduc(){
+        $this->load->model('bonreduc');
+        $this->load->model('commercant');
+        $this->load->model('entreprise');
+        $this->load->helper('form','url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
 
-public function liste_entreprise(){
-	$this->load->helper('cookie');
-	$this->load->model('commercant');
-	$this->load->model('entreprise');
-	if($this->input->cookie('commercantCookie') != null){
-		$varid = $this->input->cookie('commercantCookie');
-		$data['commercant'] = $this->commercant->selectByMail($varid);
-		$data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+        if($this->input->cookie('commercantCookie') != null){
+            $varMail= $this->input->cookie('commercantCookie');
+            $data['commercant']=$this->commercant->selectByMail($varMail);
+            $data = $this->liste_entreprise_dropbox();
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->load->view('commercant/index',$data);
+                $this->load->view('bonreduc/ajout_bonreduc', $data);
+            }
+        }
+        else{
+            $data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('commercant/connexion');
+        }
+    }
 
-		if( $data['entreprises'] != NULL){
-			$this->load->view('commercant/index',$data);
-			$this->load->view('commercant/liste_entreprise',$data);
+        public function liste_entreprise(){
+            $this->load->helper('cookie');
+            $this->load->model('commercant');
+            $this->load->model('entreprise');
+            if($this->input->cookie('commercantCookie') != null){
+                $varid = $this->input->cookie('commercantCookie');
+                $data['commercant'] = $this->commercant->selectByMail($varid);
+                $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
 
-		}
-		else{
-			$this->ajout_entreprise();
-		}
-	}
-	else{
-		$this->load->view('commercant/connexion');
-	}
-}
+                if( $data['entreprises'] != NULL){
+                    $this->load->view('commercant/index',$data);
+                    $this->load->view('commercant/liste_entreprise',$data);
+
+                }
+                else{
+                    $this->ajout_entreprise();
+                }
+            }
+            else{
+                $this->load->view('commercant/connexion');
+            }
+        }
 
 public function ajout_entreprise() {
 	

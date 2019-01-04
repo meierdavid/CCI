@@ -10,13 +10,25 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->view('administrateur/index');
   }
+  
+  public function profil()
+	{
+		$this->load->helper('cookie');
+		$this->load->helper('url');
+		$this->load->helper('form');
 
-  public function profil($mail) {
-    $data['administrateur'] = $this->administrateur->selectById($mail);
-    $this->load->model('administrateur');
-    $this->load->helper('url');
-    $this->load->view('administrateur/profil', $data);
-  }
+		if($this->input->cookie('administrateurCookie') != Null){
+			$varMail= $this->input->cookie('administrateurCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
+			$this->load->model('administrateur');
+			$data['administrateur'] = $this->admninistrateur->selectByMail($varMail);
+			$this->load->view('commercant/index',$data);
+			$this->load->view('commercant/profil',$data);
+		}
+		else{
+			$this->load->view('pages/pageconnexion');
+		}
+	}
+
 
   public function inscription() {
     $this->load->helper('form', 'url');
@@ -185,6 +197,7 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->model('administrateur');
         $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
         $supAdmin = $data['administrateur'][0]->superAdmin;
+        var_dump($supAdmin);
         if ($supAdmin == FALSE) {
             $data['message'] = "Vous n'avez pas les droits pour effectuer cette action, veuillez contacter le super administrateur";
             $this->load->view('errors/erreur_formulaire', $data);
@@ -193,8 +206,10 @@ class AdministrateurCtrl extends CI_Controller {
             $this->administrateur->delete($id);
             echo "administrateur Supprimé";
         }
+        $varid = $this->input->cookie('administrateurCookie');
+        $data['administrateur'] = $this->administrateur->selectAll($varid);
         $this->load->view('administrateur/index');
-        $this->load->view('administrateur/liste_administrateur');
+        $this->load->view('administrateur/liste_administrateur', $data);
     }
 
     public function changer_mdp() {

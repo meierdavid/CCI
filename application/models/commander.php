@@ -22,7 +22,14 @@
                 ->get()
                 ->result();
         }
-
+        public function checkId($idProduit){
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('commander')
+                ->where('idProduit', $idProduit)
+                ->get()
+                ->result();
+        }
         public function selectByIds($idPanier, $idProduit) {
             $this->load->database();
             return $this->db->select('*')

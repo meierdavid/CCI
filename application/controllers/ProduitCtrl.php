@@ -30,6 +30,8 @@ class ProduitCtrl extends CI_Controller {
         $data['produit'] = $this->Produit->selectProduit($varid);
         $this->load->view('commercant/index', $data);
         $this->load->view('produit/liste_produit', $data);
+        var_dump($data);
+
       } else {
         $this->ajout_entreprise();
       }
@@ -88,6 +90,7 @@ class ProduitCtrl extends CI_Controller {
             "couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
             "nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit'])
           );
+          var_dump();
           $this->produit->insert_without_picture($data);
           $data['produit'] = $this->produit->selectAll();
           $this->liste_produit();
@@ -103,6 +106,7 @@ class ProduitCtrl extends CI_Controller {
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('commercant/index', $data);
             $this->load->view('produit/ajout_produit');
+            var_dump();
 
           }
           else {

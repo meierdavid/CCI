@@ -1,6 +1,7 @@
 <link href="<?php echo base_url()."../template/css/affichage_produit.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <!------ Include the above in your HEAD tag ---------->
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,6 +23,11 @@
 					<div class="preview col-md-6">
 						
 						<div class="preview-pic tab-content">
+						<?php
+				if ($produit[0]->imageProduit == NULL) {
+					$produit[0]->imageProduit = "not_found.jpg";
+				}
+				?>
 						  <div class="tab-pane active" id="pic-1"><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>" /></div>
 						</div>						
 					</div>
@@ -52,7 +58,8 @@
 					<h6> Il reste <strong><?php echo "  ".$produit[0]->nbDispoProduit . "  "; ?></strong>	 articles disponibles </br></br></h6>	
 					
 					<div class="form-login" >
-<?php echo form_open('PanierCtrl/ajout_panier/' . $produit[0]->idProduit); ?>
+
+			<?php echo form_open('PanierCtrl/ajout_panier/' . $produit[0]->idProduit); ?>
                 <br></br>
 
                 <br>

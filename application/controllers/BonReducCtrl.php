@@ -11,10 +11,10 @@ class BonReducCtrl extends CI_Controller {
             $data['commercant'] = $this->commercant->selectByMail($varid);
             $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
             if ($data['entreprises'] != NULL) {
-                var_dump($data);
-                $data['bonreduc'] = $this->BonReduc->selectById($varid);
+                $data['bonreduc'] = $this->BonReduc->selectBonReduc($varid);
                 $this->load->view('commercant/index', $data);
                 $this->load->view('bonreduc/liste_bonreduc', $data);
+
             } else {
                 $this->ajout_bon();
             }
@@ -23,14 +23,40 @@ class BonReducCtrl extends CI_Controller {
         }
     }
 
+    public function liste_bonreduc_client() {
+        $this->load->model('BonReduc');
+        $this->load->helper('form', 'url');
+
+        if ($this->input->cookie('clientCookie') != null) {
+            $varid = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varid);
+            $data['bonreduc'] = $this->BonReduc->SelectAll();
+            $this->load->view('client/header', $data);
+            $this->load->view('bonreduc/liste_bonreduc_client', $data);
+            $this->load->view('client/footer');
+            var_dump($data);
+        }
+    }
+
+    public function liste_entreprise_dropbox() {
+        $this->load->helper('cookie');
+        $this->load->model('commercant');
+        $this->load->model('entreprise');
+        $varid = $this->input->cookie('commercantCookie');
+        $data['commercant'] = $this->commercant->selectByMail($varid);
+        $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+
+        return $data;
+    }
+
     public function supprimer_bonreduc($id) {
         $this->load->model('BonReduc');
         $this->load->model('Entreprise');
         $this->load->helper('form', 'url');
-        $this->bonreduc->delete($id);
+        $this->BonReduc->delete($id);
         $data['message'] = "Le bon a bien été supprimé";
         $this->load->view('errors/validation_formulaire', $data);
-        $this->liste_bon();
+        $this->liste_bonreduc();
     }
 
     public function ajout_bonreduc() {
@@ -49,11 +75,10 @@ class BonReducCtrl extends CI_Controller {
                         "libelleBon" => htmlspecialchars($_POST['libelleBon']),
                         "numSiret" => htmlspecialchars($_POST['numSiret']),
                         "pourcentageBon" => htmlspecialchars($_POST['pourcentageBon']),
-                        "prixUnitaireProduit" => htmlspecialchars($_POST['prixUnitaireProduit'])
                     );
-                    $this->BonReduc->insert($data);
-                    $data['bonreduc'] = $this->BonReduc->selectAll();
-                    $this->liste_produit();
+                    $this->bonreduc->insert($data);
+                    $data['bonreduc'] = $this->bonreduc->selectAll();
+                    $this->liste_bonreduc();
 
             }
             else {
@@ -71,6 +96,58 @@ class BonReducCtrl extends CI_Controller {
         }
 
     }
+
+    public function detail_bonreduc($id) {
+        $this->load->model('bonreduc');
+        $this->load->helper('form', 'url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
+        var_dump("detail");
+        if (isset($_COOKIE['commercantCookie']) ) {
+            if ($this->bonreduc->selectById($id) != Null) {
+                var_dump("bonreduc");
+                $data['bonreduc'] = $this->bonreduc->selectById($id);
+                $this->load->view('commercant/index');
+                $this->load->view('bonreduc/detail', $data);
+                var_dump($data);
+            } else {
+                //ereur le produit n'existe pas
+                $this->liste_bonreduc();
+            }
+        } else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('commercant/connexion');
+        }
+    }
+
+    public function modifier() {
+        $this->load->helper('form', 'url');
+        $this->load->library('form_validation');
+        $this->load->model('bonreduc');
+        if (isset($_COOKIE['commercantCookie'])) {
+            $id = $_POST['idBon'];
+            $data = array(
+                "libelleBon" => htmlspecialchars($_POST['libelleBon']),
+                "numSiret" => htmlspecialchars($_POST['numSiret']),
+                "pourcentageBon" => htmlspecialchars($_POST['pourcentageBon']),
+                "idBon" => htmlspecialchars($_POST['idBon']),
+            );
+            $this->bonreduc->update($id, $data);
+            $data['bonreduc'] = $this->bonreduc->selectById($id);
+            $data['message'] = "Le Bon a été modifié avec succès";
+            $this->load->view('commercant/index');
+            $this->load->view('bonreduc/liste_bonreduc', $data);
+        }
+
+        else {
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('commercant/connexion');
+        }
+
+    }
+
 
 
 

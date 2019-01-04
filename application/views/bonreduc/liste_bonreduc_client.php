@@ -19,8 +19,6 @@
                                                 <th scope="col">libelleBon</th>
                                                 <th scope="col">numSiret</th>
                                                 <th scope="col">pourcentageBon</th>
-                                                <th scope="col">Supprimer</th>
-                                                <th scope="col">Modifier</th>
 
                                             </tr>
                                             </thead>
@@ -30,8 +28,6 @@
                                                 <td><?php echo $item->libelleBon; ?></td>
                                                 <td><?php echo $item->numSiret; ?></td>
                                                 <td><?php echo $item->pourcentageBon; ?></td>
-                                                <td><p><a href="<?php echo base_url("BonReducCtrl/supprimer_bonreduc/" . $item->idBon); ?>">Supprimer le Bon de réduction</a></p></td>
-                                                <td><p><a href="<?php echo base_url("BonReducCtrl/detail_bonreduc/" . $item->idBon); ?>">Modifier le Bon de réduction</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>

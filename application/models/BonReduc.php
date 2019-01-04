@@ -40,11 +40,11 @@ class BonReduc extends CI_Model{
             ->get()
             ->result();
     }
-    public function selectProduit($mail){
+    public function selectBonReduc($mail){
         $this->load->database();
         return $this->db->select('*')
-            ->from('Produit')
-            ->join('entreprise','entreprise.numSiret = produit.numSiret')
+            ->from('BonReduc')
+            ->join('entreprise','entreprise.numSiret = bonreduc.numSiret')
             ->join('faire_partie','faire_partie.numSiret = entreprise.numSiret')
             ->join('commercant', 'commercant.idCommercant = faire_partie.idCommercant')
             ->where('commercant.mailCommercant',$mail)
@@ -68,6 +68,13 @@ class BonReduc extends CI_Model{
     }
 
 
+    public function insert($data) {
+        $this->load->database();
+        $this->db->set('libelleBon', $data['libelleBon'])
+            ->set('pourcentageBon', $data['pourcentageBon'])
+            ->set('numSiret', $data['numSiret'])
+            ->insert($this->table);
+    }
 
 
 }
