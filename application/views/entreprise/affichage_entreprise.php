@@ -1,4 +1,4 @@
-<link href="<?php echo base_url()."../template/css/bootstrap.css"; ?>" rel="stylesheet" type="text/css" media="all" />
+<link href="<?php echo base_url()."../template/css/profil_entreprise.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <link href= "<?php echo base_url()."../template/css/style.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <link href= "<?php echo base_url()."../template/css/font-awesome.css"; ?>" rel="stylesheet" />
 <link href="<?php echo base_url()."../template/css/easy-responsive-tabs.css"; ?>" rel='stylesheet' type='text/css'/>
@@ -28,18 +28,6 @@
 					?>
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://localhost/cci/index.php/../assets/image/logos/<?php echo $entreprise[0]->logoEntreprise; ?>" class="img-circle img-responsive"> </div>
                 
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
@@ -96,9 +84,11 @@
 						echo $commercant[0]->telCommercant
 						?>
                         </td>
-                           
                       </tr>
-                     
+					  <td>Site Web</td>
+                        <td> <a href= "http://<?php echo $entreprise[0]->siteWebEntreprise;?>"><?php echo $entreprise[0]->siteWebEntreprise;?> </a>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
