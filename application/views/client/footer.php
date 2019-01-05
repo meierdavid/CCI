@@ -15,16 +15,16 @@
 					<h4>Plan du <span>site</span> </h4>
 					<ul>
 						<li><a href="index.html">Accueil</a></li>
-						<li><a href="mens.html">Catégories</a></li>
-						<li><a href="womens.html">Soldes</a></li>
-						<li><a href="about.html">Codes de réduction</a></li>
-						<li><a href="contact.html">Contacts</a></li>
-						<li><a href="contact.html">Aide</a></li>
+						<li>Catégories</li>
+						<li><a href="<?php echo base_url("ProduitCtrl/soldes/"); ?>">Soldes</a></li>
+						<li><a href="<?php echo base_url("BonReducCtrl/liste_bonreduc_client/"); ?>">Codes de réduction</a></li>
+						<li><a href="<?php echo base_url("PageCtrl/contact/"); ?>">Contacts</a></li>
+						<li><a href="<?php echo base_url("PageCtrl/aide/"); ?>">Aide</a></li>
 					</ul>
 				</div>
 
 				<div class="col-md-5 sign-gd-two">
-					<h4>Nous <span>contacter</span></h4>
+					<a href= "<?php echo base_url("PageCtrl/contact/"); ?>"><h4>Nous <span>contacter</span></h4></a>
 					<div class="w3-address">
 						<div class="w3-address-grid">
 							<div class="w3-address-left">
@@ -32,27 +32,18 @@
 							</div>
 							<div class="w3-address-right">
 								<h6>Numéro de téléphone</h6>
-								<p>0123456789</p>
+								<p>04 99 51 54 00</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
-						<div class="w3-address-grid">
-							<div class="w3-address-left">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
-							</div>
-							<div class="w3-address-right">
-								<h6>Addresse email</h6>
-								<p>Email :<a href="mailto:example@email.com"> cci_assistance@gmail.com</a></p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
+						
 						<div class="w3-address-grid">
 							<div class="w3-address-left">
 								<i class="fa fa-map-marker" aria-hidden="true"></i>
 							</div>
 							<div class="w3-address-right">
-								<h6>Localisationn</h6>
-								<p>Hérault, FRANCE.</p>
+								<h6>Localisation</h6>
+								<p>32 Grand Rue Jean Moulin, 34000 Montpellier.</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>

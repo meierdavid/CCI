@@ -25,6 +25,13 @@
                     <label class="control-label">numSiret</label>
                     <input type="text" class="form-control" name="numSiret" value="<?php echo  $bonreduc[0]->numSiret; ?>" size="30" />
                 </div>
+				
+				<div class="form-group">
+                        <label class="control-label">Description du Bon de réduction :</label>
+                        <input type="text" class="form-control" name="descriptionBon" value="<?php echo  $bonreduc[0]->descriptionBon; ?>" size="30" required/>
+                        <h6 style="color:red;"</h6>
+                    </div>
+					
                 <div class="form-group">
                     <label class="control-label">libelleBon</label>
                     <input type="text" class="form-control" name="libelleBon" value="<?php echo  $bonreduc[0]->libelleBon; ?>" size="30" required/>

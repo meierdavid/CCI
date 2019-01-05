@@ -64,6 +64,7 @@ class BonReduc extends CI_Model{
         $this->db->set('libelleBon', $data['libelleBon'])
             ->set('numSiret', $data['numSiret'])
             ->set('pourcentageBon', $data['pourcentageBon'])
+			->set('descriptionBon', $data['descriptionBon'])
             ->update($this->table);
     }
 
@@ -73,6 +74,7 @@ class BonReduc extends CI_Model{
         $this->db->set('libelleBon', $data['libelleBon'])
             ->set('pourcentageBon', $data['pourcentageBon'])
             ->set('numSiret', $data['numSiret'])
+			->set('descriptionBon', $data['descriptionBon'])
             ->insert($this->table);
     }
 

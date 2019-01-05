@@ -16,28 +16,18 @@
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
-                                                <th scope="col">Code du bon</th>
-												<th scope="col">Description du bon</th>
-                                                <th scope="col">Entreprise</th>
-                                                <th scope="col">Pourcentage appliqué</th>
-                                                <th scope="col">Supprimer</th>
-                                                <th scope="col">Modifier</th>
+                                                <th scope="col">libelleBon</th>
+                                                <th scope="col">numSiret</th>
+                                                <th scope="col">pourcentageBon</th>
 
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <?php 
-												$this->load->model("entreprise");
-												foreach ($bonreduc as $item) { 
-												$entreprise=$this->entreprise->selectById($item->numSiret);
-												?>
+                                                <?php foreach ($bonreduc as $item) { ?>
                                                 <td><?php echo $item->libelleBon; ?></td>
-                                                <td><?php echo $item->descriptionBon; ?></td>
-                                                <td><strong> <a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$item->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></td>
+                                                <td><?php echo $item->numSiret; ?></td>
                                                 <td><?php echo $item->pourcentageBon; ?></td>
-                                                <td><p><a href="<?php echo base_url("BonReducCtrl/supprimer_bonreduc/" . $item->idBon); ?>">Supprimer le Bon de réduction</a></p></td>
-                                                <td><p><a href="<?php echo base_url("BonReducCtrl/detail_bonreduc/" . $item->idBon); ?>">Modifier le Bon de réduction</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>

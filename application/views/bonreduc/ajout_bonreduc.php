@@ -32,8 +32,15 @@
                         <?php } ?>
                     </select>
                     <br>
+					
+					<div class="form-group">
+                        <label class="control-label">Description du Bon de réduction :</label>
+                        <input type="text" class="form-control" name="descriptionBon" value="" size="30" required/>
+                        <h6 style="color:red;"</h6>
+                    </div>
+					
                     <div class="form-group">
-                        <label class="control-label">Libellé du Bon de réduction :</label>
+                        <label class="control-label">Code du Bon de réduction :</label>
                         <input type="text" class="form-control" name="libelleBon" value="" size="30" required/>
                         <h6 style="color:red;"</h6>
                     </div>

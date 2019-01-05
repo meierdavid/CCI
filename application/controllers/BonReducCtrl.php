@@ -28,13 +28,13 @@ class BonReducCtrl extends CI_Controller {
         $this->load->helper('form', 'url');
 
         if ($this->input->cookie('clientCookie') != null) {
-            $varid = $this->input->cookie('clientCookie');
-            $data['client'] = $this->client->selectByMail($varid);
+			$cookie=$this->input->cookie('clientCookie');
+			$data['client']=$this->client->SelectByMail($cookie);
+			$data['entreprises_header'] = $this->entreprise->selectAll();
             $data['bonreduc'] = $this->BonReduc->SelectAll();
             $this->load->view('client/header', $data);
             $this->load->view('bonreduc/liste_bonreduc_client', $data);
             $this->load->view('client/footer');
-            var_dump($data);
         }
     }
 
@@ -75,6 +75,7 @@ class BonReducCtrl extends CI_Controller {
                         "libelleBon" => htmlspecialchars($_POST['libelleBon']),
                         "numSiret" => htmlspecialchars($_POST['numSiret']),
                         "pourcentageBon" => htmlspecialchars($_POST['pourcentageBon']),
+						"descriptionBon" => htmlspecialchars($_POST['descriptionBon']),
                     );
                     $this->bonreduc->insert($data);
                     $data['bonreduc'] = $this->bonreduc->selectAll();
@@ -132,6 +133,7 @@ class BonReducCtrl extends CI_Controller {
                 "numSiret" => htmlspecialchars($_POST['numSiret']),
                 "pourcentageBon" => htmlspecialchars($_POST['pourcentageBon']),
                 "idBon" => htmlspecialchars($_POST['idBon']),
+				"descriptionBon" => htmlspecialchars($_POST['descriptionBon']),
             );
             $this->bonreduc->update($id, $data);
             $data['bonreduc'] = $this->bonreduc->selectById($id);
