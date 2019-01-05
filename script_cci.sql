@@ -112,6 +112,8 @@ CREATE TABLE COMMANDER(
 	idPanier               INT  NOT NULL ,
 	quantiteProd           INT  NOT NULL ,
 	livraisonCommande  TINYINT  NOT NULL  ,
+        AnnulerCommande  TINYINT DEFAULT 0 NOT NULL  ,
+        ReceptionCommande  TINYINT DEFAULT 0 NOT NULL  ,
 	CONSTRAINT COMMANDER_PK PRIMARY KEY (idProduit,idPanier)
 
 	,CONSTRAINT COMMANDER_PRODUIT_FK FOREIGN KEY (idProduit) REFERENCES PRODUIT(idProduit)

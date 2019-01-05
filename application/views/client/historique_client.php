@@ -1,4 +1,4 @@
-<?php if($commander != null){ ?>
+<?php if($commander != null && $panier->paiementPanier == 1){ ?>
 <div class="container">
     <div class="content mt-3">
         <div class="animated fadeIn">
