@@ -88,7 +88,7 @@ class PanierCtrl extends CI_Controller {
                 $this->load->view('panier/ajout_panier', $data);
                 $this->load->view('client/footer');
             } else {
-                if ($this->panier->checkId($idProduit,$idClient) == Null) {
+                if ($this->panier->checkId($idProduit, $idClient) == Null) {
                     if ($data['produit'][0]->nbDispoProduit >= $_POST['quantite']) {
                         $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
                         $date = date("d-m-y H:i:s");
@@ -176,7 +176,7 @@ class PanierCtrl extends CI_Controller {
                 $idPanier = $data['panier'][0]->idPanier;
                 $data['commander'] = $this->commander->selectByIdPanier($idPanier);
                 $data['produit'] = $this->produit->selectById($data['commander'][0]->idProduit);
-                
+
 
                 $date = date("d-m-y H:i:s");
                 $prixPanier = $data['panier'][0]->prixTotPanier;
@@ -222,22 +222,22 @@ class PanierCtrl extends CI_Controller {
         $this->load->helper('form', 'url');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
-		$cookie=$this->input->cookie('clientCookie');
-		$data['client']=$this->client->SelectByMail($cookie);
+        $cookie = $this->input->cookie('clientCookie');
+        $data['client'] = $this->client->SelectByMail($cookie);
         if (isset($_COOKIE['clientCookie'])) {
             //suppression dans Commander
             $this->commander->deletePanier($id);
             $date = date("d-m-y H:i:s");
             //suppression dans Panier
             $data = array(
-                        "annulationPanier" => htmlspecialchars(0),
-                        "codePromo" => htmlspecialchars(0),
-                        "datePanier" => htmlspecialchars($date),
-                        "finaliserPanier" => htmlspecialchars(0),
-                        "paiementPanier" => htmlspecialchars(0),
-                        "prixTotPanier" => htmlspecialchars(0),
-                    );
-             $this->panier->update($id, $data);
+                "annulationPanier" => htmlspecialchars(0),
+                "codePromo" => htmlspecialchars(0),
+                "datePanier" => htmlspecialchars($date),
+                "finaliserPanier" => htmlspecialchars(0),
+                "paiementPanier" => htmlspecialchars(0),
+                "prixTotPanier" => htmlspecialchars(0),
+            );
+            $this->panier->update($id, $data);
             $varmail = $this->input->cookie('clientCookie');
             $data['client'] = $this->client->selectByMail($varmail);
             $data['message'] = "Votre panier a été vidé avec succès";
@@ -386,28 +386,33 @@ class PanierCtrl extends CI_Controller {
                 $nouveauSoldeClient = $data['client'][0]->creditClient - $data['panier'][0]->prixTotPanier;
                 $this->client->updateCredit($idClient, $nouveauSoldeClient);
                 //modifie le panier en cours
+                //générer chaine de caractère aléatoire et enregistrer dans le panier
+                $chaine = $this->genererChaineAleatoire();
+                
                 $date = date("d-m-y H:i:s");
                 $idPanier = $data['panier'][0]->idPanier;
                 $data = array(
                     "datePanier" => htmlspecialchars($date),
                     "paiementPanier" => htmlspecialchars(1),
+                    "chainePanier" => htmlspecialchars($chaine)
                 );
                 $this->panier->updatePaye($idPanier, $data);
-                // retirer la quantite dispo du produit 
                 
+                // retirer la quantite dispo du produit 
+
                 $data['panier'] = $this->panier->selectByIdClient($idClient);
                 $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
                 $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
                 $i = 0;
-                foreach ($data['commander'] as $item){
+                foreach ($data['commander'] as $item) {
                     $nouvelleQuantite = $data['produits'][$i]->nbDispoProduit - $item->quantiteProd;
-                    $this->produit->updateQuantite($item->idProduit,$nouvelleQuantite);
-                    $i = $i +1;
+                    $this->produit->updateQuantite($item->idProduit, $nouvelleQuantite);
+                    $i = $i + 1;
                 }
                 //ajouter les points de fidélité
                 $data['client'] = $this->client->selectByMail($varmail);
                 $nouveauPoint = $data['client'][0]->pointClient + ($data['panier'][0]->prixTotPanier / 10);
-                $this->client->updatePoint($idClient,$nouveauPoint);
+                $this->client->updatePoint($idClient, $nouveauPoint);
                 
                 //créer un nouveau panier
                 $data = array(
@@ -420,14 +425,13 @@ class PanierCtrl extends CI_Controller {
                     "prixTotPanier" => htmlspecialchars(0),
                 );
                 $this->panier->insert($data);
-
+                $data['entreprises_header'] = $this->entreprise->selectAll();
                 $data['client'] = $this->client->selectByMail($varmail);
                 $data['message'] = "Votre paiement à bien été accepté";
                 $this->load->view('errors/validation_formulaire', $data);
                 $this->load->view('client/header', $data);
                 $this->load->view('client/accueil');
                 $this->load->view('client/footer');
- 
             } else {
                 $data['message'] = "erreur : Veuillez réapprovisionner votre compte";
                 $this->load->view('errors/erreur_formulaire', $data);
@@ -440,6 +444,17 @@ class PanierCtrl extends CI_Controller {
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('client/connexion');
         }
+    }
+
+    public function genererChaineAleatoire() {
+        $longueur = 10;
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $longueurMax = strlen($caracteres);
+        $chaineAleatoire = '';
+        for ($i = 0; $i < $longueur; $i++) {
+            $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+        }
+        return $chaineAleatoire;
     }
 
 }

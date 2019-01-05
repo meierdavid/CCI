@@ -465,9 +465,15 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/header',$data);
             // mettre dans data chaque produit pour 
             foreach($data['paniers'] as $item){
+                
             $data['panier'] = $item;
             $data['commander'] = $this->commander->selectByIdPanier($item->idPanier);
             $data['produit'] = $this->panier->selectProduits($item->idPanier);
+            $i=0;
+            foreach ($data['produit'] as $item){
+            $data['entreprises']['entreprise'.$i] =$this->entreprise->selectById($item->numSiret);
+            $i= $i +1;
+            }   
             $this->load->view('client/historique_client',$data);
             }
             $this->load->view('client/footer');

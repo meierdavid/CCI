@@ -26,15 +26,14 @@
                     </div>
                     <div class="col-md-3">
                         <select name = 'livraison' id = 'category'>
-                            <option value="">-- mode de livraison --</option>
+                            
                             <?php
                             if ($commander[$i]->livraisonCommande == 1) {
-
                                 echo "<option  value=\"colissimo\">Colissimo</option>";
+                                
+                            } else{
                                 echo "<option  value=\"magasin\">En magasin</option>";
-                            } else
-                                echo "<option  value=\"magasin\">En magasin</option>";
-                            ?>
+                            }?>
                         </select>
                         <p>Livraison Gratuite</p>
 

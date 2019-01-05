@@ -107,7 +107,8 @@
             $this->load->database();
             $this->db       
                 ->set('datePanier', $data['datePanier'])
-                ->set('paiementPanier', $data['paiementPanier'])               
+                ->set('paiementPanier', $data['paiementPanier'])
+                ->set('chainePanier', $data['chainePanier'])
                 ->where('idPanier', $id)
                 ->update($this->table);
         }
