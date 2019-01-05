@@ -8,6 +8,7 @@
                 <div class="col-md-8">
                   <div class="page-header">
                     <h1><small class="pull-right"><?php 
+					$deja=0;
 					$this->load->model('poster_avis');
 					echo ("Il y a <strong>" . $this->poster_avis->nombre_avis($avis[0]->idProduit)) . "</strong> Avis";
 					
@@ -22,11 +23,11 @@
                               <h4 class="media-heading user_name">
 							  <?php 
 						  $this->load->model('client');
-						  $client=$this->client->selectById($item->idClient);
-						echo "</br>" . $client[0]->prenomClient . "  " . $client[0]->nomClient ?> <p class="pull-right"><small><?php echo "Note: " .  $item->noteClient . " / 10"?></small></p></h4>
+						  $client_posteur=$this->client->selectById($item->idClient);
+						echo "</br>" . $client_posteur[0]->prenomClient . "  " . $client_posteur[0]->nomClient ?> <p class="pull-right"><small><?php echo "Note: " .  $item->noteClient . " / 10"?></small></p></h4>
                               <?php echo $item->avisClient?>
                               <p<small class="pull-right">
-							<?php if($client[0]->idClient == $item->idClient){?>
+							<?php if($client[0]->idClient == $item->idClient){ $deja=1;?>
 								<td></br><a href="<?php echo base_url("ClientCtrl/modifier_avis/").$produit[0]->idProduit; ?>">Modifiez votre avis</a></td>
 							<?php } ?>
 
@@ -37,9 +38,13 @@
 				   <?php } ?>
                        
                    </div>
+				   </br>
+				   <?php if($deja==0){?>
+                               <a href="<?php echo base_url("ClientCtrl/ajouter_avis/").$produit[0]->idProduit; ?>">Donnez votre avis</a>
+                                <?php } ?>
                     
                     
-                    
+                    </br></br>
                 </div>
             </div>
         </div>
