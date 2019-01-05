@@ -191,8 +191,9 @@ h2::after {
 												echo $produit[0]->prixUnitaireProduit . "€" ;
 											}
 											?></span>
-                        
 											</br></br></p>
+											<h6> <?php echo $notes[0] . "/10";
+										$i=1;		?></h6>
 									<h6 align="left"><strong>Description : </strong> <?php echo $produit[0]->descriptionProduit ?></h6>
 								</div>										
 							</div>
@@ -223,6 +224,8 @@ h2::after {
 											?></span>
                         
 											</br></br></p>
+									<h6> <?php echo $notes[$i] . "/10";
+											$i=$i+1;?> </h6>
 									<h6 align="left"><strong>Description : </strong> <?php echo $item->descriptionProduit ?></h6>
 								</div>	
 								</br></br>

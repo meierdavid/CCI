@@ -18,7 +18,7 @@ class PageCtrl extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->view('client/header',$data);
-        $this->load->view('template/contact');
+        $this->load->view('pages/contact');
         $this->load->view('client/footer');
         }
 

@@ -4,7 +4,9 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-                <h2 class="text-center"> Mettre à jour un avis</h2>
+			</br></br>
+                <h2 class="text-center"> Mettre à jour votre avis</h2>
+				</br>
 
 
                 <?php $action= 'ClientCtrl/modifier_avis/'. $produit[0]->idProduit;
