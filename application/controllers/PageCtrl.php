@@ -21,6 +21,19 @@ class PageCtrl extends CI_Controller {
         $this->load->view('pages/contact');
         $this->load->view('client/footer');
         }
+		
+		public function aide()
+        {
+		$cookie=$this->input->cookie('clientCookie');
+		$data['client']=$this->client->SelectByMail($cookie);
+		$data['entreprises_header'] = $this->entreprise->selectAll();
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->view('client/header',$data);
+        $this->load->view('pages/FAQ');
+        $this->load->view('client/footer');
+        }
+
 
         public function Accueil()
         {

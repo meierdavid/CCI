@@ -117,7 +117,7 @@
                                     <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>BonReducCtrl/liste_bonreduc_client">Codes de réduction</a></li>
                                     <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Comparateur</a></li>
                                     <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Contacts</a></li>
-                                    <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/contact">Aide</a></li>
+                                    <li class=" menu__item"><a class="menu__link" href="<?php echo base_url(); ?>PageCtrl/aide">Aide</a></li>
                                 </ul>
                             </div>
                         </div>
