@@ -13,6 +13,31 @@
                 ->get()
                 ->result();
         }
+        public function selectClient($idPanier){
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('client')
+                ->join('panier','client.idClient = panier.idClient')
+                ->where('idPanier', $idPanier)
+                ->get()
+                ->result();
+        }
+        public function selectDate($idPanier){
+              $this->load->database();
+            return $this->db->select('datePanier')
+                ->from('panier')
+                ->where('idPanier', $idPanier)
+                ->get()
+                ->result();
+        }
+        public function selectCode($idPanier){
+            $this->load->database();
+            return $this->db->select('chainePanier')
+                ->from('panier')
+                ->where('idPanier', $idPanier)
+                ->get()
+                ->result();
+        }
 
         public function selectByIdPanier($id) {
             $this->load->database();

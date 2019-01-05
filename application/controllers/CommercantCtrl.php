@@ -156,6 +156,27 @@ public function check_connexion(){
 	}
 }
 
+public function historique_commande(){
+    $this->load->model('panier');
+    $this->load->model('produit');
+    $this->load->model('commander');
+    $this->load->model('commercant');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $varid = $this->input->cookie('commercantCookie');
+    $data['commercant'] = $this->commercant->selectByMail($varid);
+    $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+    $this->load->view('commercant/index',$data);
+    foreach ($data['entreprises'] as $entreprise){
+        $data['commandes'] = $this->entreprise->selectCommandes($entreprise->numSiret);
+         // select la date et le code de retrait de la commande SQL
+        
+        $this->load->view('commercant/historique_entreprise',$data);   
+    }
+}
+
 public function liste_entreprise_dropbox(){
 	$this->load->helper('cookie');
 	$this->load->model('commercant');

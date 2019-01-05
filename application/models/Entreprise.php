@@ -37,7 +37,17 @@
                     ->get()
                     ->result();
         }
-  		
+  	
+        public function selectCommandes($numSiret){
+            $this->load->database();
+    		
+            return $this->db->select('*')
+                    ->from('commander')
+                    ->join('produit','commander.idProduit = produit.idProduit')                   
+                    ->where('produit.numSiret',$numSiret)
+                    ->get()
+                    ->result();
+        }
                 
   		public function getLastEntrepriseId() {
     		
