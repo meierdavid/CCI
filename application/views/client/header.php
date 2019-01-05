@@ -127,13 +127,13 @@
                     <div class="wthreecartaits wthreecartaits2 cart cart box_1">
                         
                             
-                            
+                        <a class='' href="<?php echo base_url("PanierCtrl/liste_panier"); ?>">
                             <button class="w3view-cart" type="submit" name="submit" value="">
-                                <a class='' href="<?php echo base_url("PanierCtrl/liste_panier"); ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true">
+                                <i class="fa fa-cart-arrow-down" aria-hidden="true">
                                     
-                                </i></a>
+                                </i>
                             </button>
-                        
+                        </a>
                     </div>
                 </div>
                 <div class="clearfix"></div>
