@@ -19,6 +19,7 @@
                         <br>
                         <?php
                                         foreach ($commandes as $item) {
+                                            if($item->annulerCommande == 0 && $item->receptionCommande == 0 ){
                                             $date = $this->commander->selectDate($item->idPanier);
                                             echo "<h2> Commande du " .$date[0]->datePanier."</h2>"; 
                                             
@@ -55,11 +56,11 @@
                                                    echo "Code de retrait: <strong>".$code[0]->chainePanier ."</strong>"; ?>
                                                 </div>
                                             </td>
-                                            <td><?php
+                                            <td><?php echo " quantité : ". $item->quantiteProd;
                                         if ($produit[0]->reducProduit != 0) {
-                                            echo intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 ) . "€";
+                                            echo (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 )) *$item->quantiteProd . "€";
                                         } else {
-                                            echo $produit[0]->prixUnitaireProduit . "€";
+                                            echo $produit[0]->prixUnitaireProduit * $item->quantiteProd . "€";
                                         }
                                             ?></td>
                                             <td>
@@ -71,7 +72,7 @@
                                                     echo $destinataire;
                                                     ?>
 
-                                                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmer la reception" /></div>
+                                                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmer le retrait" /></div>
                                                     </form>
                                                 <?php
                                                 } else {
@@ -88,7 +89,7 @@
                                                  
                                                     ?>
                                                     <br>
-                                                 <a class="btn btn-danger" href="<?php echo base_url("CommercantCtrl/annuler_commande/");?>" role="button">Annuler la commande</a>   
+                                                 <a class="btn btn-danger" href="<?php echo base_url("CommercantCtrl/annuler_commande/").$item->idPanier ."/".$item->idProduit;?>" role="button">Annuler la commande</a>   
                                                       
                                                     
                                                
@@ -96,7 +97,7 @@
                                             </td>
                                         </tr>
                                         <?php $i = $i + 1;
-                                    }
+                                        }}
                                     ?>
                                 </tbody>
                             </table>

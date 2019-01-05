@@ -47,6 +47,16 @@
                 ->get()
                 ->result();
         }
+         public function selectById($idPanier, $idProduit) {
+            $this->load->database();
+            return $this->db->select('*')
+                ->from('commander')
+                ->where('idPanier', $idPanier)
+                ->where('idProduit', $idProduit)
+                ->get()
+                ->result();
+        }
+        
         public function checkId($idProduit){
             $this->load->database();
             return $this->db->select('*')
@@ -95,8 +105,21 @@
                 ->where('idProduit', $idProduit)
                 ->update($this->table);
         }
-
-
-
+        
+        public function updateAnnuler($idPanier, $idProduit, $annuler){
+            $this->load->database();
+            $this->db->set('annulerCommande', $annuler)
+                ->where('idPanier', $idPanier)
+                ->where('idProduit', $idProduit)
+                ->update($this->table);
+        }
+        
+        public function updateReception($idPanier, $idProduit, $reception){
+            $this->load->database();
+            $this->db->set('receptionCommande', $reception)
+                ->where('idPanier', $idPanier)
+                ->where('idProduit', $idProduit)
+                ->update($this->table);
+        }
     }
 ?>
