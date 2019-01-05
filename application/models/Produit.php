@@ -24,6 +24,15 @@ class produit extends CI_Model {
                         ->get()
                         ->result();
     }
+    public function selectEntrepriseById($id) {
+        $this->load->database();
+        return $this->db->select('*')
+                        ->from('entreprise')
+                        ->join('produit','produit.numSiret = entreprise.numSiret')
+                        ->where('idProduit', $id)
+                        ->get()
+                        ->result();
+    }
 
     public function selectByEntreprise($numSiret) {
         $this->load->database();

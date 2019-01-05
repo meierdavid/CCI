@@ -49,12 +49,12 @@
                                         }
                                             ?></td>
                                             <td>
-                                                <?php if ($commander[$i]->livraisonCommande == '1') {
-                                                    echo form_open('ClientCtrl/payer_entreprise/' . $item->idProduit);
+                                                <?php if ($commander[$i]->livraisonCommande == '1' && $commander[$i]->annulerCommande == '0' && $commander[$i]->receptionCommande == '0') {
+                                                    
                                                     ?>
 
-                                                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmer la reception" /></div>
-                                                    </form>
+                                                    <a class="btn btn-primary btn-success btn-block" href="<?php echo base_url('ClientCtrl/payer_entreprise/'.$commander[$i]->idPanier ."/".$commander[$i]->idProduit);?>" role="button">Confirmer la reception</a> 
+                                                    
                                                 <?php
                                                 } else {
                                                     
