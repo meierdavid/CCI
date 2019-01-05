@@ -35,7 +35,7 @@
                                 echo "<option  value=\"magasin\">En magasin</option>";
                             }?>
                         </select>
-                        <p>Livraison Gratuite</p>
+                        <p>Frais de ports Gratuits </p>
 
 
                     </div>
