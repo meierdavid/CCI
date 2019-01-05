@@ -3,7 +3,7 @@
 <div class="footer">
 	<div class="footer_agile_inner_info_w3l">
 		<div class="col-md-3 footer-left">
-			<h2><a href="index.html"><span>H</span>érrault E-Commerce</a></h2>
+			<h2><a href="index.html"><span>H</span>érault E-Commerce</a></h2>
 			<p>Crée par la CCI Hérault</p>
                         <br><br>
                         <p> Avec : </p>
