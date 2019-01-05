@@ -76,13 +76,19 @@
                     <input type="number" class="form-control" name="quantite" value="1" size="30" min="0" max="<?php echo $produit[0]->nbDispoProduit; ?>" required/>
                 </div>
 				</br>
-
+                 <?php if($entreprise[0]->livraisonEntreprise == 1){?>
                 <div class="text-center">
                     <label class="control-label">Livraison: </label>
                     <input type="radio"  name="livraison" value="Oui" required/>Oui
                     <input type="radio"  name="livraison" value="Non" required/>Non
                 </div>
-				</br>
+                <?php }else { ?>
+                     <div class="text-center">
+                         <label class="control-label">Cet article doit être retiré en magasin </label>
+                         <input type="hidden" name="livraison" value="Non" required/>
+                     </div>
+                <?php } ?>                    
+                                <br>	
 
 					
 

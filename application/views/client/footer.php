@@ -18,7 +18,6 @@
 						<li><a href="mens.html">Catégories</a></li>
 						<li><a href="womens.html">Soldes</a></li>
 						<li><a href="about.html">Codes de réduction</a></li>
-						<li><a href="typography.html">Comparateur</a></li>
 						<li><a href="contact.html">Contacts</a></li>
 						<li><a href="contact.html">Aide</a></li>
 					</ul>
