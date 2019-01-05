@@ -73,7 +73,7 @@
                 <input type="hidden" class="form-control" name="couleurProduit" value="<?php echo $produit[0]->couleurProduit; ?>" size="30" required/>                   
                 <div class="text-center">
                     <label class="control-label">Quantité souhaitée</label>
-                    <input type="number" class="form-control" name="quantite" value="1" size="30" min="0" max="<?php echo $produit[0]->nbDispoProduit; ?>" required/>
+                    <input type="number" class="form-control" name="quantite" value="0" size="30" min="1" max="<?php echo $produit[0]->nbDispoProduit; ?>" required/>
                 </div>
 				</br>
                  <?php if($entreprise[0]->livraisonEntreprise == 1){?>
@@ -91,7 +91,7 @@
                                 <br>	
 
 					
-
+						
 						<div class="text-center"><input class="add-to-cart btn btn-default" type="submit" value="Ajouter au panier" href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>" ></div>
 	   
                 </form>
