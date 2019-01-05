@@ -83,14 +83,24 @@
                     <input type="radio"  name="livraison" value="Non" required/>Non
                 </div>
 <?php }
- else {?>
+ else if($entreprise[0]->livraisonEntreprise == 1 && $commander[0]->livraisonCommande==1){?> {?>
 					<div class="text-center">
                     <label class="control-label">Livraison: </label>
                     <input type="radio"  name="livraison" value="Oui" required >Oui
                     <input type="radio"  name="livraison" value="Non" required checked >Non
                 </div>
  <?php } ?>
-				</br>
+ 
+ <?php if($entreprise[0]->livraisonEntreprise == 0){ ?>
+ <div class="text-center">
+                         <label class="control-label">Cet article doit être retiré en magasin </label>
+                         <input type="hidden" name="livraison" value="Non" required/>
+                     </div>
+     
+<?php }
+ 
+?>
+				<br>
 
 					
 
