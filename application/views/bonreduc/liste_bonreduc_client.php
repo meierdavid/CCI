@@ -4,6 +4,7 @@
 <div class="container">
 	<div class="box">
 		<div class="row">
+		<div class="table-responsive">
 			<div class="text-center">
 			<h2>Liste des codes de réduction :</h2>
 			</br></br>
@@ -35,7 +36,7 @@
 					
 				   </tbody> 
 				  </table>
-				
+				</div>
 		</div>
 	</div>
 </div>
