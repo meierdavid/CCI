@@ -122,12 +122,14 @@ class BonReducCtrl extends CI_Controller {
         }
     }
 
-    public function utiliser_bonReduc($id,$panier) {
+    public function utiliser_bonReduc($id) {
         $this->load->model('bonreduc');
+        $this->load->model('panier');
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
         $this->load->library('form_validation');
-        $panier ['panier'][0]->PrixTotPanier = $panier['panier'][0]->PrixTotPanier * (1-((($this->bonreduc->selectById($id))->pourcentageBon)/100));
+        $data['panier'] = $this->bonreduc->selectAll();
+        $data['panier'][0]->PrixTotPanier = $data['panier'][0]->PrixTotPanier * (1-((($this->bonreduc->selectById($id))->pourcentageBon)/100));
     }
 
     public function modifier() {
