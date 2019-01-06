@@ -11,16 +11,19 @@ class PanierCtrl extends CI_Controller {
 
     public function finaliser($idPanier) {
         $this->load->model('panier');
+        $this->load->model('entreprise');
+        $this->load->model('bonreduc');
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
-        $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
+        //$data['bonreduc'] = $this->bonreduc->selectByEntreprise($data['entreprises_header'][0]->numSiret);
         if (isset($_COOKIE['clientCookie'])) {
             $data['client'] = $this->client->selectByMail($this->input->cookie('clientCookie'));
             //acheter !
             $this->load->view('client/header', $data);
             $this->load->view('client/adresse', $data);
             $this->load->view('client/footer');
+            var_dump($data);
         } else {
             $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
             $this->load->view('errors/erreur_formulaire', $data);
@@ -35,8 +38,11 @@ class PanierCtrl extends CI_Controller {
         $this->load->model('panier');
         $this->load->model('commander');
         $this->load->model('produit');
+        $this->load->model('bonreduc');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
+        $data['bonreduc'] = $this->bonreduc->selectAll();
+
         if (isset($_COOKIE['clientCookie'])) {
             $varid = $this->input->cookie('clientCookie');
 
@@ -50,6 +56,7 @@ class PanierCtrl extends CI_Controller {
                 $this->load->view('client/header', $data);
                 $this->load->view('panier/liste_panier', $data);
                 $this->load->view('client/footer');
+                var_dump($data);
             } else {
                 $data['message'] = "erreur : Vous n'avez pas de produits dans votre panier";
                 $this->load->view('errors/erreur_formulaire', $data);
