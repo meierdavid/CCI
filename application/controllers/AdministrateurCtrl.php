@@ -32,11 +32,11 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->library('form_validation');
     $this->load->model('administrateur');
 
-    $this->form_validation->set_rules('prenomAdministrateur', 'Prénom', 'alpha_dash');
+    $this->form_validation->set_rules('prenomAdministrateur', 'Prénom', 'required');
     $this->form_validation->set_rules('nomAdministrateur', 'Nom', 'alpha_numeric_spaces');
     $this->form_validation->set_rules('mailAdministrateur', 'Email', 'valid_email');
     $this->form_validation->set_rules('codePAdministrateur', 'Code postale', 'integer');
-    $this->form_validation->set_rules('villeAdministrateur', 'Ville', 'alpha_dash');
+    $this->form_validation->set_rules('villeAdministrateur', 'Ville', 'required');
     $this->form_validation->set_rules('telAdministrateur', 'Numéro de téléphone', 'integer');
 
     if ($this->form_validation->run() == FALSE) {
@@ -60,6 +60,7 @@ class AdministrateurCtrl extends CI_Controller {
         $this->administrateur->insert($data);
         $data['message'] = "Vous avez été inscrit en tant qu'administrateur";
         $this->load->view('errors/validation_formulaire', $data);
+		$this->load->view('administrateur/connexion');
       } else {
         $data['message'] = "erreur : La confirmation de Mot de passe ne correspond pas au premier";
         $this->load->view('errors/erreur_formulaire', $data);
@@ -72,7 +73,7 @@ class AdministrateurCtrl extends CI_Controller {
   public function connexion() {
 	$this->load->helper('form','url');
 	$this->load->helper('cookie');
-	$this->load->library('form_validation');
+	$this->load->library('form_validation');	
     $this->load->model('administrateur');
     $this->form_validation->set_rules('mailAdministrateur', 'Email', 'required');
 

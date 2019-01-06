@@ -761,11 +761,11 @@ public function inscription(){
 	$this->load->helper('form','url');
 	$this->load->library('form_validation');
 
-	$this->form_validation->set_rules('prenomCommercant', 'Prénom', 'alpha_dash');
+	$this->form_validation->set_rules('prenomCommercant', 'Prénom', 'required');
 	$this->form_validation->set_rules('nomCommercant', 'Nom', 'alpha_numeric_spaces');
 	$this->form_validation->set_rules('mailCommercant', 'Email', 'valid_email');
 	$this->form_validation->set_rules('codePCommercant', 'Code postale', 'integer');
-	$this->form_validation->set_rules('villeCommercant', 'Ville', 'alpha_dash');
+	$this->form_validation->set_rules('villeCommercant', 'Ville', 'required');
 	$this->form_validation->set_rules('telCommercant', 'Numéro de téléphone', 'integer');
 
 	if ($this->form_validation->run() == FALSE)
