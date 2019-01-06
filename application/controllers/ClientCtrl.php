@@ -447,7 +447,32 @@ class ClientCtrl extends CI_Controller {
             var_dump($data);
         }
     }
+    public function payer_entreprise($idPanier, $idProduit){
+    $this->load->model('panier');
+    $this->load->model('produit');
+    $this->load->model('commander');
+    $this->load->model('commercant');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $data['entreprises_header'] = $this->entreprise->selectAll();
+    $varMail = $this->input->cookie('clientCookie');
+    $data['client'] = $this->client->selectByMail($varMail);
 
+    $data['produit'] = $this->produit->selectById($idProduit);
+    $data['entreprise'] = $this->produit->selectEntrepriseById($idProduit);
+        //valider la commande
+    $numSiret = $data['entreprise'][0]->numSiret;
+    $this->commander->updateReception($idPanier,$idProduit,'1');
+    $data['commander'] =$this->commander->selectById($idPanier,$idProduit);
+    
+    //payer entreprise
+    $prix = $this->produit->prix_a_afficher($idProduit) * $data['commander'][0]->quantiteProd;
+    $nouveauSoldeEntreprise = $data['entreprise'][0]->soldeEntreprise + $prix;
+    $this->entreprise->updateCredit($numSiret, $nouveauSoldeEntreprise);
+    $this->historique();
+    }
     public function historique() {
         $this->load->model('panier');
         $this->load->model('produit');

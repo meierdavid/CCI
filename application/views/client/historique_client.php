@@ -41,27 +41,29 @@
                                             ?>
                                             <td><img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible"></td>
                                             <td><?php echo "<strong>" . $item->nomProduit . "</strong> "; ?> <div> <?php echo $item->descriptionProduit; ?> </div></td>
-                                            <td><?php
+                                            <td><?php echo " quantité : ". $commander[$i]->quantiteProd . " <br><br>";
                                         if ($item->reducProduit != 0) {
-                                            echo intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100 ) . "€";
+                                            echo "prix unitaire :  " .(intval($item->prixUnitaireProduit) - (intval($item->prixUnitaireProduit) * intval($item->reducProduit) / 100 ))  . "€";
                                         } else {
-                                            echo $item->prixUnitaireProduit . "€";
+                                            echo "prix unitaire :  " . $item->prixUnitaireProduit . "€";
                                         }
                                             ?></td>
                                             <td>
-                                                <?php if ($commander[$i]->livraisonCommande == '1') {
-                                                    echo form_open('ClientCtrl/payer_entreprise/' . $item->idProduit);
+                                                <?php if ($commander[$i]->livraisonCommande == '1' && $commander[$i]->annulerCommande == '0' && $commander[$i]->receptionCommande == '0') {
+                                                    
                                                     ?>
 
-                                                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmer la reception" /></div>
-                                                    </form>
+                                                    <a class="btn btn-primary btn-success btn-block" href="<?php echo base_url('ClientCtrl/payer_entreprise/'.$commander[$i]->idPanier ."/".$commander[$i]->idProduit);?>" role="button">Confirmer la reception</a> 
+                                                    
                                                 <?php
                                                 } else {
-                                                    if ($panier->annulationPanier == 1) {
+                                                    
+                                                    if ($commander[$i]->annulerCommande == 1) {
+                                                        
                                                         echo "<strong> Annulé </strong>";
-                                                    } else if ($panier->finaliserPanier == 1 && $panier->annulationPanier == 0) {
+                                                    } else if ($commander[$i]->receptionCommande == 1 && $commander[$i]->annulerCommande == 0) {
                                                         echo "<strong> Receptionné </strong>";
-                                                    } else if ($panier->paiementPanier == 1 && $panier->annulationPanier == 0 && $panier->finaliserPanier == 0) {
+                                                    } else if ( $commander[$i]->annulerCommande == 0 && $commander[$i]->receptionCommande == 0) {
                                                         echo "<strong> en attente de retrait </strong>";
                                                     }
                                                     

@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <center>
         <h1>Bienvenue <?php if(isset($commercant)){ echo $commercant[0]->prenomCommercant; echo ' '; echo $commercant[0]->nomCommercant ;}    ?> sur votre espace Commerçant</h1>
     </center>
+	<div class=responsive>
   <div class="vertical-menu" style="position: absolute; margin-top: 70px;">
         <a href="#" class="active">Vos Commerces</a>
         <a href="<?php echo base_url()?>CommercantCtrl/liste_entreprise">Liste des commerces</a>
@@ -21,12 +22,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a href="<?php echo base_url()?>CommercantCtrl/form_ajout_produit">Ajouter un produit</a>
         <a href="<?php echo base_url()?>BonReducCtrl/liste_bonreduc">Liste des bons de réduction</a>
         <a href="<?php echo base_url()?>CommercantCtrl/form_ajout_bonreduc">Ajouter un bon de réduction</a>
-        <a href="<?php echo base_url()?>CommercantCtrl/historique_commande">">Vos commandes en attente</a>
+        <a href="<?php echo base_url()?>CommercantCtrl/historique_commande">"Vos commandes en attente</a>
         <a href="#" class="active">Votre Compte</a>
         <a href="<?php echo base_url()?>commercantCtrl/profil">Profil</a>
         <a href="#">Historique</a>
         <a href="<?php echo base_url()?>commercantCtrl/changer_mdp">Changer de mot de passe</a>
         <a href="<?php echo base_url()?>commercantCtrl/deconnexion">Se déconnecter</a> <?php // changer ce Href lorsque les cookies seront mis en place ?>
+</div>
 </div>
 
   </body>

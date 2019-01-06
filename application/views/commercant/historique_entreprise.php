@@ -19,6 +19,7 @@
                         <br>
                         <?php
                                         foreach ($commandes as $item) {
+                                            if($item->annulerCommande == 0 && $item->receptionCommande == 0 ){
                                             $date = $this->commander->selectDate($item->idPanier);
                                             echo "<h2> Commande du " .$date[0]->datePanier."</h2>"; 
                                             
@@ -55,24 +56,26 @@
                                                    echo "Code de retrait: <strong>".$code[0]->chainePanier ."</strong>"; ?>
                                                 </div>
                                             </td>
-                                            <td><?php
+                                            <td><?php echo " quantité : ". $item->quantiteProd ."<br><br>";
                                         if ($produit[0]->reducProduit != 0) {
+                                            echo "prix unitaire : <br> ";
                                             echo intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 ) . "€";
                                         } else {
-                                            echo $produit[0]->prixUnitaireProduit . "€";
+                                            echo "prix unitaire : <br> " . $produit[0]->prixUnitaireProduit . "€";
                                         }
+                                            echo "<br><br> total : " . (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 )) * $item->quantiteProd. "€";
                                             ?></td>
                                             <td>
                                                 <?php 
                                                 $client=$this->commander->selectClient($item->idPanier);
-                                                if ($item->livraisonCommande == '1') {
-                                                    echo form_open('ClientCtrl/payer_entreprise/' . $item->idProduit);
+                                                if ($item->livraisonCommande == '0') {
+                                                    
                                                     $destinataire = "Destinataire : " . $client[0]->prenomClient . " " . $client[0]->nomClient . "<br><br><br>";
                                                     echo $destinataire;
                                                     ?>
 
-                                                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmer la reception" /></div>
-                                                    </form>
+                                                    
+                                                     <a class="btn btn-primary btn-success btn-block" href="<?php echo base_url('CommercantCtrl/valider_commande/'.$item->idPanier ."/".$item->idProduit);?>" role="button">Confirmer le retrait</a>   
                                                 <?php
                                                 } else {
                                                     
@@ -88,7 +91,7 @@
                                                  
                                                     ?>
                                                     <br>
-                                                 <a class="btn btn-danger" href="<?php echo base_url("CommercantCtrl/annuler_commande/");?>" role="button">Annuler la commande</a>   
+                                                 <a class="btn btn-danger" href="<?php echo base_url("CommercantCtrl/annuler_commande/").$item->idPanier ."/".$item->idProduit;?>" role="button">Annuler la commande</a>   
                                                       
                                                     
                                                
@@ -96,7 +99,7 @@
                                             </td>
                                         </tr>
                                         <?php $i = $i + 1;
-                                    }
+                                        }}
                                     ?>
                                 </tbody>
                             </table>

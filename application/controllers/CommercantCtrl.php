@@ -155,7 +155,61 @@ public function check_connexion(){
 		// erreur
 	}
 }
-
+public function valider_commande($idPanier, $idProduit){
+    $this->load->model('panier');
+    $this->load->model('produit');
+    $this->load->model('commander');
+    $this->load->model('commercant');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $varid = $this->input->cookie('commercantCookie');
+    $data['commercant'] = $this->commercant->selectByMail($varid);
+    $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+    $data['produit'] = $this->produit->selectById($idProduit);
+    $data['entreprise'] = $this->produit->selectEntrepriseById($idProduit);
+    //valider la commande
+    $numSiret = $data['entreprise'][0]->numSiret;
+    $this->commander->updateReception($idPanier,$idProduit,'1');
+    $data['commander'] =$this->commander->selectById($idPanier,$idProduit);
+    
+    //payer entreprise
+    $prix = $this->produit->prix_a_afficher($idProduit) * $data['commander'][0]->quantiteProd;
+    $nouveauSoldeEntreprise = $data['entreprise'][0]->soldeEntreprise + $prix;
+    $this->entreprise->updateCredit($numSiret, $nouveauSoldeEntreprise);
+    $this->historique_commande();
+}
+public function annuler_commande($idPanier, $idProduit){
+    $this->load->model('panier');
+    $this->load->model('produit');
+    $this->load->model('commander');
+    $this->load->model('commercant');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    $varid = $this->input->cookie('commercantCookie');
+    $data['commercant'] = $this->commercant->selectByMail($varid);
+    $data['entreprises'] = $this->commercant->selectEntreprise($data['commercant'][0]->idCommercant);
+    $data['produit'] = $this->produit->selectById($idProduit);
+    $data['client'] = $this->commander->selectClient($idPanier);
+    $idClient =$data['client'][0]->idClient;
+    //annuler la commande
+    $this->commander->updateAnnuler($idPanier,$idProduit,'1');
+    $data['commander'] =$this->commander->selectById($idPanier,$idProduit);
+    // réaugmenter la quantité
+    $nouvelleQuantite = $data['produit'][0]->nbDispoProduit + $data['commander'][0]->quantiteProd;
+    $this->produit->updateQuantite($idProduit, $nouvelleQuantite);
+    //annulation des points
+    $prix = $this->produit->prix_a_afficher($idProduit) * $data['commander'][0]->quantiteProd;
+    $nouveauPoint = $data['client'][0]->pointClient - ($prix / 10);
+    $this->client->updatePoint($idClient, $nouveauPoint);
+    //rembourser client
+    $nouveauSoldeClient = $data['client'][0]->creditClient + $prix;
+    $this->client->updateCredit($idClient, $nouveauSoldeClient);
+    $this->historique_commande();
+}
 public function historique_commande(){
     $this->load->model('panier');
     $this->load->model('produit');

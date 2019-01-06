@@ -4,11 +4,11 @@
     <head>
         <title>Herault Ecommerce | Accueil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-            function hideURLbar(){ window.scrollTo(0,1); } </script>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+				  Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+			<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+				function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 
         <link href="<?php echo base_url() . "../template/css/bootstrap.css"; ?>" rel="stylesheet" type="text/css" media="all" />
@@ -38,7 +38,7 @@
         <div class="header-bot">
             <div class="header-bot_inner_wthreeinfo_header_mid">
                 <div class="col-md-4 logo_agile">
-                    <h1><a href="index.html"><img src="<?php echo base_url() . "../assets/image/logo.png"; ?>"></a></h1>
+                    <h1><a href="index.html"><img class="img-responsive" src="<?php echo base_url() . "../assets/image/logo.png"; ?>"></a></h1>
                 </div>
                 <div class="col-md-4 header-middle">
                     <?php echo form_open('ProduitCtrl/search'); ?>
@@ -76,7 +76,7 @@
                                         <ul class="dropdown-menu multi-column columns-3">
                                             <div class="agile_inner_drop_nav_info">
                                                 <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                                    <img src="<?php echo base_url("../assets/image/chariot.png"); ?>" alt=""/>
+                                                    <img class=img-responsive src="<?php echo base_url("../assets/image/chariot.png"); ?>" alt=""/>
                                                 </div>
                                                 <div class="col-sm-3 multi-gd-img">
                                                     <ul class="multi-column-dropdown">
@@ -105,7 +105,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                                                    <a href="womens.html"><img src="<?php echo base_url() . "../assets/image/top1.jpg"; ?>" alt=" "/></a>
+                                                    <a href="womens.html"><img class=img-responsive src="<?php echo base_url() . "../assets/image/top1.jpg"; ?>" alt=" "/></a>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>

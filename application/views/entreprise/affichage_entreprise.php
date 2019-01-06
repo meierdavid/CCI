@@ -36,7 +36,6 @@
                         <td>Adresse :</td>
 						<?php 
 						$adresse = str_replace(' ', '+', $entreprise[0]->adresseEntreprise) . "+" . str_replace(' ', '+', $entreprise[0]->codePEntreprise) . "+" . str_replace(' ', '+', $entreprise[0]->villeEntreprise)  ;
-						var_dump($adresse);
 						?>
                         <td><a href = "https://www.google.fr/maps/place/<?php echo $adresse?>"><?php echo $entreprise[0]->adresseEntreprise; ?> 
 							<br>

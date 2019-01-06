@@ -108,5 +108,13 @@
 
 				->update($this->table);
     	}
+        public function updateCredit($numSiret,$credit){
+            $this->load->database();
+            
+            return $this->db->where('numSiret',$numSiret)
+			->set('soldeEntreprise',$credit)
+			->update($this->table);
+            
+        }
     }
 ?>
