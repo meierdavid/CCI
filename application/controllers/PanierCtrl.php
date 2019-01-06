@@ -352,7 +352,7 @@ class PanierCtrl extends CI_Controller {
             if ($data['panier'][0]->codePromo == 0) {
 
                 if ($this->bonreduc->selectByLibelle($_POST['libelleBon']) != null) {
-                    $nouveauPrix = $data['panier'][0]->prixTotPanier * (1 - ((($this->bonreduc->selectByLibelle($_POST['libelleBon']))[0]->pourcentageBon) / 100));
+                    $nouveauPrix = $data['panier'][0]->prixTotPanier * (1 - (($this->bonreduc->selectByLibelle($_POST['libelleBon'])[0]->pourcentageBon) / 100));
                     $this->panier->updateprix($data['panier'][0]->idPanier, $nouveauPrix);
                     $this->panier->updatecode($data['panier'][0]->idPanier, 1);
                     $this->liste_panier();
