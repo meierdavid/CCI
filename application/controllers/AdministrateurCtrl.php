@@ -10,7 +10,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->view('administrateur/index');
   }
-  
+
   public function profil()
 	{
 		$this->load->helper('cookie');
@@ -126,13 +126,13 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('administrateur');
         $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
-        $supAdmin = $data['administrateur'][0]->superAdmin;
+        $supAdmin = $data['administrateur'][0]->superAdministrateur;
 
         if ($supAdmin == FALSE) {
             $data['message'] = "Vous n'avez pas les droits pour effectuer cette action, veuillez contacter le super administrateur";
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('administrateur/index');
-        } 
+        }
         else {
             $this->load->view('administrateur/index');
 
@@ -172,7 +172,7 @@ class AdministrateurCtrl extends CI_Controller {
             }
         }
     }
-    
+
     public function liste_administrateur() {
     $this->load->helper('cookie');
     $this->load->model('administrateur');
@@ -190,7 +190,7 @@ class AdministrateurCtrl extends CI_Controller {
       $this->load->view('administrateur/connexion');
     }
   }
-  
+
   public function supprimer_administrateur($id) {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
@@ -201,7 +201,7 @@ class AdministrateurCtrl extends CI_Controller {
         if ($supAdmin == FALSE) {
             $data['message'] = "Vous n'avez pas les droits pour effectuer cette action, veuillez contacter le super administrateur";
             $this->load->view('errors/erreur_formulaire', $data);
-        } 
+        }
         else {
             $this->administrateur->delete($id);
             echo "administrateur Supprimé";
@@ -409,7 +409,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->view('administrateur/profil_client', $data);
 
   }
-  
+
    public function profil_commercant($id){
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
@@ -467,8 +467,8 @@ class AdministrateurCtrl extends CI_Controller {
     }
 
   }
-  
- 
+
+
 
   public function modifier_commercant() {
     $this->load->helper('form', 'url');

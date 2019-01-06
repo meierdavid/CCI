@@ -20,9 +20,9 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label">Logo de l'entreprise :</label>
-                        <input type="file" class="form-control" name="logoEntreprise" size="30" accept "image/*"/>
+                        <input type="file" class="form-control" name="logoEntreprise" size="30" accept "image/*" required/>
                     </div>
-					
+
                     <div class="form-group">
                         <label class="control-label">Nom de L'entreprise</label>
                         <input type="text" class="form-control" name="nomEntreprise" value="" size="30" required/>
@@ -138,7 +138,7 @@
                         <label class="control-label">Temps Maximum de Réservation en heure </label>
                         <input type="number" class="form-control" name="tempsReservMax" value="" size="30" required/>
                     </div>
-					
+
 					<div class="form-group">
                         <label class="control-label">Site Web de l'entreprise </label>
                         <input type="text" class="form-control" name="siteWebEntreprise" value="" size="300" />

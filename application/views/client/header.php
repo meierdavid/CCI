@@ -101,11 +101,8 @@
                                                         foreach ($entreprises_header as $item) {
                                                             ?>
                                                             <li><a href="<?php echo base_url("ProduitCtrl/produit_entreprise/" . $item->numSiret); ?>"><?php echo $item->nomEntreprise; ?></a></li>
-                                                        <?php } ?>	
+                                                        <?php } ?>
                                                     </ul>
-                                                </div>
-                                                <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                                                    <a href="womens.html"><img class=img-responsive src="<?php echo base_url() . "../assets/image/top1.jpg"; ?>" alt=" "/></a>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -124,12 +121,12 @@
                 </div>
                 <div class="top_nav_right">
                     <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                        
-                            
+
+
                         <a class='' href="<?php echo base_url("PanierCtrl/liste_panier"); ?>">
                             <button class="w3view-cart" type="submit" name="submit" value="">
                                 <i class="fa fa-cart-arrow-down" aria-hidden="true">
-                                    
+
                                 </i>
                             </button>
                         </a>

@@ -180,7 +180,7 @@ class ProduitCtrl extends CI_Controller {
 			$this->load->view('commercant/connexion');
     }
   }
-  
+
   //comme détail produit mais pour le client ( ne permet pas la modification )
 public function affichage_produit($id) {
     $this->load->model('produit','entreprise');
@@ -211,7 +211,7 @@ public function affichage_produit($id) {
 			$this->load->view('client/connexion');
     }
   }
-  
+
   public function comparer_produit($id){
     $this->load->model('produit','entreprise');
     $this->load->helper('form', 'url');
@@ -234,7 +234,7 @@ public function affichage_produit($id) {
         foreach ($data['produitsProposés'] as $item){
             $data['entreprises']['entreprise'.$i] =$this->entreprise->selectById($item->numSiret);
             $i= $i +1;
-        }   
+        }
         $this->load->view('client/header',$data);
         $this->load->view('produit/comparaison_produit',$data);
         $this->load->view('client/footer');
@@ -270,7 +270,7 @@ public function affichage_produit($id) {
 	  //SI IL N'Y A PAS DE NOUVELLE IMAGE
 	  if (!(isset($_FILES['imageProduit']['name']) && !empty($_FILES['imageProduit']['name']))) {
 		  var_dump("detecte pas image");
-		  // SI IL Y EN AVAIT UNE AVANT 
+		  // SI IL Y EN AVAIT UNE AVANT
 		  if($produit[0]->imageProduit != "null" ){
 				$data = array(
 			"nomProduit" => htmlspecialchars($_POST['nomProduit']),
@@ -285,7 +285,7 @@ public function affichage_produit($id) {
 		  );
 		  }
 			else {
-			//SI IL N'Y EN AVAIT PAS AVANT 
+			//SI IL N'Y EN AVAIT PAS AVANT
 				$data = array(
 			"nomProduit" => htmlspecialchars($_POST['nomProduit']),
 			"categorieProduit" => htmlspecialchars($categorie),
@@ -303,8 +303,8 @@ public function affichage_produit($id) {
 		  $this->load->view('errors/validation_formulaire', $data);
 		  $this->liste_produit();
 	  }
-	  
-	  //SI IL Y A UNE NOUVELLE IMAGE	
+
+	  //SI IL Y A UNE NOUVELLE IMAGE
 	  else {
 		  var_dump("detecte image");
 		  $config = array(
@@ -339,7 +339,7 @@ public function affichage_produit($id) {
               "couleurProduit" => htmlspecialchars($_POST['couleurProduit']),
               "nbDispoProduit" => htmlspecialchars($_POST['nbDispoProduit']),
               "imageProduit" => htmlspecialchars($file_data['file_name'])
-            );		  
+            );
 			$this->produit->update($id, $data);
 			  $data['produit'] = $this->produit->selectById($id);
 			  $data['message'] = "Le produit a été modifié avec succès";
@@ -347,18 +347,18 @@ public function affichage_produit($id) {
 			  $this->modifier_image($file_data['file_name']);
 		  }
 	  }
-		  
-		 
-		} 
+
+
+		}
 	else {
 		  $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
 		  $this->load->view('errors/erreur_formulaire', $data);
 		  $this->load->view('commercant/connexion');
 	}
-	
+
   }
 
-  
+
   public function supprimer_image($id){
 	$this->load->model('produit');
 	$produit = $this->produit->selectById($id);
@@ -372,15 +372,15 @@ public function affichage_produit($id) {
               "couleurProduit" => htmlspecialchars($produit[0]->couleurProduit),
               "nbDispoProduit" => htmlspecialchars($produit[0]->nbDispoProduit),
 			   "imageProduit" => htmlspecialchars(NULL),
-            );	
+            );
 	$this->produit->update($id, $data);
 	$data['produit'] = $this->produit->selectById($id);
 	$data['message'] = "L'image a été supprimée avec succès";
 	$this->load->view('errors/validation_formulaire', $data);
     $this->liste_produit();
   }
-  
-  
+
+
   public function categorie($categorie) {
     $i=0;
     $this->load->helper('form', 'url');
@@ -400,6 +400,8 @@ public function affichage_produit($id) {
       $this->load->view('produit/produit_par_categorie(2)', $data);
       $this->load->view('client/footer');
     } else {
+      $data['message'] = "erreur : Désolé, les produits de cette catégorie ne sont pas disponibles";
+      $this->load->view('errors/erreur_formulaire', $data);
       $this->load->view('client/header',$data);
       $this->load->view('client/accueil');
       $this->load->view('client/footer');
@@ -426,6 +428,8 @@ public function affichage_produit($id) {
       $this->load->view('produit/produit_par_entreprise(2)', $data);
       $this->load->view('client/footer');
     } else {
+      $data['message'] = "Cette entreprise n'a pas de produit disponible pour le moment";
+      $this->load->view('errors/erreur_formulaire', $data);
       $this->load->view('client/header',$data);
       $this->load->view('client/accueil');
       $this->load->view('client/footer');
@@ -479,9 +483,11 @@ public function affichage_produit($id) {
         $this->load->view('produit/produit_par_recherche(2)', $data);
         $this->load->view('client/footer');
       } else {
-        $data['message'] = "aucun produit trouvé";
-        $this->load->view('errors/erreur_formulaire', $data);        
-         
+        $data['message'] = "Aucun produit trouvé";
+        $this->load->view('errors/erreur_formulaire', $data);
+        $this->load->view('client/header',$data);
+        $this->load->view('client/accueil');
+        $this->load->view('client/footer');
       }
     } else {
       //
@@ -527,7 +533,7 @@ public function affichage_produit($id) {
     }
   }
 
-  
+
   public function prix_a_afficher($idProduit){
 	  $this->load->model('produit');
 	  var_dump ($this->produit->prix_a_afficher($idProduit));
@@ -539,7 +545,7 @@ public function affichage_produit($id) {
       $data['produit']= $this->produit->selectByOffre();
       $this->affichage_produit($data['produit'][0]->idProduit);
   }
-  
+
   public function produit_recent(){
       $this->load->model('produit');
       $data['produit']= $this->produit->selectByRecent();
