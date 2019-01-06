@@ -432,7 +432,7 @@ class PanierCtrl extends CI_Controller
                         $this->panier->updatecode($data['panier'][0]->idPanier, 1);
                         $this->liste_panier();
                     } else {
-                        $data['message'] = "le libellé n'existe pas";
+                        $data['message'] = "erreur: Ce code promotionel n'existe pas";
                         $this->load->view('errors/erreur_formulaire', $data);
                         $this->liste_panier();
                     }
