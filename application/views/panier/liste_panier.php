@@ -87,7 +87,7 @@
                         <td><h5><strong><?php echo $client[0]->pointClient . "</strong>" ?></h5></td>
                         <td>   </td>
 						<td>   
-						<a href="<?php echo base_url("PanierCtrl/utiliser_point/".$item->numSiret); ?>">
+						<a href="<?php echo base_url("PanierCtrl/utiliser_points/"); ?>">
                         <button type="button" class="btn btn-primary">
                             <span class="glyphicon glyphicon-eur"></span> Utiliser mes points
                         </button></a>
