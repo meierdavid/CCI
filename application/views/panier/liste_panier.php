@@ -67,19 +67,18 @@
                         <td>   </td>
                         <td>   </td>
                         <td></td>
-                        <td class="text-right"><h5>Code de Réduction :</h5></td>
 
                         <td class="text-right"><div>
-                                <?php echo form_open('bonReducCtrl/utiliser_bonReduc/'.$panier[0]->idPanier); ?>
-                                <select name = 'libelleBon' id = 'idBon'>
-                                    <option value="">Bon de Réduction</option>
-                                    <?php foreach($bonreduc as $item){ ?>
-                                        <option  value="<?php echo $item->idBon; ?>"><?php echo $item->libelleBon; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <?php echo form_close()?>
-                        <td class="text-right"><h5></h5></td>
-        </div></td>
+                                <?php echo form_open('PanierCtrl/utiliser_bonReduc/'); ?>
+                                <div class="text-center">
+                                    <label class="control-label">Saisir votre code promo: </label>
+                                    <input type="text" class="form-control" name="libelleBon" value="" size="30" required/>
+                                </div>
+                                <br>
+                                <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Valider"/></div>
+                                </form>
+                            </div><td class="text-right"><h5></h5></td>
+                    </td>
                     </tr>
 					
 					<tr>
@@ -88,7 +87,7 @@
                         <td><h5><strong><?php echo $client[0]->pointClient . "</strong>" ?></h5></td>
                         <td>   </td>
 						<td>   
-						<a href="#">
+						<a href="<?php echo base_url("PanierCtrl/utiliser_point/".$item->numSiret); ?>">
                         <button type="button" class="btn btn-primary">
                             <span class="glyphicon glyphicon-eur"></span> Utiliser mes points
                         </button></a>
