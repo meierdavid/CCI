@@ -66,9 +66,19 @@
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
-                        <td><h5>Code Promo :</h5></td>
-						<?php echo form_open('bonReducCtrl/utiliser_bonReduc/'); ?>
-                        <td class="text-right"><h5><input type="text" class="form-control" name="couleurProduit" value=" " size="30" required/></h5></td>
+                        <td></td>
+                        <td class="text-right"><h5>Code de Réduction :</h5></td>
+
+                        <td class="text-right"><div><?php echo form_open('bonReducCtrl/utiliser_bonReduc/'.$panier[0]->idPanier); ?>
+                                <select name = 'libelleBon' id = 'idBon'>
+                                    <option value="">Bon de Réduction</option>
+                                    <?php foreach($bonreduc as $item){ ?>
+                                        <option  value="<?php echo $item->idBon; ?>"><?php echo $item->libelleBon; ?></option>
+                                    <?php } ?>
+                                </select>
+                                <?php echo form_close()?>
+                        <td class="text-right"><h5></h5></td>
+        </div></td>
                     </tr>
 					
 					<tr>
