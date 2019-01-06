@@ -466,13 +466,14 @@ class ClientCtrl extends CI_Controller {
     $numSiret = $data['entreprise'][0]->numSiret;
     $this->commander->updateReception($idPanier,$idProduit,'1');
     $data['commander'] =$this->commander->selectById($idPanier,$idProduit);
-    
+
     //payer entreprise
     $prix = $this->produit->prix_a_afficher($idProduit) * $data['commander'][0]->quantiteProd;
     $nouveauSoldeEntreprise = $data['entreprise'][0]->soldeEntreprise + $prix;
     $this->entreprise->updateCredit($numSiret, $nouveauSoldeEntreprise);
     $this->historique();
     }
+
     public function historique() {
         $this->load->model('panier');
         $this->load->model('produit');
@@ -487,11 +488,11 @@ class ClientCtrl extends CI_Controller {
             $data['client'] = $this->client->selectByMail($varid);
             $id = $data['client'][0]->idClient;
             $data['paniers'] = $this->panier->selectAllByIdClient($id);
-            
+
             $this->load->view('client/header',$data);
-            // mettre dans data chaque produit pour 
+            // mettre dans data chaque produit pour
             foreach($data['paniers'] as $item){
-                
+
             $data['panier'] = $item;
             $data['commander'] = $this->commander->selectByIdPanier($item->idPanier);
             $data['produit'] = $this->panier->selectProduits($item->idPanier);
@@ -499,7 +500,7 @@ class ClientCtrl extends CI_Controller {
             foreach ($data['produit'] as $item){
             $data['entreprises']['entreprise'.$i] =$this->entreprise->selectById($item->numSiret);
             $i= $i +1;
-            }   
+            }
             $this->load->view('client/historique_client',$data);
             }
             $this->load->view('client/footer');
@@ -509,5 +510,4 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/connexion');
         }
     }
-
 }

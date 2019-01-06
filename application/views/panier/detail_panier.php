@@ -83,7 +83,7 @@
                     <input type="radio"  name="livraison" value="Non" required/>Non
                 </div>
 <?php }
- else if($entreprise[0]->livraisonEntreprise == 1){?> {?>
+ else if($entreprise[0]->livraisonEntreprise == 1) {?>
 					<div class="text-center">
                     <label class="control-label">Livraison: </label>
                     <input type="radio"  name="livraison" value="Oui" required >Oui

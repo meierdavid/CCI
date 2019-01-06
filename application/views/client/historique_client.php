@@ -3,7 +3,7 @@
     <div class="content mt-3">
         <div class="animated fadeIn">
             <div>
-                
+
                 <div class="row">
 
                     <div class="box">
@@ -12,11 +12,11 @@
                         </div>
                         <br>
                         <br>
-                        <h2><?php echo " Commande du " . $panier->datePanier ?></h2>
+                        <h2><?php echo " Commande du " . date("d", strtotime($panier->datePanier))."/".date("m", strtotime($panier->datePanier))."/".date("Y", strtotime($panier->datePanier))." à ".date("H:i:s", strtotime($panier->datePanier)); ?></h2>
                         <br>
                         <?php
                         echo " votre code de retrait est : <strong>" . $panier->chainePanier ."</strong>";
-                        ?> 
+                        ?>
                         <br>
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -50,33 +50,33 @@
                                             ?></td>
                                             <td>
                                                 <?php if ($commander[$i]->livraisonCommande == '1' && $commander[$i]->annulerCommande == '0' && $commander[$i]->receptionCommande == '0') {
-                                                    
+
                                                     ?>
 
-                                                    <a class="btn btn-primary btn-success btn-block" href="<?php echo base_url('ClientCtrl/payer_entreprise/'.$commander[$i]->idPanier ."/".$commander[$i]->idProduit);?>" role="button">Confirmer la reception</a> 
-                                                    
+                                                    <a class="btn btn-primary btn-success btn-block" href="<?php echo base_url('ClientCtrl/payer_entreprise/'.$commander[$i]->idPanier ."/".$commander[$i]->idProduit);?>" role="button">Confirmer la reception</a>
+
                                                 <?php
                                                 } else {
-                                                    
+
                                                     if ($commander[$i]->annulerCommande == 1) {
-                                                        
+
                                                         echo "<strong> Annulé </strong>";
                                                     } else if ($commander[$i]->receptionCommande == 1 && $commander[$i]->annulerCommande == 0) {
                                                         echo "<strong> Receptionné </strong>";
                                                     } else if ( $commander[$i]->annulerCommande == 0 && $commander[$i]->receptionCommande == 0) {
                                                         echo "<strong> en attente de retrait </strong>";
                                                     }
-                                                    
+
                                                 }
-                                                 
+
                                                     ?>
-                                                    
+
                                                         <p>Vendu par :  <a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprises['entreprise'.$i][0]->numSiret); ?>"><?php echo $entreprises['entreprise'.$i][0]->nomEntreprise; ?></a></p>
                                                         <p><?php echo "adresse : " .$entreprises['entreprise'.$i][0]->adresseEntreprise; ?></p>
                                                         <p><?php echo  $entreprises['entreprise'.$i][0]->codePEntreprise . " " . $entreprises['entreprise'.$i][0]->villeEntreprise ; ?></p>
-                                                        
-                                                    
-                                               
+
+
+
 
                                             </td>
                                         </tr>
@@ -91,7 +91,7 @@
                     </div>
 
                 </div>
-                
+
             </div>
 
             <br></br>
