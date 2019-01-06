@@ -147,12 +147,6 @@ class BonReducCtrl extends CI_Controller {
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('commercant/connexion');
         }
-
+        
     }
-
-
-
-
-
-
 }
