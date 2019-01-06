@@ -72,6 +72,10 @@
 <p>Les avis des internautes fournis par nos partenaires&nbsp; ne relèvent pas de l’activité éditoriale de Herault E-commerce qui ne fait que mettre à disposition des utilisateurs ces services et en stocker le contenu sur son propre Site. Ainsi, les avis ne sauraient être considérés comme reflétant les opinions de la rédaction du Site mais engagent leur seul auteur. La responsabilité de Herault E-commerce au titre de la mise à disposition de ces avis &nbsp;est celle d’un prestataire technique tel que défini à l’article 6.I-1 de la loi sur la Confiance dans l’Economie numérique du 21 juin 2004.</p>
 <p>Dans le cadre particulier du Site, Herault E-commerce décline toute responsabilité et notamment&nbsp;:</p>
 <ul>
+
+    <li>L'APPLICATION DE POINTS DE FIDELITE OU DE BON DE REDUCTION EST NON REVERSBILE, AINSI VOUS NE POUVEZ MODIFIER UN PANIER SUR LEQUEL A ETE APPLIQUE BON OU POINTS.</li>
+    <li>LA SUPPRESSION DE CE PANIER EST POSSIBLE, MAIS LES POINTS NE SERONT PAS RENDU;</li>
+
 <li>En cas d’impossibilité d’accéder temporairement au Site , pour des opérations de maintenance technique ou d’actualisation des informations publiées&nbsp;de ses fournisseurs ou pour toute autre cause que ce soit.</li>
 <li>En cas d’attaques virales.</li>
 <li>En cas d’inadéquation entre les produits proposés et les attentes de l’Utilisateur,</li>
