@@ -336,6 +336,45 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
+    public function utiliser_bonReduc()
+    {
+        $this->load->model('bonreduc');
+        $this->load->model('panier');
+        $this->load->helper('form', 'url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
+        if (isset($_COOKIE['clientCookie'])) {
+            $varmail = $this->input->cookie('clientCookie');
+            $data['client'] = $this->client->selectByMail($varmail);
+            $id = $data['client'][0]->idClient;
+            $data['panier'] = $this->panier->selectByIdClient($id);
+
+            if ($data['panier'][0]->codePromo == 0) {
+
+                if ($this->bonreduc->selectByLibelle($_POST['libelleBon']) != null) {
+                    $nouveauPrix = $data['panier'][0]->prixTotPanier * (1 - ((($this->bonreduc->selectByLibelle($_POST['libelleBon']))[0]->pourcentageBon) / 100));
+                    $this->panier->updateprix($data['panier'][0]->idPanier, $nouveauPrix);
+                    $this->panier->updatecode($data['panier'][0]->idPanier, 1);
+                    $this->liste_panier();
+                } else {
+                    $data['message'] = "le libellé n'existe pas";
+                    $this->load->view('errors/erreur_formulaire', $data);
+                    $this->liste_panier();
+                }
+            }
+        else{$data['message'] = "erreur : Vous avez déjà utilisé un bon de réduction";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->liste_panier();
+            }
+        }
+
+            else{
+            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+            $this->load->view('errors/erreur_formulaire', $data);
+            $this->load->view('client/connexion');
+        }
+    }
+
     public function confirmation() {
         $this->load->helper('cookie');
         $this->load->helper('url');

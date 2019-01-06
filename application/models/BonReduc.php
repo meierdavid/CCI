@@ -23,6 +23,17 @@ class BonReduc extends CI_Model{
             ->result();
 
     }
+
+    public function selectByLibelle($libelle) {
+        $this->load->database();
+        return $this->db->select('*')
+            ->from('bonreduc')
+            ->where('libelleBon', $libelle)
+            ->get()
+            ->result();
+
+    }
+
     public function selectByEntreprise($numSiret){
         $this->load->database();
         return $this->db->select('*')

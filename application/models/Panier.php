@@ -102,13 +102,28 @@
                 ->where('idPanier', $id)
                 ->update($this->table);
         }
-        
+
+        public function updateprix($id, $prix) {
+            $this->load->database();
+            $this->db->set('prixTotPanier', $prix)
+                ->where('idPanier', $id)
+                ->update($this->table);
+        }
+
+
         public function updatepaye($id, $data){
             $this->load->database();
             $this->db       
                 ->set('datePanier', $data['datePanier'])
                 ->set('paiementPanier', $data['paiementPanier'])
                 ->set('chainePanier', $data['chainePanier'])
+                ->where('idPanier', $id)
+                ->update($this->table);
+        }
+
+        public function updatecode($id, $bool) {
+            $this->load->database();
+            $this->db->set('codePromo', $bool)
                 ->where('idPanier', $id)
                 ->update($this->table);
         }
