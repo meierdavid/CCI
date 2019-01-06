@@ -18,10 +18,10 @@
         <br><br>
         <div class="row mb-2">
             <div class="col-md-4">
-                <br></br>
+                <br>
 
                 <img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible">
-                <br></br>
+                <br>
                 Couleur de l'article :
                 <div style="background-color: <?php echo $produit[0]->couleurProduit; ?>; width: 40px;
                      height: 40px; border-radius: 20px;">
@@ -65,8 +65,8 @@
             </div>
 
 
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
 
         </div>
@@ -74,7 +74,7 @@
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
 <?php echo form_open('PanierCtrl/modifier/' . $produit[0]->idProduit); ?>
-                <br></br>
+                <br>
 
                 <br>
                 <input type="hidden" class="form-control" name="nomProduit" value="<?php echo $produit[0]->nomProduit; ?>" size="30" />
@@ -98,8 +98,8 @@
                 <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier"/></div>
                
                 </form>
-                <br></br>
-                <br></br>
+                <br>
+                <br>
             </div></div>
         
 

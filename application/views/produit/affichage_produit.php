@@ -28,8 +28,8 @@
 					<div class="details col-md-6">
 						<h3 class="product-title"><?php echo $produit[0]->nomProduit; ?></h3>
 
-						<h6>Vendu par : <strong><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></br></br></h6></br>
-						<h6>Catégorie : <strong><?php echo $produit[0]->categorieProduit; ?></strong></br></br></h6>
+						<h6>Vendu par : <strong><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></h6>
+						<h6>Catégorie : <strong><?php echo $produit[0]->categorieProduit; ?></strong></h6>
 						<p class="product-description"><?php echo $produit[0]->descriptionProduit; ?></p>
 						<h4 class="price">Prix: <?php
 											if ($produit[0]->reducProduit !=0){
@@ -57,13 +57,13 @@
             }
             ?>
 					</h6>
-					<h6> Il reste <strong><?php echo "  ".$produit[0]->nbDispoProduit . "  "; ?></strong>	 articles disponibles </br></br></h6>
+					<h6> Il reste <strong><?php echo "  ".$produit[0]->nbDispoProduit . "  "; ?></strong>	 articles disponibles </h6>
 						<h5 class="colors">Couleur :
 							<div  class="text-center" style="background-color: <?php echo $produit[0]->couleurProduit; ?>; width: 40px;
                  height: 40px; border-radius: 40px; margin-left: 20px; display: inline-block; vertical-align: middle;">
             </div>
 
-							</br></br>
+							
 						</h5>
 
 						<div class="action">
@@ -76,7 +76,7 @@
 						</div>
 					</div>
 				</div>
-				 </br></br></br></br></br></br>
+				 
     <h6><strong>Autres produits pouvant vous intéresser :</strong></h6>
     <br>
     <div class="row mb-2">

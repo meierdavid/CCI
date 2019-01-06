@@ -21,7 +21,7 @@
                     <h4>Entrez les coordonnees du commercant à ajouter :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
@@ -68,8 +68,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
 
 

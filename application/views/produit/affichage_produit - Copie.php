@@ -14,10 +14,10 @@
     </div>
     <div class="row mb-2">
         <div class="col-md-4">
-            <br></br>
+            <br>
 
             <img src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $produit[0]->imageProduit; ?>"  class="rounded float-left"  alt="Pas d'image disponible">
-            <br></br>
+            <br>
             Couleur de l'article :
             <div style="background-color: <?php echo $produit[0]->couleurProduit; ?>; width: 40px;
                  height: 40px; border-radius: 20px;">
@@ -64,8 +64,8 @@
         </div>
 
 
-        <br></br>
-        <br></br>
+        <br>
+        <br>
 
 
     </div>

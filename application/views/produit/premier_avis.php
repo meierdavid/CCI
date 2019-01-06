@@ -11,8 +11,8 @@
 					$this->load->model('poster_avis');
 					
 					?></small> Il n'y a pas encore d'avis sur ce produit </h1>
-					</br>
-					</br>
+					
+					
 					<h4>Soyez le premier à donner votre avis :
 					<a href="<?php echo base_url("ClientCtrl/ajouter_avis/") . $produit[0]->idProduit; ?>">Cliquez ici !</a>
                   </h4></div> 
@@ -24,7 +24,7 @@
                               <h4 class="media-heading user_name"> <p class="pull-right"><small></small></p></h4>
                   
                               
-                              </br></br>
+                              
                             </div>
                           </div>
 				 

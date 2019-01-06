@@ -16,12 +16,12 @@
             <?php // formulaire de connexion Admin ?>
 
             <form role="form" method="post" action="<?=base_url('administrateurCtrl/connexion')?>">
-                <br></br>
+                <br>
                     <div class="text-center">
                     <h4>Entrez votre Pseudo d'Administrateur et votre mot de passe :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="form-group">
                         <label name="mail" class="control-label">Mail</label>
@@ -43,8 +43,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
             <div class="text-center">
             <a class="btn btn-primary" href="index" role="button">Accueil</a>

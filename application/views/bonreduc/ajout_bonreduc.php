@@ -16,12 +16,12 @@
                 <?php echo form_open_multipart('BonReducCtrl/ajout_bonreduc'); ?>
 
                 <form>
-                    <br></br>
+                    <br>
                     <div class="text-center">
                         <h4>Veuillez inscrire les spécifications du bon de réduction :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
                     <br>
                     <p class="control-label"Selectionnez l'Entreprise</p>
 
@@ -50,8 +50,8 @@
                         <input type="number" class="form-control" name="pourcentageBon" value="" size="300" required/>
                     </div>
 
-                        <br></br>
-                        <br></br>
+                        <br>
+                        <br>
 
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmation" /></div>
                     <div class="text-center">
@@ -59,8 +59,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-                <br></br>
-                <br></br>
+                <br>
+                <br>
 
 
 

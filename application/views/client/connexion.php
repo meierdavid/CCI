@@ -19,12 +19,12 @@
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
             <?php echo form_open('ClientCtrl/connexion'); ?>
 
-                <br></br>
+                <br>
                     <div class="text-center">
                     <h4>Entrez votre Pseudo d'Utilisateur et votre mot de passe :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="form-group">
                         <label class="control-label">Pseudo</label>

@@ -63,7 +63,7 @@
             <div class="text-center">
                 <a class="btn btn-primary" href="<?php echo base_url()?>AdministrateurCtrl/changer_mdp" role="button">Voulez vous changer votre mot de passe ?</a>
             </div>
-          </br>
+          
 
             </div>
         </div>

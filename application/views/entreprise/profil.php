@@ -5,7 +5,7 @@
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" style="margin-left: 200px;">
             <?php echo form_open_multipart('CommercantCtrl/modifier_entreprise');?>
-                    <br></br>
+                    <br>
                     <div class="form-group">
                         <input type="text" class="form-control" name="numSiret" value="<?php echo  $entreprise[0]->numSiret; ?>" size="30" hidden/>
                     </div>
@@ -57,8 +57,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
             </div>
         </div>
     </div>

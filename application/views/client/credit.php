@@ -7,12 +7,12 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-                <br></br>
-                <br></br>
+                <br>
+                <br>
 
                 <h2>Approvisionner votre compte</h2>
 
-                    <br></br>
+                    <br>
                     <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
                     <?php echo form_open('ClientCtrl/modifier_credit'); ?>
                     <div class="form-group">

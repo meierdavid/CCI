@@ -17,12 +17,12 @@
 
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
             <?php echo form_open('ClientCtrl/connexion'); ?>
-                <br></br>
+                <br>
                     <div class="text-center">
                     <h4>Entrez votre Pseudo d'Utilisateur et votre mot de passe :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="form-group">
                         <label class="control-label">Pseudo</label>
@@ -43,20 +43,20 @@
                         <br>
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
             <div class="text-center">
             <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/ConnexionCommercant" role="button">Commercant ? Cliquez ici !</a>
             </div>
 
-            <br></br>
+            <br>
 
             <div class="text-center">
             <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/ConnexionAdmin" role="button">Administrateur ? Cliquez ici !</a>
             </div>
 
-            <br></br>
+            <br>
 
              <div class="text-center">
             <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/choix_inscription" role="button">Vous êtes pas inscrit ? Cliquez ici !</a>
