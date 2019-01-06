@@ -11,24 +11,21 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->view('administrateur/index');
   }
   
-  public function profil()
-	{
-		$this->load->helper('cookie');
-		$this->load->helper('url');
-		$this->load->helper('form');
+  public function profil() {
+        $this->load->helper('cookie');
+        $this->load->helper('url');
+        $this->load->helper('form');
 
-		if($this->input->cookie('administrateurCookie') != Null){
-			$varMail= $this->input->cookie('administrateurCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
-			$this->load->model('administrateur');
-			$data['administrateur'] = $this->admninistrateur->selectByMail($varMail);
-			$this->load->view('commercant/index',$data);
-			$this->load->view('commercant/profil',$data);
-		}
-		else{
-			$this->load->view('pages/pageconnexion');
-		}
-	}
-
+        if ($this->input->cookie('administrateurCookie') != Null) {
+            $varMail = $this->input->cookie('administrateurCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
+            $this->load->model('administrateur');
+            $data['administrateur'] = $this->administrateur->selectByMail($varMail);
+            $this->load->view('administrateur/index', $data);
+            $this->load->view('administrateur/profil', $data);
+        } else {
+            $this->load->view('pages/pageconnexion');
+        }
+    }
 
   public function inscription() {
     $this->load->helper('form', 'url');
@@ -126,13 +123,13 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('administrateur');
         $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
-        $supAdmin = $data['administrateur'][0]->superAdmin;
+        $supAdmin = $data['administrateur'][0]->superAdministrateur;
 
         if ($supAdmin == FALSE) {
             $data['message'] = "Vous n'avez pas les droits pour effectuer cette action, veuillez contacter le super administrateur";
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('administrateur/index');
-        } 
+        }
         else {
             $this->load->view('administrateur/index');
 
@@ -172,7 +169,7 @@ class AdministrateurCtrl extends CI_Controller {
             }
         }
     }
-    
+
     public function liste_administrateur() {
     $this->load->helper('cookie');
     $this->load->model('administrateur');
@@ -190,18 +187,18 @@ class AdministrateurCtrl extends CI_Controller {
       $this->load->view('administrateur/connexion');
     }
   }
-  
+
   public function supprimer_administrateur($id) {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
         $this->load->model('administrateur');
         $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
-        $supAdmin = $data['administrateur'][0]->superAdmin;
+        $supAdmin = $data['administrateur'][0]->superAdministrateur;
         var_dump($supAdmin);
         if ($supAdmin == FALSE) {
             $data['message'] = "Vous n'avez pas les droits pour effectuer cette action, veuillez contacter le super administrateur";
             $this->load->view('errors/erreur_formulaire', $data);
-        } 
+        }
         else {
             $this->administrateur->delete($id);
             echo "administrateur Supprimé";
@@ -210,6 +207,40 @@ class AdministrateurCtrl extends CI_Controller {
         $data['administrateur'] = $this->administrateur->selectAll($varid);
         $this->load->view('administrateur/index');
         $this->load->view('administrateur/liste_administrateur', $data);
+    }
+    
+    public function modifier_administrateur() {
+        $this->load->helper('form', 'url');
+        $this->load->library('form_validation');
+        $this->load->model('administrateur');
+        $this->form_validation->set_rules('prenomAdministrateur', 'Prénom', 'alpha_dash');
+        $this->form_validation->set_rules('nomAdministrateur', 'Nom', 'alpha_numeric_spaces');
+        $this->form_validation->set_rules('mailAdministrateur', 'Email', 'valid_email');
+        //$this->form_validation->set_rules('adresseAdministrateur', 'adresse', 'alpha_dash');
+        $this->form_validation->set_rules('codePAdministrateur', 'Code postale', 'integer');
+        $this->form_validation->set_rules('villeAdministrateur', 'Ville', 'alpha_dash');
+        $this->form_validation->set_rules('telAdministrateur', 'Numéro de téléphone', 'integer');
+        //$data['administrateur'] = $this->administrateur->selectById($_POST['idAdministrateur']);
+        $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
+        //$mdp = $data['administrateur'][0]->mdpAdministrateur;
+        $id = $data['administrateur'][0]->idAdministrateur;
+        if ($this->form_validation->run() == FALSE) {
+            $this->liste_administrateur();
+        } 
+        else {
+            $data = array(
+                "prenomAdministrateur" => htmlspecialchars($_POST['prenomAdministrateur']),
+                "nomAdministrateur" => htmlspecialchars($_POST['nomAdministrateur']),
+                "mailAdministrateur" => htmlspecialchars($_POST['mailAdministrateur']),
+                "adresseAdministrateur" => htmlspecialchars($_POST['adresseAdministrateur']),
+                "codePAdministrateur" => htmlspecialchars($_POST['codePAdministrateur']),
+                "villeAdministrateur" => htmlspecialchars($_POST['villeAdministrateur']),
+                "telAdministrateur" => htmlspecialchars($_POST['telAdministrateur']),
+            );
+            $this->administrateur->update($id, $data);
+            $this->profil();
+            echo "modif faite";
+        }
     }
 
     public function changer_mdp() {
@@ -369,10 +400,10 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->model('client');
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
-    $this->load->view('administrateur/index');
-    $this->poster_avis->deleteByidClient($id);
     $this->client->delete($id);
+    $this->liste_client();
     echo "client Supprimé";
+    
   }
 
   public function supprimer_commercant($id) {
@@ -384,6 +415,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->view('administrateur/index');
     $this->faire_partie->deleteById($id);
     $this->commercant->delete($id);
+    $this->liste_commercant();
     echo "commercant Supprimé";
   }
 
@@ -409,7 +441,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->view('administrateur/profil_client', $data);
 
   }
-  
+
    public function profil_commercant($id){
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
@@ -467,8 +499,8 @@ class AdministrateurCtrl extends CI_Controller {
     }
 
   }
-  
- 
+
+
 
   public function modifier_commercant() {
     $this->load->helper('form', 'url');
@@ -503,9 +535,7 @@ class AdministrateurCtrl extends CI_Controller {
         );
 
         $this->commercant->update($id, $data);
-        $this->load->view('administrateur/index');
-        $data['commercant'] = $this->commercant->selectAll();
-        $this->load->view('administrateur/liste_commercant',$data);
+        $this->liste_commercant();
       } else {
         $data['message'] = "erreur : la confirmation de Mot de passe ne correspond pas au premier";
         $this->load->view('errors/erreur_formulaire', $data);

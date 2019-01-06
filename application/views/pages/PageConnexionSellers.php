@@ -50,9 +50,6 @@
                     <a class="btn btn-primary" href="index" role="button">Accueil</a>
                 </div>
 
-
-
-
             </div>
         </div>
     </div>

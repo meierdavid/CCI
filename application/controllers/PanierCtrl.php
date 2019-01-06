@@ -98,8 +98,8 @@ class PanierCtrl extends CI_Controller {
                 if ($this->panier->checkId($idProduit, $idClient) == Null) {
                     if ($data['produit'][0]->nbDispoProduit >= $_POST['quantite']) {
                         $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
-                        $date = date("d-m-y H:i:s");
-
+                        $date = date("Y-m-d H:i:s");
+                        var_dump($date);
                         $data['panier'] = $this->panier->selectByIdClient($idClient);
 
                         if ($data['panier'] == null) { //panier inexistant : on le créé
@@ -185,7 +185,7 @@ class PanierCtrl extends CI_Controller {
                 $data['produit'] = $this->produit->selectById($data['commander'][0]->idProduit);
 
 
-                $date = date("d-m-y H:i:s");
+                $date = date("Y-m-d H:i:s");
                 $prixPanier = $data['panier'][0]->prixTotPanier;
                 $prixProduit = $this->produit->prix_a_afficher($idProduit) * $data['commander'][0]->quantiteProd;
                 $prix = $prixPanier - $prixProduit;
@@ -234,7 +234,7 @@ class PanierCtrl extends CI_Controller {
         if (isset($_COOKIE['clientCookie'])) {
             //suppression dans Commander
             $this->commander->deletePanier($id);
-            $date = date("d-m-y H:i:s");
+            $date = date("Y-m-d H:i:s");
             //suppression dans Panier
             $data = array(
                 "annulationPanier" => htmlspecialchars(0),
@@ -291,7 +291,7 @@ class PanierCtrl extends CI_Controller {
                     $prixInitial = $this->produit->prix_a_afficher($idProduit) * $quantiteInitiale;
                     $prixNouveau = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
                     $prix = $data['panier'][0]->prixTotPanier - $prixInitial + $prixNouveau;
-                    $date = date("d-m-y H:i:s");
+                    $date = date("Y-m-d H:i:s");
 
                     $idPanier = $data['panier'][0]->idPanier;
 
@@ -395,8 +395,8 @@ class PanierCtrl extends CI_Controller {
                 //modifie le panier en cours
                 //générer chaine de caractère aléatoire et enregistrer dans le panier
                 $chaine = $this->genererChaineAleatoire();
-                
-                $date = date("d-m-y H:i:s");
+
+                $date = date("Y-m-d H:i:s");
                 $idPanier = $data['panier'][0]->idPanier;
                 $data = array(
                     "datePanier" => htmlspecialchars($date),
@@ -404,8 +404,8 @@ class PanierCtrl extends CI_Controller {
                     "chainePanier" => htmlspecialchars($chaine)
                 );
                 $this->panier->updatePaye($idPanier, $data);
-                
-                // retirer la quantite dispo du produit 
+
+                // retirer la quantite dispo du produit
 
                 $data['panier'] = $this->panier->selectByIdClient($idClient);
                 $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
@@ -420,7 +420,7 @@ class PanierCtrl extends CI_Controller {
                 $data['client'] = $this->client->selectByMail($varmail);
                 $nouveauPoint = $data['client'][0]->pointClient + ($data['panier'][0]->prixTotPanier / 10);
                 $this->client->updatePoint($idClient, $nouveauPoint);
-                
+
                 //créer un nouveau panier
                 $data = array(
                     "datePanier" => htmlspecialchars($date),

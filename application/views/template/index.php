@@ -13,7 +13,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <link href="<?php echo base_url()."../template/css/bootstrap.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <link href= "<?php echo base_url()."../template/css/style.css"; ?>" rel="stylesheet" type="text/css" media="all" />
-<link href="<?php echo base_url()."../template/css/font-awesome.css"; ?> rel="stylesheet">
+<link href="<?php echo base_url()."../template/css/font-awesome.css"; ?>" rel="stylesheet"/>
 <link href="<?php echo base_url()."../template/css/easy-responsive-tabs.css"; ?>" rel='stylesheet' type='text/css'/>
 <!-- //for bootstrap working -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
@@ -60,14 +60,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                      
+
                                         <span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				  </button>
 				</div>
-                               
+
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav menu__list">
@@ -84,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<h2>Produits</h2>
 											<li><a href="mens.html">Aliments</a></li>
 											<li><a href="mens.html">Vêtements</a></li>
-											<li><a href="mens.html">chaussures</a></li>
+											<li><a href="mens.html">Chaussures</a></li>
 											<li><a href="mens.html">Accessoires</a></li>
 											<li><a href="mens.html">Beauté</a></li>
 											<li><a href="mens.html">Sport</a></li>
@@ -390,7 +390,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				};
 			*/
 
-			
+
 
 			});
 	</script>

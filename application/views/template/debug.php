@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<h2>Produits</h2>
 											<li><a href="mens.html">Aliments</a></li>
 											<li><a href="mens.html">Vêtements</a></li>
-											<li><a href="mens.html">chaussures</a></li>
+											<li><a href="mens.html">Chaussures</a></li>
 											<li><a href="mens.html">Accessoires</a></li>
 											<li><a href="mens.html">Beauté</a></li>
 											<li><a href="mens.html">Sport</a></li>

@@ -34,7 +34,7 @@
                                                 <td><?php echo $item->mailAdministrateur; ?></td>
                                                 <td><?php echo $item->telAdministrateur; ?></td>
                                                 <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_administrateur/".$item->idAdministrateur);?>">Supprimer l'administrateur</a></p></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/profil_administrateur/".$item->idAdministrateur);?>">Modifier l'administrateur</a></p></td>
+                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/profil/".$item->idAdministrateur);?>">Modifier l'administrateur</a></p></td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>

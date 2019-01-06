@@ -12,30 +12,30 @@
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Admin !</h2>
-            
-            <?php // formulaire de connexion Admin ?> 
+
+            <?php // formulaire de connexion Admin ?>
 
             <form role="form" method="post" action="<?=base_url('administrateurCtrl/connexion')?>">
                 <br></br>
                     <div class="text-center">
                     <h4>Entrez votre Pseudo d'Administrateur et votre mot de passe :</h4>
                     </div>
-                    
+
                     <br></br>
 
                     <div class="form-group">
                         <label name="mail" class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mail" value="" size="30" required/> 
+                        <input type="text" class="form-control" name="mail" value="" size="30" required/>
                             <h6 style="color:red;"</h6>
                     </div>
-                    
+
                     <div class="form-group">
                         <label name="mdp" class="control-label">Mot de passe</label>
                         <input type="password" class="form-control" name="mdp" value="" size="30" required/>
-                    </div>    
-                    
-                 
-                    
+                    </div>
+
+
+
                     <div class="text-center">
                         <input class="btn btn-primary btn-success btn-block" type="submit" value="Connexion" /></div>
                     <div class="text-center">
@@ -50,9 +50,6 @@
             <a class="btn btn-primary" href="index" role="button">Accueil</a>
             </div>
 
-            <br></br>
-
-            
 
             </div>
         </div>
