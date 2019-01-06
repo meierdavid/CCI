@@ -17,7 +17,7 @@
             <div class="product-grid7">
                 <div class="product-image7">
                     
-                        <img class="pic-1" width="150" height="150" src="http://localhost/cci/index.php/../assets/image/logos/<?php echo $item->logoEntreprise; ?>" width=5 height=150>
+                        <a href = "<?php echo base_url("ProduitCtrl/produit_entreprise/".$item->numSiret); ?>" ><img class="pic-1" width="150" height="150" src="http://localhost/cci/index.php/../assets/image/logos/<?php echo $item->logoEntreprise; ?>" width=5 height=150></a>
                     
                     <ul class="social">
                         <li><a href="<?php echo base_url("EntrepriseCtrl/affichage_entreprise/" . $item->numSiret); ?>" class="fa fa-search"></a></li>

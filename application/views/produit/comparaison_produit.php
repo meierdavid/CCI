@@ -117,11 +117,11 @@ h2::after {
 	padding: 2px 0;
 }
 .carousel .item-price strike {
-	color: #FFA500;
+	color: #FFFFFF;
 	margin-right: 5px;
 }
 .carousel .item-price span {
-	color: #00FF00;
+	color: #99FF66;
 	font-size: 110%;
 }
 .carousel .carousel-control.left i {
@@ -194,7 +194,7 @@ h2::after {
 											</p>
 											<h6> <?php echo $notes[0] . "/10";
 										$i=1;		?></h6>
-									<h6 align="left"><strong>Description : </strong> <?php echo $produit[0]->descriptionProduit ?></h6>
+									<h6 align="left"></br><strong>Description : </strong> <?php echo $produit[0]->descriptionProduit ?></h6>
 								</div>										
 							</div>
 						</div>
@@ -209,7 +209,7 @@ h2::after {
 									<p class="item-price">
 									<strike><?php
 											if ($item->reducProduit !=0){
-												echo $item->prixUnitaireProduit . "€" ;
+												echo $item->prixUnitaireProduit . "€</strike>" ;
 											}
 											?>
 											</strike>
@@ -224,9 +224,11 @@ h2::after {
 											?></span>
                         
 											</p>
-									<h6> <?php echo $notes[$i] . "/10";
+									<h6> <?php if ($notes[$i]!=0) {echo $notes[$i] . "/10";}
+									else { echo "</br>" ;}
 											$i=$i+1;?> </h6>
-									<h6 align="left"><strong>Description : </strong> <?php echo $item->descriptionProduit ?></h6>
+											
+									<h6 align="left"></br><strong>Description : </strong> <?php echo $item->descriptionProduit ?></h6>
 								</div>	
 								
 							</div>
@@ -245,6 +247,7 @@ h2::after {
 							
 						</div>
 						<?php } ?>
+						</br></br>
 					</div>
 				</div>
 				

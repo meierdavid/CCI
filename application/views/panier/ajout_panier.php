@@ -36,8 +36,8 @@
 						<h3 class="product-title"><?php echo $produit[0]->nomProduit; ?></h3>
 						
 						<h6>Vendu par : <strong><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></h6>
-
-						<h4 class="price">Prix: <?php
+						
+						<h4 class="price"></br>Prix: <?php
 											if ($produit[0]->reducProduit !=0){
 												echo  "<span>" . (intval($produit[0]->prixUnitaireProduit) - (intval($produit[0]->prixUnitaireProduit) * intval($produit[0]->reducProduit) / 100 ))  . "€ </span>" . "  au lieu de <span> " . $produit[0]->prixUnitaireProduit . "€ </span>" ;
 											}

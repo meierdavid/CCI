@@ -4,7 +4,7 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Sans" rel="stylesheet"> 
-<div class="container">
+<br><br><div class="container">
 	
 	<div class="row bg-info card my-4 mb-3 pd-l-2">
 
@@ -16,10 +16,10 @@
 	</div>
 	
 	
-	<div class="row">
+	<div class="row"><br>
 	    <p class="col-sm-6 col-md-12">
 	    Vous avez une question ? Nous y répondons sûrement ici !
-	    </p>
+	    </p><br>
 		
   
 	    <ul id="accordion" class="col-sm-6 col-md-12">
@@ -31,8 +31,9 @@
 	            </div>
 	            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                   <div class="card-body">
-                      Cliquez sur <strong>Profil</strong> ( en haut à gauche du site ) puis sur <strong>approvisionner mon compte</strong> 
+                      Cliquez sur <strong>Profil</strong> ( en haut à gauche du site ) puis sur <strong>approvisionner mon compte</strong>
 				</div>
+				<br>
                 </div>
 	        </li>
 	        
@@ -48,6 +49,7 @@
                       <br>
                       Vous ne pouvez pas utiliser plus de <strong>50</strong> points d'un coup ce qui reduira le prix de votre panier de <strong>50%</strong>
                   </div>
+				  <br>
                 </div>
 	        </li>
 	        
@@ -63,6 +65,7 @@
                       <br>
                       Ainsi le commercant sera rémunéré à la hauteur du montant du produit
 					</div>
+					<br>
                 </div>
 	        </li>
 	        
@@ -78,6 +81,7 @@
                       <br>
                       Ou bien cliquer sur <strong>Catégories</strong> puis le nom du magasin dont vous chercher les produits
                   </div>
+				  <br>
                 </div>
 	        </li>
 	        
@@ -91,6 +95,7 @@
                   <div class="card-body">
                       Vous pouvez cliquer sur <strong>Codes de réduction</strong> vous y trouverais tous les codes prévu par les magasins inscrit sur le site.
                   </div>
+				  <br>
                 </div>
 	        </li>
 	        
