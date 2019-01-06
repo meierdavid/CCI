@@ -18,12 +18,12 @@
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
             <?php echo form_open('ClientCtrl/inscription'); ?>
 
-                <br></br>
+                <br>
                     <div class="text-center">
                     <h4>Entrez vos coordonnées :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="form-group">
                         <label class="control-label">Prénom</label>
@@ -76,8 +76,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
 
 

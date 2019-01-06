@@ -24,27 +24,27 @@
 							  <?php
 						  $this->load->model('client');
 						  $client_posteur=$this->client->selectById($item->idClient);
-						echo "</br>" . $client_posteur[0]->prenomClient . "  " . $client_posteur[0]->nomClient ?> <p class="pull-right"><small><?php echo "Note: " .  $item->noteClient . " / 10"?></small></p></h4>
+						echo "" . $client_posteur[0]->prenomClient . "  " . $client_posteur[0]->nomClient ?> <p class="pull-right"><small><?php echo "Note: " .  $item->noteClient . " / 10"?></small></p></h4>
                               <?php echo $item->avisClient?>
                               <p<small class="pull-right">
 							<?php if($client[0]->idClient == $item->idClient){ $deja=1;?>
-								<td></br><a href="<?php echo base_url("ClientCtrl/modifier_avis/").$produit[0]->idProduit; ?>">Modifiez votre avis</a></td>
+								<td><a href="<?php echo base_url("ClientCtrl/modifier_avis/").$produit[0]->idProduit; ?>">Modifiez votre avis</a></td>
 							<?php } ?>
 
 							  </small></p>
-                              </br></br>
+                              
                             </div>
                           </div>
 				   <?php } ?>
 
                    </div>
-				   </br>
+				   
 				   <?php if($deja==0){?>
                                <a href="<?php echo base_url("ClientCtrl/ajouter_avis/").$produit[0]->idProduit; ?>">Donnez votre avis</a>
                                 <?php } ?>
 
 
-                    </br></br>
+                    
                 </div>
             </div>
         </div>

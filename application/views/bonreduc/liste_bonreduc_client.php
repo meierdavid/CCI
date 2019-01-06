@@ -1,13 +1,13 @@
 <link href="<?php echo base_url()."../template/css/BonReduClient.css"; ?>" rel="stylesheet" type="text/css" media="all" />
 <!------ Include the above in your HEAD tag ---------->
-</br></br>
+
 <div class="container">
 	<div class="box">
 		<div class="row">
 		<div class="table-responsive">
 			<div class="text-center">
 			<h2>Liste des codes de réduction :</h2>
-			</br></br>
+			
 		</div>
 				
 				 <table class="table table-striped">

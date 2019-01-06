@@ -35,7 +35,7 @@
 					<div class="details col-md-6">
 						<h3 class="product-title"><?php echo $produit[0]->nomProduit; ?></h3>
 
-						<h6>Vendu par : <strong><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></br></br></h6></br>
+						<h6>Vendu par : <strong><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></strong></h6>
 
 						<h4 class="price">Prix: <?php
 											if ($produit[0]->reducProduit !=0){
@@ -56,12 +56,12 @@
             }
             ?>
 					</h6>
-					<h6> Il reste <strong><?php echo "  ".$produit[0]->nbDispoProduit . "  "; ?></strong>	 articles disponibles </br></br></h6>
+					<h6> Il reste <strong><?php echo "  ".$produit[0]->nbDispoProduit . "  "; ?></strong>	 articles disponibles </h6>
 
 					<div class="form-login" >
 
 			<?php echo form_open_multipart('PanierCtrl/modifier/' . $produit[0]->idProduit); ?>
-                <br></br>
+                <br>
 
                 <br>
                 <input type="hidden" class="form-control" name="nomProduit" value="<?php echo $produit[0]->nomProduit; ?>" size="30" />
@@ -75,7 +75,7 @@
                     <label class="control-label">Quantité souhaitée</label>
                     <input type="number" class="form-control" name="quantite" value="<?php echo $commander[0]->quantiteProd ?>" size="30" min="0" max="<?php echo $produit[0]->nbDispoProduit; ?>" required/>
                 </div>
-				</br>
+				
 <?php if ($entreprise[0]->livraisonEntreprise == 1 && $commander[0]->livraisonCommande==1) {?>
                 <div class="text-center">
                     <label class="control-label">Livraison: </label>
@@ -107,7 +107,7 @@
 						<div class="text-center"><input class="add-to-cart btn btn-default" type="submit" value="Ajouter au panier" href="<?php echo base_url("PanierCtrl/modifier/".$produit[0]->idProduit); ?>" ></div>
 
                 </form>
-                <br></br>
+                <br>
             </div>
 			</div>
 					</div>

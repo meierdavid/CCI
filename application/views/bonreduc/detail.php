@@ -12,7 +12,7 @@
                 <?php echo form_open_multipart('BonReducCtrl/modifier'); ?>
 
 
-                <br></br>
+                <br>
                 <div class="form-group">
                     <label class="control-label">idBon</label>
                     <input type="text" class="form-control" name="idBon" value="<?php echo  $bonreduc[0]->idBon; ?>" size="30"/>
@@ -44,8 +44,8 @@
                     <h1 style="color:darkslategrey; "></h1>
                 </div>
                 </form>
-                <br></br>
-                <br></br>
+                <br>
+                <br>
 
             </div>
         </div>

@@ -43,7 +43,7 @@
                 <div class="col-md-4 header-middle">
                     <?php echo form_open('ProduitCtrl/search'); ?>
                     <input type="search" name="search" placeholder="Rechercher sur le site..." value="" required="">
-                    <input type="submit" value=" ">
+                    <input type="submit" value="✔">
                     <div class="clearfix"></div>
                     </form>
                 </div>

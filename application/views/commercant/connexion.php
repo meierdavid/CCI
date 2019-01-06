@@ -18,12 +18,12 @@
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
             <?php echo form_open('CommercantCtrl/connexion'); ?>
 
-                <br></br>
+                <br>
                     <div class="text-center">
                     <h4>Entrez votre Email et votre mot de passe :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="form-group">
                         <label class="control-label">Adresse mail</label>
@@ -44,8 +44,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
             <div class="text-center">
             <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/index" role="button">Accueil</a>

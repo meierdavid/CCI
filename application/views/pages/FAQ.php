@@ -5,22 +5,22 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Sans" rel="stylesheet"> 
 <div class="container">
-	</br></br>
+	
 	<div class="row bg-info card my-4 mb-3 pd-l-2">
-</br>
+
 		<h3>
 		    <span class="fa fa-question-circle text-white"></span>
 		    FAQ :
 		</h3>
-</br>
+
 	</div>
-	</br>
+	
 	
 	<div class="row">
 	    <p class="col-sm-6 col-md-12">
 	    Vous avez une question ? Nous y répondons sûrement ici !
 	    </p>
-		</br></br>
+		
   
 	    <ul id="accordion" class="col-sm-6 col-md-12">
 	        <!-- Question one -->
@@ -102,5 +102,5 @@
 	        </li>
 	    </ul>
 	</div>
-	</br></br>
+	
 </div>

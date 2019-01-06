@@ -18,12 +18,12 @@
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
             <?php echo form_open('CommercantCtrl/lie_commercant'); ?>
 
-                <br></br>
+                <br>
                     <div class="text-center">
 
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="form-group">
                         <label class="control-label">Adresse mail du commercant</label>
@@ -40,8 +40,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
 
 

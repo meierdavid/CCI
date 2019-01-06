@@ -167,7 +167,7 @@ h2::after {
 			<div class="carousel-inner">
 				<div class="item carousel-item active">
 					<div class="row">
-					</br></br>
+					
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
@@ -191,7 +191,7 @@ h2::after {
 												echo $produit[0]->prixUnitaireProduit . "€" ;
 											}
 											?></span>
-											</br></br></p>
+											</p>
 											<h6> <?php echo $notes[0] . "/10";
 										$i=1;		?></h6>
 									<h6 align="left"><strong>Description : </strong> <?php echo $produit[0]->descriptionProduit ?></h6>
@@ -223,12 +223,12 @@ h2::after {
 											}
 											?></span>
                         
-											</br></br></p>
+											</p>
 									<h6> <?php echo $notes[$i] . "/10";
 											$i=$i+1;?> </h6>
 									<h6 align="left"><strong>Description : </strong> <?php echo $item->descriptionProduit ?></h6>
 								</div>	
-								</br></br>
+								
 							</div>
 						</div>	
 						<?php }?>						
@@ -237,12 +237,12 @@ h2::after {
 					<div class="row">
 						<div class="col-sm-3">
 							<a href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>" class="btn btn-primary">Ajouter au panier</a>
-							</br></br>
+							
 						</div>
 						<?php foreach($produitsProposés as $item) {?>
 						<div class="col-sm-3">
 							<a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>" class="btn btn-primary">Ajouter au panier </a>
-							</br></br>
+							
 						</div>
 						<?php } ?>
 					</div>

@@ -17,12 +17,12 @@
                 <?php echo form_open_multipart('ProduitCtrl/ajout_produit'); ?>
 
                 <form>
-                    <br></br>
+                    <br>
                     <div class="text-center">
                         <h4>Veuillez rentrer les spécifications du produit :</h4>
                     </div>
 
-                    <br></br>
+                    <br>
 
 
                      <select name = 'numSiret' id = 'category'>
@@ -56,7 +56,7 @@
                             <option  value="bricolage">Bricolage</option>
                          </select>
 
-                    <br></br>
+                    <br>
 
                     </div>
                     <div class="form-group">
@@ -85,7 +85,7 @@
                         <h6 style="color:red;"</h6>
                     </div>
 
-                    <br></br>
+                    <br>
 
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Confirmation" /></div>
                     <div class="text-center">
@@ -93,8 +93,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-                <br></br>
-                <br></br>
+                <br>
+                <br>
 
 
 

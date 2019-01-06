@@ -10,9 +10,9 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
-			</br></br>
+			
                 <h2 class="text-center"> Poster un avis</h2>
-				</br>
+				
 
 
                 <?php $action= 'ClientCtrl/ajouter_avis/'. $produit[0]->idProduit;
@@ -34,8 +34,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-                <br></br>
-                <br></br>
+                <br>
+                <br>
 
 
 

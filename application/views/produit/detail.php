@@ -10,12 +10,12 @@
     <div class="col-md-offset-3 col-md-5">
       <div class="form-login" style="margin-left: 200px;">
             <?php echo form_open_multipart('ProduitCtrl/modifier'); ?>
-                <br></br>
+                <br>
                     <div class="text-center">
                     
                     </div>
                     
-                    <br></br>
+                    <br>
                     <div class="form-group">
                         <input type="text" class="form-control" name="idProduit" value="<?php echo  $produit[0]->idProduit; ?>" size="30" hidden/>     
                     </div>
@@ -81,8 +81,8 @@
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
                 </form>
-            <br></br>
-            <br></br>
+            <br>
+            <br>
 
         </div>
       </div>

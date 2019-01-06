@@ -2,9 +2,9 @@
 
 
 <div class="container">
-    <h3 class="h3"></br><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></h3>
+    <h3 class="h3"><a href="<?php echo base_url("entrepriseCtrl/affichage_entreprise/".$entreprise[0]->numSiret); ?>"><?php echo $entreprise[0]->nomEntreprise; ?></a></h3>
     <div class="row">
-	</br>
+	
 	<?php foreach ($produit as $item) { ?>
 		<?php
 			if ($item->imageProduit == 'NULL') {
@@ -39,7 +39,7 @@
 											}
 											?>
 											</span>
-											</br></br>
+											
                     </div>
                 </div>
             </div>
