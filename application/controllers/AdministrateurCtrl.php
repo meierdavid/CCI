@@ -10,9 +10,8 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->view('administrateur/index');
   }
-<<<<<<< HEAD
   
-    public function profil() {
+  public function profil() {
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -28,30 +27,7 @@ class AdministrateurCtrl extends CI_Controller {
         }
     }
 
-    public function inscription() {
-=======
-
-  public function profil()
-	{
-		$this->load->helper('cookie');
-		$this->load->helper('url');
-		$this->load->helper('form');
-
-		if($this->input->cookie('administrateurCookie') != Null){
-			$varMail= $this->input->cookie('administrateurCookie'); // rentrer un mail dans votre base de données en attendant qu'on fasse les cookies
-			$this->load->model('administrateur');
-			$data['administrateur'] = $this->admninistrateur->selectByMail($varMail);
-			$this->load->view('commercant/index',$data);
-			$this->load->view('commercant/profil',$data);
-		}
-		else{
-			$this->load->view('pages/pageconnexion');
-		}
-	}
-
-
   public function inscription() {
->>>>>>> 73a25ecc762c2a2a1946fe4bb196ed4912983d83
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
     $this->load->model('administrateur');

@@ -15,7 +15,10 @@
             <h2 class="text-center"> Votre profil</h2>
             <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
             <?php echo form_open('AdministrateurCtrl/modifier_administrateur'); ?>
-                    <div class="form-group">
+                    
+             <input type="text" class="form-control" name="idAdministrateur" value="<?php echo  $administrateur[0]->idAdministrateur; ?>" size="30" required hidden/>
+            
+            <div class="form-group">
                         <label class="control-label">Prénom</label>
                         <input type="text" class="form-control" name="prenomAdministrateur" value="<?php echo  $administrateur[0]->prenomAdministrateur; ?>" size="30" required/>
                             <h6 style="color:red;"</h6>

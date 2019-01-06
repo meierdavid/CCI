@@ -73,22 +73,20 @@
     	}
         
         public function update($id, $data) {
-        
+
         $this->load->database();
-        
-        $this->db->set('prenomAdministrateur', $data['prenomAdministrateur'])
-        	->set('nomAdministrateur', $data['nomAdministrateur'])
- 		->set('mailAdministrateur', $data['mailAdministrateur'])
-                ->set('adresseAdministrateur', $data['adresseAdministrateur'])
-                ->set('codePAdministrateur', $data['codePAdministrateur'])
-                ->set('villeAdministrateur', $data['villeAdministrateur'])
-                ->set('telAdministrateur', $data['telAdministrateur'])
-                ->set('mdpAdministrateur', $data['mdpAdministrateur'])
-                ->where('idAdministrateur', $id)
-                ->update($this->table);
-        }
-        
-        public function updateMdp($id,$mdp){
+
+        return $this->db->where('idAdministrateur', $id)
+                        ->set('nomAdministrateur', $data['nomAdministrateur'])
+                        ->set('mailAdministrateur', $data['mailAdministrateur'])
+                        ->set('adresseAdministrateur', $data['adresseAdministrateur'])
+                        ->set('codePAdministrateur', $data['codePAdministrateur'])
+                        ->set('villeAdministrateur', $data['villeAdministrateur'])
+                        ->set('telAdministrateur', $data['telAdministrateur'])
+                        ->update($this->table);
+    }
+
+    public function updateMdp($id,$mdp){
 
           $this->load->database();
 
