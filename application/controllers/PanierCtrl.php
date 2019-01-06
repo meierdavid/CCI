@@ -2,14 +2,17 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PanierCtrl extends CI_Controller {
+class PanierCtrl extends CI_Controller
+{
 
-    public function index() {
+    public function index()
+    {
         $this->load->helper('url');
         $this->load->view('client/accueil');
     }
 
-    public function finaliser($idPanier) {
+    public function finaliser($idPanier)
+    {
         $this->load->model('panier');
         $this->load->model('entreprise');
         $this->load->model('bonreduc');
@@ -31,7 +34,8 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
-    public function liste_panier() {
+    public function liste_panier()
+    {
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -71,7 +75,8 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
-    public function ajout_panier($idProduit) {
+    public function ajout_panier($idProduit)
+    {
         $this->load->model('panier');
         $this->load->model('produit');
         $this->load->model('commander');
@@ -167,7 +172,8 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
-    public function supprimer_produit_panier($idProduit) {
+    public function supprimer_produit_panier($idProduit)
+    {
         $this->load->model('panier');
         $this->load->model('commander');
         $this->load->model('produit');
@@ -223,7 +229,8 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
-    public function supprimer_panier($id) {
+    public function supprimer_panier($id)
+    {
         $this->load->model('panier');
         $this->load->model('commander');
         $this->load->helper('form', 'url');
@@ -259,7 +266,8 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
-    public function modifier($idProduit) {
+    public function modifier($idProduit)
+    {
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
         $this->load->library('form_validation');
@@ -336,171 +344,219 @@ class PanierCtrl extends CI_Controller {
         }
     }
 
-    public function utiliser_bonReduc()
-    {
-        $this->load->model('bonreduc');
-        $this->load->model('panier');
-        $this->load->helper('form', 'url');
-        $this->load->helper('cookie');
-        $this->load->library('form_validation');
-        if (isset($_COOKIE['clientCookie'])) {
-            $varmail = $this->input->cookie('clientCookie');
-            $data['client'] = $this->client->selectByMail($varmail);
-            $id = $data['client'][0]->idClient;
-            $data['panier'] = $this->panier->selectByIdClient($id);
+        public function utiliser_points()
+        {
+            $this->load->model('bonreduc');
+            $this->load->model('panier');
+            $this->load->model('client');
+            $this->load->helper('form', 'url');
+            $this->load->helper('cookie');
+            $this->load->library('form_validation');
 
-            if ($data['panier'][0]->codePromo == 0) {
+            if (isset($_COOKIE['clientCookie'])) {
+                $varmail = $this->input->cookie('clientCookie');
+                $data['client'] = $this->client->selectByMail($varmail);
+                $id = $data['client'][0]->idClient;
+                $data['panier'] = $this->panier->selectByIdClient($id);
+                $points = $data['client'][0]->pointClient;
 
-                if ($this->bonreduc->selectByLibelle($_POST['libelleBon']) != null) {
-                    $nouveauPrix = $data['panier'][0]->prixTotPanier * (1 - (($this->bonreduc->selectByLibelle($_POST['libelleBon'])[0]->pourcentageBon) / 100));
-                    $this->panier->updateprix($data['panier'][0]->idPanier, $nouveauPrix);
-                    $this->panier->updatecode($data['panier'][0]->idPanier, 1);
-                    $this->liste_panier();
+                if ($data['panier'][0]->pointPanier == 0) {
+
+                    if ($points < 51) {
+                        $nouveauPrix = $data['panier'][0]->prixTotPanier * (1 - ($points / 100));
+                        $this->panier->updateprix($data['panier'][0]->idPanier, $nouveauPrix);
+                        $this->client->updatepoint($id, 0);
+                        $this->liste_panier();
+                    } else {
+                        $nouveauPrix = $data['panier'][0]->prixTotPanier * (1 - (50 / 100));
+                        $this->panier->updateprix($data['panier'][0]->idPanier, $nouveauPrix);
+                        $this->client->updatePoint($id, $points - 50);
+                        $this->panier->updateUsePoint($data['panier'][0]->idPanier, 1);
+                        $this->liste_panier();
+                    }
                 } else {
-                    $data['message'] = "le libellé n'existe pas";
+                    $data['message'] = "erreur : Vous avez déjà utilisé vos points pour ce panier";
+                    $this->load->view('errors/erreur_formulaire', $data);
+                    $this->liste_panier();
+
+                }
+            } else {
+                $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+                $this->load->view('errors/erreur_formulaire', $data);
+                $this->load->view('client/connexion');
+            }
+
+        }
+
+
+        public function utiliser_bonReduc()
+        {
+            $this->load->model('bonreduc');
+            $this->load->model('panier');
+            $this->load->helper('form', 'url');
+            $this->load->helper('cookie');
+            $this->load->library('form_validation');
+            if (isset($_COOKIE['clientCookie'])) {
+                $varmail = $this->input->cookie('clientCookie');
+                $data['client'] = $this->client->selectByMail($varmail);
+                $id = $data['client'][0]->idClient;
+                $data['panier'] = $this->panier->selectByIdClient($id);
+
+                if ($data['panier'][0]->codePromo == 0) {
+
+                    if ($this->bonreduc->selectByLibelle($_POST['libelleBon']) != null) {
+                        $nouveauPrix = $data['panier'][0]->prixTotPanier * (1 - (($this->bonreduc->selectByLibelle($_POST['libelleBon'])[0]->pourcentageBon) / 100));
+                        $this->panier->updateprix($data['panier'][0]->idPanier, $nouveauPrix);
+                        $this->panier->updatecode($data['panier'][0]->idPanier, 1);
+                        $this->liste_panier();
+                    } else {
+                        $data['message'] = "le libellé n'existe pas";
+                        $this->load->view('errors/erreur_formulaire', $data);
+                        $this->liste_panier();
+                    }
+                } else {
+                    $data['message'] = "erreur : Vous avez déjà utilisé un bon de réduction";
                     $this->load->view('errors/erreur_formulaire', $data);
                     $this->liste_panier();
                 }
-            }
-        else{$data['message'] = "erreur : Vous avez déjà utilisé un bon de réduction";
-            $this->load->view('errors/erreur_formulaire', $data);
-            $this->liste_panier();
-            }
-        }
-
-            else{
-            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
-            $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('client/connexion');
-        }
-    }
-
-    public function confirmation() {
-        $this->load->helper('cookie');
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->model('panier');
-        $this->load->model('commander');
-        $this->load->model('produit');
-        $this->load->model('entreprise');
-        $data['entreprises_header'] = $this->entreprise->selectAll();
-        if (isset($_COOKIE['clientCookie'])) {
-            $varid = $this->input->cookie('clientCookie');
-
-            $data['client'] = $this->client->selectByMail($varid);
-            $data['panier'] = $this->panier->selectByIdClient($data['client'][0]->idClient);
-
-            if ($data['panier'] != NULL) {
-                $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
-                $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
-
-                $this->load->view('client/header', $data);
-                $this->load->view('panier/confirmation_panier', $data);
-                $this->load->view('client/footer');
             } else {
-                $data['message'] = "erreur : Vous n'avez pas de produits dans votre panier";
+                $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
                 $this->load->view('errors/erreur_formulaire', $data);
-                $this->load->view('client/header', $data);
-                $this->load->view('client/accueil');
-                $this->load->view('client/footer');
+                $this->load->view('client/connexion');
             }
-        } else {
-            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
-            $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('client/connexion');
         }
-    }
 
-    public function payement() {
-        $this->load->model('panier');
-        $this->load->model('produit');
-        $this->load->model('commander');
-        $this->load->model('client');
-        $this->load->helper('form', 'url');
-        $this->load->helper('cookie');
-        $this->load->library('form_validation');
-        $this->load->model('entreprise');
-        $data['entreprises_header'] = $this->entreprise->selectAll();
+        public function confirmation()
+        {
+            $this->load->helper('cookie');
+            $this->load->helper('url');
+            $this->load->helper('form');
+            $this->load->model('panier');
+            $this->load->model('commander');
+            $this->load->model('produit');
+            $this->load->model('entreprise');
+            $data['entreprises_header'] = $this->entreprise->selectAll();
+            if (isset($_COOKIE['clientCookie'])) {
+                $varid = $this->input->cookie('clientCookie');
 
+                $data['client'] = $this->client->selectByMail($varid);
+                $data['panier'] = $this->panier->selectByIdClient($data['client'][0]->idClient);
 
-        if (isset($_COOKIE['clientCookie'])) {
-            $varmail = $this->input->cookie('clientCookie');
-            $data['client'] = $this->client->selectByMail($varmail);
-            $idClient = $data['client'][0]->idClient;
-            $data['panier'] = $this->panier->selectByIdClient($idClient);
-            if ($data['panier'][0]->prixTotPanier < $data['client'][0]->creditClient) {
-                $nouveauSoldeClient = $data['client'][0]->creditClient - $data['panier'][0]->prixTotPanier;
-                $this->client->updateCredit($idClient, $nouveauSoldeClient);
-                //modifie le panier en cours
-                //générer chaine de caractère aléatoire et enregistrer dans le panier
-                $chaine = $this->genererChaineAleatoire();
+                if ($data['panier'] != NULL) {
+                    $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
+                    $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
 
-                $date = date("Y-m-d H:i:s");
-                $idPanier = $data['panier'][0]->idPanier;
-                $data = array(
-                    "datePanier" => htmlspecialchars($date),
-                    "paiementPanier" => htmlspecialchars(1),
-                    "chainePanier" => htmlspecialchars($chaine)
-                );
-                $this->panier->updatePaye($idPanier, $data);
-
-                // retirer la quantite dispo du produit
-
-                $data['panier'] = $this->panier->selectByIdClient($idClient);
-                $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
-                $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
-                $i = 0;
-                foreach ($data['commander'] as $item) {
-                    $nouvelleQuantite = $data['produits'][$i]->nbDispoProduit - $item->quantiteProd;
-                    $this->produit->updateQuantite($item->idProduit, $nouvelleQuantite);
-                    $i = $i + 1;
+                    $this->load->view('client/header', $data);
+                    $this->load->view('panier/confirmation_panier', $data);
+                    $this->load->view('client/footer');
+                } else {
+                    $data['message'] = "erreur : Vous n'avez pas de produits dans votre panier";
+                    $this->load->view('errors/erreur_formulaire', $data);
+                    $this->load->view('client/header', $data);
+                    $this->load->view('client/accueil');
+                    $this->load->view('client/footer');
                 }
-                //ajouter les points de fidélité
-                $data['client'] = $this->client->selectByMail($varmail);
-                $nouveauPoint = $data['client'][0]->pointClient + ($data['panier'][0]->prixTotPanier / 10);
-                $this->client->updatePoint($idClient, $nouveauPoint);
-
-                //créer un nouveau panier
-                $data = array(
-                    "datePanier" => htmlspecialchars($date),
-                    "annulationPanier" => htmlspecialchars(0),
-                    "codePromo" => htmlspecialchars(0),
-                    "paiementPanier" => htmlspecialchars(0),
-                    "finaliserPanier" => htmlspecialchars(0),
-                    "idClient" => htmlspecialchars($idClient),
-                    "prixTotPanier" => htmlspecialchars(0),
-                );
-                $this->panier->insert($data);
-                $data['entreprises_header'] = $this->entreprise->selectAll();
-                $data['client'] = $this->client->selectByMail($varmail);
-                $data['message'] = "Votre paiement à bien été accepté";
-                $this->load->view('errors/validation_formulaire', $data);
-                $this->load->view('client/header', $data);
-                $this->load->view('client/accueil');
-                $this->load->view('client/footer');
             } else {
-                $data['message'] = "erreur : Veuillez réapprovisionner votre compte";
+                $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
                 $this->load->view('errors/erreur_formulaire', $data);
-                $this->load->view('client/header', $data);
-                $this->load->view('client/profil', $data);
-                $this->load->view('client/footer');
+                $this->load->view('client/connexion');
             }
-        } else {
-            $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
-            $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('client/connexion');
         }
-    }
 
-    public function genererChaineAleatoire() {
-        $longueur = 10;
-        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $longueurMax = strlen($caracteres);
-        $chaineAleatoire = '';
-        for ($i = 0; $i < $longueur; $i++) {
-            $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+        public function payement()
+        {
+            $this->load->model('panier');
+            $this->load->model('produit');
+            $this->load->model('commander');
+            $this->load->model('client');
+            $this->load->helper('form', 'url');
+            $this->load->helper('cookie');
+            $this->load->library('form_validation');
+            $this->load->model('entreprise');
+            $data['entreprises_header'] = $this->entreprise->selectAll();
+
+
+            if (isset($_COOKIE['clientCookie'])) {
+                $varmail = $this->input->cookie('clientCookie');
+                $data['client'] = $this->client->selectByMail($varmail);
+                $idClient = $data['client'][0]->idClient;
+                $data['panier'] = $this->panier->selectByIdClient($idClient);
+                if ($data['panier'][0]->prixTotPanier < $data['client'][0]->creditClient) {
+                    $nouveauSoldeClient = $data['client'][0]->creditClient - $data['panier'][0]->prixTotPanier;
+                    $this->client->updateCredit($idClient, $nouveauSoldeClient);
+                    //modifie le panier en cours
+                    //générer chaine de caractère aléatoire et enregistrer dans le panier
+                    $chaine = $this->genererChaineAleatoire();
+
+                    $date = date("Y-m-d H:i:s");
+                    $idPanier = $data['panier'][0]->idPanier;
+                    $data = array(
+                        "datePanier" => htmlspecialchars($date),
+                        "paiementPanier" => htmlspecialchars(1),
+                        "chainePanier" => htmlspecialchars($chaine)
+                    );
+                    $this->panier->updatePaye($idPanier, $data);
+
+                    // retirer la quantite dispo du produit
+
+                    $data['panier'] = $this->panier->selectByIdClient($idClient);
+                    $data['commander'] = $this->commander->selectByIdPanier($data['panier'][0]->idPanier);
+                    $data['produits'] = $this->panier->selectProduits($data['panier'][0]->idPanier);
+                    $i = 0;
+                    foreach ($data['commander'] as $item) {
+                        $nouvelleQuantite = $data['produits'][$i]->nbDispoProduit - $item->quantiteProd;
+                        $this->produit->updateQuantite($item->idProduit, $nouvelleQuantite);
+                        $i = $i + 1;
+                    }
+                    //ajouter les points de fidélité
+                    $data['client'] = $this->client->selectByMail($varmail);
+                    $nouveauPoint = $data['client'][0]->pointClient + ($data['panier'][0]->prixTotPanier / 10);
+                    $this->client->updatePoint($idClient, $nouveauPoint);
+
+                    //créer un nouveau panier
+                    $data = array(
+                        "datePanier" => htmlspecialchars($date),
+                        "annulationPanier" => htmlspecialchars(0),
+                        "codePromo" => htmlspecialchars(0),
+                        "paiementPanier" => htmlspecialchars(0),
+                        "finaliserPanier" => htmlspecialchars(0),
+                        "idClient" => htmlspecialchars($idClient),
+                        "prixTotPanier" => htmlspecialchars(0),
+                    );
+                    $this->panier->insert($data);
+                    $data['entreprises_header'] = $this->entreprise->selectAll();
+                    $data['client'] = $this->client->selectByMail($varmail);
+                    $data['message'] = "Votre paiement à bien été accepté";
+                    $this->load->view('errors/validation_formulaire', $data);
+                    $this->load->view('client/header', $data);
+                    $this->load->view('client/accueil');
+                    $this->load->view('client/footer');
+                } else {
+                    $data['message'] = "erreur : Veuillez réapprovisionner votre compte";
+                    $this->load->view('errors/erreur_formulaire', $data);
+                    $this->load->view('client/header', $data);
+                    $this->load->view('client/profil', $data);
+                    $this->load->view('client/footer');
+                }
+            } else {
+                $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+                $this->load->view('errors/erreur_formulaire', $data);
+                $this->load->view('client/connexion');
+            }
         }
-        return $chaineAleatoire;
-    }
+
+        public function genererChaineAleatoire()
+        {
+            $longueur = 10;
+            $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $longueurMax = strlen($caracteres);
+            $chaineAleatoire = '';
+            for ($i = 0; $i < $longueur; $i++) {
+                $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+            }
+            return $chaineAleatoire;
+        }
+
+
 
 }
