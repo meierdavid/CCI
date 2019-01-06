@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a href="<?php echo base_url()?>CommercantCtrl/form_ajout_produit">Ajouter un produit</a>
         <a href="<?php echo base_url()?>BonReducCtrl/liste_bonreduc">Liste des bons de réduction</a>
         <a href="<?php echo base_url()?>CommercantCtrl/form_ajout_bonreduc">Ajouter un bon de réduction</a>
-        <a href="<?php echo base_url()?>CommercantCtrl/historique_commande">"Vos commandes en attente</a>
+        <a href="<?php echo base_url()?>CommercantCtrl/historique_commande">Vos commandes en attente</a>
         <a href="#" class="active">Votre Compte</a>
         <a href="<?php echo base_url()?>commercantCtrl/profil">Profil</a>
         <a href="#">Historique</a>
