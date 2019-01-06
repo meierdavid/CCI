@@ -23,7 +23,7 @@ class AdministrateurCtrl extends CI_Controller {
             $this->load->view('administrateur/index', $data);
             $this->load->view('administrateur/profil', $data);
         } else {
-            $this->load->view('pages/pageconnexion');
+            $this->load->view('client/connexion');
         }
     }
 
@@ -70,9 +70,9 @@ class AdministrateurCtrl extends CI_Controller {
 
 
   public function connexion() {
-    $this->load->helper('form', 'url');
-    $this->load->helper('cookie');
-    $this->load->library('form_validation');
+	$this->load->helper('form','url');
+	$this->load->helper('cookie');
+	$this->load->library('form_validation');
     $this->load->model('administrateur');
     $this->form_validation->set_rules('mailAdministrateur', 'Email', 'required');
 

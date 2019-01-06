@@ -19,7 +19,7 @@ class BonReducCtrl extends CI_Controller {
                 $this->ajout_bon();
             }
         } else {
-            $this->load->view('commercant/connexion');
+            $this->load->view('client/connexion');
         }
     }
 
@@ -93,7 +93,7 @@ class BonReducCtrl extends CI_Controller {
         else
         {
             $this->load->view('pages/deconnexion');
-            $this->load->view('pages/pageConnexionSellers');
+            $this->load->view('client/connexion');
         }
 
     }
@@ -115,7 +115,7 @@ class BonReducCtrl extends CI_Controller {
         } else {
             $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
             $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('commercant/connexion');
+            $this->load->view('client/connexion');
         }
     }
 
@@ -142,7 +142,7 @@ class BonReducCtrl extends CI_Controller {
         else {
             $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
             $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('commercant/connexion');
+            $this->load->view('client/connexion');
         }
 
     }

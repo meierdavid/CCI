@@ -35,7 +35,7 @@ class ProduitCtrl extends CI_Controller {
         $this->ajout_entreprise();
       }
     } else {
-      $this->load->view('commercant/connexion');
+      $this->load->view('client/connexion');
     }
   }
 
@@ -137,7 +137,7 @@ class ProduitCtrl extends CI_Controller {
     else
     {
       $this->load->view('pages/deconnexion');
-      $this->load->view('pages/pageConnexionSellers');
+      $this->load->view('client/connexion');
     }
 
   }
@@ -175,7 +175,7 @@ class ProduitCtrl extends CI_Controller {
     } else {
       $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
 			$this->load->view('errors/erreur_formulaire', $data);
-			$this->load->view('commercant/connexion');
+			$this->load->view('client/connexion');
     }
   }
 
@@ -366,7 +366,7 @@ public function affichage_produit($id) {
 	else {
 		  $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
 		  $this->load->view('errors/erreur_formulaire', $data);
-		  $this->load->view('commercant/connexion');
+		  $this->load->view('client/connexion');
 	}
 
   }

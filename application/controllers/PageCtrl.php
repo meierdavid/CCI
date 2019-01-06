@@ -51,7 +51,7 @@ class PageCtrl extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE)
             {
-                $this->load->view('commercant/connexion');
+                $this->load->view('client/connexion');
             }
             else
             {
@@ -66,7 +66,7 @@ class PageCtrl extends CI_Controller {
                 else{
                     $com = $this->commercant->selectByMail($_POST['mailCommercant']);
                     if( $com[0]->mdpCommercant != $_POST['mdp']){
-                        $this->load->view('commercant/connexion');
+                        $this->load->view('client/connexion');
                         echo "<div class='alert alert-danger text-center'>Mauvais mot de passe</div>";
                     }
                     else{
@@ -107,7 +107,7 @@ class PageCtrl extends CI_Controller {
         public function ConnexionSellers()
         {
 		$this->load->helper('url');
-		$this->load->view('pages/pageconnexionsellers');
+		$this->load->view('client/connexion');
 	    }
 
 }

@@ -8,7 +8,7 @@ class CommercantCtrl extends CI_Controller {
 	{
 		if($this->input->cookie('commercantCookie') != null){
 			$this->load->helper('url');
-			$this->load->view('commercant/connexion');
+			$this->load->view('client/connexion');
 		}
 	}
 
@@ -26,7 +26,7 @@ class CommercantCtrl extends CI_Controller {
 			$this->load->view('commercant/profil',$data);
 		}
 		else{
-			$this->load->view('pages/pageconnexion');
+			$this->load->view('client/connexion');
 		}
 	}
 
@@ -72,7 +72,7 @@ class CommercantCtrl extends CI_Controller {
 		else{
 			$data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
 			$this->load->view('errors/erreur_formulaire', $data);
-			$this->load->view('commercant/connexion');
+			$this->load->view('client/connexion');
 		}
 	}
 
@@ -123,7 +123,7 @@ class CommercantCtrl extends CI_Controller {
 	else {
 		$data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
 		$this->load->view('errors/erreur_formulaire', $data);
-		$this->load->view('commercant/connexion');
+		$this->load->view('client/connexion');
 	}
 }
 
@@ -264,7 +264,7 @@ public function form_ajout_produit(){
 	else{
 		$data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
 		$this->load->view('errors/erreur_formulaire', $data);
-		$this->load->view('commercant/connexion');
+		$this->load->view('client/connexion');
 	}
 }
 
@@ -289,7 +289,7 @@ public function form_ajout_produit(){
         else{
             $data['message'] = "ereur : Votre session a expiré, veuillez vous reconnecter";
             $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('commercant/connexion');
+            $this->load->view('client/connexion');
         }
     }
 
@@ -312,7 +312,7 @@ public function form_ajout_produit(){
                 }
             }
             else{
-                $this->load->view('commercant/connexion');
+                $this->load->view('client/connexion');
             }
         }
 
@@ -449,7 +449,7 @@ public function ajout_entreprise() {
     else
     {
       $this->load->view('pages/deconnexion');
-      $this->load->view('pages/pageConnexionSellers');
+      $this->load->view('client/connexion');
     }
 
 
@@ -553,7 +553,7 @@ public function ajout_entreprise() {
 	else {
 		  $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
 		  $this->load->view('errors/erreur_formulaire', $data);
-		  $this->load->view('commercant/connexion');
+		  $this->load->view('client/connexion');
 	}
 
   }
@@ -578,7 +578,7 @@ public function ajout_entreprise() {
     } else {
       $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
 			$this->load->view('errors/erreur_formulaire', $data);
-			$this->load->view('commercant/connexion');
+			$this->load->view('client/connexion');
     }
   }
 
@@ -666,7 +666,7 @@ public function connexion(){
 	$this->form_validation->set_rules('mailCommercant', 'Email', 'required');
 	if ($this->form_validation->run() == FALSE)
 	{
-		$this->load->view('commercant/connexion');
+		$this->load->view('client/connexion');
 	}
 	else
 	{
@@ -677,13 +677,13 @@ public function connexion(){
 		if ($com == null){
 			$data['message']="erreur : cette adresse email n'existe pas";
 			$this->load->view('errors/erreur_formulaire', $data);
-			$this->load->view('commercant/connexion');
+			$this->load->view('client/connexion');
 		}
 		else{
 			if(!password_verify($_POST['mdp'], $com[0]->mdpCommercant)){ //dé-hashage
 				$data['message']="erreur : mauvais mot de passe";
 				$this->load->view('errors/erreur_formulaire', $data);
-				$this->load->view('commercant/connexion');
+				$this->load->view('client/connexion');
 			}
 			else{
 				//mettre la connexion dans les cookies
@@ -793,7 +793,7 @@ public function inscription(){
 			$this->commercant->insert($data);
 			$data['message'] = "Vous avez été inscrit en tant que commerçant";
 			$this->load->view('errors/validation_formulaire', $data);
-			$this->load->view('commercant/connexion');
+			$this->load->view('client/connexion');
 		}
 		else {
 			$data['message']="erreur : la confirmation de Mot de passe ne correspond pas au premier";

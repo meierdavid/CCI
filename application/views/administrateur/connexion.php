@@ -1,60 +1,36 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="<?php echo base_url()."../template/css/Connexion.css"; ?>" rel="stylesheet" type="text/css" media="all" />
+
 <!------ Include the above in your HEAD tag ---------->
 
+<div class="text-center">
+	<div class="container login-container">
+            <div class="row">
+			<div class="col-md-6 login-form-2">
+                    <h3>Vous êtes Administrateur</h3>
+                    <?php 
+					$this->load->helper('form');
+					echo form_open('AdministrateurCtrl/connexion'); ?>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Votre adresse email" value="" name="mailAdministrateur" size="30" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Your Password *" value="" name="mdpAdministrateur" size="30" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Se connecter" />
+                        </div>
+                        <div class="form-group">
 
-<!--Pulling Awesome Font -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-5">
-            <div class="form-login" >
-            <h2 class="text-center"> CCI Hérault - Bienvenue cher Admin !</h2>
-
-            <?php // formulaire de connexion Admin ?>
-
-            <form role="form" method="post" action="<?=base_url('administrateurCtrl/connexion')?>">
-                <br>
-                    <div class="text-center">
-                    <h4>Entrez votre Pseudo d'Administrateur et votre mot de passe :</h4>
-                    </div>
-
-                    <br>
-
-                    <div class="form-group">
-                        <label name="mailAdministrateur" class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mailAdministrateur" value="" size="30" required/>
-                            <h6 style="color:red;"</h6>
-                    </div>
-
-                    <div class="form-group">
-                        <label name="mdpAdministrateur" class="control-label">Mot de passe</label>
-                        <input type="password" class="form-control" name="mdpAdministrateur" value="" size="30" required/>
-                    </div>
-
-
-
-                    <div class="text-center">
-                        <input class="btn btn-primary btn-success btn-block" type="submit" value="Connexion" /></div>
-                    <div class="text-center">
-                        <br>
-                        <h1 style="color:darkslategrey; "></h1>
-                    </div>
-                </form>
-            <br>
-            <br>
-
-            <div class="text-center">
-            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/index" role="button">Accueil</a>
-            </div>
-
-            <br>
-
-
-
+                            <a href="#" class="ForgetPwd" value="Login">Mot de passe oublié</a>
+                        </div>
+                    </form>
+					<div class="text-center">
+                            <a href="<?php echo base_url()?>AdministrateurCtrl/inscription" role="button" ><input type="submit" class="btnNew" value="[Nouvel Admin]" /><a>
+					</div>
+                </div>
             </div>
         </div>
-    </div>
 </div>

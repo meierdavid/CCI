@@ -6,8 +6,9 @@
 		<div class="row">
 		<div class="table-responsive">
 			<div class="text-center">
+			</br>
 			<h2>Liste des codes de réduction :</h2>
-			
+			</br>
 		</div>
 				
 				 <table class="table table-striped">

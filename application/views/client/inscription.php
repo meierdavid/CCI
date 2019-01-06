@@ -1,4 +1,4 @@
-
+<link href="<?php echo base_url()."../template/css/Connexion.css"; ?>" rel="stylesheet" type="text/css" media="all" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -70,11 +70,13 @@
                         <input type="checkbox" name="conditionsUtilisation" required/> Je m'engage à respecter les <a href="<?php echo base_url("ClientCtrl/condition_utilisation/");?>">conditions d'utilisation</a> de ce site
                     </div>
 
-                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Inscription" /></div>
+
+                    <div class="text-center"><input class="btnSubmit" type="submit" value="Inscription" /></div>
                     <div class="text-center">
                         <br>
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
+				
                 </form>
             <br>
             <br>

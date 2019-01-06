@@ -23,6 +23,7 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/footer');
         } else {
             $this->load->view('pages/deconnexion');
+			$this->load->view('client/connexion');
         }
     }
 
@@ -144,7 +145,7 @@ class ClientCtrl extends CI_Controller {
                 $this->client->insert($data);
                 $data['message'] = "Vous avez été inscrit en tant que client";
                 $this->load->view('errors/validation_formulaire', $data);
-                $this->load->view('pages/pageConnexion');
+                $this->load->view('client/connexion');
             } else {
                 $data['message'] = "erreur : la confirmation de Mot de passe ne correspond pas au premier";
                 $this->load->view('errors/erreur_formulaire', $data);

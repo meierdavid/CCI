@@ -24,7 +24,7 @@ class EntrepriseCtrl extends CI_Controller {
             $this->load->view('entreprise/index', $data);
             $this->load->view('entreprise/profil', $data);
         } else {
-            $this->load->view('pages/pageconnexion');
+            $this->load->view('client/connexion');
         }
     }
 
@@ -46,7 +46,7 @@ class EntrepriseCtrl extends CI_Controller {
         } else {
             $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
             $this->load->view('errors/erreur_formulaire', $data);
-            $this->load->view('commercant/connexion');
+            $this->load->view('c/connexion');
         }
     }*/
 
@@ -86,7 +86,7 @@ class EntrepriseCtrl extends CI_Controller {
             $this->load->view('entreprise/index', $data);
             $this->load->view('entreprise/liste_produit', $data);
         } else {
-            $this->load->view('pages/pageconnexion');
+            $this->load->view('client/connexion');
         }
     }
 
