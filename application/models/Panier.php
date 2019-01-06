@@ -128,6 +128,12 @@
                 ->update($this->table);
         }
 
+        public function updateUsePoint($id, $bool) {
+            $this->load->database();
+            $this->db->set('pointPanier', $bool)
+                ->where('idPanier', $id)
+                ->update($this->table);
+        }
 
     }
 ?>
