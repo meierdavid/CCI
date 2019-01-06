@@ -163,10 +163,8 @@ class ProduitCtrl extends CI_Controller {
     $cookie = $this->input->cookie('clientCookie');
         $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
-    var_dump("detail");
     if (isset($_COOKIE['commercantCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
-        var_dump("produit");
         $data['produit'] = $this->produit->selectById($id);
         $this->load->view('commercant/index');
         $this->load->view('produit/detail', $data);
@@ -193,7 +191,6 @@ public function affichage_produit($id) {
     $data['entreprises_header'] = $this->entreprise->selectAll();
     if (isset($_COOKIE['clientCookie']) ) {
       if ($this->produit->selectById($id) != Null) {
-        var_dump("produit");
         $data['produit'] = $this->produit->selectById($id);
         $data['entreprise'] = $this->entreprise->selectById($data['produit'][0]->numSiret);
         $data['note']=$this->moyenne_note_produit(($data['produit'][0]->idProduit));
@@ -287,7 +284,6 @@ public function affichage_produit($id) {
 	  }
 	  //SI IL N'Y A PAS DE NOUVELLE IMAGE
 	  if (!(isset($_FILES['imageProduit']['name']) && !empty($_FILES['imageProduit']['name']))) {
-		  var_dump("detecte pas image");
 		  // SI IL Y EN AVAIT UNE AVANT
 		  if($produit[0]->imageProduit != "null" ){
 				$data = array(
@@ -324,7 +320,6 @@ public function affichage_produit($id) {
 
 	  //SI IL Y A UNE NOUVELLE IMAGE
 	  else {
-		  var_dump("detecte image");
 		  $config = array(
           'upload_path' => "./assets/image/Produits",
           'allowed_types' => "gif|jpg|png|jpeg|pdf",
@@ -481,7 +476,6 @@ public function affichage_produit($id) {
 
   public function search() {
     $i=0;
-    var_dump($_POST);
     $this->load->helper('form', 'url','cookie');
     $this->load->model('produit');
     $this->load->model('entreprise');
@@ -523,7 +517,6 @@ public function affichage_produit($id) {
     $config['width'] = 150;
     $config['height'] = 150;
     $this->image_lib->initialize($config);
-    var_dump("modif image");
     $this->image_lib->resize();
     $this->liste_produit();
   }
@@ -554,7 +547,6 @@ public function affichage_produit($id) {
 
   public function prix_a_afficher($idProduit){
 	  $this->load->model('produit');
-	  var_dump ($this->produit->prix_a_afficher($idProduit));
           return ($this->produit->prix_a_afficher($idProduit));
   }
 

@@ -26,7 +26,6 @@ class PanierCtrl extends CI_Controller
             $this->load->view('client/header', $data);
             $this->load->view('client/adresse', $data);
             $this->load->view('client/footer');
-            var_dump($data);
         } else {
             $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
             $this->load->view('errors/erreur_formulaire', $data);
@@ -60,7 +59,6 @@ class PanierCtrl extends CI_Controller
                 $this->load->view('client/header', $data);
                 $this->load->view('panier/liste_panier', $data);
                 $this->load->view('client/footer');
-                var_dump($data);
             } else {
                 $data['message'] = "erreur : Vous n'avez pas de produits dans votre panier";
                 $this->load->view('errors/erreur_formulaire', $data);
@@ -104,7 +102,6 @@ class PanierCtrl extends CI_Controller
                     if ($data['produit'][0]->nbDispoProduit >= $_POST['quantite']) {
                         $prix = $this->produit->prix_a_afficher($idProduit) * $_POST['quantite'];
                         $date = date("Y-m-d H:i:s");
-                        var_dump($date);
                         $data['panier'] = $this->panier->selectByIdClient($idClient);
 
                         if ($data['panier'] == null) { //panier inexistant : on le créé

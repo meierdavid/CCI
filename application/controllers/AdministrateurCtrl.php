@@ -10,7 +10,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->helper('cookie');
     $this->load->view('administrateur/index');
   }
-  
+
   public function profil() {
         $this->load->helper('cookie');
         $this->load->helper('url');
@@ -194,7 +194,6 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->model('administrateur');
         $data['administrateur'] = $this->administrateur->selectByMail($_COOKIE['administrateurCookie']);
         $supAdmin = $data['administrateur'][0]->superAdministrateur;
-        var_dump($supAdmin);
         if ($supAdmin == FALSE) {
             $data['message'] = "Vous n'avez pas les droits pour effectuer cette action, veuillez contacter le super administrateur";
             $this->load->view('errors/erreur_formulaire', $data);
@@ -208,7 +207,7 @@ class AdministrateurCtrl extends CI_Controller {
         $this->load->view('administrateur/index');
         $this->load->view('administrateur/liste_administrateur', $data);
     }
-    
+
     public function modifier_administrateur() {
         $this->load->helper('form', 'url');
         $this->load->library('form_validation');
@@ -226,7 +225,7 @@ class AdministrateurCtrl extends CI_Controller {
         $id = $data['administrateur'][0]->idAdministrateur;
         if ($this->form_validation->run() == FALSE) {
             $this->liste_administrateur();
-        } 
+        }
         else {
             $data = array(
                 "prenomAdministrateur" => htmlspecialchars($_POST['prenomAdministrateur']),
@@ -403,7 +402,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->client->delete($id);
     $this->liste_client();
     echo "client Supprimé";
-    
+
   }
 
   public function supprimer_commercant($id) {

@@ -71,7 +71,6 @@ class BonReduc extends CI_Model{
 
     public function update($id, $data) {
         $this->load->database();
-        var_dump($data);
         $this->db->set('libelleBon', $data['libelleBon'])
             ->set('numSiret', $data['numSiret'])
             ->set('pourcentageBon', $data['pourcentageBon'])

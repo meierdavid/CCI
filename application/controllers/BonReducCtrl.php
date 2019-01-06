@@ -103,14 +103,11 @@ class BonReducCtrl extends CI_Controller {
         $this->load->helper('form', 'url');
         $this->load->helper('cookie');
         $this->load->library('form_validation');
-        var_dump("detail");
         if (isset($_COOKIE['commercantCookie']) ) {
             if ($this->bonreduc->selectById($id) != Null) {
-                var_dump("bonreduc");
                 $data['bonreduc'] = $this->bonreduc->selectById($id);
                 $this->load->view('commercant/index');
                 $this->load->view('bonreduc/detail', $data);
-                var_dump($data);
             } else {
                 //ereur le produit n'existe pas
                 $this->liste_bonreduc();
@@ -147,6 +144,6 @@ class BonReducCtrl extends CI_Controller {
             $this->load->view('errors/erreur_formulaire', $data);
             $this->load->view('commercant/connexion');
         }
-        
+
     }
 }

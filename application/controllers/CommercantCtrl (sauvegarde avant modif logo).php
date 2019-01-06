@@ -174,17 +174,14 @@ public function form_ajout_produit(){
 	$this->load->model('entreprise');
 	$this->load->helper('form','url');
 	$this->load->helper('cookie');
-	var_dump($_POST);
 	$this->load->library('form_validation');
 
 	if($this->input->cookie('commercantCookie') != null){
-		var_dump("cookie");
 		$varMail= $this->input->cookie('commercantCookie');
 		$data['commercant']=$this->commercant->selectByMail($varMail);
 		$data = $this->liste_entreprise_dropbox();
 		if ($this->form_validation->run() == FALSE)
 		{
-			var_dump("form");
 			$this->load->view('commercant/index',$data);
 			$this->load->view('produit/ajout_produit', $data);
 		}
@@ -237,7 +234,7 @@ public function ajout_entreprise() {
 	$this->form_validation->set_rules('villeEntreprise', 'Ville', 'alpha_dash');
 	$this->form_validation->set_rules('TempsReservMax', 'Temps maximum de réservation en heure', 'integer');
 
-	
+
 	if($this->input->cookie('commercantCookie') != null){
 		$varMail= $this->input->cookie('commercantCookie');
 		$data['commercant']=$this->commercant->selectByMail($varMail);

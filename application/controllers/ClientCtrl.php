@@ -15,7 +15,6 @@ class ClientCtrl extends CI_Controller {
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
 
-        var_dump($_COOKIE['clientCookie']);
         if (isset($_COOKIE['clientCookie'])) {
             $varmail = $this->input->cookie('clientCookie');
             $data['client'] = $this->client->selectByMail($varmail);
@@ -105,8 +104,6 @@ class ClientCtrl extends CI_Controller {
                 $this->load->view('client/profil', $data);
                 $this->load->view('client/footer');
             }
-        } else {
-            var_dump($_COOKIE);
         }
 
         // modifie le profil à l'envoi du formulaire
@@ -444,7 +441,6 @@ class ClientCtrl extends CI_Controller {
             $this->load->view('client/header', $data);
             $this->load->view('bonreduc/liste_bonreduc', $data);
             $this->load->view('client/footer');
-            var_dump($data);
         }
     }
     public function payer_entreprise($idPanier, $idProduit){

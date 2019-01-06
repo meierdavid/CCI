@@ -10,7 +10,6 @@
                         <input type="text" class="form-control" name="numSiret" value="<?php echo  $entreprise[0]->numSiret; ?>" size="30" hidden/>
                     </div>
 					<div class="table-responsive">
-					<?php var_dump($entreprise[0]->logoEntreprise); ?>
 						<td><img src="http://localhost/cci/index.php/../assets/image/logos/<?php echo $entreprise[0]->logoEntreprise; ?>"  class="img-thumbnail"></td>
 					</div>
 					<div class="form-group">

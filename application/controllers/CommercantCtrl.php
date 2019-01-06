@@ -173,7 +173,7 @@ public function valider_commande($idPanier, $idProduit){
     $numSiret = $data['entreprise'][0]->numSiret;
     $this->commander->updateReception($idPanier,$idProduit,'1');
     $data['commander'] =$this->commander->selectById($idPanier,$idProduit);
-    
+
     //payer entreprise
     $prix = $this->produit->prix_a_afficher($idProduit) * $data['commander'][0]->quantiteProd;
     $nouveauSoldeEntreprise = $data['entreprise'][0]->soldeEntreprise + $prix;
@@ -226,8 +226,8 @@ public function historique_commande(){
     foreach ($data['entreprises'] as $entreprise){
         $data['commandes'] = $this->entreprise->selectCommandes($entreprise->numSiret);
          // select la date et le code de retrait de la commande SQL
-        
-        $this->load->view('commercant/historique_entreprise',$data);   
+
+        $this->load->view('commercant/historique_entreprise',$data);
     }
 }
 
@@ -249,17 +249,14 @@ public function form_ajout_produit(){
 	$this->load->model('entreprise');
 	$this->load->helper('form','url');
 	$this->load->helper('cookie');
-	var_dump($_POST);
 	$this->load->library('form_validation');
 
 	if($this->input->cookie('commercantCookie') != null){
-		var_dump("cookie");
 		$varMail= $this->input->cookie('commercantCookie');
 		$data['commercant']=$this->commercant->selectByMail($varMail);
 		$data = $this->liste_entreprise_dropbox();
 		if ($this->form_validation->run() == FALSE)
 		{
-			var_dump("form");
 			$this->load->view('commercant/index',$data);
 			$this->load->view('produit/ajout_produit', $data);
 		}
@@ -320,13 +317,13 @@ public function form_ajout_produit(){
         }
 
 public function ajout_entreprise() {
-	
+
     $this->load->helper('form','url');
 	$this->load->helper('cookie');
 	$this->load->library('form_validation');
 	$this->load->model('entreprise');
 	$this->load->model('commercant');
-	
+
 	$this->form_validation->set_rules('numSiret', 'n° SIRET', 'required');
 	$this->form_validation->set_rules('nomEntreprise', "Nom de l'entreprise", 'alpha_numeric_spaces');
 	$this->form_validation->set_rules('codePEntreprise', 'Code postale', 'integer');
@@ -454,13 +451,13 @@ public function ajout_entreprise() {
       $this->load->view('pages/deconnexion');
       $this->load->view('pages/pageConnexionSellers');
     }
-	
+
 
   }
-  
-  
-  
-  
+
+
+
+
       public function modifier_entreprise() {
     $this->load->helper('form', 'url');
     $this->load->library('form_validation');
@@ -468,15 +465,12 @@ public function ajout_entreprise() {
     if (isset($_COOKIE['commercantCookie'])) {
 		$id=$_POST['numSiret'];
 	  $entreprise = $this->entreprise->selectById($id);
-	  var_dump($entreprise);
 	  $varMail = $this->input->cookie('commercantCookie');
       $data['commercant'] = $this->commercant->selectByMail($varMail);
 
 	  //SI IL N'Y A PAS DE NOUVELLE IMAGE
 	  if (!(isset($_FILES['logoEntreprise']['name']) && !empty($_FILES['logoEntreprise']['name']))) {
-		  var_dump("detecte pas image");
-		  var_dump($_POST);
-		  // SI IL Y EN AVAIT UNE AVANT 
+		  // SI IL Y EN AVAIT UNE AVANT
 		  if($entreprise[0]->logoEntreprise != "null" ){
 			$data = array(
 				"numSiret" => htmlspecialchars($_POST['numSiret']),
@@ -492,7 +486,7 @@ public function ajout_entreprise() {
 		  );
 		  }
 			else {
-			//SI IL N'Y EN AVAIT PAS AVANT 
+			//SI IL N'Y EN AVAIT PAS AVANT
 				$data = array(
 				"numSiret" => htmlspecialchars($_POST['numSiret']),
                 "nomEntreprise" => htmlspecialchars($_POST['nomEntreprise']),
@@ -511,10 +505,9 @@ public function ajout_entreprise() {
 		  $this->load->view('errors/validation_formulaire', $data);
 		  $this->liste_entreprise();
 	  }
-	  
-	  //SI IL Y A UNE NOUVELLE IMAGE	
+
+	  //SI IL Y A UNE NOUVELLE IMAGE
 	  else {
-		  var_dump("detecte image");
 		  $config = array(
           'upload_path' => "./assets/image/Logos",
           'allowed_types' => "gif|jpg|png|jpeg|pdf",
@@ -548,7 +541,7 @@ public function ajout_entreprise() {
                 "tempsReservMax" => htmlspecialchars($_POST['tempsReservMax']),
                 "siteWebEntreprise" => htmlspecialchars($_POST['siteWebEntreprise']),
 				"logoEntreprise" => htmlspecialchars($file_data['file_name'])
-            );		  
+            );
 			$this->entreprise->update($id, $data);
 			  $data['entreprise'] = $this->entreprise->selectById($id);
 			  $data['message'] = "L'entreprise a été modifié avec succès";
@@ -562,10 +555,10 @@ public function ajout_entreprise() {
 		  $this->load->view('errors/erreur_formulaire', $data);
 		  $this->load->view('commercant/connexion');
 	}
-	
+
   }
-  
-  
+
+
   public function detail_entreprise($id) {
     $this->load->model('commercant');
     $this->load->helper('form', 'url');
@@ -573,10 +566,8 @@ public function ajout_entreprise() {
     $this->load->library('form_validation');
     $this->load->model('entreprise');
     $data['entreprises_header'] = $this->entreprise->selectAll();
-    var_dump("detail");
     if (isset($_COOKIE['commercantCookie']) ) {
       if ($this->entreprise->selectById($id) != Null) {
-        var_dump("entreprise");
         $data['entreprise'] = $this->entreprise->selectById($id);
         $this->load->view('commercant/index');
         $this->load->view('entreprise/profil', $data);
@@ -590,11 +581,11 @@ public function ajout_entreprise() {
 			$this->load->view('commercant/connexion');
     }
   }
-  
-  
-  
-  
-  
+
+
+
+
+
   public function modifier_logo($logoEntreprise){
     $this->load->library('image_lib');
     $config['image_library'] = 'gd2';
@@ -608,8 +599,8 @@ public function ajout_entreprise() {
     $this->image_lib->resize();
     $this->liste_entreprise();
   }
-  
-  
+
+
   public function supprimer_logo($id){
 	$this->load->model('entreprise');
 	$entreprise = $this->entreprise->selectById($id);
@@ -624,15 +615,15 @@ public function ajout_entreprise() {
                 "tempsReservMax" => htmlspecialchars($entreprise[0]->tempsReservMax),
                 "siteWebEntreprise" => htmlspecialchars($entreprise[0]->siteWebEntreprise),
 			   "logoEntreprise" => htmlspecialchars(NULL),
-            );	
+            );
 	$this->entreprise->update($id, $data);
 	$data['entreprise'] = $this->entreprise->selectById($id);
 	$data['message'] = "Le logo a été supprimée avec succès";
 	$this->load->view('errors/validation_formulaire', $data);
     $this->liste_entreprise();
   }
-  
-  
+
+
 // Cette fonction est en commentaire car le but était d'ajouter un produit à une entreprise
 // OR ce sont les sous produit qui sont lié à une entreprise
 /* public function ajout_produit() {

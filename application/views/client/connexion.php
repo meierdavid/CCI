@@ -14,7 +14,7 @@
             <div class="form-login" >
             <h2 class="text-center"> CCI Hérault - Bienvenue cher Client !</h2>
 
-            <?php var_dump($_COOKIE);
+            <?php 
             echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
             <?php echo form_open('ClientCtrl/connexion'); ?>
@@ -60,7 +60,7 @@
             <br>
 
              <div class="text-center">
-            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/choix_inscription" role="button">Vous êtes pas inscrit ? Cliquez ici !</a>
+            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/choix_inscription" role="button">Vous n'êtes pas inscrit ? Cliquez ici !</a>
             </div>
 
             <br>

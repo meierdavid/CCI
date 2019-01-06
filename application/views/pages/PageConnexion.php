@@ -59,7 +59,7 @@
             <br>
 
              <div class="text-center">
-            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/choix_inscription" role="button">Vous êtes pas inscrit ? Cliquez ici !</a>
+            <a class="btn btn-primary" href="<?php echo base_url()?>PageCtrl/choix_inscription" role="button">Vous n'êtes pas inscrit ? Cliquez ici !</a>
             </div>
 
             </div>
