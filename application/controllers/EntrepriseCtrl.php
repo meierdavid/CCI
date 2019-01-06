@@ -65,7 +65,7 @@ class EntrepriseCtrl extends CI_Controller {
     $data['entreprises_header'] = $this->entreprise->selectAll();
     
     $this->load->view('client/header',$data);
-    $this->load->view('entreprise/affichage_entreprises',$data);
+    $this->load->view('entreprise/liste_entreprises',$data);
     $this->load->view('client/footer');
     }else{
         $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";

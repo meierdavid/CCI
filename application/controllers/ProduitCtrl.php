@@ -219,7 +219,7 @@ public function affichage_produit($id) {
     $data['client'] = $this->client->selectByMail($cookie);
     $data['entreprises_header'] = $this->entreprise->selectAll();
     $this->load->view('client/header',$data);
-    $this->load->view('produit/categorie_produit',$data);
+    $this->load->view('produit/liste_categories',$data);
     $this->load->view('client/footer');
     }else{
         $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
