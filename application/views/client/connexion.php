@@ -45,7 +45,7 @@
                         </div>
                     </form>
 					<div class="text-center">
-                            <a href="<?php echo base_url()?>ClientCtrl/inscription" role="button" ><input type="submit" class="btnNew" value="Vous êtes nouveaux ?" /><a>
+                            <a href="<?php echo base_url()?>CommercantCtrl/inscription" role="button" ><input type="submit" class="btnNew" value="Vous êtes nouveaux ?" /><a>
 					</div>
                 </div>
             </div>
