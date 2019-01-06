@@ -79,7 +79,8 @@ CREATE TABLE PANIER(
 	paiementPanier     TINYINT  NOT NULL ,
 	finaliserPanier    TINYINT  NOT NULL ,
 	codePromo         TINYINT DEFAULT 0 ,
-    chainePanier     varchar(12) NOT NULL,
+	pointPanier         TINYINT DEFAULT 0 ,
+	chainePanier     varchar(12) NOT NULL,
 	idClient              INT  NOT NULL ,
 	CONSTRAINT PANIER_PK PRIMARY KEY (idPanier),
 	CONSTRAINT PANIER_CLIENT_FK FOREIGN KEY (idClient) REFERENCES CLIENT(idClient)
