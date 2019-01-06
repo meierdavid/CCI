@@ -14,9 +14,9 @@
         <div class="col-md-3 col-sm-6">
             <div class="product-grid7">
                 <div class="product-image7">
-                    <a href="#">
+                    
                         <img class="pic-1" width="150" height="150" src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>" width=5 height=150>
-                    </a>
+                    
                     <ul class="social">
                         <li><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>" class="fa fa-search"></a></li>
                         <li><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>" class="fa fa-shopping-bag"></a></li>
