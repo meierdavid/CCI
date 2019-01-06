@@ -211,7 +211,25 @@ public function affichage_produit($id) {
 			$this->load->view('client/connexion');
     }
   }
-
+  public function produit_all(){
+      $this->load->model('produit','entreprise');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    if (isset($_COOKIE['clientCookie']) ) {
+    $cookie = $this->input->cookie('clientCookie');
+    $data['client'] = $this->client->selectByMail($cookie);
+    $data['entreprises_header'] = $this->entreprise->selectAll();
+    $this->load->view('client/header',$data);
+    $this->load->view('produit/categorie_produit',$data);
+    $this->load->view('client/footer');
+    }else{
+        $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+        $this->load->view('errors/erreur_formulaire', $data);
+        $this->load->view('client/connexion');
+    }
+  }
   public function comparer_produit($id){
     $this->load->model('produit','entreprise');
     $this->load->helper('form', 'url');

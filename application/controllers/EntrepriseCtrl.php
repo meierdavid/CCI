@@ -53,10 +53,29 @@ class EntrepriseCtrl extends CI_Controller {
 	
 
   
-  
-  
+   public function magasin_all(){
+    $this->load->model('entreprise');
+    $this->load->helper('form', 'url');
+    $this->load->helper('cookie');
+    $this->load->library('form_validation');
+    $this->load->model('entreprise');
+    if (isset($_COOKIE['clientCookie']) ) {
+    $cookie = $this->input->cookie('clientCookie');
+    $data['client'] = $this->client->selectByMail($cookie);
+    $data['entreprises_header'] = $this->entreprise->selectAll();
+    
+    $this->load->view('client/header',$data);
+    $this->load->view('entreprise/affichage_entreprises',$data);
+    $this->load->view('client/footer');
+    }else{
+        $data['message'] = "erreur : Votre session a expiré, veuillez vous reconnecter";
+        $this->load->view('errors/erreur_formulaire', $data);
+        $this->load->view('client/connexion');
+    }
+   }
 
-    public function liste_produit($num) {
+
+       public function liste_produit($num) {
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->model('entreprise');

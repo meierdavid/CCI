@@ -42,20 +42,20 @@
 	    <div class="container">
             <div class="banner_bottom_agile_info_inner_w3ls">
     	           <div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
-						<figure class="effect-roxy">
-							<img src="<?php echo base_url()."../assets/image/bottom1.jpg"; ?>" alt=" " class="img-responsive" />
+						<a href="<?php echo base_url("ProduitCtrl/produit_all"); ?>"><figure class="effect-roxy">
+                                                    <img src="<?php echo base_url()."../assets/image/bottom1.jpg"; ?>" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>P</span>roduits</h3>
 							</figcaption>
-						</figure>
+                                                    </figure></a>
 					</div>
 					 <div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
-						<figure class="effect-roxy">
-							<img src="<?php echo base_url()."../assets/image/bottom2.jpg"; ?>" alt=" " class="img-responsive" />
+						<a href="<?php echo base_url("EntrepriseCtrl/magasin_all"); ?>"><figure class="effect-roxy">
+                                                    <img src="<?php echo base_url()."../assets/image/bottom2.jpg"; ?>" alt=" " class="img-responsive" />
 							<figcaption>
 								<h3><span>M</span>agasins</h3>
 							</figcaption>
-						</figure>
+						</figure></a>
 					</div>
 					<div class="clearfix"></div>
 		    </div>
