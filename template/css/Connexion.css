@@ -12,11 +12,11 @@
 }
 .login-form-1 h3{
     text-align: center;
-    color: #333;
+    color: #10d3ce;
 }
 .login-form-2{
     padding: 5%;
-    background: #0062cc;
+    background: #10d3c2;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-2 h3{
@@ -25,7 +25,7 @@
 }
 .login-form-3{
     padding: 0%;
-    background: #0062cc;
+    background: #10d3c2;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-3 h3{
@@ -48,7 +48,7 @@
 }
 .login-form-4 h3{
     text-align: center;
-    color: #333;
+    color: #10d3ce;
 }
 .login-form-3 h5{
 	line-height: 20%;
@@ -70,27 +70,27 @@
     cursor: pointer;
 	font-weight: 600;
     color: #fff;
-    background-color: #0062cc;
+    background-color: #10d3ce;
 }
 .login-form-1 .btnSubmit{
     font-weight: 600;
     color: #fff;
-    background-color: #0062cc;
+    background-color: #10d3ce;
 }
 .login-form-2 .btnSubmit{
     font-weight: 600;
-    color: #0062cc;
+    color: #10d3ce;
     background-color: #fff;
 }
 .login-form-3 .btnSubmit{
     font-weight: 600;
-    color: #0062cc;
+    color: #10d3ce;
     background-color: #fff;
 }
 .login-form-4 .btnSubmit{
     font-weight: 600;
     color: #fff;
-    background-color: #0062cc;
+    background-color: #10d3ce;
 }
 .login-form-2 .ForgetPwd{
     color: #fff;
@@ -98,7 +98,7 @@
     text-decoration: none;
 }
 .login-form-1 .ForgetPwd{
-    color: #0062cc;
+    color: #10d3ce;
     font-weight: 600;
     text-decoration: none;
 }
@@ -118,10 +118,10 @@
 .login-form-1 .btnNew{
     font-weight: 600;
     color: #fff;
-    background-color: #0062cc;
+    background-color: #10d3ce;
 }
 .login-form-2 .btnNew{
     font-weight: 600;
-    color: #0062cc;
+    color: #10d3ce;
     background-color: #fff;
 }
