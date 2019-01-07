@@ -10,18 +10,33 @@ class PageCtrl extends CI_Controller {
         $this->load->helper('form');
         $this->load->view('client/connexion');
         }
-         public function contact()
+
+        public function contact()
         {
 		$cookie=$this->input->cookie('clientCookie');
 		$data['client']=$this->client->SelectByMail($cookie);
 		$data['entreprises_header'] = $this->entreprise->selectAll();
         $this->load->helper('url');
         $this->load->helper('form');
-        $data['message'] = "Votre demande de contact est prise en compte.";
-        $this->load->view('errors/validation_formulaire', $data);
         $this->load->view('client/header',$data);
         $this->load->view('pages/contact');
         $this->load->view('client/footer');
+        }
+
+        public function envoi()
+        {
+            $cookie=$this->input->cookie('clientCookie');
+            $data['client']=$this->client->SelectByMail($cookie);
+            $data['entreprises_header'] = $this->entreprise->selectAll();
+            $this->load->helper('url');
+            $this->load->helper('form');
+            $data['message'] = "Votre demande de contact est prise en compte.";
+            $this->load->view('errors/validation_formulaire', $data);
+            $this->load->view('client/header',$data);
+            $this->load->view('pages/contact');
+            $this->load->view('client/footer');
+            $data['message'] = null;
+
         }
 		
 		public function aide()

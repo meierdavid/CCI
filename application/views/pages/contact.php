@@ -56,8 +56,9 @@
             </div>
 			<div class="text-center">
             <div class="col-12">
-              <a href="<?php echo base_url("PageCtrl/contact/");?>"></a>
-              <button class="btn btn-success" type="submit">Envoyer</button>
+              <a href="<?php echo base_url();?>PageCtrl/envoi/"
+                <button class="btn btn-success" type="submit">Envoyer</button>
+                </a>
             </div>
 			</div>
 			<br>

@@ -15,7 +15,7 @@
 					<h4>Plan du <span>site</span> </h4>
 					<ul>
 						<li><a href="index.html">Accueil</a></li>
-						<li>Catégories</li>
+						<li><a href="<?php echo base_url("ProduitCtrl/produit_all/"); ?>">Catégories</a></li>
 						<li><a href="<?php echo base_url("ProduitCtrl/soldes/"); ?>">Soldes</a></li>
 						<li><a href="<?php echo base_url("BonReducCtrl/liste_bonreduc_client/"); ?>">Codes de réduction</a></li>
 						<li><a href="<?php echo base_url("PageCtrl/contact/"); ?>">Contacts</a></li>
@@ -54,7 +54,7 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-		<p class="copy-right">&copy 2018 Herault E-Commerce. Tous droits reservés | Design par <a href="http://w3layouts.com/">W3layouts</a></p>
+		<p class="copy-right">&copy 2018 Herault E-Commerce. Tous droits reservés | Edité par Mathis BOURRAT, David MEIER, Adam MEGHERAT, Clément TEMIL, Camille THOMAS et <a href="http://w3layouts.com/">W3layouts</a></p>
 	</div>
 </div>
 <!-- //footer -->

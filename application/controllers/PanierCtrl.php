@@ -185,7 +185,7 @@ class PanierCtrl extends CI_Controller
 
             if ($data['panier'] != null) {
 
-                if ($data['panier'][0]->pointPanier == 0 && $data['panier'][0]->codePanier == 0) {
+                if ($data['panier'][0]->pointPanier == 0 && $data['panier'][0]->codePromo == 0) {
                     $idPanier = $data['panier'][0]->idPanier;
                     $data['commander'] = $this->commander->selectByIdPanier($idPanier);
                     $data['produit'] = $this->produit->selectById($data['commander'][0]->idProduit);
