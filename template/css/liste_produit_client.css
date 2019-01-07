@@ -1,7 +1,7 @@
 .product-grid7{font-family:'Roboto Slab',serif;position:relative;z-index:1}
 .product-grid7 .product-image7{border:1px solid rgba(0,0,0,.1);overflow:hidden;perspective:1500px;position:relative;transition:all .3s ease 0s}
 .product-grid7 .product-image7 a{display:block}
-.product-grid7 .product-image7 img{width:300px;height:300px;}
+.product-grid7 .product-image7 img{width:300px;height:250px;}
 .product-grid7 .pic-1{opacity:1;transition:all .5s ease-out 0s}
 .product-grid7 .pic-2{opacity:0;transform:rotateY(-90deg);position:absolute;top:0;left:0;transition:all .5s ease-out 0s}
 .product-grid7:hover .pic-2{opacity:1;transform:rotateY(0)}

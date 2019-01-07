@@ -125,3 +125,32 @@
     color: #10d3ce;
     background-color: #fff;
 }
+.btnAccueil
+{
+    width: 25%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form-1 .btnAccueil{
+    font-weight: 600;
+    color: #10d3ce;
+    background-color: #fff;
+}
+.login-form-2 .btnAccueil{
+    font-weight: 600;
+    color: #10d3ce;
+    background-color: #fff;
+}
+.login-form-3 .btnAccueil{
+    font-weight: 600;
+    color: #10d3ce;
+    background-color: #fff;
+}
+.login-form-4 .btnAccueil{
+   font-weight: 600;
+    color: #fff;
+    background-color: #10d3ce;
+}

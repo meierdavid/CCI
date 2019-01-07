@@ -33,6 +33,7 @@
                             <option  value="aliments">Aliments</option>
                             <option  value="vetements">Vêtements</option>
                             <option  value="chaussures">Chaussures</option>
+                            <option  value="accessoires">Accessoires</option>
                             <option  value="beaute">Beauté</option>
                             <option  value="sport">Sport</option>
                             <option  value="informatique">Informatique</option>
