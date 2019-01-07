@@ -515,8 +515,8 @@ public function affichage_produit($id) {
     $config['image_library'] = 'gd2';
     $config['source_image'] = './assets/image/Produits/'.$imageProduit;
     $config['maintain_ratio'] = FALSE;
-    $config['width'] = 150;
-    $config['height'] = 150;
+    $config['width'] = 900;
+    $config['height'] = 900;
     $this->image_lib->initialize($config);
     $this->image_lib->resize();
     $this->liste_produit();

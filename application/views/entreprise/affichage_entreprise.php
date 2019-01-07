@@ -103,20 +103,27 @@
                       </tr>
                       <tr>
                         <td>Email :</td>
-                        <td><?php 
+                        <td><a href="mailto:<?php 
 						$this->load->model('faire_partie');
 						$this->load->model('commercant');
 						$idcommercant=$this->faire_partie->selectByNumSiret($entreprise[0]->numSiret);
 						$commercant=$this->commercant->selectById($idcommercant[0]->idCommercant);
 						echo $commercant[0]->mailCommercant
+						?>"><?php 
+						
+						echo $commercant[0]->mailCommercant
 						?>	</td>
                       </tr>
                         <td>Numéro de Téléphone:</td>
-                        <td><a href="tel:+"><?php 
+                        <td><a href="tel:0<?php 
 						$this->load->model('faire_partie');
 						$this->load->model('commercant');
 						$idcommercant=$this->faire_partie->selectByNumSiret($entreprise[0]->numSiret);
 						$commercant=$this->commercant->selectById($idcommercant[0]->idCommercant);
+						echo "0" . $commercant[0]->telCommercant
+						?>">
+						<?php 
+						
 						echo "0" . $commercant[0]->telCommercant
 						?>
                         </a></td>
