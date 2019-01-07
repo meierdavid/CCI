@@ -1,94 +1,102 @@
-
+<link href="<?php echo base_url()."../template/css/Profil_utilisateur.css"; ?>" rel="stylesheet" type="text/css" media="all" />
+<script src="<?php echo base_url()."../template/js/Profil_utilisateur.js"; ?>"></script>
 <!------ Include the above in your HEAD tag ---------->
 
+<div class="container">
+      <div class="row">
 
-<!--Pulling Awesome Font -->
-    <div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-5">
-            <div class="form-login" >
-                <br>
-                
-
-                <h2>Votre Profil</h2>
-
-                    <br>
-                    <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
-                    <?php echo form_open('ClientCtrl/modifier'); ?>
-                    <div class="form-group">
-                        <label class="control-label">Prénom</label>
-                        <input type="text" class="form-control" name="prenomClient" value="<?php echo  $client[0]->prenomClient; ?>" size="30" required/> 
-                            <h6 style="color:red;"</h6>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="control-label">Nom</label>
-                        <input type="text" class="form-control" name="nomClient" value=" <?php echo $client[0]->nomClient; ?>" size="30" required/>
-                    </div>    
-                    <div class="form-group">
-                        <label class="control-label">Mail</label>
-                        <input type="text" class="form-control" name="mailClient" value="<?php echo $client[0]->mailClient; ?>" size="30" required/> 
-                            <h6 style="color:red;"</h6>
-                    </div>  
-                    
-                    <div class="form-group">
-                        <label class="control-label">Mot de passe</label>
-                        <input type="password" class="form-control" name="mdpClient" value="" size="30" required/>
-                    </div>    
-                    <div class="form-group">
-                        <label class="control-label">Mot de passe2</label>
-                        <input type="password" class="form-control" name="mdpClient2" value="" size="30" required/>
-                    </div>    
-                    <div class="form-group">
-                        <label class="control-label">Adresse</label>
-                        <input type="text" class="form-control" name="adresseClient" value="<?php echo $client[0]->adresseClient; ?>" size="30" required/>
-                    </div>    
-                    <div class="form-group">
-                        <label class="control-label">Code postale</label>
-                            <input type="text" class="form-control" name="codePClient" value="<?php  echo $client[0]->codePClient; ?>" size="30" required/>
-                    </div> 
-                    <div class="form-group">
-                        <label class="control-label">Ville</label>
-                        <input type="text" class="form-control" name="villeClient" value="<?php echo $client[0]->villeClient; ?>" size="30" required/>
-                    </div>    
-                    <div class="form-group">
-                        <label class="control-label">Numéro de téléphone</label>
-                        <input type="text" class="form-control" name="telClient" value="<?php echo $client[0]->telClient; ?>" size="30" required/>
-                    </div>    
-                    <div class="text-center">
-                        <label class="control-label">Vos points de fidélité </label>
-                        <input type="text" disabled="disabled" class="form-control" name="pointClient" step="any" value="<?php echo $client[0]->pointClient ?>" size="10"/>
-                     </div>
-                    <div class="text-center">
-                        <label class="control-label">Votre Crédit </label>
-                        <input type="text" disabled="disabled" class="form-control" name="creditClient" step="any" value="<?php echo $client[0]->creditClient ?>" size="10"/>
-                     </div>
-
-                    <br>
-                    <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Modifier" /></div>
-                    <div class="text-center">
-                        <br>
-                        
-                        <h1 style="color:darkslategrey; "></h1>
-                    </div>
-                </form>
-            <br>
-            
-
-                <br>
-
-                <div class="text-center">
-                    <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/changer_mdp" role="button">Voulez vous changer votre mot de passe ?</a>
-                </div>
-                <br>
-                <div class="text-center">
-                    <a class="btn btn-primary" href="<?php echo base_url()?>ClientCtrl/modifier_credit" role="button">Approvisionner votre compte</a>
-                </div>
-                <br>
-
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+   
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><?php echo  $client[0]->prenomClient . " " . $client[0]->nomClient; ?></h3>
             </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://localhost/cci/index.php/../assets/image/logos/user_pic.jpg" class="img-circle img-responsive"> </div>
+                
+                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
+                  <dl>
+                    <dt>DEPARTMENT:</dt>
+                    <dd>Administrator</dd>
+                    <dt>HIRE DATE</dt>
+                    <dd>11/12/2013</dd>
+                    <dt>DATE OF BIRTH</dt>
+                       <dd>11/12/2013</dd>
+                    <dt>GENDER</dt>
+                    <dd>Male</dd>
+                  </dl>
+                </div>-->
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Email :</td>
+                        <td><a href="mailto:<?php echo $client[0]->mailClient; ?>"><?php echo $client[0]->mailClient; ?></td>
+                      </tr>
+                      <tr>
+                        <td>Adresse:</td>
+                        <td><?php echo $client[0]->adresseClient ?></td>
+                      </tr>
+                      <tr>
+                        <td>Code Postal</td>
+                        <td><?php  echo $client[0]->codePClient; ?></td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td>Ville</td>
+                        <td><?php echo $client[0]->villeClient; ?></td>
+                      </tr>
+                        <tr>
+                        <td>Téléphone</td>
+                        <td><a href="tel:0<?php echo "0" . $client[0]->telClient; ?>"><?php echo "0" . $client[0]->telClient; ?></td></a>
+                      </tr>
+                      <tr>
+                        <td>Points de fidélité</td>
+                        <td><?php echo $client[0]->pointClient ?></td>
+                      </tr>
+                        <td>Votre Crédit</td>
+                        <td><?php echo $client[0]->creditClient ?></td>
+                           
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                  
+              </div>
+			  
+			
+			  <div class="text-center" style="margin:10px">
+                  <br><br><br><a href="<?php echo base_url()?>ClientCtrl/changer_mdp" class="btn btn-primary">Changer Mot de Passe</a>
+			  </div>
+			 
+			  
+			 
+			  <div class="text-center" style="margin:10px">
+                  <a href="<?php echo base_url()?>ClientCtrl/modification" class="btn btn-primary">Modifier Profil</a>
+				</div>
+			
+			  
+			  <div class="text-center" style="margin:10px">
+				  <a href="<?php echo base_url()?>ClientCtrl/modifier_credit" class="btn btn-success">Approvisionner votre compte</a><br><br>
+			  </div>
+
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			   </div>
+            </div>
+                 <div class="panel-footer">
+                        <br>
+                    </div>
+            
+          </div>
         </div>
+      </div>
     </div>
-</div>
-    
- 
