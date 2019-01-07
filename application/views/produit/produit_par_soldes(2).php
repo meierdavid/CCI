@@ -18,7 +18,7 @@
                     <ul class="social">
                         <li><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>" class="fa fa-search"></a></li>
                         <li><a href="<?php echo base_url("PanierCtrl/ajout_panier/".$item->idProduit); ?>" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $produit[0]->idProduit); ?>" class="fa fa-heart"></a></li>
+                        <li><a href="<?php echo base_url("ProduitCtrl/liste_avis/" . $item->idProduit); ?>" class="fa fa-heart"></a></li>
                     </ul>
                 </div>
                 <div class="product-content">
