@@ -379,12 +379,33 @@ class AdministrateurCtrl extends CI_Controller {
   }
 
 
-  public function supprimer_avis($idProduit,$idClient){
+  public function supprimer_avis(){
+	$this->load->helper('cookie');
     $this->load->model('poster_avis');
-    $this->poster_avis->delete($idClient,$idProduit);
-    $this->load->view('administrateur/index');
+	$this->load->helper('form', 'url');
+	$this->load->library('form_validation');
+	$this->form_validation->set_rules('idClient', 'idClient', 'integer');
+    $this->form_validation->set_rules('idProduit', 'idProduit', 'integer');
+	
+
+	if ($this->input->cookie('administrateurCookie') != null) {
+		if ($this->form_validation->run() == FALSE) {
+		$this->load->view('administrateur/index');
+		$this->load->view('administrateur/supprimer_avis');
+    } else {
+
+		$this->poster_avis->deleteByidClientidProduit($_POST['idClient'],$_POST['idProduit']);
+		echo "Avis Supprimé";
+		$this->load->view('administrateur/index');
+	}
+	}
+	else {
+      $this->load->view('administrateur/connexion');
+    }	
   }
 
+  
+  
 
   public function supprimer_produit($id) {
     $this->load->model('produit');

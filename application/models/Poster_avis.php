@@ -102,6 +102,11 @@ class poster_avis extends CI_Model{
 		$this->load->database();
 		$this->db->delete('poster_avis', array('idClient' => $idClient));
    }
+   
+   public function deleteByidClientidProduit($idClient,$idProduit) {
+		$this->load->database();
+		$this->db->delete('poster_avis', array('idClient' => $idClient,'idClient' => $idClient));
+   }
   
 	public function deleteByidProduit($idProduit) {
 		$this->load->database();
