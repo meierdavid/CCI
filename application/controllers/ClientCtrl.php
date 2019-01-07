@@ -14,7 +14,6 @@ class ClientCtrl extends CI_Controller {
         $this->load->model('client');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
-
         if (isset($_COOKIE['clientCookie'])) {
             $varmail = $this->input->cookie('clientCookie');
             $data['client'] = $this->client->selectByMail($varmail);

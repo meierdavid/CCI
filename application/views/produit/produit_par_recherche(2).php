@@ -2,9 +2,9 @@
 
 
 <div class="container">
-    <h3 class="h3">Recherche</h3>
+    <h3 class="h3">Recherche : <?php echo $recherche ?></h3>
     <div class="row">
-	
+	<br>
 	<?php foreach ($produit as $item) { ?>
 		<?php
 			if ($item->imageProduit == 'NULL') {

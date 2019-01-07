@@ -77,14 +77,14 @@
 						?>	</td>
                       </tr>
                         <td>Numéro de Téléphone:</td>
-                        <td><?php 
+                        <td><a href="tel:+"><?php 
 						$this->load->model('faire_partie');
 						$this->load->model('commercant');
 						$idcommercant=$this->faire_partie->selectByNumSiret($entreprise[0]->numSiret);
 						$commercant=$this->commercant->selectById($idcommercant[0]->idCommercant);
-						echo $commercant[0]->telCommercant
+						echo "0" . $commercant[0]->telCommercant
 						?>
-                        </td>
+                        </a></td>
                       </tr>
 					  <td>Site Web :</td>
                         <td> <a href= "http://<?php echo $entreprise[0]->siteWebEntreprise;?>"><?php echo $entreprise[0]->siteWebEntreprise;?> </a>

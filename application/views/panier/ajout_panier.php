@@ -92,7 +92,7 @@
 
 					
 						
-						<div class="text-center"><input class="add-to-cart btn btn-default" type="submit" value="Ajouter au panier" href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>" ></div>
+						<div class="text-center"><input class="add-to-cart btn btn-default" type="submit" value="Ajouter au panier" href="<?php echo base_url("PanierCtrl/ajout_panier/".$produit[0]->idProduit); ?>" /></div>
 	   
                 </form>
                 <br>

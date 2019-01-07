@@ -38,7 +38,7 @@
         <div class="header-bot">
             <div class="header-bot_inner_wthreeinfo_header_mid">
                 <div class="col-md-4 logo_agile">
-                    <h1><a href="index.html"><img class="img-responsive" src="<?php echo base_url() . "../assets/image/logo.png"; ?>"></a></h1>
+                    <h1><a href="<?php echo base_url() ?>ClientCtrl/index"><img class="img-responsive" src="<?php echo base_url() . "../assets/image/logo.png"; ?>"></a></h1>
                 </div>
                 <div class="col-md-4 header-middle">
                     <?php echo form_open('ProduitCtrl/search'); ?>

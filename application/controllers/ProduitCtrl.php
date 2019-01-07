@@ -487,6 +487,7 @@ public function affichage_produit($id) {
       $str = preg_replace("#[^0-9a-z]#i", "", $str);
       if ($this->produit->search($str) != null) {
         $data['produit'] = $this->produit->search($str);
+		$data['recherche']=$_POST['search'];
 	foreach ($data['produit'] as $item) {
         $data['note'][$i]=$this->moyenne_note_produit($item->idProduit);
         $i=$i+1;
