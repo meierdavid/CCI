@@ -262,6 +262,7 @@ class PanierCtrl extends CI_Controller
             );
             $this->panier->update($id, $data);
             $varmail = $this->input->cookie('clientCookie');
+			$data['entreprises_header'] = $this->entreprise->selectAll();
             $data['client'] = $this->client->selectByMail($varmail);
             $data['message'] = "Votre panier a été vidé avec succès";
             $this->load->view('errors/validation_formulaire', $data);
