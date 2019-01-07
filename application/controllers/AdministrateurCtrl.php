@@ -188,6 +188,9 @@ class AdministrateurCtrl extends CI_Controller {
       $this->load->view('administrateur/connexion');
     }
   }
+  
+  
+  
 
   public function supprimer_administrateur($id) {
         $this->load->helper('form', 'url');
