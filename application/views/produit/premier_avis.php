@@ -10,12 +10,12 @@
                     <h1><small class="pull-right"><?php 
 					$this->load->model('poster_avis');
 					
-					?></small> Il n'y a pas encore d'avis sur ce produit </h1>
+					?></small><br> Il n'y a pas encore d'avis sur ce produit <br><br></h1>
 					
 					
 					<h4>Soyez le premier à donner votre avis :
 					<a href="<?php echo base_url("ClientCtrl/ajouter_avis/") . $produit[0]->idProduit; ?>">Cliquez ici !</a>
-                  </h4></div> 
+                  <br></h4></div> 
                    <div class="comments-list">
                        <div class="media">
                           

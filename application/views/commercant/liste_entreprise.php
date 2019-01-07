@@ -26,6 +26,7 @@
                                     <th scope="col">livraisonEntreprise</th>
                                     <th scope="col">tempsReservMax</th>
 									<th scope="col">Site Web</th>
+									<th scope="col">Solde</th>
                                     <th scope="col">Modifier</th>
 
 
@@ -49,6 +50,7 @@
                                     <td><?php echo $item->livraisonEntreprise; ?></td>
                                     <td><?php echo $item->tempsReservMax; ?></td>
 									<td><?php echo $item->siteWebEntreprise; ?></td>
+									<td><?php echo $item->soldeEntreprise . "€"; ?></td>
                                     <td><p><a href="<?php echo base_url("CommercantCtrl/detail_entreprise/".$item->numSiret );?>">Modifier l'entreprise</a></p></td>
                                   </tr>
                                   <?php } ?>

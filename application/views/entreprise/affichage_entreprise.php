@@ -47,7 +47,42 @@
                       </tr>
                       <tr>
                         <td>Horaires :</td>
-                        <td><?php echo $entreprise[0]->horairesEntreprise; ?></td>
+						<td>
+						<?php 
+						$list_horaires = preg_split('/ /', $entreprise[0]->horairesEntreprise,-1);
+						$i=0;
+						foreach ($list_horaires as $item) {
+							$horaires[$i] = preg_split('/\//', $item,-1);
+							$i=$i+1;
+						}
+						$i=0;
+						foreach($horaires as $item) {
+							if ($item[0] == '-'){
+								$horaires[$i][0]='Fermé';
+							}
+							if ($item[1] == '-'){
+								$horaires[$i][1]='Fermé';
+							}
+							$i=$i+1;
+						}
+						
+						
+						echo "<div class='text-center'><strong>Lundi : </strong></div>" . $horaires[0][0];					
+						echo "<br> " . $horaires[0][1] . "<br><br>";
+						echo "<div class='text-center'><strong>Mardi : </strong></div>" . $horaires[1][0];
+						echo "<br> " . $horaires[1][1] . "<br><br>";
+						echo "<div class='text-center'><strong>Mercredi : </strong></div>" . $horaires[2][0];
+						echo "<br> " . $horaires[2][1] . "<br><br>";
+						echo "<div class='text-center'><strong>Jeudi : </strong></div>" . $horaires[3][0];
+						echo "<br> " . $horaires[3][1] . "<br><br>";
+						echo "<div class='text-center'><strong>Vendredi : </strong></div>" . $horaires[4][0];
+						echo "<br> " . $horaires[4][1] . "<br><br>";
+						echo "<div class='text-center'><strong>Samedi : </strong></div>" . $horaires[5][0];
+						echo "<br> " . $horaires[5][1] . "<br><br>";
+						echo "<div class='text-center'><strong>Dimanche : </strong></div>" . $horaires[6][0];
+						echo "<br> " . $horaires[6][1] . "<br><br>";
+						?>
+						<td>
                       </tr>
                    
                          <tr>
@@ -68,20 +103,27 @@
                       </tr>
                       <tr>
                         <td>Email :</td>
-                        <td><?php 
+                        <td><a href="mailto:<?php 
 						$this->load->model('faire_partie');
 						$this->load->model('commercant');
 						$idcommercant=$this->faire_partie->selectByNumSiret($entreprise[0]->numSiret);
 						$commercant=$this->commercant->selectById($idcommercant[0]->idCommercant);
 						echo $commercant[0]->mailCommercant
+						?>"><?php 
+						
+						echo $commercant[0]->mailCommercant
 						?>	</td>
                       </tr>
                         <td>Numéro de Téléphone:</td>
-                        <td><a href="tel:+"><?php 
+                        <td><a href="tel:0<?php 
 						$this->load->model('faire_partie');
 						$this->load->model('commercant');
 						$idcommercant=$this->faire_partie->selectByNumSiret($entreprise[0]->numSiret);
 						$commercant=$this->commercant->selectById($idcommercant[0]->idCommercant);
+						echo "0" . $commercant[0]->telCommercant
+						?>">
+						<?php 
+						
 						echo "0" . $commercant[0]->telCommercant
 						?>
                         </a></td>

@@ -10,7 +10,8 @@
 <div class="container login-container2" align="left">
     <div class="row">
 		<div class="col-md-6"></div>
-        <div class="col-md-6 login-form-4">
+        <div class="col-md-6 login-form-4"><br>
+			<a href="<?php echo base_url()?>ClientCtrl/connexion"><input class="btnAccueil" type="submit" value="Retour Accueil" /></a>
 
             <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
             <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->

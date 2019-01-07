@@ -33,11 +33,11 @@ class ClientCtrl extends CI_Controller {
         $this->load->model('client');
         $this->load->model('entreprise');
         $data['entreprises_header'] = $this->entreprise->selectAll();
-        $this->form_validation->set_rules('prenomClient', 'Prénom', 'alpha_dash');
+        $this->form_validation->set_rules('prenomClient', 'Prénom', 'required');
         $this->form_validation->set_rules('nomClient', 'Nom', 'alpha_numeric_spaces');
         $this->form_validation->set_rules('mailClient', 'Email', 'valid_email');
         $this->form_validation->set_rules('codePClient', 'Code postale', 'integer');
-        $this->form_validation->set_rules('villeClient', 'Ville', 'alpha_dash');
+        $this->form_validation->set_rules('villeClient', 'Ville', 'required');
         $this->form_validation->set_rules('telClient', 'Numéro de téléphone', 'integer');
 
         if (isset($_COOKIE['clientCookie'])) {
@@ -69,6 +69,7 @@ class ClientCtrl extends CI_Controller {
                     $this->client->update($id, $data);
                     $data['client'] = $this->client->selectByMail($varmail);
                     $data['message'] = "Votre profil client a été modifié avec succès";
+					$data['entreprises_header'] = $this->entreprise->selectAll();
                     $this->load->view('errors/validation_formulaire', $data);
                     $this->load->view('client/header', $data);
                     $this->load->view('client/profil', $data);
@@ -108,6 +109,28 @@ class ClientCtrl extends CI_Controller {
 
         // modifie le profil à l'envoi du formulaire
     }
+	
+	
+	public function modification() {
+        $this->load->model('client');
+        $this->load->helper('form', 'url');
+        $this->load->helper('cookie');
+        $this->load->library('form_validation');
+        $this->load->model('entreprise');
+        $data['entreprises_header'] = $this->entreprise->selectAll();
+        if (isset($_COOKIE['clientCookie'])) {
+            $varmail = $this->input->cookie('clientCookie');
+            if (isset($varmail)) {
+                $data['client'] = $this->client->selectByMail($varmail);
+                $this->load->view('client/header', $data);
+                $this->load->view('client/modification_profil', $data);
+                $this->load->view('client/footer');
+            }
+        }
+
+        // modifie le profil à l'envoi du formulaire
+    }
+	
 
     //Permet l'inscription du client. On doit verrifier qu'aucun autre client n'a déja utilisé cette adresse mail
     // ---On peut sécuriser cette fonction par envoie de mail---

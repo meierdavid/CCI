@@ -24,7 +24,7 @@
                         <input type="password" class="form-control" name="mdpClient" value="" size="30" required/>
                     </div>    
                     <div class="form-group">
-                        <label class="control-label">récrivez votre mot de passe</label>
+                        <label class="control-label">Retapez votre mot de passe</label>
                         <input type="password" class="form-control" name="mdpClient2" value="" size="30" required/>
                     </div> 
                     <div class="text-center"><input class="btn btn-primary btn-success btn-block" type="submit" value="Ajouter" /></div>

@@ -34,7 +34,7 @@
                             <input type="text" class="form-control" placeholder="Votre adresse email" value="" name="mailCommercant" size="30" required />
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" name="mdp" size="30" />
+                            <input type="password" class="form-control" placeholder="Votre mot de passe" value="" name="mdp" size="30" />
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btnSubmit" value="Se connecter" />

@@ -15,26 +15,26 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">Identifiant</th>
-                                                <th scope="col">Mail</th>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col">Prénom</th>
-                                                <th scope="col">Supprimer</th>
-                                                <th scope="col">Modifier</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Identifiant</th>
+                                                    <th scope="col">Mail</th>
+                                                    <th scope="col">Nom</th>
+                                                    <th scope="col">Prénom</th>
+                                                    <th scope="col">Supprimer</th>
+                                                    <th scope="col">Modifier</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <?php foreach ($client as $item) { ?>
-                                                <td><?php echo $item->idClient; ?></td>
-                                                <td><?php echo $item->mailClient; ?></td>
-                                                <td><?php echo $item->nomClient; ?></td>
-                                                <td><?php echo $item->prenomClient; ?></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_client/".$item->idClient);?>">Supprimer le client</a></p></td>
-                                                <td><p><a href="<?php echo base_url("AdministrateurCtrl/profil_client/".$item->idClient);?>">Modifier le client</a></p></td>
-                                            </tr>
-                                            <?php } ?>
+                                                <tr>
+                                                    <?php foreach ($client as $item) { ?>
+                                                        <td><?php echo $item->idClient; ?></td>
+                                                        <td><?php echo $item->mailClient; ?></td>
+                                                        <td><?php echo $item->nomClient; ?></td>
+                                                        <td><?php echo $item->prenomClient; ?></td>
+                                                        <td><p><a href="<?php echo base_url("AdministrateurCtrl/supprimer_client/" . $item->idClient); ?>">Supprimer le client</a></p></td>
+                                                        <td><p><a href="<?php echo base_url("AdministrateurCtrl/profil_client/" . $item->idClient); ?>">Modifier le client</a></p></td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
