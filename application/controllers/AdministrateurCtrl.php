@@ -9,6 +9,7 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->helper('form', 'url');
     $this->load->helper('cookie');
     $this->load->view('administrateur/index');
+    
   }
 
   public function profil() {
@@ -377,32 +378,30 @@ class AdministrateurCtrl extends CI_Controller {
       $this->load->view('administrateur/connexion');
     }
   }
-
-
-  public function supprimer_avis(){
-	$this->load->helper('cookie');
+  
+    public function liste_avis() {
+    $this->load->helper('cookie');
+    $this->load->model('client');
     $this->load->model('poster_avis');
-	$this->load->helper('form', 'url');
-	$this->load->library('form_validation');
-	$this->form_validation->set_rules('idClient', 'idClient', 'integer');
-    $this->form_validation->set_rules('idProduit', 'idProduit', 'integer');
-	
-
-	if ($this->input->cookie('administrateurCookie') != null) {
-		if ($this->form_validation->run() == FALSE) {
-		$this->load->view('administrateur/index');
-		$this->load->view('administrateur/supprimer_avis');
+    if ($this->input->cookie('administrateurCookie') != null) {
+      $varid = $this->input->cookie('administrateurCookie');
+      $data['poster_avis'] = $this->poster_avis->selectAll();
+      $this->load->view('administrateur/index', $data);
+      $this->load->view('administrateur/liste_avis', $data);
     } else {
-
-		$this->poster_avis->deleteByidClientidProduit($_POST['idClient'],$_POST['idProduit']);
-		echo "Avis Supprimé";
-		$this->load->view('administrateur/index');
-	}
-	}
-	else {
       $this->load->view('administrateur/connexion');
-    }	
+    }
   }
+  
+    public function supprimer_avis($idP, $idC) {
+    $this->load->model('poster_avis');
+    $this->load->helper('form', 'url');
+    $this->load->library('form_validation');
+    $this->poster_avis->deleteByidClientidProduit($idP, $idC);
+    $this->liste_avis();
+    }
+
+
 
   
   
@@ -413,7 +412,6 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->library('form_validation');
     $this->load->view('administrateur/index');
     $this->produit->delete($id);
-    echo "produit Supprimé";
     $this->liste_produit();
   }
 
@@ -423,7 +421,6 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->library('form_validation');
     $this->client->delete($id);
     $this->liste_client();
-    echo "client Supprimé";
 
   }
 
@@ -437,7 +434,6 @@ class AdministrateurCtrl extends CI_Controller {
     $this->faire_partie->deleteById($id);
     $this->commercant->delete($id);
     $this->liste_commercant();
-    echo "commercant Supprimé";
   }
 
   public function supprimer_entreprise($id) {
@@ -449,7 +445,6 @@ class AdministrateurCtrl extends CI_Controller {
     $this->load->view('administrateur/index');
     $this->faire_partie->deleteByNumSiret($id);
     $this->entreprise->delete($id);
-    echo "Entreprise Supprimé";
   }
 
   public function profil_client($id){
