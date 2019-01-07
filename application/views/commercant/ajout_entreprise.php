@@ -1,24 +1,24 @@
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-    <div class="container">
+<div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-5">
             <div class="form-login" >
 
-              <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
-              <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
-              <?php echo form_open_multipart('CommercantCtrl/ajout_entreprise'); ?>
+                <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+                <!-- renvoie tous les messages d'erreur, une chaine vide sinon -->
+                <?php echo form_open_multipart('CommercantCtrl/ajout_entreprise'); ?>
 
-                    <div class="text-center">
+                <div class="text-center">
                     <h4>Ajoutez votre entreprise :</h4>
                     <div class="form-group">
                         <label class="control-label">n°siret</label>
                         <input type="number" class="form-control" name="numSiret" value="<?php echo set_value('prenomEntreprise'); ?>" size="30" required/>
                     </div>
-					<div class="form-group">
+                    <div class="form-group">
                         <label class="control-label">Logo de l'entreprise :</label>
                         <input type="file" class="form-control" name="logoEntreprise" size="30" accept "image/*" required/>
                     </div>
@@ -42,92 +42,92 @@
                     <div class="form-group">
                         <label class="control-label">Horaires d'ouverture</label>
                         <table width="100%" cellspacing="1" cellpadding="0" class="horaire">
-													<tbody>
-                          <tr>
-														<th>Lundi Matin</th>
-														<td><input type="time" class="form-control" name="lundi_matin_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="lundi_matin_fermeture"></td>
-                          </tr>
-                          <tr>
-                            <th>Lundi Soir</th>
-                            <td><input type="time" class="form-control" name="lundi_soir_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="lundi_soir_fermeture"></td>
-													</tr>
-                          <tr>
-														<th>Mardi Matin</th>
-														<td><input type="time" class="form-control" name="mardi_matin_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="mardi_matin_fermeture"></td>
-                          </tr>
-                          <tr>
-                            <th>Mardi Soir</th>
-                            <td><input type="time" class="form-control" name="mardi_soir_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="mardi_soir_fermeture"></td>
-													</tr>
-                          <tr>
-														<th>Mercredi Matin</th>
-														<td><input type="time" class="form-control" name="mercredi_matin_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="mercredi_matin_fermeture"></td>
-                          </tr>
-                          <tr>
-                            <th>Mercredi Soir</th>
-                            <td><input type="time" class="form-control" name="mercredi_soir_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="mercredi_soir_fermeture"></td>
-													</tr>
-                          <tr>
-														<th>Jeudi Matin</th>
-														<td><input type="time" class="form-control" name="jeudi_matin_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="jeudi_matin_fermeture"></td>
-                          </tr>
-                          <tr>
-                            <th>Jeudi Soir</th>
-                            <td><input type="time" class="form-control" name="jeudi_soir_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="jeudi_soir_fermeture"></td>
-													</tr>
-                          <tr>
-														<th>Vendredi Matin</th>
-														<td><input type="time" class="form-control" name="vendredi_matin_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="vendredi_matin_fermeture"></td>
-                          </tr>
-                          <tr>
-                            <th>Vendredi Soir</th>
-                            <td><input type="time" class="form-control" name="vendredi_soir_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="vendredi_soir_fermeture"></td>
-													</tr>
-                          <tr>
-														<th>Samedi Matin</th>
-														<td><input type="time" class="form-control" name="samedi_matin_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="samedi_matin_fermeture"></td>
-                          </tr>
-                          <tr>
-                            <th>Samedi Soir</th>
-                            <td><input type="time" class="form-control" name="samedi_soir_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="samedi_soir_fermeture"></td>
-													</tr>
-                          <tr>
-														<th>Dimanche Matin</th>
-														<td><input type="time" class="form-control" name="dimanche_matin_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="dimanche_matin_fermeture"></td>
-                          </tr>
-                          <tr>
-                            <th>Dimanche Soir</th>
-                            <td><input type="time" class="form-control" name="dimanche_soir_ouverture"></td>
-                            <td><p>à</p></td>
-                            <td><input type="time" class="form-control" name="dimanche_soir_fermeture"></td>
-													</tr>
-												</tbody></table>
+                            <tbody>
+                                <tr>
+                                    <th>Lundi Matin</th>
+                                    <td><input type="time" class="form-control" name="lundi_matin_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="lundi_matin_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Lundi Après-midi</th>
+                                    <td><input type="time" class="form-control" name="lundi_soir_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="lundi_soir_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Mardi Matin</th>
+                                    <td><input type="time" class="form-control" name="mardi_matin_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="mardi_matin_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Mardi Après-midi</th>
+                                    <td><input type="time" class="form-control" name="mardi_soir_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="mardi_soir_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Mercredi Matin</th>
+                                    <td><input type="time" class="form-control" name="mercredi_matin_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="mercredi_matin_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Mercredi Après-midi</th>
+                                    <td><input type="time" class="form-control" name="mercredi_soir_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="mercredi_soir_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Jeudi Matin</th>
+                                    <td><input type="time" class="form-control" name="jeudi_matin_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="jeudi_matin_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Jeudi Soir</th>
+                                    <td><input type="time" class="form-control" name="jeudi_soir_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="jeudi_soir_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Vendredi Matin</th>
+                                    <td><input type="time" class="form-control" name="vendredi_matin_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="vendredi_matin_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Vendredi Après-midi</th>
+                                    <td><input type="time" class="form-control" name="vendredi_soir_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="vendredi_soir_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Samedi Matin</th>
+                                    <td><input type="time" class="form-control" name="samedi_matin_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="samedi_matin_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Samedi Après-midi</th>
+                                    <td><input type="time" class="form-control" name="samedi_soir_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="samedi_soir_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Dimanche Matin</th>
+                                    <td><input type="time" class="form-control" name="dimanche_matin_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="dimanche_matin_fermeture"></td>
+                                </tr>
+                                <tr>
+                                    <th>Dimanche Après-midi</th>
+                                    <td><input type="time" class="form-control" name="dimanche_soir_ouverture"></td>
+                                    <td><p>à</p></td>
+                                    <td><input type="time" class="form-control" name="dimanche_soir_fermeture"></td>
+                                </tr>
+                            </tbody></table>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Livraison: </label>
@@ -139,7 +139,7 @@
                         <input type="number" class="form-control" name="tempsReservMax" value="" size="30" required/>
                     </div>
 
-					<div class="form-group">
+                    <div class="form-group">
                         <label class="control-label">Site Web de l'entreprise </label>
                         <input type="text" class="form-control" name="siteWebEntreprise" value="" size="300" />
                     </div>
@@ -152,13 +152,13 @@
                         <br>
                         <h1 style="color:darkslategrey; "></h1>
                     </div>
-                </form>
-            <br>
-            <br>
+                    </form>
+                    <br>
+                    <br>
 
 
 
+                </div>
             </div>
         </div>
     </div>
-</div>
