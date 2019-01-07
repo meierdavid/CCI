@@ -17,6 +17,8 @@ class PageCtrl extends CI_Controller {
 		$data['entreprises_header'] = $this->entreprise->selectAll();
         $this->load->helper('url');
         $this->load->helper('form');
+        $data['message'] = "Votre demande de contact est prise en compte.";
+        $this->load->view('errors/validation_formulaire', $data);
         $this->load->view('client/header',$data);
         $this->load->view('pages/contact');
         $this->load->view('client/footer');

@@ -19,34 +19,34 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
-                <input type="text" class="form-control mt-2" placeholder="Nom/Entreprise" required>
+                <input type="text" class="form-control mt-2" placeholder="Nom/Entreprise" >
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <input type="text" class="form-control mt-2" placeholder="Objet" required>
+                <input type="text" class="form-control mt-2" placeholder="Objet" >
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <input type="email" class="form-control mt-2" placeholder="Email" required>
+                <input type="email" class="form-control mt-2" placeholder="Email" >
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <input type="number" class="form-control mt-2" placeholder="Numéro de téléphone" required>
+                <input type="number" class="form-control mt-2" placeholder="Numéro de téléphone" >
               </div>
             </div>
             <div class="col-12">
               <div class="form-group">
-                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Demande" rows="3" required></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Demande" rows="3" ></textarea>
               </div>
             </div>
             <div class="col-12">
 			<div class="text-center">
             <div class="form-group">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" >
                 <label class="form-check-label" for="invalidCheck2">
                   Je m'engage à respecter les <a href="<?php echo base_url("ClientCtrl/condition_utilisation/");?>">conditions d'utilisation</a>
                 </label>
@@ -56,6 +56,7 @@
             </div>
 			<div class="text-center">
             <div class="col-12">
+              <a href="<?php echo base_url("PageCtrl/contact/");?>"></a>
               <button class="btn btn-success" type="submit">Envoyer</button>
             </div>
 			</div>
