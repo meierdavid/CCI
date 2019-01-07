@@ -392,6 +392,7 @@ class ClientCtrl extends CI_Controller {
                 $data['client'] = $this->client->selectByMail($cookie);
                 $data['produit'] = $this->produit->selectById($idProduit);
 				$data['avis'] = $this->poster_avis->selectByIdProduit($idProduit);
+
                 $this->load->view('client/header', $data);
                 $this->load->view('produit/liste_avis', $data);
                 $this->load->view('client/footer');
