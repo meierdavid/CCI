@@ -15,7 +15,7 @@
             <div class="product-grid7">
                 <div class="product-image7">
                     
-                        <img class="pic-1" width="150" height="150" src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>" width=5 height=150>
+                        <img class="pic-1" width="150" height="150" src="http://localhost/cci/index.php/../assets/image/produits/<?php echo $item->imageProduit; ?>">
                     
                     <ul class="social">
                         <li><a href="<?php echo base_url("ProduitCtrl/affichage_produit/" . $item->idProduit); ?>" class="fa fa-search"></a></li>
